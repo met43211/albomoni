@@ -1,0 +1,7 @@
+node_modules
+out
+*.css
+*.js
+*.mjs
+next.config.mjs
+*.json
