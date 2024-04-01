@@ -11,7 +11,6 @@ import { PiUserBold } from 'react-icons/pi';
 import { useCookies } from 'react-cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@albomoni/shared/ui/button';
-import { useRouter } from 'next/navigation';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -23,7 +22,6 @@ export const LoginWidget = () => {
   const { t } = useClientTranslation('forms');
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
   const [, setToken] = useCookies(['token']);
-  const router = useRouter();
 
   const { control, handleSubmit } = useForm<LoginCheckSchemaFormData>({
     resolver: yupResolver(LoginCheckSchema),
@@ -44,7 +42,6 @@ export const LoginWidget = () => {
       const { access } = response;
 
       setToken('token', access);
-      router.push('/');
     } catch {
       return;
     }
