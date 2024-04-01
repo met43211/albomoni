@@ -1,4 +1,5 @@
 import { Header } from '@albomoni/widgets/header';
+import { Suspense } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -8,7 +9,10 @@ type Props = {
 export default function HeaderLayout({ children, params: { lng } }: Props) {
   return (
     <>
-      <Header lang={lng} />
+      <Suspense fallback={<div className='w-full h-32' />}>
+        <Header lang={lng} />
+      </Suspense>
+
       {children}
     </>
   );
