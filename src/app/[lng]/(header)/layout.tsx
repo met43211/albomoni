@@ -1,5 +1,11 @@
-import { Header } from '@albomoni/widgets/header';
-import { Suspense } from 'react';
+import dynamic from 'next/dynamic';
+
+const DynamicHeader = dynamic(
+  () => import('@albomoni/widgets/header').then((mod) => mod.Header),
+  {
+    loading: () => <header className='w-full h-32' />,
+  },
+);
 
 type Props = {
   children: React.ReactNode;
@@ -9,10 +15,7 @@ type Props = {
 export default function HeaderLayout({ children, params: { lng } }: Props) {
   return (
     <>
-      <Suspense fallback={<div className='w-full h-32' />}>
-        <Header lang={lng} />
-      </Suspense>
-
+      <DynamicHeader lang={lng} />
       {children}
     </>
   );

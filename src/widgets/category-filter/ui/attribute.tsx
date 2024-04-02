@@ -1,39 +1,39 @@
 import { SingleSelector } from '@albomoni/shared/ui/single-selector';
-import { useState } from 'react';
 import { MultipleSelector } from '@albomoni/shared/ui/multiple-selector';
-import { AttributesVariables } from '../model/category.type';
 
 type Props = {
-  attribute_id: number;
-  variants: AttributesVariables;
+  type: 'one' | 'many';
+  variants: string[];
+  selected: string | string[];
+  filterKey: string;
+  setFilterState: (state: any) => void;
 };
 
-export const Attribute = ({ attribute_id, variants }: Props) => {
-  const initialState =
-    variants.selection === 'one'
-      ? variants.variants[0]
-      : [variants.variants[0]];
-
-  const [selected, setSelected] = useState(initialState);
-
+export const Attribute = ({
+  type,
+  variants,
+  selected,
+  filterKey,
+  setFilterState,
+}: Props) => {
   const selectors = {
     one: (
       <SingleSelector
         selected={selected as string}
-        setSelected={setSelected}
-        attribute_id={attribute_id}
-        variants={variants.variants}
+        filterKey={filterKey}
+        variants={variants}
+        setFilterState={setFilterState}
       />
     ),
     many: (
       <MultipleSelector
         selected={selected as string[]}
-        setSelected={setSelected}
-        attribute_id={attribute_id}
-        variants={variants.variants}
+        filterKey={filterKey}
+        variants={variants}
+        setFilterState={setFilterState}
       />
     ),
   };
 
-  return selectors[variants.selection];
+  return selectors[type];
 };

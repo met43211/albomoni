@@ -4,25 +4,29 @@ export const TestCategoriesAttributes = [
     attributes: [
       {
         name: 'apartment',
-        selection: 'one',
-        collection: [
-          {
-            name: 'buy',
-            selection: 'many',
-            collection: ['new', 'old'],
-            otherFilters: [
-              {
-                selection: 'many',
-                variants: ['studio', 'one', 'two', 'three', 'four', 'more'],
-              },
-            ],
-          },
-          {
-            name: 'rent',
-            selection: 'many',
-            collection: [],
-          },
-        ],
+        collection: {
+          name: 'buy_type',
+          selection: 'one',
+          items: [
+            {
+              name: 'buy',
+              selection: 'many',
+              variants: ['new', 'old'],
+              otherFilters: [
+                {
+                  name: 'layout',
+                  selection: 'many',
+                  variants: ['studio', 'one', 'two', 'three', 'four', 'more'],
+                },
+              ],
+            },
+            {
+              name: 'rent',
+              selection: 'many',
+              collection: [],
+            },
+          ],
+        },
       },
     ],
   },

@@ -26,11 +26,8 @@ export const UserAvatar = () => {
           classNames={{ base: 'ring-black/10 ring-[3px] ring-offset-[3px]' }}
         />
       </PopoverTrigger>
-      <PopoverContent className='w-40'>
-        <div className='w-full flex flex-col gap-2 px-1 py-2'>
-          <div className='text-small font-bold'>
-            {first_name} {last_name}
-          </div>
+      <PopoverContent className='w-40 p-1'>
+        <div className='w-full flex flex-col gap-2 px-1 py-1'>
           <LogoutButton />
         </div>
       </PopoverContent>

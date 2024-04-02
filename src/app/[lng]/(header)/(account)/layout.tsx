@@ -1,7 +1,7 @@
 'use client';
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@nextui-org/spinner';
 import { redirect } from 'next/navigation';
 
 type Props = {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useValidateToken } from '@albomoni/widgets/header/lib/use-validate-token';
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@nextui-org/spinner';
 import { redirect } from 'next/navigation';
 
 type Props = {
