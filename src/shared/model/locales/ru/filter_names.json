@@ -1,0 +1,136 @@
+{
+  "layout_type": {
+    "apartment": "Квартира",
+    "room": "Комната",
+    "house": "Дом",
+    "stead": "Земельный участок",
+    "garage": "Гараж",
+    "commercial": "Коммерческая недвижимость"
+  },
+  "apartment_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "room_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "house_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "stead_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "garage_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "commercial_buy_type": {
+    "buy": "Купить",
+    "rent": "Снять"
+  },
+  "target_age": {
+    "new": "Новостройки",
+    "old": "Вторичка"
+  },
+  "apartment_buy_rooms_count": {
+    "studio": "Студия",
+    "one": "1 + 1",
+    "two": "2 + 1",
+    "three": "3 + 1",
+    "four": "4 + 1",
+    "more": "5 + 2 и более"
+  },
+  "apartment_rent_rooms_count": {
+    "studio": "Студия",
+    "one": "1 + 1",
+    "two": "2 + 1",
+    "three": "3 + 1",
+    "four": "4 + 1",
+    "more": "5 + 2 и более"
+  },
+  "room_buy_rooms_count": {
+    "studio": "Студия",
+    "one": "1 + 1",
+    "two": "2 + 1",
+    "three": "3 + 1",
+    "four": "4 + 1",
+    "more": "5 + 2 и более"
+  },
+  "room_rent_rooms_count": {
+    "studio": "Студия",
+    "one": "1 + 1",
+    "two": "2 + 1",
+    "three": "3 + 1",
+    "four": "4 + 1",
+    "more": "5 + 2 и более"
+  },
+  "apartment_duration": {
+    "long": "Долгосрочно",
+    "daily": "Посуточно"
+  },
+  "room_duration": {
+    "long": "Долгосрочно",
+    "daily": "Посуточно"
+  },
+  "house_duration": {
+    "long": "Долгосрочно",
+    "daily": "Посуточно"
+  },
+  "house_buy_object_type": {
+    "house": "Дом",
+    "dacha": "Дача",
+    "cottage": "Коттедж",
+    "townhouse": "Таунхаус"
+  },
+  "garage_buy_object_type": {
+    "garage": "Гаражи",
+    "car_place": "Машиноместа"
+  },
+  "garage_rent_object_type": {
+    "garage": "Гаражи",
+    "car_place": "Машиноместа"
+  },
+  "commercial_buy_object_type": {
+    "office": "Офис",
+    "free_type": "Свободного назначения",
+    "sell_square": "Торговаяв площадь",
+    "warehouse": "Склад",
+    "industry": "Производство",
+    "food": "общепит",
+    "hostel": "Гостиница",
+    "car_service": "Автосервис",
+    "house": "Здание"
+  },
+  "commercial_rent_object_type": {
+    "office": "Офис",
+    "free_type": "Свободного назначения",
+    "sell_square": "Торговаяв площадь",
+    "warehouse": "Склад",
+    "industry": "Производство",
+    "food": "общепит",
+    "hostel": "Гостиница",
+    "car_service": "Автосервис",
+    "house": "Здание"
+  },
+  "stead_buy_category": {
+    "IZHS": "ИЖС",
+    "SNT": "СНТ",
+    "industrial": "Промназначение"
+  },
+  "stead_rent_category": {
+    "IZHS": "ИЖС",
+    "SNT": "СНТ",
+    "industrial": "Промназначение"
+  },
+  "garage_buy_secure": {
+    "true": "С охраной",
+    "false": "Без охраны"
+  },
+  "garage_rent_secure": {
+    "true": "С охраной",
+    "false": "Без охраны"
+  }
+}

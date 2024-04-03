@@ -1,5 +1,3 @@
-'use client';
-
 import { LoginWidget } from '@albomoni/features/auth/login';
 import { Logo } from '@albomoni/shared/ui/logo';
 import { Button } from '@nextui-org/react';
@@ -10,7 +8,7 @@ export const LoginPage = () => {
   const navigate = useRouter();
 
   const handleClick = () => {
-    navigate.push('/');
+    navigate.back();
   };
 
   return (

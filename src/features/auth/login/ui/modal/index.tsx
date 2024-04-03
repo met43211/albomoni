@@ -1,3 +1,5 @@
+'use client';
+
 import { Modal, ModalContent } from '@nextui-org/modal';
 import { useEffect, useState } from 'react';
 import { ELoginModalScreens } from '../../model/login-modal-screens.enum';

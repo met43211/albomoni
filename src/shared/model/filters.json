@@ -4,7 +4,7 @@
       "name": "layout_type",
       "variants": {
         "apartment": {
-          "name": "buy_type",
+          "name": "apartment_buy_type",
           "variants": {
             "buy": {
               "static": [
@@ -15,19 +15,177 @@
                 },
                 {
                   "type": "many",
-                  "name": "rooms_count",
+                  "name": "apartment_buy_rooms_count",
                   "variants": ["studio", "one", "two", "three", "four", "more"]
                 }
               ]
             },
-            "rent": {}
+            "rent": {
+              "static": [
+                {
+                  "type": "one",
+                  "name": "apartment_duration",
+                  "variants": ["long", "daily"]
+                },
+                {
+                  "type": "many",
+                  "name": "apartment_rent_rooms_count",
+                  "variants": ["studio", "one", "two", "three", "four", "more"]
+                }
+              ]
+            }
           }
         },
-        "room": {},
-        "house": {},
-        "stead": {},
-        "garage": {},
-        "commercial": {}
+        "room": {
+          "name": "room_buy_type",
+          "variants": {
+            "buy": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "room_buy_rooms_count",
+                  "variants": ["studio", "one", "two", "three", "four", "more"]
+                }
+              ]
+            },
+            "rent": {
+              "static": [
+                {
+                  "type": "one",
+                  "name": "room_duration",
+                  "variants": ["long", "daily"]
+                },
+                {
+                  "type": "many",
+                  "name": "room_rent_rooms_count",
+                  "variants": ["studio", "one", "two", "three", "four", "more"]
+                }
+              ]
+            }
+          }
+        },
+        "house": {
+          "name": "house_buy_type",
+          "variants": {
+            "buy": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "house_buy_object_type",
+                  "variants": ["house", "dacha", "cottage", "townhouse"]
+                }
+              ]
+            },
+            "rent": {
+              "static": [
+                {
+                  "type": "one",
+                  "name": "house_duration",
+                  "variants": ["long", "daily"]
+                }
+              ]
+            }
+          }
+        },
+        "stead": {
+          "name": "stead_buy_type",
+          "variants": {
+            "buy": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "stead_buy_category",
+                  "variants": ["IZHS", "SNT", "industrial"]
+                }
+              ]
+            },
+            "rent": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "stead_rent_category",
+                  "variants": ["IZHS", "SNT", "industrial"]
+                }
+              ]
+            }
+          }
+        },
+        "garage": {
+          "name": "garage_buy_type",
+          "variants": {
+            "buy": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "garage_buy_object_type",
+                  "variants": ["garage", "car_place"]
+                },
+                {
+                  "type": "one",
+                  "name": "garage_buy_secure",
+                  "variants": ["true", "false"]
+                }
+              ]
+            },
+            "rent": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "garage_rent_object_type",
+                  "variants": ["garage", "car_place"]
+                },
+                {
+                  "type": "one",
+                  "name": "garage_rent_secure",
+                  "variants": ["true", "false"]
+                }
+              ]
+            }
+          }
+        },
+        "commercial": {
+          "name": "commercial_buy_type",
+          "variants": {
+            "buy": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "commercial_buy_object_type",
+                  "variants": [
+                    "office",
+                    "free_type",
+                    "sell_square",
+                    "warehouse",
+                    "industry",
+                    "food",
+                    "hostel",
+                    "car_service",
+                    "house"
+                  ]
+                }
+              ]
+            },
+            "rent": {
+              "static": [
+                {
+                  "type": "many",
+                  "name": "commercial_rent_object_type",
+                  "variants": [
+                    "office",
+                    "free_type",
+                    "sell_square",
+                    "warehouse",
+                    "industry",
+                    "food",
+                    "hostel",
+                    "car_service",
+                    "house"
+                  ]
+                }
+              ]
+            }
+          }
+        }
       }
     }
   }

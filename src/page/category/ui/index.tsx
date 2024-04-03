@@ -21,7 +21,9 @@ export const CategoryPage = ({ lng, categoryId }: Props) => (
     </Suspense>
 
     <div className='w-full max-w-7xl px-4 flex flex-col-reverse lg:flex-row gap-6'>
-      <AdsList title='Недавние объявления' cols={4} />
+      <Suspense>
+        <AdsList title='Недавние объявления' cols={4} />
+      </Suspense>
       {/* <div className='flex flex-col gap-8 w-96 '>
         <ShowHistoryButton />
       </div> */}

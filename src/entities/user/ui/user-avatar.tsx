@@ -1,16 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { PopoverTransitionVariants } from '@albomoni/shared/config/transition-variants';
-import { User } from '@albomoni/shared/model/types/user.type';
 import { Avatar } from '@nextui-org/avatar';
 import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover';
 import { PiUserBold } from 'react-icons/pi';
 import { LogoutButton } from './logout-button';
 
 export const UserAvatar = () => {
-  const { user } = useSession();
-  const { first_name, last_name } = user as User;
-
   return (
     <Popover
       motionProps={PopoverTransitionVariants}

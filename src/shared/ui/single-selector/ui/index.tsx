@@ -20,7 +20,7 @@ export const SingleSelector = ({
   filterKey,
   setFilterState,
 }: Props) => {
-  const { t } = useClientTranslation();
+  const { t } = useClientTranslation('filter_names');
   const filters = useFilters();
   const filtersState = useFiltersState();
 
@@ -37,7 +37,7 @@ export const SingleSelector = ({
     >
       <PopoverTrigger>
         <div className='w-fit h-10 bg-[--element] dark:bg-blue-500 rounded-xl px-5 pb-[2px] flex items-center gap-2 hover:scale-105 active:scale-90 transition-transform cursor-pointer'>
-          {t(`attribute_variables.${filterKey}.${selected}`)}
+          {t(`${filterKey}.${selected}`)}
           <HiSelector size={20} className='mt-[1px]' />
         </div>
       </PopoverTrigger>
@@ -58,7 +58,7 @@ export const SingleSelector = ({
               key={variant}
               value={variant}
             >
-              {t(`attribute_variables.${filterKey}.${variant}`)}
+              {t(`${filterKey}.${variant}`)}
             </Radio>
           ))}
         </RadioGroup>

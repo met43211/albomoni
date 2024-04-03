@@ -21,7 +21,7 @@ export const MultipleSelector = ({
   filterKey,
   setFilterState,
 }: Props) => {
-  const { t } = useClientTranslation();
+  const { t } = useClientTranslation('filter_names');
   const filters = useFilters();
   const filtersState = useFiltersState();
 
@@ -47,9 +47,9 @@ export const MultipleSelector = ({
         <div className='w-fit h-min py-2 bg-[--element] dark:bg-blue-500 rounded-xl px-5 flex items-center gap-2 hover:scale-105 active:scale-95 transition-transform cursor-pointer'>
           {selected.map((item, index) => {
             if (selected.length !== index + 1) {
-              return `${t(`attribute_variables.${filterKey}.${item}`)}, `;
+              return `${t(`${filterKey}.${item}`)}, `;
             }
-            return t(`attribute_variables.${filterKey}.${item}`);
+            return t(`${filterKey}.${item}`);
           })}
           <HiSelector size={20} className='mt-[1px] flex-shrink-0' />
         </div>
@@ -71,7 +71,7 @@ export const MultipleSelector = ({
               key={variant}
               value={variant}
             >
-              {t(`attribute_variables.${filterKey}.${variant}`)}
+              {t(`${filterKey}.${variant}`)}
             </Checkbox>
           ))}
         </CheckboxGroup>

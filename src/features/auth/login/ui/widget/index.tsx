@@ -1,3 +1,5 @@
+'use client';
+
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { PasswordVisibilityButton } from '@albomoni/shared/ui/password-visibility-button/ui';
 import { Input } from '@nextui-org/input';
