@@ -13,7 +13,7 @@ type Props = {
   lang: string;
 };
 
-export const StaticBar = async ({ lang }: Props) => {
+export const TopBar = async ({ lang }: Props) => {
   const location = 'Турция, Анкара';
   const { t } = await useTranslation(lang);
 

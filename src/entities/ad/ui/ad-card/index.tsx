@@ -1,12 +1,11 @@
+'use client';
+
+import { useMedia } from 'react-use';
+import { AdCardMobile } from './ad-card-mobile';
+import { AdCardDesktop } from './ad-card-desktop';
+
 export const AdCard = () => {
-  return (
-    <div className='w-full flex-shrink-0 flex flex-col gap-4'>
-      <div className='w-full aspect-[3/2] bg-[--element] rounded-lg' />
-      <div className='w-full flex flex-col gap-2'>
-        <div className='w-full h-6 bg-[--element] rounded-lg' />
-        <div className='w-36 h-4 bg-[--element] rounded-lg' />
-        <div className='w-24 h-4 bg-[--element] rounded-lg' />
-      </div>
-    </div>
-  );
+  const isMobile = useMedia('(max-width: 600px)', false);
+
+  return isMobile ? <AdCardMobile /> : <AdCardDesktop />;
 };

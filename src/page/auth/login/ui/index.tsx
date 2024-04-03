@@ -12,8 +12,8 @@ export const LoginPage = () => {
   };
 
   return (
-    <main className='flex flex-col gap-6 items-center px-4 justify-center h-dvh md:bg-[--element]'>
-      <div className='w-full md:absolute top-0 flex justify-between p-1 md:p-10'>
+    <main className='flex flex-col gap-6 items-center px-4 md:justify-center min-h-dvh md:bg-[--element] pb-4'>
+      <div className='w-full md:absolute top-0 flex justify-between p-1 pt-6 md:p-10'>
         <button
           type='button'
           aria-label='Logo'

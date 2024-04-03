@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import { StaticBar } from './static-bar';
-import { StickyBar } from './sticky-bar';
+import { TopBar } from './top-bar';
+import { BottomBar } from './bottom-bar';
 
 type Props = {
   lang: string;
@@ -9,9 +9,9 @@ type Props = {
 export const Header = ({ lang }: Props) => {
   return (
     <header className='w-full h-32 flex flex-col items-center z-30'>
-      <StaticBar lang={lang} />
+      <TopBar lang={lang} />
       <Suspense>
-        <StickyBar />
+        <BottomBar />
       </Suspense>
     </header>
   );

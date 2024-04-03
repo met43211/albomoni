@@ -22,7 +22,7 @@ export const Search = () => {
             className='opacity-60 mx-2 flex-shrink-0'
           />
         }
-        classNames={{ input: 'text-sm pr-24' }}
+        classNames={{ input: 'text-sm pr-24', inputWrapper: 'shadow-medium' }}
       />
       <AnimatePresence>
         {search.length > 0 && (

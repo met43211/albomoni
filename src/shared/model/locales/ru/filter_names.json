@@ -1,4 +1,15 @@
 {
+  "categories": {
+    "transport": "Транспорт",
+    "realty": "Недвижимость",
+    "services": "Услуги",
+    "requests": "Заявка на услуги",
+    "personal_items": "Личные вещи",
+    "home_items": "Для дома и дачи",
+    "spare_parts": "Запчасти и аксессуары",
+    "electronics": "Техника",
+    "events": "Мероприятия, праздники"
+  },
   "layout_type": {
     "apartment": "Квартира",
     "room": "Комната",

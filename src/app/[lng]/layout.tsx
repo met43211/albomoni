@@ -6,7 +6,7 @@ import { fallbackLng, languages } from '@albomoni/shared/i18n/settings';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { dir } from 'i18next';
 import type { Viewport } from 'next';
-import { Open_Sans } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { ScrollToTop } from '@albomoni/shared/lib/utils/scroll-to-top';
 import './globals.css';
 import Providers from './providers';
@@ -19,7 +19,7 @@ type PageProps = MetadataProps & {
   children: React.ReactNode;
 };
 
-const font = Open_Sans({ subsets: ['latin', 'cyrillic'] });
+const font = Inter({ subsets: ['latin', 'cyrillic'] });
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));

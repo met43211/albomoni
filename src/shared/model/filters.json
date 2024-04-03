@@ -12,6 +12,7 @@
                   "type": "many",
                   "name": "target_age",
                   "variants": ["new", "old"]
+                  
                 },
                 {
                   "type": "many",

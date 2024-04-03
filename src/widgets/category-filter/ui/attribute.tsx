@@ -1,5 +1,5 @@
-import { SingleSelector } from '@albomoni/shared/ui/single-selector';
-import { MultipleSelector } from '@albomoni/shared/ui/multiple-selector';
+import { SingleSelector } from '@albomoni/widgets/category-filter/ui/single-selector';
+import { MultipleSelector } from '@albomoni/widgets/category-filter/ui/multiple-selector';
 
 type Props = {
   type: 'one' | 'many';

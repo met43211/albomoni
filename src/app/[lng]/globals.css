@@ -17,6 +17,9 @@
   --scrollbar: #c0c0c0;
   --element: rgb(244, 244, 245);
   --element-hover: rgb(241, 241, 241);
+  --success: rgb(40, 199, 0);
+  --warning: rgb(238, 192, 8);
+  --error: rgb(229, 12, 12);
 }
 
 [class='dark'] {
@@ -28,6 +31,9 @@
   --scrollbar: #2b2b2b;
   --element: rgb(39, 39, 42);
   --element-hover: rgb(47, 47, 50);
+  --success: rgb(40, 199, 0);
+  --warning: rgb(229, 200, 12);
+  --error: rgb(229, 12, 12);
 }
 
 html,
