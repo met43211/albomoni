@@ -2,7 +2,7 @@
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
 

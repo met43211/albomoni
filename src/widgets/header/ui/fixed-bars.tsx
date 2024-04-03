@@ -6,7 +6,6 @@ import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
 import { AnimatePresence, m } from 'framer-motion';
 import { PiSquaresFour } from 'react-icons/pi';
-import { useMedia } from 'react-use';
 import { clsx } from 'clsx';
 import { usePathname } from 'next/navigation';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
@@ -17,7 +16,6 @@ export const FixedBars = () => {
   const { t } = useClientTranslation();
   const isScrolled = useScrolledTo(128);
   const scrollDir = useScrollDirection();
-  const isMobile = useMedia('(max-width: 600px)', false);
   const activePath = usePathname();
 
   const normalizedPath = activePath.slice(3) === '' ? '/' : activePath.slice(3);
@@ -40,7 +38,7 @@ export const FixedBars = () => {
         )}
       </AnimatePresence>
       <AnimatePresence>
-        {(scrollDir === 'up' || scrollDir === null) && (
+        {scrollDir !== 'down' && (
           <m.div
             initial={{ y: '150%', filter: 'blur(10px)', scale: 0.5 }}
             animate={{ y: 0, filter: 'blur(0px)', scale: 1 }}
