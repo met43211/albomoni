@@ -5,7 +5,7 @@ import { CategoriesList } from './categories-list';
 import { WelcomeBlock } from './welcome-block';
 
 export const HomePage = ({ lng }: I18nLangParam) => (
-  <main className='flex flex-col gap-14 items-center z-10'>
+  <main className='flex flex-col gap-14 items-center z-10 pb-40'>
     <Suspense
       fallback={
         <div className='w-full h-[410px] bg-neutral-100 dark:bg-neutral-900' />
@@ -23,7 +23,7 @@ export const HomePage = ({ lng }: I18nLangParam) => (
         <AdsList
           title='Последние опубликованные объявления'
           titleSize='big'
-          cols={4}
+          cols={3}
         />
       </div>
     </Suspense>

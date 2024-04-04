@@ -36,11 +36,13 @@
   --error: rgb(229, 12, 12);
 }
 
-html,
 body {
-  width: 100%;
   color: var(--text);
   background: var(--bg);
+}
+
+body {
+  width: 100%;
   user-select: none;
   cursor: default;
   min-height: 100vh;
@@ -48,6 +50,15 @@ body {
   box-sizing: border-box;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  letter-spacing: -0.02em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

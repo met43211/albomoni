@@ -9,11 +9,11 @@ import { UserAvatar } from '@albomoni/entities/user';
 import Link from 'next/link';
 import { LoginButton } from '@albomoni/features/auth/login/ui/modal/login-button';
 import { Search } from '@albomoni/features/search';
-import { useValidateToken } from '../../../shared/api/use-validate-token';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 
 export const BottomBar = () => {
   const { t } = useClientTranslation();
-  const { isLogged, isPending } = useValidateToken();
+  const { isLogged, isPending } = useSession();
 
   const UserAction = isLogged ? UserAvatar : LoginButton;
 

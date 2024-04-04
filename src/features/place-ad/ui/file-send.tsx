@@ -19,7 +19,7 @@ export const FilesSend = () => {
     const formData = new FormData();
 
     for (let i = 0; i < files.length; i += 1) {
-      formData.append('files', files[i]);
+      formData.append('file', files[i]);
     }
 
     console.log(formData.getAll('files'));
