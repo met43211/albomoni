@@ -2,7 +2,7 @@
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Spinner } from '@nextui-org/spinner';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   children: React.ReactNode;
@@ -27,7 +27,7 @@ export default function AuthLayout({ children }: Props) {
         <Spinner />
       </div>
     );
-  } else {
-    return children;
   }
+  
+  return children;
 }
