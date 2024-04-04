@@ -1,5 +1,4 @@
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
-import { PopoverTransitionVariants } from '@albomoni/shared/config/transition-variants';
 import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover';
 import { Radio, RadioGroup } from '@nextui-org/radio';
 import { HiSelector } from 'react-icons/hi';
@@ -33,7 +32,6 @@ export const SingleSelector = ({
     <Popover
       backdrop='opaque'
       placement='bottom'
-      motionProps={PopoverTransitionVariants}
     >
       <PopoverTrigger>
         <div className='w-fit h-10 bg-[--element] dark:bg-blue-500 rounded-xl px-5 pb-[2px] flex items-center gap-2 hover:scale-105 active:scale-90 transition-transform cursor-pointer'>

@@ -13,7 +13,7 @@ export const AdsList = ({ title, cols = 3, titleSize = 'small' }: Props) => {
     'text-xl md:text-2xl': titleSize === 'big',
   });
 
-  const listStyles = clsx('w-full h-fit grid gap-4 gap-y-6 flex-shrink-0', {
+  const listStyles = clsx('w-full h-fit grid gap-5 gap-y-6 flex-shrink-0', {
     'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3': cols === 3,
     'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4': cols === 4,
   });

@@ -8,7 +8,7 @@ import { PiMapPin } from 'react-icons/pi';
 
 export const AdCard = () => {
   return (
-    <div className='w-full flex-shrink-0 flex flex-col shadow-medium rounded-2xl overflow-clip cursor-pointer'>
+    <div className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer'>
       <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory'>
         <Image
           src={img1}

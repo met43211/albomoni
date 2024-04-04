@@ -50,7 +50,7 @@ export const LoginWidget = () => {
   });
 
   return (
-    <div className='w-full max-w-[420px] flex flex-col shadow-medium bg-[--bg] rounded-2xl overflow-clip'>
+    <div className='w-full max-w-[420px] flex flex-col shadow-medium bg-[--bg] dark:bg-default-50 rounded-2xl overflow-clip'>
       <h2 className='text-lg font-bold px-6 py-6'>Войдите в аккаунт</h2>
       <AnimatePresence>
         {isPending || isSuccess ? (

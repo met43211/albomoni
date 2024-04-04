@@ -6,17 +6,9 @@ import { WelcomeBlock } from './welcome-block';
 
 export const HomePage = ({ lng }: I18nLangParam) => (
   <main className='flex flex-col gap-14 items-center z-10 pb-40'>
-    <Suspense
-      fallback={
-        <div className='w-full h-[410px] bg-neutral-100 dark:bg-neutral-900' />
-      }
-    >
-      <WelcomeBlock />
-    </Suspense>
+    <WelcomeBlock />
 
-    <Suspense>
-      <CategoriesList lng={lng} />
-    </Suspense>
+    <CategoriesList lng={lng} />
 
     <Suspense>
       <div className='w-full max-w-7xl px-4'>

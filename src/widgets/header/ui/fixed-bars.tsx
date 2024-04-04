@@ -43,7 +43,7 @@ export const FixedBars = () => {
             initial={{ y: '150%', filter: 'blur(10px)', scale: 0.5 }}
             animate={{ y: 0, filter: 'blur(0px)', scale: 1 }}
             exit={{ y: '150%', filter: 'blur(10px)', scale: 0.5 }}
-            className='fixed bottom-5 md:bottom-6 w-[calc(100%-56px)] sm:w-96 h-14 z-50 flex bg-white/80 dark:bg-black/80 backdrop-blur-xl rounded-[20px] shadow-base origin-bottom'
+            className='fixed bottom-5 md:bottom-6 w-[calc(100%-56px)] sm:w-96 h-14 z-50 flex bg-white/80 dark:bg-black/80 backdrop-blur-xl rounded-[20px] shadow-base origin-bottom dark:border-1 dark:border-white/10'
           >
             {HeaderNavigationPaths.map(({ id, path, icon: Icon }) => {
               const buttonStyles = clsx(

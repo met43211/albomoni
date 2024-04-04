@@ -3,61 +3,74 @@
 'use client';
 
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
-import jsonFilters from '@albomoni/shared/model/filters.json';
 import { Button } from '@nextui-org/button';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { PiCaretLeftBold, PiCaretRightBold } from 'react-icons/pi';
 import { useImmer } from 'use-immer';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useCookie } from 'react-use';
 import { InitialChosenMemoryState } from '../config/initial-chosen-memory-state';
+import { GetPlaceCategoriesQueries, PlaceFormQueries } from '../api';
+import { PlaceAdSkeleton } from './skeleton';
 
 export const PlaceAd = () => {
   const { t } = useClientTranslation('filter_names');
+  const [token] = useCookie('token');
 
-  const { filters } = JSON.parse(JSON.stringify(jsonFilters));
-  const [filterTitle, setFilterTitle] = useState('categories');
+  const { data, isPending, isLoading, isFetching } = useQuery(
+    GetPlaceCategoriesQueries(token as string),
+  );
+
+  const { mutateAsync } = useMutation(PlaceFormQueries);
+
   const [chosenMemoryState, updateChosenMemoryState] = useImmer(
     InitialChosenMemoryState,
   );
-  
-  const [variants, setVariants] = useState(filters);
-  const [selectedVariants, updateSelectedVariants] = useImmer<any>({});
 
-  const handleClick = (event: any) => {
+  const [variants, setVariants] = useState<any>({});
+  const [selectedVariants, updateSelectedVariants] = useImmer<any>([]);
+
+  useEffect(() => {
+    setVariants(data);
+  }, [data]);
+
+  if (isLoading || isFetching || isPending) return <PlaceAdSkeleton />;
+
+  const selectFormAsync = async () => {
+    const resp = await mutateAsync({ filters: selectedVariants });
+    console.log(resp);
+  };
+
+  const handleClick = async (event: any) => {
     const selectedVariant = event.target.id;
     const dependencies = variants[selectedVariant];
 
     updateSelectedVariants((draft: any) => {
-      draft[filterTitle] = selectedVariant;
+      draft.push(selectedVariant);
     });
 
     updateChosenMemoryState((draft: typeof InitialChosenMemoryState) => {
       draft.prevVariants.push(variants);
-      draft.prevTitles.push(filterTitle);
       draft.prevSelected.push(selectedVariant);
     });
 
-    if ('static' in dependencies) {
-      console.log(selectedVariants);
+    if (dependencies === null) {
+      selectFormAsync();
     } else {
-      setFilterTitle(dependencies.name);
-      setVariants(dependencies.variants);
+      setVariants(dependencies);
     }
   };
 
   const handleClickBack = () => {
-    const { prevTitles, prevVariants } = chosenMemoryState;
+    const { prevVariants } = chosenMemoryState;
 
-    const currPrevTitle = prevTitles[prevTitles.length - 1];
-
-    setFilterTitle(currPrevTitle);
     setVariants(prevVariants[prevVariants.length - 1]);
 
     updateSelectedVariants((draft: any) => {
-      delete draft[currPrevTitle];
+      draft.length -= 1;
     });
 
     updateChosenMemoryState((draft: typeof InitialChosenMemoryState) => {
-      draft.prevTitles.length -= 1;
       draft.prevVariants.length -= 1;
       draft.prevSelected.length -= 1;
     });
@@ -65,7 +78,7 @@ export const PlaceAd = () => {
 
   return (
     <>
-      {chosenMemoryState.prevTitles.length > 0 && (
+      {chosenMemoryState.prevSelected.length > 0 && (
         <div className='w-full flex items-start gap-6'>
           <Button
             radius='full'
@@ -80,39 +93,36 @@ export const PlaceAd = () => {
               if (index < array.length - 1) {
                 return (
                   <Fragment key={title}>
-                    <p>
-                      {t(`${chosenMemoryState.prevTitles[index]}.${title}`)}
-                    </p>
+                    <p>{t(`${title}`)}</p>
                     <p>{'>'}</p>
                   </Fragment>
                 );
               }
-              return (
-                <p key={title}>
-                  {t(`${chosenMemoryState.prevTitles[index]}.${title}`)}
-                </p>
-              );
+              return <p key={title}>{t(`${title}`)}</p>;
             })}
           </div>
         </div>
       )}
-      <div className='flex gap-3 sm:gap-6 flex-wrap pb-20'>
-        {Object.keys(variants).map((variant) => {
-          return (
-            <Button
-              key={variant}
-              disableRipple
-              size='lg'
-              className='w-full sm:w-min min-w-72 rounded-2xl py-8 justify-between'
-              id={variant}
-              onPress={handleClick}
-            >
-              {t(`${filterTitle}.${variant}`)}
-              <PiCaretRightBold size={18} className='flex-shrink-0' />
-            </Button>
-          );
-        })}
-      </div>
+
+      {variants && (
+        <div className='flex md:grid md:grid-cols-2 gap-3 md:gap-6 flex-wrap pb-20'>
+          {Object.keys(variants).map((variant) => {
+            return (
+              <Button
+                key={variant}
+                disableRipple
+                size='lg'
+                className='w-full rounded-2xl py-8 justify-between hover:scale-[1.02]'
+                id={variant}
+                onPress={handleClick}
+              >
+                {t(`${variant}`)}
+                <PiCaretRightBold size={18} className='flex-shrink-0' />
+              </Button>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
