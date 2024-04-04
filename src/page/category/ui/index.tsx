@@ -13,7 +13,7 @@ export const CategoryPage = ({ lng, categoryId }: Props) => (
     <Suspense
       fallback={
         <div className='max-w-7xl w-full px-4'>
-          <Skeleton className='w-full h-52 rounded-3xl' />
+          <Skeleton className='w-full h-[304px] md:h-[248px] rounded-3xl' />
         </div>
       }
     >

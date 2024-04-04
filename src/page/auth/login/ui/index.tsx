@@ -6,10 +6,10 @@ import { Suspense } from 'react';
 import { PiXBold } from 'react-icons/pi';
 
 export const LoginPage = () => {
-  const navigate = useRouter();
+  const router = useRouter();
 
   const handleClick = () => {
-    navigate.back();
+    router.push('/');
   };
 
   return (

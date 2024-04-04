@@ -2,7 +2,7 @@
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Spinner } from '@nextui-org/spinner';
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 
 type Props = {
   children: React.ReactNode;
@@ -10,6 +10,7 @@ type Props = {
 
 export default function AuthLayout({ children }: Props) {
   const { isPending, isLogged } = useSession();
+  const router = useRouter();
 
   if (isPending) {
     return (
@@ -20,8 +21,13 @@ export default function AuthLayout({ children }: Props) {
   }
 
   if (!isLogged) {
-    redirect('/login');
+    router.push('/login');
+    return (
+      <div className='w-dvw h-dvh flex justify-center items-center'>
+        <Spinner />
+      </div>
+    );
+  } else {
+    return children;
   }
-
-  return children;
 }

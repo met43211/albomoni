@@ -6,8 +6,9 @@ import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { HeaderMobile } from './header-mobile';
 import { HeaderDesktop } from './header-desktop';
 
-const DynamicFixedBars = dynamic(() =>
-  import('./fixed-bars').then((mod) => mod.FixedBars),
+const DynamicFixedBars = dynamic(
+  () => import('./fixed-bars').then((mod) => mod.FixedBars),
+  { ssr: false },
 );
 
 export const Header = () => {

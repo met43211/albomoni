@@ -7,7 +7,7 @@ import { Tooltip } from '@nextui-org/tooltip';
 import { AnimatePresence, m } from 'framer-motion';
 import { PiSquaresFour } from 'react-icons/pi';
 import { clsx } from 'clsx';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import Link from 'next/link';
 import { HeaderNavigationPaths } from '../config/header-navigation-paths';
@@ -17,6 +17,9 @@ export const FixedBars = () => {
   const isScrolled = useScrolledTo(128);
   const scrollDir = useScrollDirection();
   const activePath = usePathname();
+  const router = useRouter();
+
+  router.prefetch('/login');
 
   const normalizedPath = activePath.slice(3) === '' ? '/' : activePath.slice(3);
 
@@ -37,6 +40,7 @@ export const FixedBars = () => {
           </m.div>
         )}
       </AnimatePresence>
+
       <AnimatePresence>
         {scrollDir !== 'down' && (
           <m.div
@@ -52,6 +56,8 @@ export const FixedBars = () => {
                   'opacity-50': path !== normalizedPath,
                 },
               );
+
+              router.prefetch(path);
 
               return (
                 <Tooltip
