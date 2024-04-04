@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
-import { validateTokenAsync } from '../api';
+import { validateTokenAsync } from '../../widgets/header/api';
 
 export const useValidateToken = () => {
   const [cookie] = useCookies(['token']);

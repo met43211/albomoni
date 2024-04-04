@@ -1,3 +1,5 @@
+'use client';
+
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
@@ -22,7 +24,7 @@ export const Search = () => {
             className='opacity-60 mx-2 flex-shrink-0'
           />
         }
-        classNames={{ input: 'text-sm pr-24', inputWrapper: 'shadow-medium' }}
+        classNames={{ input: 'text-sm pr-24' }}
       />
       <AnimatePresence>
         {search.length > 0 && (

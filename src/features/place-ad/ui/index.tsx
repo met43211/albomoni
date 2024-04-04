@@ -9,6 +9,7 @@ import { Fragment, useState } from 'react';
 import { PiCaretLeftBold, PiCaretRightBold } from 'react-icons/pi';
 import { useImmer } from 'use-immer';
 import { InitialChosenMemoryState } from '../config/initial-chosen-memory-state';
+import { FilesSend } from './file-send';
 
 export const PlaceAd = () => {
   const { t } = useClientTranslation('filter_names');
@@ -19,7 +20,6 @@ export const PlaceAd = () => {
     InitialChosenMemoryState,
   );
   const [variants, setVariants] = useState(filters);
-
   const [selectedVariants, updateSelectedVariants] = useImmer<any>({});
 
   const handleClick = (event: any) => {
@@ -113,6 +113,7 @@ export const PlaceAd = () => {
           );
         })}
       </div>
+      <FilesSend />
     </>
   );
 };

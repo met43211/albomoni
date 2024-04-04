@@ -1,7 +1,8 @@
 import { LoginWidget } from '@albomoni/features/auth/login';
-import { Logo } from '@albomoni/shared/ui/logo';
+import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import { Button } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
+import { Suspense } from 'react';
 import { PiXBold } from 'react-icons/pi';
 
 export const LoginPage = () => {
@@ -20,7 +21,7 @@ export const LoginPage = () => {
           onClick={handleClick}
           className='w-[132px] flex items-center justify-center'
         >
-          <Logo />
+          <AlbomoniSvg />
         </button>
         <Button
           onPress={handleClick}
@@ -33,7 +34,9 @@ export const LoginPage = () => {
         </Button>
       </div>
 
-      <LoginWidget />
+      <Suspense>
+        <LoginWidget />
+      </Suspense>
     </main>
   );
 };

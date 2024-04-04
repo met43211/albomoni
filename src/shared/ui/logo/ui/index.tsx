@@ -9,7 +9,7 @@ export const Logo = () => {
   return (
     <div className='w-full flex flex-col gap-2 mt-1 relative justify-center items-center'>
       <AlbomoniSvg />
-      <p className='w-full text-[10.5px] pl-[1px] text-center font-light tracking-[2px] uppercase whitespace-nowrap'>
+      <p className='w-full text-[10px] pl-[1px] text-center font-light tracking-[1.6px] uppercase whitespace-nowrap'>
         {t('short-description')}
       </p>
     </div>

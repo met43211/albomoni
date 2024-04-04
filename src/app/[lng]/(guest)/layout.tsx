@@ -1,6 +1,6 @@
 'use client';
 
-import { useValidateToken } from '@albomoni/widgets/header/lib/use-validate-token';
+import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { Spinner } from '@nextui-org/spinner';
 import { redirect } from 'next/navigation';
 
