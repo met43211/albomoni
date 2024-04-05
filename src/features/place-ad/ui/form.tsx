@@ -10,7 +10,10 @@ type Props = {
 
 export const PlaceAdForm = ({ formData }: Props) => {
   const { t } = useClientTranslation('inputs');
-  const [form, updateForm] = useImmer({
+  const [form, updateForm] = useImmer<{
+    fields: { [key: string]: string | string[] };
+    filters: string[];
+  }>({
     fields: {},
     filters: formData.filters,
   });
@@ -34,7 +37,7 @@ export const PlaceAdForm = ({ formData }: Props) => {
                     name={input.name}
                     type={input.type}
                     variants={input.variants}
-                    value={form.fields[input.name]}
+                    value={form.fields[input.name] as string}
                     updateForm={updateForm}
                   />
                 );
