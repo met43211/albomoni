@@ -6,9 +6,15 @@ type Props = {
   title: string;
   updateForm: (draft: any) => void;
   value: string;
+  variants: string[];
 };
 
-export const PlaceAdAddress = ({ title, updateForm, value }: Props) => {
+export const PlaceAdAddress = ({
+  title,
+  updateForm,
+  value,
+  variants,
+}: Props) => {
   const { t } = useClientTranslation('inputs');
 
   const handleChange = (e: any) => {

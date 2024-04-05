@@ -8,7 +8,7 @@ export type PlaceAdInput = {
   name: string;
   type: 'textarea';
   variants: string[];
-  value: string | string[];
+  value: string;
   updateForm: (draft: any) => void;
 };
 

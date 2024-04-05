@@ -1,16 +1,22 @@
 /* eslint-disable no-param-reassign */
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Button } from '@nextui-org/react';
-import { FormEvent, SyntheticEvent, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { PiPlusCircleBold } from 'react-icons/pi';
 
 type Props = {
   title: string;
   updateForm: (draft: any) => void;
-  value: string;
+  value: any;
+  variants: string[];
 };
 
-export const PlaceAdAPhotos = ({ title, updateForm, value }: Props) => {
+export const PlaceAdAPhotos = ({
+  title,
+  updateForm,
+  value,
+  variants,
+}: Props) => {
   const { t } = useClientTranslation('inputs');
   const fileInputRef = useRef<HTMLInputElement>(null);
 

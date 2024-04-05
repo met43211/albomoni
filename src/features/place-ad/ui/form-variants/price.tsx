@@ -7,9 +7,10 @@ type Props = {
   title: string;
   updateForm: (draft: any) => void;
   value: string;
+  variants: string[];
 };
 
-export const PlaceAdPrice = ({ title, updateForm, value }: Props) => {
+export const PlaceAdPrice = ({ title, updateForm, value, variants }: Props) => {
   const { t } = useClientTranslation('inputs');
 
   const handleChange = (e: any) => {
