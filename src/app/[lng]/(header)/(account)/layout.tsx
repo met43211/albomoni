@@ -14,7 +14,7 @@ export default function AuthLayout({ children }: Props) {
 
   if (isPending) {
     return (
-      <div className='w-dvw h-dvh flex justify-center items-center pb-40'>
+      <div className='w-dvw h-calc(100dvh-140px) flex justify-center items-center pb-40'>
         <Spinner />
       </div>
     );
@@ -23,11 +23,11 @@ export default function AuthLayout({ children }: Props) {
   if (!isLogged) {
     router.push('/login');
     return (
-      <div className='w-dvw h-dvh flex justify-center items-center'>
+      <div className='w-dvw h-calc(100dvh-140px) flex justify-center items-center pb-40'>
         <Spinner />
       </div>
     );
   }
-  
+
   return children;
 }

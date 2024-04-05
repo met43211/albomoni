@@ -31,9 +31,9 @@
   --scrollbar: #2b2b2b;
   --element: rgb(39, 39, 42);
   --element-hover: rgb(47, 47, 50);
-  --success: rgb(40, 199, 0);
+  --success: rgb(23, 186, 15);
   --warning: rgb(229, 200, 12);
-  --error: rgb(229, 12, 12);
+  --error: rgb(233, 22, 22);
 }
 
 body {

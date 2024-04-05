@@ -22,17 +22,13 @@ export const FilesSend = () => {
       formData.append('file', files[i]);
     }
 
-    console.log(formData.getAll('files'));
-
-    const resp = await fetch('http://192.168.22.188:8000/api/v1/create/', {
+    await fetch('http://192.168.22.188:8000/api/v1/create/', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
       method: 'POST',
       body: formData,
     });
-
-    console.log(resp);
   };
 
   return (
