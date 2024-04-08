@@ -1,5 +1,5 @@
 import { PlaceAdAddress } from './address';
-import { PlaceAdAPhotos } from './photos';
+import { PlaceAdPhotos } from './photos';
 import { PlaceAdPrice } from './price';
 import { PlaceAdSingleSelect } from './single-select';
 import { PlaceAdTextarea } from './textarea';
@@ -24,7 +24,7 @@ export const PlaceAdFormElement = ({
     textarea: PlaceAdTextarea,
     single: PlaceAdSingleSelect,
     price: PlaceAdPrice,
-    images: PlaceAdAPhotos,
+    images: PlaceAdPhotos,
   };
 
   const Element = FormElements[type];
