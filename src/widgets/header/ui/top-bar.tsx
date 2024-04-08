@@ -1,10 +1,7 @@
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { ButtonLight } from '@albomoni/shared/ui/button-light/ui';
 import {
-  PiChatBold,
   PiFolderBold,
-  PiFolderPlusBold,
-  PiHeartBold,
   PiMapPinBold,
 } from 'react-icons/pi';
 

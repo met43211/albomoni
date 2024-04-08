@@ -13,9 +13,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'downloader.disk.yandex.ru',
+        hostname: 'ansaratracker.store',
         port: '',
-        pathname: '/preview/**',
+        pathname: '/static/**',
       },
     ],
   },

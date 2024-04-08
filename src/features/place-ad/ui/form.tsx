@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-param-reassign */
 import { useImmer } from 'use-immer';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
@@ -6,27 +7,48 @@ import { useMutation } from '@tanstack/react-query';
 import _ from 'lodash';
 import { useCookie } from 'react-use';
 import { API_URL } from '@albomoni/shared/config';
+import { useState } from 'react';
+import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
+import { AnimatePresence } from 'framer-motion';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { PlaceAdFormElement, PlaceAdInput } from './form-variants';
 import { PlaceAdQueries } from '../api';
+import { PlaceAdFormState } from '../model/form.type';
+import { countFields } from '../lib/count-fields';
 
 type Props = {
   formData: any;
+  setFormData: (state: string) => void;
 };
 
-export const PlaceAdForm = ({ formData }: Props) => {
+export const PlaceAdForm = ({ formData, setFormData }: Props) => {
   const { t } = useClientTranslation('inputs');
-  const { mutateAsync, isPending } = useMutation(PlaceAdQueries);
+  const { mutateAsync } = useMutation(PlaceAdQueries);
+  const { user } = useSession();
   const [token] = useCookie('token');
+  const [isLoading, setIsLoading] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
-  const [form, updateForm] = useImmer<{
-    fields: { [key: string]: string | string[] | FormData | File[] };
-    filters: string[];
-  }>({
+  const [form, updateForm] = useImmer<PlaceAdFormState>({
     fields: {},
     filters: formData.filters,
+    errors: {},
   });
 
   const handleSubmit = async () => {
+    const errorsList = Object.entries(form.errors);
+    const passedFields = errorsList.filter(
+      ([_errKey, errValue]) => errValue === null,
+    );
+
+    const isValidForm = passedFields.length === countFields(formData);
+
+    if (!isValidForm) {
+      setFormError('error.invalid');
+      return;
+    }
+    setFormError(null);
+
     const formCopy = _.cloneDeep(form);
     const photoFormData = new FormData();
     const photos = form.fields.photo as File[];
@@ -34,23 +56,31 @@ export const PlaceAdForm = ({ formData }: Props) => {
     photos.forEach((img: Blob) => {
       photoFormData.append('file', img);
     });
+
     delete formCopy.fields.photo;
 
-    const hash = Math.random() * 100000000000000000;
+    const hash = `${user?.user_id}_${Date.now().toString()}`;
 
-    await mutateAsync({ ...formCopy, token, hash });
+    setIsLoading(true);
 
-    await fetch(`${API_URL}place-ad/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: '*/*',
-        AdId: hash.toString(),
-      },
-      method: 'POST',
-      body: photoFormData,
-    });
+    try {
+      await mutateAsync({ ...formCopy, token, hash });
 
-    
+      await fetch(`${API_URL}place-ad/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: '*/*',
+          AdId: hash,
+        },
+        method: 'POST',
+        body: photoFormData,
+      });
+    } catch {
+      return;
+    } finally {
+      setIsLoading(false);
+      setFormData('success');
+    }
   };
 
   return (
@@ -71,6 +101,7 @@ export const PlaceAdForm = ({ formData }: Props) => {
                     type={input.type}
                     variants={input.variants}
                     value={form.fields[input.name] as string}
+                    form={form}
                     updateForm={updateForm}
                   />
                 );
@@ -79,15 +110,26 @@ export const PlaceAdForm = ({ formData }: Props) => {
           </div>
         );
       })}
-      <Button
-        size='lg'
-        color='primary'
-        variant='shadow'
-        onPress={handleSubmit}
-        isLoading={isPending}
-      >
-        Разместить объявление
-      </Button>
+      <div className='flex flex-col gap-4'>
+        <Button
+          size='lg'
+          color='primary'
+          variant='shadow'
+          onPress={handleSubmit}
+          isLoading={isLoading}
+          className='w-min'
+        >
+          Разместить объявление
+        </Button>
+
+        <AnimatePresence>
+          {formError && (
+            <NotificationBubble type='error'>
+              Заполните корректно все поля
+            </NotificationBubble>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 };

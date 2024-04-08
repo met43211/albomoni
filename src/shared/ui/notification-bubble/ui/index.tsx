@@ -1,4 +1,5 @@
 import { clsx } from 'clsx';
+import { m } from 'framer-motion';
 
 type Props = {
   children: React.ReactNode;
@@ -14,5 +15,14 @@ export const NotificationBubble = ({ children, type = 'default' }: Props) => {
     },
   );
 
-  return <div className={bubbleStyles}>{children}</div>;
+  return (
+    <m.div
+      initial={{ opacity: 0, filter: 'blur(20px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }}
+      exit={{ opacity: 0, filter: 'blur(20px)' }}
+      className={bubbleStyles}
+    >
+      {children}
+    </m.div>
+  );
 };

@@ -13,6 +13,7 @@ import { PiUserBold } from 'react-icons/pi';
 import { useCookies } from 'react-cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@albomoni/shared/ui/button';
+import { useRouter } from 'next/navigation';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -22,6 +23,7 @@ import {
 export const LoginWidget = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useClientTranslation('forms');
+  const router = useRouter();
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
   const [, setToken] = useCookies(['token']);
 
@@ -48,6 +50,10 @@ export const LoginWidget = () => {
       return;
     }
   });
+
+  const handleClickRegistration = () => {
+    router.push('/registration');
+  };
 
   return (
     <div className='w-full max-w-[420px] flex flex-col shadow-medium bg-[--bg] dark:bg-default-50 rounded-2xl overflow-clip'>
@@ -147,6 +153,7 @@ export const LoginWidget = () => {
           size='md'
           color='primary'
           variant='flat'
+          onPress={handleClickRegistration}
           className='mt-2 z-10 backdrop-blur-sm font-semibold dark:text-blue-200'
         >
           Зарегистрироваться

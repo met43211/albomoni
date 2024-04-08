@@ -1,5 +1,5 @@
-import { Button } from '@nextui-org/button';
 import { PiPlusCircleBold } from 'react-icons/pi';
+import Link from 'next/link';
 import { WelcomeBlockScreen } from './screen';
 
 export const WelcomeBlock = () => {
@@ -13,14 +13,15 @@ export const WelcomeBlock = () => {
           <p className='text-md lg:text-lg text-blue-900 dark:text-blue-100 opacity-90 mb-1'>
             Совершайте выгодные сделки каждый день
           </p>
-          <Button
-            size='lg'
-            color='primary'
-            className='w-min bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400'
-          >
-            <PiPlusCircleBold size={20} />
-            Разместить объявление
-          </Button>
+          <Link href='/place-ad'>
+            <button
+              type='button'
+              className='w-fit flex gap-2 items-center py-3 px-5 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400 hover:scale-105 active:scale-95 transition-transform text-white'
+            >
+              <PiPlusCircleBold size={20} />
+              Разместить объявление
+            </button>
+          </Link>
         </div>
         <div className='absolute bottom-0 right-4 overflow-clip w-full h-[270px] md:w-[600px] md:h-[350px]'>
           <WelcomeBlockScreen />

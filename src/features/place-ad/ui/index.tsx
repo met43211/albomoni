@@ -13,6 +13,7 @@ import { PlaceAdSkeleton } from './skeleton';
 import { PlaceAdNavigation } from './navigation';
 import { SelectFilters } from './select-filters';
 import { PlaceAdForm } from './form';
+import { PlaceAdSuccess } from './success';
 
 export const PlaceAd = () => {
   const [token] = useCookie('token');
@@ -55,9 +56,11 @@ export const PlaceAd = () => {
 
       {formData === 'loading' && <Spinner />}
 
-      {formData && formData !== 'loading' && (
-        <PlaceAdForm formData={formData} />
+      {formData && formData !== 'loading' && formData !== 'success' && (
+        <PlaceAdForm formData={formData} setFormData={setFormData} />
       )}
+
+      {formData === 'success' && <PlaceAdSuccess />}
     </>
   );
 };

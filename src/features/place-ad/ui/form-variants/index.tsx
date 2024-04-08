@@ -1,3 +1,4 @@
+import { PlaceAdFormState } from '../../model/form.type';
 import { PlaceAdAddress } from './address';
 import { PlaceAdPhotos } from './photos';
 import { PlaceAdPrice } from './price';
@@ -9,6 +10,7 @@ export type PlaceAdInput = {
   type: 'textarea';
   variants: string[];
   value: string;
+  form: PlaceAdFormState;
   updateForm: (draft: any) => void;
 };
 
@@ -17,6 +19,7 @@ export const PlaceAdFormElement = ({
   type,
   variants,
   value,
+  form,
   updateForm,
 }: PlaceAdInput) => {
   const FormElements = {
@@ -34,6 +37,7 @@ export const PlaceAdFormElement = ({
       <Element
         title={name}
         variants={variants}
+        form={form}
         updateForm={updateForm}
         value={value}
       />

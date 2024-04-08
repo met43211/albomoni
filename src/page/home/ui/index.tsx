@@ -1,23 +1,29 @@
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
-import { AdsList } from '@albomoni/widgets/ads-list';
 import { Suspense } from 'react';
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from '@tanstack/react-query';
 import { CategoriesList } from './categories-list';
 import { WelcomeBlock } from './welcome-block';
+import { HomeAdsList } from './ads-list';
 
-export const HomePage = ({ lng }: I18nLangParam) => (
-  <main className='flex flex-col gap-14 items-center z-10 pb-40'>
-    <WelcomeBlock />
 
-    <CategoriesList lng={lng} />
+export const HomePage = ({ lng }: I18nLangParam) => {
+  const queryClient = new QueryClient();
 
-    <Suspense>
-      <div className='w-full max-w-7xl px-4'>
-        <AdsList
-          title='Последние опубликованные объявления'
-          titleSize='big'
-          cols={3}
-        />
-      </div>
-    </Suspense>
-  </main>
-);
+  return (
+    <main className='flex flex-col gap-14 items-center z-10 pb-40'>
+      <WelcomeBlock />
+
+      <CategoriesList lng={lng} />
+
+      <Suspense>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <HomeAdsList />
+        </HydrationBoundary>
+      </Suspense>
+    </main>
+  );
+};

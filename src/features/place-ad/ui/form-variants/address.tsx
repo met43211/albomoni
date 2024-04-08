@@ -1,25 +1,39 @@
 /* eslint-disable no-param-reassign */
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
+import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Input } from '@nextui-org/input';
+import * as yup from 'yup';
+import { AnimatePresence } from 'framer-motion';
+import { PlaceAdInputProps } from '../../model/form.type';
 
-type Props = {
-  title: string;
-  updateForm: (draft: any) => void;
-  value: string;
-  variants: string[];
-};
+const yupSchema = yup.object({
+  address: yup.string().required('required'),
+});
 
 export const PlaceAdAddress = ({
   title,
+  form,
   updateForm,
   value,
-  variants,
-}: Props) => {
+}: PlaceAdInputProps) => {
   const { t } = useClientTranslation('inputs');
 
   const handleChange = (e: any) => {
+    const { value: inputValue } = e.target;
+
+    try {
+      yupSchema.validateSync({ address: inputValue });
+      updateForm((draft: any) => {
+        draft.errors[title] = null;
+      });
+    } catch (err: any) {
+      updateForm((draft: any) => {
+        draft.errors[title] = err.message;
+      });
+    }
+
     updateForm((draft: any) => {
-      draft.fields[title] = e.target.value;
+      draft.fields[title] = inputValue;
     });
   };
 
@@ -33,6 +47,13 @@ export const PlaceAdAddress = ({
         onChange={handleChange}
         value={value || ''}
       />
+      <AnimatePresence>
+        {form?.errors[title] && (
+          <NotificationBubble type='error'>
+            {t(`errors.${form.errors[title]}`)}
+          </NotificationBubble>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
