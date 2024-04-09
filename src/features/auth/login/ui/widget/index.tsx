@@ -57,14 +57,14 @@ export const LoginWidget = () => {
 
   return (
     <div className='w-full max-w-[420px] flex flex-col shadow-medium bg-[--bg] dark:bg-default-50 rounded-2xl overflow-clip'>
-      <h2 className='text-lg font-bold px-6 py-6'>Войдите в аккаунт</h2>
+      <h2 className='text-lg font-bold px-6 py-6'>Вход в аккаунт</h2>
       <AnimatePresence>
         {isPending || isSuccess ? (
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className='h-[244px] flex justify-center items-center'
+            className='h-[236px] flex justify-center items-center'
           >
             <Spinner />
           </m.div>

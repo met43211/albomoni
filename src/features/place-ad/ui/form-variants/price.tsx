@@ -61,7 +61,7 @@ export const PlaceAdPrice = ({
         />
         <p className='opacity-50 text-3xl'>₽</p>
       </div>
-      
+
       <AnimatePresence>
         {form?.errors[title] && (
           <NotificationBubble type='error'>

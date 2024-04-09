@@ -1,23 +1,19 @@
-'use client';
-
 import { AdsList } from '@albomoni/widgets/ads-list';
-import { useQuery } from '@tanstack/react-query';
-import { Spinner } from '@nextui-org/spinner';
-import { GetAdsQueries } from '../../api';
+import { cookies } from 'next/headers';
+import { getAdsAsync } from '../../api/get-ads/get-ads';
 
-export const HomeAdsList = () => {
-  const { data } = useQuery(GetAdsQueries());
+export const HomeAdsList = async () => {
+  cookies();
+  const ads = await getAdsAsync();
 
-  return data ? (
+  return (
     <div className='w-full max-w-7xl px-4'>
       <AdsList
         title='Последние опубликованные объявления'
-        data={data}
+        data={ads}
         titleSize='big'
         cols={3}
       />
     </div>
-  ) : (
-    <Spinner />
   );
 };

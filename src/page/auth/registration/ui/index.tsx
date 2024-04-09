@@ -22,7 +22,7 @@ export const RegistrationPage = () => {
           <button
             type='button'
             aria-label='Back'
-            className='w-10 h-10 rounded-full dark:bg-[--element] flex items-center justify-center'
+            className='w-10 h-10 rounded-full bg-[--bg] dark:bg-[--element] flex items-center justify-center'
           >
             <PiXBold size={20} />
           </button>

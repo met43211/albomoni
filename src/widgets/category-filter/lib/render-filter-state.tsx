@@ -24,7 +24,8 @@ const buildInitialTree = (filters: any, initOrder: number = 0) => {
       let staticOrder = order;
       node.static.forEach((filter: any) => {
         initialTree[filter.name] = {
-          selected: [filter.variants[0]],
+          selected:
+            filter.type === 'one' ? filter.variants[0] : [filter.variants[0]],
           variants: filter.variants,
           type: filter.type,
           order: staticOrder,
