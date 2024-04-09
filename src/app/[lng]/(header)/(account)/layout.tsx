@@ -2,7 +2,7 @@
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Spinner } from '@nextui-org/spinner';
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 type Props = {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: Props) {
   }
 
   if (!isLogged) {
-    redirect('/login');
+    permanentRedirect('/login');
   }
 
   return children;

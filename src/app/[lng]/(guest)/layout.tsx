@@ -2,7 +2,7 @@
 
 import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { Spinner } from '@nextui-org/spinner';
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 type Props = {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export default function GuestLayout({ children }: Props) {
   }
 
   if (isLogged) {
-    redirect('/');
+    permanentRedirect('/');
   }
 
   return children;
