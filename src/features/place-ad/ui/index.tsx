@@ -2,11 +2,11 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import { useQuery } from '@tanstack/react-query';
-import { useCookie } from 'react-use';
 import { Spinner } from '@nextui-org/spinner';
+import { useCookies } from 'react-cookie';
 import { InitialChosenMemoryState } from '../config/initial-chosen-memory-state';
 import { GetPlaceCategoriesQueries } from '../api';
 import { PlaceAdSkeleton } from './skeleton';
@@ -16,7 +16,8 @@ import { PlaceAdForm } from './form';
 import { PlaceAdSuccess } from './success';
 
 export const PlaceAd = () => {
-  const [token] = useCookie('token');
+  const [cookies] = useCookies(['token']);
+  const { token } = cookies;
   const { data, isPending, isLoading } = useQuery(
     GetPlaceCategoriesQueries(token as string),
   );
@@ -25,8 +26,12 @@ export const PlaceAd = () => {
     InitialChosenMemoryState,
   );
   const [selectedVariants, updateSelectedVariants] = useImmer<any>([]);
-  const [variants, setVariants] = useState<any>(data);
+  const [variants, setVariants] = useState<any>();
   const [formData, setFormData] = useState<any>(null);
+
+  useEffect(() => {
+    setVariants(data);
+  }, [data]);
 
   if (isLoading || isPending) return <PlaceAdSkeleton />;
 
@@ -43,7 +48,7 @@ export const PlaceAd = () => {
         />
       )}
 
-      {!formData && (
+      {!formData && variants && (
         <SelectFilters
           variants={variants}
           selectedVariants={selectedVariants}
