@@ -21,6 +21,8 @@ export const useValidateToken = () => {
       } catch {
         removeCookie('token');
         setIsPending(false);
+        setUser(null);
+        setIsValidToken(false);
         return;
       }
     };
@@ -29,6 +31,8 @@ export const useValidateToken = () => {
       validateToken(token);
     } else {
       setIsPending(false);
+      setUser(null);
+      setIsValidToken(false);
     }
   }, [token]);
 

@@ -6,7 +6,7 @@ import { PiXBold } from 'react-icons/pi';
 
 export const LoginPage = () => {
   return (
-    <main className='flex flex-col gap-6 items-center px-4 md:justify-center min-h-dvh light:md:bg-[--element] pb-4'>
+    <main className='flex flex-col gap-6 items-center px-4 md:justify-center min-h-dvh md:bg-[--element] dark:bg-[--bg] pb-4'>
       <div className='w-full md:absolute top-0 flex justify-between p-1 pt-6 md:p-10'>
         <Link href='/'>
           <button
