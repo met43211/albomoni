@@ -8,8 +8,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const dynamic = 'force-dynamic'
-
 export default function GuestLayout({ children }: Props) {
   const { isLogged, isPending } = useValidateToken();
 
