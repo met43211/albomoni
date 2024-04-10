@@ -1,23 +1,15 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import { Header } from '@albomoni/widgets/header';
 
 type Props = {
   children: React.ReactNode;
 };
 
-const DynamicHeader = dynamic(
-  () => import('@albomoni/widgets/header').then((mod) => mod.Header),
-  {
-    ssr: false,
-    loading: () => <div className='w-full h-[140px] lg:h-32' />,
-  },
-);
-
 export default function HeaderLayout({ children }: Props) {
   return (
     <>
-      <DynamicHeader />
+      <Header />
       {children}
     </>
   );

@@ -1,13 +1,15 @@
 'use client';
 
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
-import { Button } from '@nextui-org/button';
 import { Input } from '@nextui-org/input';
-import { AnimatePresence, m } from 'framer-motion';
 import { useState } from 'react';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 
-export const Search = () => {
+type Props = {
+  isScrollable?: boolean;
+};
+
+export const Search = ({ isScrollable = false }: Props) => {
   const [search, setSearch] = useState('');
   const { t } = useClientTranslation();
 
@@ -24,27 +26,13 @@ export const Search = () => {
             className='opacity-60 mx-2 flex-shrink-0'
           />
         }
-        classNames={{ input: 'text-sm pr-24' }}
+        classNames={{
+          input: 'text-sm md:pr-24',
+          inputWrapper:
+            isScrollable &&
+            'bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-medium border-1 border-white/10',
+        }}
       />
-      <AnimatePresence>
-        {search.length > 0 && (
-          <m.div
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 10 }}
-          >
-            <Button
-              disableRipple
-              size='lg'
-              variant='shadow'
-              color='primary'
-              className='absolute right-0 text-sm'
-            >
-              {t('header.search-button')}
-            </Button>
-          </m.div>
-        )}
-      </AnimatePresence>
     </form>
   );
 };

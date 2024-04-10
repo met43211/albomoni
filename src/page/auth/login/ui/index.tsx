@@ -29,9 +29,7 @@ export const LoginPage = () => {
         </Link>
       </div>
 
-      <Suspense>
-        <LoginWidget />
-      </Suspense>
+      <LoginWidget />
     </main>
   );
 };

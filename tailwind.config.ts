@@ -38,7 +38,7 @@ const config: Config = {
               foreground: '#000000',
             },
             primary: {
-              DEFAULT: 'rgb(0, 82, 204)',
+              DEFAULT: '#3C72FF',
               foreground: '#ffffff',
             },
             secondary: {
@@ -49,7 +49,7 @@ const config: Config = {
               DEFAULT: '#ED2939',
               foreground: '#ffffff',
             },
-            focus: 'rgb(0, 82, 204)',
+            focus: '#3C72FF',
           },
         },
         dark: {
@@ -59,7 +59,7 @@ const config: Config = {
               foreground: '#ffffff',
             },
             primary: {
-              DEFAULT: 'rgb(0, 82, 204)',
+              DEFAULT: '#3C72FF',
               foreground: '#ffffff',
             },
             secondary: {

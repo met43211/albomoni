@@ -9,6 +9,12 @@
     "title": "Albomoni",
     "description": "Сервис для размещения заказов и услуг"
   },
+  "theme": {
+    "name": "Оформление",
+    "light": "Светлое",
+    "dark": "Тёмное",
+    "system": "Системное"
+  },
   "header": {
     "categories": "Все категории",
     "search-placeholder": "Поиск по объявлениям",

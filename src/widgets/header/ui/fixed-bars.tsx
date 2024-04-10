@@ -2,14 +2,13 @@ import { Search } from '@albomoni/features/search';
 import { TooltipTransitionVariants } from '@albomoni/shared/config/transition-variants';
 import { useScrollDirection } from '@albomoni/shared/lib/hooks/use-scroll-direction';
 import { useScrolledTo } from '@albomoni/shared/lib/hooks/use-scrolled-to';
-import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
 import { AnimatePresence, m } from 'framer-motion';
-import { PiSquaresFour } from 'react-icons/pi';
 import { clsx } from 'clsx';
 import { usePathname, useRouter } from 'next/navigation';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import Link from 'next/link';
+import { MenuButton } from '@albomoni/entities/menu';
 import { HeaderNavigationPaths } from '../config/header-navigation-paths';
 
 export const FixedBars = () => {
@@ -31,12 +30,10 @@ export const FixedBars = () => {
             initial={{ y: '-150%' }}
             animate={{ y: 0 }}
             exit={{ y: '-150%' }}
-            className='fixed top-0 left-0 w-full h-20 z-50 flex items-center justify-center px-4 gap-4'
+            className='fixed max-w-7xl top-0 w-full h-20 z-50 flex items-center justify-center px-4 gap-4 lg:gap-8'
           >
-            <Button isIconOnly color='primary' size='lg' radius='full'>
-              <PiSquaresFour size={20} className='flex-shrink-0' />
-            </Button>
-            <Search />
+            <Search isScrollable />
+            <MenuButton />
           </m.div>
         )}
       </AnimatePresence>

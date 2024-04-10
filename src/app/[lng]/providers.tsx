@@ -24,11 +24,7 @@ const Providers = ({ children, lang }: Props) => {
         <StoreProvider store={store}>
           <LazyMotion features={domMax}>
             <NextUIProvider>
-              <ThemeProvider
-                attribute='class'
-                enableSystem={false}
-                defaultTheme='light'
-              >
+              <ThemeProvider attribute='class'>
                 <LanguageProvider lang={lang}>{children}</LanguageProvider>
               </ThemeProvider>
             </NextUIProvider>
