@@ -1,4 +1,4 @@
-import { TestCategories } from '@albomoni/page/home/model/test-categories';
+import { getCategoriesAsync } from '@albomoni/entities/menu/api/get-categories';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
 import Image from 'next/image';
@@ -10,8 +10,8 @@ type Props = {
 
 export const CategoryHeader = async ({ lng, categoryId }: Props) => {
   const { t } = await useTranslation(lng);
-
-  const categoryData = TestCategories.find(({ id }) => id === categoryId);
+  const categories = await getCategoriesAsync();
+  const categoryData = categories.find(({ name }) => name === categoryId);
 
   return (
     <div className='w-full max-w-7xl px-4 flex flex-col gap-10'>

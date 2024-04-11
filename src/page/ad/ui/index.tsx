@@ -10,7 +10,6 @@ type Props = {
 export const AdPage = async ({ lng, adId }: Props) => {
   cookies();
   const data = await getAdAsync(adId);
-  console.log(data);
 
   return (
     <div className='w-full flex items-center justify-center'>
