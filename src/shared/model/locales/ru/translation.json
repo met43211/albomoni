@@ -28,14 +28,14 @@
     "profile": "Профиль"
   },
   "categories": {
-    "transport": "Транспорт",
-    "realty": "Недвижимость",
+    "transportation": "Транспорт",
+    "real_estate": "Недвижимость",
     "services": "Услуги",
     "requests": "Заявка на услуги",
-    "personal_items": "Личные вещи",
-    "home_items": "Для дома и дачи",
-    "spare_parts": "Запчасти и аксессуары",
+    "personal_effects": "Личные вещи",
+    "for_home_and_cottage": "Для дома и дачи",
+    "spare_parts_and_accessories": "Запчасти и аксессуары",
     "electronics": "Техника",
-    "events": "Мероприятия, праздники"
+    "events_celebrations": "Мероприятия, праздники"
   }
 }

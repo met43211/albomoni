@@ -12,8 +12,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { PiUserBold } from 'react-icons/pi';
 import { useCookies } from 'react-cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from '@albomoni/shared/ui/button';
 import { useRouter } from 'next/navigation';
+import { Button } from '@nextui-org/button';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -133,7 +133,8 @@ export const LoginWidget = () => {
               <Button
                 type='submit'
                 size='md'
-                onPress={onSubmit}
+                variant='shadow'
+                onPress={onSubmit as any}
                 color='primary'
               >
                 Войти

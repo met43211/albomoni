@@ -37,12 +37,9 @@ export const MultipleSelector = ({
   };
 
   return (
-    <Popover
-      backdrop='opaque'
-      placement='bottom'
-    >
+    <Popover backdrop='opaque' placement='bottom'>
       <PopoverTrigger>
-        <div className='w-fit h-min py-2 bg-[--element] dark:bg-blue-500 rounded-xl px-5 flex items-center gap-2 hover:scale-105 active:scale-95 transition-transform cursor-pointer'>
+        <div className='w-fit h-min py-2 bg-[--element] dark:bg-neutral-300 text-black rounded-xl px-5 flex items-center gap-2 hover:scale-105 active:scale-95 transition-transform cursor-pointer'>
           {selected.map((item, index) => {
             if (selected.length !== index + 1) {
               return `${t(`${filterKey}.${item}`)}, `;

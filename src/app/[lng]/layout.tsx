@@ -39,11 +39,12 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  themeColor: 'black',
 };
 
 export default function RootLayout({ children, params: { lng } }: PageProps) {
   return (
-    <html suppressHydrationWarning className='dark' lang={lng} dir={dir(lng)}>
+    <html className='dark' lang={lng} dir={dir(lng)} suppressHydrationWarning>
       <ScrollToTop />
       <body className={font.className}>
         <Providers lang={lng}>{children}</Providers>

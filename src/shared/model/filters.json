@@ -1,6 +1,6 @@
 {
   "filters": {
-    "realty": {
+    "real_estate": {
       "name": "layout_type",
       "variants": {
         "apartment": {

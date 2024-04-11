@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        tablet: '864px',
+      },
       borderRadius: {
         '4xl': '2rem',
       },

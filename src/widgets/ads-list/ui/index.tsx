@@ -1,6 +1,6 @@
 import { AdCard } from '@albomoni/entities/ad';
+import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { clsx } from 'clsx';
-import { Ad } from '../../../entities/ad/model/ad.type';
 
 type Props = {
   title: string;

@@ -3,7 +3,7 @@
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { MouseEventHandler, useState } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
 
 type Props = {
@@ -16,7 +16,10 @@ export const AddToFavoritesButton = ({ isLiked = false }: Props) => {
 
   const [isActive, setActive] = useState(isLiked);
 
-  const handleClick = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     if (!isLogged) {
       router.push('/login');
     } else {
@@ -29,8 +32,12 @@ export const AddToFavoritesButton = ({ isLiked = false }: Props) => {
       isIconOnly
       size='sm'
       radius='full'
-      onPress={handleClick}
-      className={isActive ? 'text-[--error] bg-red-500/10' : 'text-[--text] dark:bg-default-200'}
+      onClick={handleClick}
+      className={
+        isActive
+          ? 'text-[--error] bg-red-500/10'
+          : 'text-[--text] dark:bg-default-200'
+      }
     >
       {isActive ? <PiHeartFill size={18} /> : <PiHeartBold size={18} />}
     </Button>

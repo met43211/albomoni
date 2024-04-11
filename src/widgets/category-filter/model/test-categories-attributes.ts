@@ -1,6 +1,6 @@
 export const TestCategoriesAttributes = [
   {
-    category_id: 'realty',
+    category_id: 'real_estate',
     attributes: [
       {
         name: 'apartment',

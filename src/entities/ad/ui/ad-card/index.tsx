@@ -13,21 +13,25 @@ type Props = {
 export const AdCard = ({ data }: Props) => {
   const { images, cost, id } = data;
 
+  console.log(images);
+
   return (
     <Link
       href={`/ad/${id}`}
       className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer'
     >
       <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory'>
-        {images.map((img) => (
+        {images.map(({ full, preview }) => (
           <Image
-            key={img}
-            src={img}
+            key={full}
+            src={full}
+            blurDataURL={preview}
+            placeholder='blur'
             alt='image'
             width={240}
             height={160}
             quality={40}
-            className='snap-start flex-shrink-0 object-cover'
+            className='snap-start flex-shrink-0 object-cover h-full'
           />
         ))}
       </div>

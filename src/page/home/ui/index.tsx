@@ -3,13 +3,16 @@ import { Suspense } from 'react';
 import { CategoriesList } from './categories-list';
 import { WelcomeBlock } from './welcome-block';
 import { HomeAdsList } from './ads-list';
+import { CategoriesListSkeleton } from './categories-list/skeleton';
 
 export const HomePage = async ({ lng }: I18nLangParam) => {
   return (
     <main className='flex flex-col gap-14 items-center z-10 pb-40'>
       <WelcomeBlock />
 
-      <CategoriesList lng={lng} />
+      <Suspense fallback={<CategoriesListSkeleton />}>
+        <CategoriesList lng={lng} />
+      </Suspense>
 
       <Suspense>
         <HomeAdsList />

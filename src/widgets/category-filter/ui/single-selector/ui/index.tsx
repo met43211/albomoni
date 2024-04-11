@@ -29,12 +29,9 @@ export const SingleSelector = ({
   };
 
   return (
-    <Popover
-      backdrop='opaque'
-      placement='bottom'
-    >
+    <Popover backdrop='opaque' placement='bottom'>
       <PopoverTrigger>
-        <div className='w-fit h-10 bg-[--element] dark:bg-blue-500 rounded-xl px-5 pb-[2px] flex items-center gap-2 hover:scale-105 active:scale-90 transition-transform cursor-pointer'>
+        <div className='w-fit h-10 bg-[--element] dark:bg-neutral-300 text-black rounded-xl px-5 pb-[2px] flex items-center gap-2 hover:scale-105 active:scale-90 transition-transform cursor-pointer'>
           {t(`${filterKey}.${selected}`)}
           <HiSelector size={20} className='mt-[1px]' />
         </div>

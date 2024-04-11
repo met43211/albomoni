@@ -9,5 +9,5 @@ export type Ad = {
   geoposition: string;
   isServise: boolean;
   category: string;
-  images: string[];
+  images: { full: string; preview: string }[];
 };

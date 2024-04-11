@@ -22,7 +22,8 @@
   --error: rgb(229, 12, 12);
 }
 
-[class='dark'] {
+[class='dark'],
+[class='dark with-fancybox'] {
   --text: #ffffff;
   --inv-text: #000000;
   --accent: rgb(0, 82, 204);
