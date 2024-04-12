@@ -20,23 +20,26 @@ import { ChangeThemeButton } from './change-theme-button';
 
 export const MenuAside = () => {
   const { isLogged, user } = useSession();
+
   return (
     <aside className='w-full tablet:w-80 flex-shrink-0 flex flex-col gap-4'>
       {isLogged ? (
-        <div className='w-full h-16 flex gap-4 items-center'>
-          <Avatar
-            isBordered
-            src={user?.avatar && (user.avatar as any)}
-            icon={<PiUserBold size={24} className='opacity-50' />}
-            className='w-14 h-14 m-1 flex-shrink-0'
-            classNames={{
-              base: 'ring-black/10 dark:ring-white/10 ring-[3px] ring-offset-[3px]',
-            }}
-          />
-          <div className='flex flex-col gap-1 justify-between w-full h-full'>
-            <p className='text-lg font-bold'>{user?.first_name}</p>
+        <Link href='/unauth'>
+          <div className='w-full h-16 flex gap-4 items-center'>
+            <Avatar
+              isBordered
+              src={user?.avatar && (user.avatar as any)}
+              icon={<PiUserBold size={24} className='opacity-50' />}
+              className='w-14 h-14 m-1 flex-shrink-0'
+              classNames={{
+                base: 'ring-black/10 dark:ring-white/10 ring-[3px] ring-offset-[3px]',
+              }}
+            />
+            <div className='flex flex-col gap-1 justify-between w-full h-full'>
+              <p className='text-lg font-bold'>{user?.first_name}</p>
+            </div>
           </div>
-        </div>
+        </Link>
       ) : (
         <Link href='/login'>
           <button
