@@ -8,8 +8,9 @@ import { dir } from 'i18next';
 import type { Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ScrollToTop } from '@albomoni/shared/lib/utils/scroll-to-top';
-import './globals.css';
+import { cookies } from 'next/headers';
 import Providers from './providers';
+import './globals.css';
 
 type MetadataProps = {
   params: I18nLangParam;
@@ -34,18 +35,39 @@ export async function generateMetadata({ params: { lng } }: MetadataProps) {
   };
 }
 
+export function generateViewport() {
+  const theme = cookies().get('theme');
+
+  const fallbackThemeColor = [
+    { media: '(prefers-color-scheme: light)', color: '#fffffd' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ];
+
+  if (theme?.value) {
+    return {
+      themeColor: theme.value === 'light' ? '#fffffd' : '#000000',
+    };
+  }
+
+  return {
+    themeColor: fallbackThemeColor,
+  };
+}
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: 'black',
 };
 
 export default function RootLayout({ children, params: { lng } }: PageProps) {
   return (
     <html className='dark' lang={lng} dir={dir(lng)} suppressHydrationWarning>
       <ScrollToTop />
+      <head>
+        <meta name='format-detection' content='telephone=no' />
+      </head>
       <body className={font.className}>
         <Providers lang={lng}>{children}</Providers>
       </body>

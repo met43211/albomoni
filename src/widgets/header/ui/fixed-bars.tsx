@@ -25,7 +25,9 @@ export const FixedBars = () => {
   return (
     <>
       <AnimatePresence>
-        {isScrolled && scrollDir === 'up' && (
+        {isScrolled &&
+          scrollDir === 'up' &&
+          normalizedPath.split('/')[1] !== 'ad' && (
           <m.div
             initial={{ y: '-150%' }}
             animate={{ y: 0 }}

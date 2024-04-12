@@ -6,7 +6,7 @@ import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { validateTokenAsync } from '../../widgets/header/api';
 
 export const useValidateToken = () => {
-  const [cookie, _setCookie, removeCookie] = useCookies(['token']);
+  const [cookie, _setCookie, removeCookie] = useCookies();
   const { isPending, isLogged, setUser, setIsValidToken, setIsPending } =
     useSession();
   const { token } = cookie;

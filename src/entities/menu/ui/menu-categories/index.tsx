@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { getCategoriesAsync } from '../../api/get-categories';
+import { MenuCategoriesSkeleton } from './skeleton';
 
 type Props = {
   onClose: () => void;
@@ -10,10 +11,14 @@ type Props = {
 
 export const MenuCategories = ({ onClose }: Props) => {
   const { t } = useClientTranslation();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['categories'],
     queryFn: getCategoriesAsync,
   });
+
+  if (isLoading) {
+    return <MenuCategoriesSkeleton />;
+  }
 
   return (
     data && (

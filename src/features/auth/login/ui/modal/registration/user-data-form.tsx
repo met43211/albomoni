@@ -23,7 +23,7 @@ export const ModalRegistrationUserData = ({
   const [passVisible, setPassVisible] = useState(false);
   const [confPassVisible, setConfPassVisible] = useState(false);
   const { mutateAsync, isPending, isError } = useMutation(SignupQueries);
-  const [, setToken] = useCookies(['token']);
+  const [, setToken] = useCookies();
 
   const togglePassVis = () => setPassVisible(!passVisible);
   const toggleConfPassVis = () => setConfPassVisible(!confPassVisible);

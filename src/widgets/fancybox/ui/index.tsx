@@ -15,7 +15,7 @@ export const ImageViewer = ({ images }: Props) => {
     <Fancybox
       options={{
         Carousel: {
-          infinite: false,
+          infinite: true,
         },
         Toolbar: {
           display: {
@@ -51,7 +51,23 @@ export const ImageViewer = ({ images }: Props) => {
         },
       }}
     >
-      <Carousel options={{ infinite: false }}>
+      <Carousel
+        options={{
+          infinite: true,
+          Dots: {
+            dynamicFrom: 5,
+          },
+          Thumbs: false,
+          // breakpoints: {
+          //   '(min-width: 768px)': {
+          //     Dots: false,
+          //     Thumbs: {
+          //       type: 'modern',
+          //     },
+          //   },
+          // },
+        }}
+      >
         {images?.map(({ full, preview }) => (
           <div
             key={full}
@@ -68,7 +84,7 @@ export const ImageViewer = ({ images }: Props) => {
               placeholder='blur'
               blurDataURL={preview}
               alt='img'
-              className='snap-start flex-shrink-0 object-cover h-full'
+              className='snap-start flex-shrink-0 object-cover h-full w-full'
             />
           </div>
         ))}

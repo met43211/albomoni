@@ -4,9 +4,8 @@ import { Fancybox as NativeFancybox } from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
 import type { OptionsType } from '@fancyapps/ui/types/Fancybox/options';
-import { useTheme } from 'next-themes';
 
-import '../model/fancybox.css';
+import './fancybox.css';
 
 interface Props {
   delegate?: string;

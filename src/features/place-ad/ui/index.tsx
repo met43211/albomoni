@@ -16,7 +16,7 @@ import { PlaceAdForm } from './form';
 import { PlaceAdSuccess } from './success';
 
 export const PlaceAd = () => {
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies();
   const { token } = cookies;
   const { data, isPending, isLoading } = useQuery(
     GetPlaceCategoriesQueries(token as string),

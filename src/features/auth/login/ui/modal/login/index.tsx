@@ -24,7 +24,7 @@ export const ModalLogin = ({ onClose, setModal }: LoginModalContentProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useClientTranslation('forms');
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
-  const [, setToken] = useCookies(['token']);
+  const [, setToken] = useCookies();
 
   const { control, handleSubmit } = useForm<LoginCheckSchemaFormData>({
     resolver: yupResolver(LoginCheckSchema),

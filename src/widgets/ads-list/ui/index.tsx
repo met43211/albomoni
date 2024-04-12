@@ -7,13 +7,15 @@ type Props = {
   cols?: 3 | 4;
   titleSize?: 'small' | 'big';
   data?: Ad[];
+  lng: string;
 };
 
-export const AdsList = ({
+export const AdsList = async ({
   title,
   cols = 3,
   titleSize = 'small',
   data,
+  lng,
 }: Props) => {
   const titleStyles = clsx('font-bold', {
     'text-xl': titleSize === 'small',
@@ -30,7 +32,7 @@ export const AdsList = ({
       <h2 className={titleStyles}>{title}</h2>
       <div className={listStyles}>
         {data?.reverse().map((ad) => (
-          <AdCard key={ad.id} data={ad} />
+          <AdCard key={ad.ad.id} data={ad} lng={lng} />
         ))}
       </div>
     </div>

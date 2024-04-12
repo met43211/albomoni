@@ -4,7 +4,7 @@ import { WelcomeBlockScreen } from './screen';
 
 export const WelcomeBlock = () => {
   return (
-    <div className='w-full h-[500px] lg:h-[410px] bg-gradient-to-bl from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-500 flex justify-center'>
+    <div className='w-full h-[500px] lg:h-[410px] bg-gradient-to-bl from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-500 flex justify-center mb-14'>
       <div className='max-w-7xl w-full px-4 flex py-8 items-start lg:items-center relative'>
         <div className='flex flex-col gap-5 w-full sm:w-1/2'>
           <h2 className='text-3xl lg:text-5xl font-bold !leading-[1.3] subpixel-antialiased text-indigo-900 dark:text-indigo-100'>

@@ -37,5 +37,10 @@
     "spare_parts_and_accessories": "Запчасти и аксессуары",
     "electronics": "Техника",
     "events_celebrations": "Мероприятия, праздники"
+  },
+  "feedback": {
+    "t_one": "{{count}} отзыв",
+    "t_few": "{{count}} отзыва",
+    "t_many": "{{count}} отзывов"
   }
 }

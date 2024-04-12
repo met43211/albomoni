@@ -38,7 +38,10 @@ export const Carousel = (props: PropsWithChildren<Props>) => {
   });
 
   return (
-    <div className='f-carousel max-w-[500px] h-96 flex items-center justify-center' ref={containerRef}>
+    <div
+      className='w-full f-carousel h-96 sm:h-[32rem] md:h-[38rem] flex items-center justify-center'
+      ref={containerRef}
+    >
       {children}
     </div>
   );

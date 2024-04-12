@@ -1,4 +1,3 @@
-import { AdsList } from '@albomoni/widgets/ads-list/ui';
 import { Suspense } from 'react';
 import { Skeleton } from '@nextui-org/react';
 import { CategoryHeader } from './category-header';
@@ -22,7 +21,7 @@ export const CategoryPage = ({ lng, categoryId }: Props) => (
 
     <div className='w-full max-w-7xl px-4 flex flex-col-reverse lg:flex-row gap-6'>
       <Suspense>
-        <AdsList title='Недавние объявления' cols={3} />
+        {/* <AdsList title='Недавние объявления' cols={3} /> */}
       </Suspense>
       {/* <div className='flex flex-col gap-8 w-96 '>
         <ShowHistoryButton />

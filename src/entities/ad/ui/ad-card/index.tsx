@@ -8,20 +8,19 @@ import { Ad } from '../../model/ad.type';
 
 type Props = {
   data: Ad;
+  lng: string;
 };
 
-export const AdCard = ({ data }: Props) => {
-  const { images, cost, id } = data;
-
-  console.log(images);
+export const AdCard = ({ data, lng }: Props) => {
+  const { ad, seller } = data;
 
   return (
     <Link
-      href={`/ad/${id}`}
+      href={`/ad/${ad.id}`}
       className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer'
     >
       <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory'>
-        {images.map(({ full, preview }) => (
+        {ad.images.map(({ full, preview }) => (
           <Image
             key={full}
             src={full}
@@ -37,7 +36,11 @@ export const AdCard = ({ data }: Props) => {
       </div>
       <Divider />
       <div className='w-full flex flex-col gap-4 p-4 relative'>
-        <Rating value={4.1} />
+        <Rating
+          value={seller.rating}
+          feedback={seller.feedback_count}
+          lng={lng}
+        />
         <div className='absolute top-4 right-4'>
           <AddToFavoritesButton />
         </div>
@@ -50,7 +53,7 @@ export const AdCard = ({ data }: Props) => {
           </div>
         </div>
 
-        <p className='text-xl font-bold'>{cost} ₽</p>
+        <p className='text-xl font-bold'>{ad.cost} ₽</p>
       </div>
     </Link>
   );

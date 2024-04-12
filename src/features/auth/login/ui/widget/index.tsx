@@ -25,7 +25,7 @@ export const LoginWidget = () => {
   const { t } = useClientTranslation('forms');
   const router = useRouter();
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
-  const [, setToken] = useCookies(['token']);
+  const [, setToken] = useCookies();
 
   const { control, handleSubmit } = useForm<LoginCheckSchemaFormData>({
     resolver: yupResolver(LoginCheckSchema),

@@ -1,15 +1,20 @@
+import { useTranslation } from '@albomoni/shared/i18n';
 import { clsx } from 'clsx';
 import { PiStarFill } from 'react-icons/pi';
 
-type Props = { value: number };
+type Props = { value: number; feedback: number; lng: string };
 
-export const Rating = ({ value }: Props) => {
+export const Rating = async ({ value, feedback, lng }: Props) => {
+  const { t } = await useTranslation(lng);
+
   const bubbleStyles = clsx(
     'px-2 py-1 rounded-full text-xs text-white font-semibold',
     {
       'bg-[--success]': value >= 4,
       'bg-[--warning]': value < 4 && value >= 3,
-      'bg-[--error]': value < 3,
+      'bg-[--error]': value < 3 && value > 0,
+      'bg-default-500 text-default-200 dark:bg-default-200 dark:text-default-800':
+        value === 0,
     },
   );
 
@@ -40,7 +45,9 @@ export const Rating = ({ value }: Props) => {
           className={roundedValue >= 5 ? 'text-[--warning]' : 'opacity-20'}
         />
       </div>
-      <p className='text-sm opacity-50'>63 отзыва</p>
+      <p className='text-sm opacity-50'>
+        {t('feedback.t', { count: feedback })}
+      </p>
     </div>
   );
 };

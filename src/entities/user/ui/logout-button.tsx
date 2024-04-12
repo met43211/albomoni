@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { LuLogOut } from 'react-icons/lu';
 
 export const LogoutButton = () => {
-  const [_cookie, _setCookie, removeCookie] = useCookies(['token']);
+  const [_cookie, _setCookie, removeCookie] = useCookies();
 
   const handleClick = () => {
     removeCookie('token');
