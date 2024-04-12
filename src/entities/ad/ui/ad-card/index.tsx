@@ -4,6 +4,7 @@ import { Rating } from '@albomoni/shared/ui/rating';
 import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
 import { PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
+import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { Ad } from '../../model/ad.type';
 
 type Props = {
@@ -53,7 +54,9 @@ export const AdCard = ({ data, lng }: Props) => {
           </div>
         </div>
 
-        <p className='text-xl font-bold'>{ad.cost} ₽</p>
+        <p className='text-xl font-bold'>
+          {normalizePrice({ price: ad.cost, lng })}
+        </p>
       </div>
     </Link>
   );
