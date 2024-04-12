@@ -54,9 +54,7 @@ export const ImageViewer = ({ images }: Props) => {
       <Carousel
         options={{
           infinite: true,
-          Dots: {
-            dynamicFrom: 5,
-          },
+          Dots: true,
           Thumbs: false,
           // breakpoints: {
           //   '(min-width: 768px)': {
@@ -79,7 +77,7 @@ export const ImageViewer = ({ images }: Props) => {
             <Image
               width={500}
               height={300}
-              quality={50}
+              quality={70}
               src={full}
               placeholder='blur'
               blurDataURL={preview}
