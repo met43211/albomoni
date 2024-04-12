@@ -3,7 +3,7 @@ import { Skeleton } from '@nextui-org/skeleton';
 export default function LoadingAd() {
   return (
     <div className='w-full flex flex-col items-center justify-center'>
-      <div className='w-full flex flex-col lg:flex-row gap-8 max-w-7xl lg:px-4 pt-2 pb-40'>
+      <div className='w-full flex flex-col lg:flex-row gap-8 max-w-7xl lg:px-4 lg:pt-2 pb-40'>
         <div className='w-full flex flex-col gap-6 flex-shrink'>
           <div className='w-full overflow-clip lg:rounded-xl flex-shrink'>
             <Skeleton className='w-full h-96 sm:h-[32rem] md:h-[38rem] lg:rounded-xl flex-shrink' />
