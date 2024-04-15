@@ -20,7 +20,7 @@ const yupSchema = yup.object({
 
 export const PlaceAdPrice = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {
-    const { t } = useClientTranslation('inputs');
+    const { t } = useClientTranslation('place-ad');
 
     const handleChange = (e: any) => {
       const { value: inputValue } = e.target;

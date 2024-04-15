@@ -17,7 +17,8 @@ const yupSchema = yup.object({
 
 export const PlaceAdPhotos = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {
-    const { t } = useClientTranslation('inputs');
+    const { t } = useClientTranslation('place-ad');
+
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (e: FormEvent<HTMLInputElement>) => {

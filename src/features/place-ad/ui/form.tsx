@@ -15,6 +15,7 @@ import { PlaceAdFormElement, PlaceAdInput } from './form-variants';
 import { PlaceAdQueries } from '../api';
 import { PlaceAdFormState } from '../model/form.type';
 import { countFields } from '../lib/count-fields';
+import { CategoryContext } from '../lib/use-category';
 
 type Props = {
   formData: any;
@@ -22,7 +23,7 @@ type Props = {
 };
 
 export const PlaceAdForm = ({ formData, setFormData }: Props) => {
-  const { t } = useClientTranslation('inputs');
+  const { t } = useClientTranslation('place-ad');
   const { mutateAsync } = useMutation(PlaceAdQueries);
   const { user } = useSession();
   const [token] = useCookie('token');
@@ -47,6 +48,7 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
       setFormError('error.invalid');
       return;
     }
+
     setFormError(null);
 
     const formCopy = _.cloneDeep(form);
@@ -84,52 +86,54 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
   };
 
   return (
-    <div className='lg:w-1/2'>
-      {Object.keys(formData.sections).map((section) => {
-        const inputs = formData.sections[section];
-        return (
-          <div key={section} className='flex flex-col gap-3 mb-20'>
-            <h3 className='text-2xl font-semibold mb-5'>
-              {t(`sections.${section}`)}
-            </h3>
-            <div className='flex flex-col gap-10'>
-              {inputs.map((input: PlaceAdInput) => {
-                return (
-                  <PlaceAdFormElement
-                    key={input.name}
-                    name={input.name}
-                    type={input.type}
-                    variants={input.variants}
-                    value={form.fields[input.name] as string}
-                    form={form}
-                    updateForm={updateForm}
-                  />
-                );
-              })}
+    <CategoryContext.Provider value={formData.filters[0]}>
+      <div className='lg:w-1/2'>
+        {Object.keys(formData.sections).map((section) => {
+          const inputs = formData.sections[section];
+          return (
+            <div key={section} className='flex flex-col gap-3 mb-20'>
+              <h3 className='text-2xl font-semibold mb-5'>
+                {t(`sections.${section}`)}
+              </h3>
+              <div className='flex flex-col gap-10'>
+                {inputs.map((input: PlaceAdInput) => {
+                  return (
+                    <PlaceAdFormElement
+                      key={input.name}
+                      name={input.name}
+                      type={input.type}
+                      variants={input.variants}
+                      value={form.fields[input.name] as string}
+                      form={form}
+                      updateForm={updateForm}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        );
-      })}
-      <div className='flex flex-col gap-4'>
-        <Button
-          size='lg'
-          color='primary'
-          variant='shadow'
-          onPress={handleSubmit}
-          isLoading={isLoading}
-          className='w-min'
-        >
-          Разместить объявление
-        </Button>
+          );
+        })}
+        <div className='flex flex-col gap-4'>
+          <Button
+            size='lg'
+            color='primary'
+            variant='shadow'
+            onPress={handleSubmit}
+            isLoading={isLoading}
+            className='w-min'
+          >
+            Разместить объявление
+          </Button>
 
-        <AnimatePresence>
-          {formError && (
-            <NotificationBubble type='error'>
-              Заполните корректно все поля
-            </NotificationBubble>
-          )}
-        </AnimatePresence>
+          <AnimatePresence>
+            {formError && (
+              <NotificationBubble type='error'>
+                Заполните корректно все поля
+              </NotificationBubble>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
-    </div>
+    </CategoryContext.Provider>
   );
 };

@@ -12,7 +12,6 @@ export const PlaceAdSkeleton = () => {
       <Skeleton className='w-full rounded-2xl py-8 justify-between' />
       <Skeleton className='w-full rounded-2xl py-8 justify-between' />
       <Skeleton className='w-full rounded-2xl py-8 justify-between' />
-      <Skeleton className='w-full rounded-2xl py-8 justify-between' />
     </div>
   );
 };

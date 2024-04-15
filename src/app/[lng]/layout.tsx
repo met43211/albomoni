@@ -5,7 +5,6 @@ import { useTranslation } from '@albomoni/shared/i18n';
 import { fallbackLng, languages } from '@albomoni/shared/i18n/settings';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { dir } from 'i18next';
-import type { Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { ScrollToTop } from '@albomoni/shared/lib/utils/scroll-to-top';
 import { cookies } from 'next/headers';

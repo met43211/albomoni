@@ -5,7 +5,7 @@ import { useTranslation } from '@albomoni/shared/i18n';
 import { Ad } from '../model/ad.type';
 
 export const getAdTitle = async (data: Ad, lng: string) => {
-  const { t } = await useTranslation(lng);
+  const { t } = await useTranslation(lng, 'place-ad');
   const { title, additional, category } = data.ad;
 
   if (title) {
@@ -14,9 +14,11 @@ export const getAdTitle = async (data: Ad, lng: string) => {
 
   const titleVault = {
     real_estate: {
-      apartments: `${t(`${additional.rooms_count}`)} квартира, ${
-        additional.square
-      } м², ${additional.floor}/${additional.floors_house} этаж`,
+      apartments: `${t(
+        `${data.ad.category[0]}.rooms_count.${additional.rooms_count}`,
+      )} квартира, ${additional.square} м², ${additional.floor}/${
+        additional.floors_house
+      } этаж`,
     },
   } as any;
 

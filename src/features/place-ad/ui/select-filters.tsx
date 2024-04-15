@@ -23,7 +23,7 @@ export const SelectFilters = ({
   updateChosenMemoryState,
   updateSelectedVariants,
 }: Props) => {
-  const { t } = useClientTranslation('filter_names');
+  const { t } = useClientTranslation('place-ad');
   const [token] = useCookie('token');
 
   const { mutateAsync } = useMutation(PlaceFormQueries);
@@ -66,7 +66,7 @@ export const SelectFilters = ({
             id={variant}
             onPress={handleClick}
           >
-            {t(`${variant}`)}
+            {t(`categories.${variant}`)}
             <PiCaretRightBold size={18} className='flex-shrink-0' />
           </Button>
         );

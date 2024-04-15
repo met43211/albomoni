@@ -10,7 +10,7 @@ type Props = {
   lng: string;
 };
 
-export const AdGallery = ({ data, lng }: Props) => {
+export const AdGallery = async ({ data, lng }: Props) => {
   return (
     <div className='w-full flex flex-col gap-6 flex-shrink'>
       <div className='w-full overflow-clip lg:rounded-xl flex-shrink'>

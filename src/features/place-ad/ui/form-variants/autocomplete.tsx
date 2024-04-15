@@ -5,10 +5,12 @@ import { Key, memo, useEffect } from 'react';
 import { Avatar } from '@nextui-org/avatar';
 import { PiCarBold } from 'react-icons/pi';
 import { PlaceAdInputProps } from '../../model/form.type';
+import { useCategory } from '../../lib/use-category';
 
 export const PlaceAdAutocomplete = memo(
   ({ title, variants, updateForm, value }: PlaceAdInputProps) => {
-    const { t } = useClientTranslation('inputs');
+    const { t } = useClientTranslation('place-ad');
+    const category = useCategory();
 
     const handleChange = (selected: Key) => {
       updateForm((draft: any) => {
@@ -36,7 +38,7 @@ export const PlaceAdAutocomplete = memo(
 
     return (
       <Autocomplete
-        label={t(`${title}.name`)}
+        label={t(`${category}.${title}.name`)}
         defaultItems={variants as any}
         onKeyDown={(e: any) => e.continuePropagation()}
         selectedKey={value || ''}
@@ -44,10 +46,12 @@ export const PlaceAdAutocomplete = memo(
       >
         {(item: { label: string; img?: string }) => (
           <AutocompleteItem
-            startContent={<Avatar src={item.img} icon={<PiCarBold size={24} />} />}
+            startContent={
+              <Avatar src={item.img} icon={<PiCarBold size={24} />} />
+            }
             key={item.label}
           >
-            {t(item.label)}
+            {item.label}
           </AutocompleteItem>
         )}
       </Autocomplete>

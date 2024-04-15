@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { cookies } from 'next/headers';
 import { Ad } from '../../model/ad.type';
+import { getAdTitle } from '../../lib/get-ad-title';
 
 type Props = {
   data: Ad;
@@ -51,7 +52,7 @@ export const AdCard = ({ data, lng }: Props) => {
         </div>
 
         <div className='flex flex-col gap-2'>
-          <h5 className='text-md font-bold '>Название объявления</h5>
+          <h5 className='text-md font-bold '>{getAdTitle(data, lng)}</h5>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />
             <p className='text-xs'>Турция, Анкара</p>

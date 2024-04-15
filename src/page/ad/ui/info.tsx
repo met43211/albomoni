@@ -1,11 +1,14 @@
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { useTranslation } from '@albomoni/shared/i18n';
 
 type Props = {
   data: Ad;
   lng: string;
 };
 
-export const AdInfo = ({ data, lng }: Props) => {
+export const AdInfo = async ({ data, lng }: Props) => {
+  const { t } = await useTranslation(lng, 'place-ad');
+
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-col gap-2'>
@@ -15,8 +18,12 @@ export const AdInfo = ({ data, lng }: Props) => {
             key={key}
             className='w-full text-lg font-semibold select-text cursor-text'
           >
-            <span className='opacity-70'>{key}: </span>
-            {value}
+            <span className='opacity-70'>
+              {t(`${data.ad.category[0]}.${key}.name`)}:{' '}
+            </span>
+            {Number(value)
+              ? value
+              : t(`${data.ad.category[0]}.${key}.${value}`)}
           </h5>
         ))}
       </div>

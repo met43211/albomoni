@@ -23,7 +23,7 @@ export const PlaceAdNavigation = ({
   updateChosenMemoryState,
   updateSelectedVariants,
 }: Props) => {
-  const { t } = useClientTranslation('filter_names');
+  const { t } = useClientTranslation('place-ad');
 
   const handleClickBack = () => {
     const { prevVariants } = chosenMemoryState;
@@ -59,12 +59,12 @@ export const PlaceAdNavigation = ({
           if (index < array.length - 1) {
             return (
               <Fragment key={title}>
-                <p>{t(`${title}`)}</p>
+                <p>{t(`categories.${title}`)}</p>
                 <p>{'>'}</p>
               </Fragment>
             );
           }
-          return <p key={title}>{t(`${title}`)}</p>;
+          return <p key={title}>{t(`categories.${title}`)}</p>;
         })}
       </div>
     </div>

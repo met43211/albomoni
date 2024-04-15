@@ -3,10 +3,12 @@ import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-tran
 import { RadioGroup, Radio } from '@nextui-org/radio';
 import { memo } from 'react';
 import { PlaceAdInputProps } from '../../model/form.type';
+import { useCategory } from '../../lib/use-category';
 
 export const PlaceAdSingleSelect = memo(
   ({ title, variants, updateForm, value }: PlaceAdInputProps) => {
-    const { t } = useClientTranslation('inputs');
+    const { t } = useClientTranslation('place-ad');
+    const category = useCategory();
 
     const handleChange = (selected: string) => {
       updateForm((draft: any) => {
@@ -17,7 +19,7 @@ export const PlaceAdSingleSelect = memo(
 
     return (
       <RadioGroup
-        label={t(`${title}.name`)}
+        label={t(`${category}.${title}.name`)}
         value={value || ''}
         onValueChange={handleChange}
         classNames={{ label: 'text-md text-[--text] mb-2 opacity-50' }}
@@ -25,7 +27,7 @@ export const PlaceAdSingleSelect = memo(
         {variants?.map((variant) => {
           return (
             <Radio key={variant} value={variant}>
-              {t(`${title}.${variant}`)}
+              {t(`${category}.${title}.${variant}`)}
             </Radio>
           );
         })}

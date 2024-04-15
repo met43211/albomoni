@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
 import { PlaceAdInputProps } from '../../model/form.type';
+import { useCategory } from '../../lib/use-category';
 
 const yupSchema = yup.object({
   address: yup.string().required('required'),
@@ -13,7 +14,8 @@ const yupSchema = yup.object({
 
 export const PlaceAdAddress = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {
-    const { t } = useClientTranslation('inputs');
+    const { t } = useClientTranslation('place-ad');
+    const category = useCategory();
 
     const handleChange = (e: any) => {
       const { value: inputValue } = e.target;
@@ -36,7 +38,9 @@ export const PlaceAdAddress = memo(
 
     return (
       <div className='flex gap-4 flex-col'>
-        <h5 className='text-md font-medium opacity-50'>{t(`${title}.name`)}</h5>
+        <h5 className='text-md font-medium opacity-50'>
+          {t(`${category}.${title}.name`)}
+        </h5>
         <Input
           size='lg'
           id='address'
