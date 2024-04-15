@@ -1,21 +1,36 @@
-import { cookies } from 'next/headers';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 
 type Props = {
-  lng?: string;
   price: number;
+  currency?: string;
+  adCurrency?: string;
 };
 
-export const normalizePrice = ({ lng = 'ru', price }: Props) => {
-  const currency = cookies().get('currency');
+export const normalizePrice = async ({
+  price,
+  currency = 'USD',
+  adCurrency = 'USD',
+}: Props) => {
+  const currencies: any = await getCurrenciesAsync();
 
   const locales = {
-    ru: 'ru-RU',
-    en: 'en-IN',
+    RUB: 'ru-RU',
+    USD: 'en-US',
   } as any;
 
-  return price.toLocaleString(locales[lng], {
+  if (currency === adCurrency)
+    return price.toLocaleString(locales[adCurrency], {
+      style: 'currency',
+      currency,
+      maximumFractionDigits: 0,
+    });
+
+  const convertedPrice =
+    (Number(price) / currencies[adCurrency]) * currencies[currency];
+
+  return Math.round(convertedPrice).toLocaleString(locales[currency], {
     style: 'currency',
-    currency: currency?.value || 'USD',
+    currency,
     maximumFractionDigits: 0,
   });
 };

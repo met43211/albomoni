@@ -107,10 +107,10 @@
   "commercial_buy_object_type": {
     "office": "Офис",
     "free_type": "Свободного назначения",
-    "sell_square": "Торговаяв площадь",
+    "sell_square": "Торговая площадь",
     "warehouse": "Склад",
     "industry": "Производство",
-    "food": "общепит",
+    "food": "Общепит",
     "hostel": "Гостиница",
     "car_service": "Автосервис",
     "house": "Здание"
@@ -118,10 +118,10 @@
   "commercial_rent_object_type": {
     "office": "Офис",
     "free_type": "Свободного назначения",
-    "sell_square": "Торговаяв площадь",
+    "sell_square": "Торговая площадь",
     "warehouse": "Склад",
     "industry": "Производство",
-    "food": "общепит",
+    "food": "Общепит",
     "hostel": "Гостиница",
     "car_service": "Автосервис",
     "house": "Здание"

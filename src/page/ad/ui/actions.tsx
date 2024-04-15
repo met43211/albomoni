@@ -4,25 +4,26 @@ import { Avatar } from '@nextui-org/avatar';
 import { Rating } from '@albomoni/shared/ui/rating';
 import { PiUserBold } from 'react-icons/pi';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { cookies } from 'next/headers';
+import { InfoButton } from '@albomoni/shared/ui/info-button';
 
 type Props = {
   data: Ad;
   lng: string;
 };
 
-export const AdActions = ({ data, lng }: Props) => {
+export const AdActions = async ({ data, lng }: Props) => {
+  const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
+  const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
 
   return (
     <div className='flex flex-col px-4 lg:px-0'>
       <div className='w-full lg:w-80 lg:sticky top-8 h-min flex flex-col gap-8 flex-shrink-0'>
         <div className='flex flex-col gap-4'>
-          <button
-            type='button'
-            className='w-full h-12 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold hover:scale-105 active:scale-95 transition-transform'
-          >
+          <Button className='w-full h-12 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold text-md'>
             Посмотреть номер
-          </button>
+          </Button>
 
           <Button size='lg' className='w-full font-semibold'>
             Написать
@@ -30,10 +31,42 @@ export const AdActions = ({ data, lng }: Props) => {
         </div>
 
         <div className='flex flex-col gap-1'>
-          <h3 className='text-md font-semibold opacity-50'>Цена</h3>
-          <h4 className='text-2xl font-bold'>
-            {normalizePrice({ price: ad.cost, lng })}
+          <div className='w-full flex gap-2 justify-start'>
+            <h3 className='text-md font-semibold opacity-50'>Цена</h3>
+            <InfoButton>
+              {isUnmatchedCurrencies ? (
+                <p className='font-medium'>
+                  Продавец указал стоимость в валюте {data.ad.currency},
+                  отличной от вашей. Верхняя цена указана приблизительно, исходя
+                  из актуального курса. Фактическая цена в валюте продавца
+                  указана ниже.
+                </p>
+              ) : (
+                <p className='font-medium'>
+                  Валюта продавца соответствует вашей. Указана точная цена.
+                </p>
+              )}
+            </InfoButton>
+          </div>
+
+          <h4 className='text-2xl font-bold select-text'>
+            {isUnmatchedCurrencies && '~ '}
+            {normalizePrice({
+              price: ad.cost,
+              currency: userCurrency?.value,
+              adCurrency: data.ad.currency,
+            })}
           </h4>
+
+          {isUnmatchedCurrencies && (
+            <h5 className='text-lg font-semibold opacity-50 select-text'>
+              {normalizePrice({
+                price: ad.cost,
+                currency: data.ad.currency,
+                adCurrency: data.ad.currency,
+              })}
+            </h5>
+          )}
         </div>
 
         <div className='flex flex-col gap-3'>
@@ -57,7 +90,7 @@ export const AdActions = ({ data, lng }: Props) => {
 
         <div className='flex flex-col gap-1'>
           <h3 className='text-md font-semibold opacity-50'>Адрес</h3>
-          <h4 className='text-lg font-bold'>Турция, Анкара, метро Mesa</h4>
+          <h4 className='text-lg font-bold select-text'>{ad.geoposition}</h4>
         </div>
       </div>
     </div>

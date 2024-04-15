@@ -45,21 +45,22 @@ export function generateViewport() {
 
   if (theme?.value) {
     return {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+      userScalable: false,
       themeColor: theme.value === 'light' ? '#fffffd' : '#000000',
     };
   }
 
   return {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
     themeColor: fallbackThemeColor,
   };
 }
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
 
 export default function RootLayout({ children, params: { lng } }: PageProps) {
   return (

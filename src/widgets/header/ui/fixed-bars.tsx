@@ -88,13 +88,13 @@ export const FixedBars = () => {
                     y: 0,
                     filter: 'blur(0px)',
                     opacity: 1,
-                    transition: { delay: 1 },
+                    transition: { delay: 0.2 },
                   }}
                   exit={{ y: 20, filter: 'blur(10px)', opacity: 0 }}
                   transition={{ duration: 0.2 }}
                   type='button'
                   onClick={handleBack}
-                  className='absolute -top-10 right-0 w-min h-min pl-2 pr-3 py-1 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-base dark:border-1 dark:border-white/10 flex gap-1 items-center text-sm font-semibold'
+                  className='absolute -top-10 left-0 md:-left-24 md:top-[14px] w-min h-min pl-2 pr-3 py-1 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-base dark:border-1 dark:border-white/10 flex gap-1 items-center text-sm font-semibold'
                 >
                   <PiCaretLeftBold />
                   Назад

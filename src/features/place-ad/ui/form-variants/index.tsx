@@ -1,9 +1,11 @@
 import { PlaceAdFormState } from '../../model/form.type';
 import { PlaceAdAddress } from './address';
 import { PlaceAdAutocomplete } from './autocomplete';
+import { PlaceAdNumber } from './number';
 import { PlaceAdPhotos } from './photos';
 import { PlaceAdPrice } from './price';
 import { PlaceAdSingleSelect } from './single-select';
+import { PlaceAdText } from './text';
 import { PlaceAdTextarea } from './textarea';
 
 export type PlaceAdInput = {
@@ -30,6 +32,8 @@ export const PlaceAdFormElement = ({
     price: PlaceAdPrice,
     images: PlaceAdPhotos,
     autocomplete: PlaceAdAutocomplete,
+    text: PlaceAdText,
+    number: PlaceAdNumber,
   };
 
   const Element = FormElements[type];

@@ -2,6 +2,7 @@ import { ImageViewer } from '@albomoni/widgets/fancybox/ui';
 import { Skeleton } from '@nextui-org/skeleton';
 import { Suspense } from 'react';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { getAdTitle } from '@albomoni/entities/ad/lib/get-ad-title';
 import { AdInfo } from './info';
 
 type Props = {
@@ -23,7 +24,7 @@ export const AdGallery = ({ data, lng }: Props) => {
       </div>
 
       <h2 className='text-2xl font-bold px-4 lg:px-0 select-text pt-1'>
-        Название объявления
+        {getAdTitle(data, lng)}
       </h2>
 
       <div className='w-full hidden lg:flex'>

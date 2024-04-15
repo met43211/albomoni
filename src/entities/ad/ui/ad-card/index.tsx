@@ -5,6 +5,7 @@ import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
 import { PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
+import { cookies } from 'next/headers';
 import { Ad } from '../../model/ad.type';
 
 type Props = {
@@ -13,7 +14,10 @@ type Props = {
 };
 
 export const AdCard = ({ data, lng }: Props) => {
+  const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
+
+  const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
 
   return (
     <Link
@@ -55,7 +59,12 @@ export const AdCard = ({ data, lng }: Props) => {
         </div>
 
         <p className='text-xl font-bold'>
-          {normalizePrice({ price: ad.cost, lng })}
+          {isUnmatchedCurrencies && '~ '}
+          {normalizePrice({
+            price: ad.cost,
+            currency: userCurrency?.value,
+            adCurrency: data.ad.currency,
+          })}
         </p>
       </div>
     </Link>
