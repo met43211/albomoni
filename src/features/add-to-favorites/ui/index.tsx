@@ -1,29 +1,48 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
-import { useRouter } from 'next/navigation';
-import { MouseEventHandler, useState } from 'react';
+import { MouseEventHandler, useEffect } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
+import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
-  isLiked?: boolean;
+  postId: number;
 };
 
-export const AddToFavoritesButton = ({ isLiked = false }: Props) => {
+export const AddToFavoritesButton = ({ postId }: Props) => {
   const { isLogged } = useSession();
-  const router = useRouter();
+  const { favorites, setFavorites } = useFavorites();
 
-  const [isActive, setActive] = useState(isLiked);
+  useEffect(() => {
+    const storedItems = localStorage.getItem('favorites');
+    if (storedItems) {
+      setFavorites(JSON.parse(storedItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (favorites.length !== 0) {
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+  }, [favorites]);
+
+  const isActive = favorites.includes(postId);
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (!isLogged) {
-      router.push('/login');
+      const updatedFavorites = isActive
+        ? favorites.filter((id) => id !== postId)
+        : [...favorites, postId];
+
+      setFavorites(updatedFavorites);
     } else {
-      setActive(!isActive);
+      return;
     }
   };
 

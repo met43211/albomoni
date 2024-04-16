@@ -5,7 +5,7 @@ import { clsx } from 'clsx';
 type Props = {
   title: string;
   cols?: 3 | 4;
-  titleSize?: 'small' | 'big';
+  titleSize?: 'small' | 'big' | 'xl';
   data?: Ad[];
   lng: string;
 };
@@ -20,6 +20,7 @@ export const AdsList = async ({
   const titleStyles = clsx('font-bold', {
     'text-xl': titleSize === 'small',
     'text-xl md:text-2xl': titleSize === 'big',
+    'text-2xl md:text-3xl mb-3': titleSize === 'xl',
   });
 
   const listStyles = clsx('w-full h-fit grid gap-5 gap-y-6 flex-shrink-0', {

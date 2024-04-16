@@ -48,14 +48,16 @@ export const AdCard = ({ data, lng }: Props) => {
           lng={lng}
         />
         <div className='absolute top-4 right-4'>
-          <AddToFavoritesButton />
+          <AddToFavoritesButton postId={data.ad.id} />
         </div>
 
         <div className='flex flex-col gap-2'>
           <h5 className='text-md font-bold '>{getAdTitle(data, lng)}</h5>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />
-            <p className='text-xs'>Турция, Анкара</p>
+            <p className='text-xs font-medium'>
+              {data.ad.geoposition.split(', ').slice(0, 2).join(', ')}
+            </p>
           </div>
         </div>
 

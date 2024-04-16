@@ -5,7 +5,6 @@ import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { Skeleton } from '@nextui-org/skeleton';
 import { useCookies } from 'react-cookie';
 import { getCurrencyByLocale } from '@albomoni/shared/lib/utils/get-currency-by-locale';
-import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { useLangContext } from '@albomoni/shared/lib/providers';
 
 const DynamicFixedBars = dynamic(

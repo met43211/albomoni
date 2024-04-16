@@ -2,7 +2,6 @@ import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { Suspense } from 'react';
 import { cookies } from 'next/headers';
 import { Spacer } from '@nextui-org/spacer';
-import { AdsList } from '@albomoni/widgets/ads-list';
 import { AdsListSkeleton } from '@albomoni/widgets/ads-list/ui/skeleton';
 import { CategoriesList } from './categories-list';
 import { WelcomeBlock } from './welcome-block';

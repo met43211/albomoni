@@ -1,6 +1,5 @@
 import { Button } from '@nextui-org/button';
 import { m } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import { PiCheckCircle } from 'react-icons/pi';
 
 export const RegistrationComplete = () => {

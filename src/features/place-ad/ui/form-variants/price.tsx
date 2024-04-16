@@ -6,6 +6,7 @@ import { Input } from '@nextui-org/input';
 import * as yup from 'yup';
 import { AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
+import { useCookies } from 'react-cookie';
 import { PlaceAdInputProps } from '../../model/form.type';
 
 const yupSchema = yup.object({
@@ -21,6 +22,8 @@ const yupSchema = yup.object({
 export const PlaceAdPrice = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {
     const { t } = useClientTranslation('place-ad');
+    const [cookie] = useCookies();
+    const { currency } = cookie;
 
     const handleChange = (e: any) => {
       const { value: inputValue } = e.target;
@@ -37,7 +40,7 @@ export const PlaceAdPrice = memo(
       }
 
       updateForm((draft: any) => {
-        draft.fields[title] = { value: inputValue, currency: 'RUB' };
+        draft.fields[title] = { value: inputValue, currency };
       });
     };
 

@@ -19,7 +19,9 @@ export const getAdTitle = async (data: Ad, lng: string) => {
       )} квартира, ${additional.square} м², ${additional.floor}/${
         additional.floors_house
       } этаж`,
+      rooms: `Комната, ${additional.square} м², ${additional.floor}/${additional.floors_house} этаж`,
     },
+    transportation: {},
   } as any;
 
   return titleVault[category[0]][category[1]];
