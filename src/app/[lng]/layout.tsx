@@ -7,7 +7,6 @@ import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { dir } from 'i18next';
 import { Inter } from 'next/font/google';
 import { ScrollToTop } from '@albomoni/shared/lib/utils/scroll-to-top';
-import { cookies } from 'next/headers';
 import Providers from './providers';
 import './globals.css';
 
@@ -31,33 +30,6 @@ export async function generateMetadata({ params: { lng } }: MetadataProps) {
   return {
     title: t('metadata.title'),
     description: t('metadata.description'),
-  };
-}
-
-export function generateViewport() {
-  const theme = cookies().get('theme');
-
-  const fallbackThemeColor = [
-    { media: '(prefers-color-scheme: light)', color: '#fffffd' },
-    { media: '(prefers-color-scheme: dark)', color: '#000000' },
-  ];
-
-  if (theme?.value) {
-    return {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 1,
-      userScalable: false,
-      themeColor: theme.value === 'light' ? '#fffffd' : '#000000',
-    };
-  }
-
-  return {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-    themeColor: fallbackThemeColor,
   };
 }
 

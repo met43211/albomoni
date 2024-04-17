@@ -1,16 +1,15 @@
-import { cookies } from 'next/headers';
 import { AdsList } from '@albomoni/widgets/ads-list';
 import { getFavoritesAsync } from '../api/get-favorites';
 
 type Props = {
   lng: string;
+  favoritesId: string;
 };
 
-export const FavoritesList = async ({ lng }: Props) => {
-  const favoritesId = cookies().get('favorites');
+export const FavoritesList = async ({ lng, favoritesId }: Props) => {
   const getFavsArray = () => {
     try {
-      return JSON.parse(favoritesId?.value as any);
+      return JSON.parse(favoritesId);
     } catch {
       return [];
     }

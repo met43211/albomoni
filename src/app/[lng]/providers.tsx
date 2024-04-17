@@ -8,7 +8,6 @@ import { ThemeProvider } from 'next-themes';
 import { Provider as StoreProvider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import { useState } from 'react';
-import { ThemeColorObserver } from '@albomoni/shared/lib/utils/theme-color-observer';
 import { store } from '../_env/store';
 
 type Props = {
@@ -26,9 +25,7 @@ const Providers = ({ children, lang }: Props) => {
           <LazyMotion features={domMax}>
             <NextUIProvider>
               <ThemeProvider attribute='class'>
-                <ThemeColorObserver>
-                  <LanguageProvider lang={lang}>{children}</LanguageProvider>
-                </ThemeColorObserver>
+                <LanguageProvider lang={lang}>{children}</LanguageProvider>
               </ThemeProvider>
             </NextUIProvider>
           </LazyMotion>

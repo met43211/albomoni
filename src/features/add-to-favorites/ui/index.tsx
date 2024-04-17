@@ -35,14 +35,14 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!isLogged) {
-      const updatedFavorites = isActive
-        ? favorites.filter((id) => id !== postId)
-        : [...favorites, postId];
+    const updatedFavorites = isActive
+      ? favorites.filter((id) => id !== postId)
+      : [...favorites, postId];
 
-      setFavorites(updatedFavorites);
-    } else {
-      return;
+    setFavorites(updatedFavorites);
+
+    if (isLogged) {
+      console.log('add');
     }
   };
 
