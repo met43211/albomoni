@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { MenuButton } from '@albomoni/entities/menu';
 import { PiCaretLeftBold } from 'react-icons/pi';
 import { HeaderNavigationPaths } from '../config/header-navigation-paths';
+import { BackableRoutes } from '../config/backable-routes';
 
 export const FixedBars = () => {
   const { t } = useClientTranslation();
@@ -23,16 +24,24 @@ export const FixedBars = () => {
 
   const normalizedPath = activePath.slice(3) === '' ? '/' : activePath.slice(3);
 
-  const isAdRoute = normalizedPath.split('/')[1] === 'ad';
+  const flatRoute = normalizedPath.split('/').slice(1).join('/');
+  const isBackableRoute = BackableRoutes.some((route) => {
+    const regex = new RegExp(route);
+    return regex.test(flatRoute);
+  });
 
   const handleBack = () => {
-    router.back();
+    if (flatRoute === 'profile/wallet') {
+      router.push('/profile');
+    } else {
+      router.back();
+    }
   };
 
   return (
     <>
       <AnimatePresence>
-        {isScrolled && scrollDir === 'up' && !isAdRoute && (
+        {isScrolled && scrollDir === 'up' && flatRoute !== 'ad' && (
           <m.div
             initial={{ y: '-150%' }}
             animate={{ y: 0 }}
@@ -81,7 +90,7 @@ export const FixedBars = () => {
             })}
 
             <AnimatePresence>
-              {isAdRoute && (
+              {isBackableRoute && (
                 <m.button
                   initial={{ y: 20, filter: 'blur(10px)', opacity: 0 }}
                   animate={{

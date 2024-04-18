@@ -17,6 +17,7 @@ export const NotificationBubble = ({ children, type = 'default' }: Props) => {
 
   return (
     <m.div
+      layout
       initial={{ opacity: 0, filter: 'blur(20px)' }}
       animate={{ opacity: 1, filter: 'blur(0px)' }}
       exit={{ opacity: 0, filter: 'blur(20px)' }}

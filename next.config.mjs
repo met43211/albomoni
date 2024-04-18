@@ -15,7 +15,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'ansaratracker.store',
         port: '',
-        pathname: '/static/**',
+        pathname: '**',
       },
     ],
   },

@@ -1,10 +1,10 @@
-import { User } from '@albomoni/shared/model/types/user.type';
+import { UserType } from '@albomoni/entities/user/model/user.type';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const useSession = () => {
   const dispatch = useDispatch();
 
-  const user: User | null = useSelector(
+  const user: UserType | null = useSelector(
     (state: RootState) => state.session.user,
   );
 
@@ -16,7 +16,7 @@ export const useSession = () => {
     (state: RootState) => state.session.isPending,
   );
 
-  const setUser = (incomingUser: User | null) => {
+  const setUser = (incomingUser: UserType | null) => {
     dispatch({
       type: 'session/setUser',
       payload: incomingUser,

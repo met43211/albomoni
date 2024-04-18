@@ -1,7 +1,7 @@
-import { User } from '@albomoni/shared/model/types/user.type';
+import { UserType } from '@albomoni/entities/user/model/user.type';
 
 export type ValidateTokenInputData = {
   token: string;
 };
 
-export type ValidateTokenOutputData = User;
+export type ValidateTokenOutputData = UserType;

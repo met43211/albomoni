@@ -1,29 +1,34 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Avatar } from '@nextui-org/avatar';
-import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover';
-import { PiUserBold } from 'react-icons/pi';
-import { LogoutButton } from './logout-button';
+import { clsx } from 'clsx';
+import { PiUser } from 'react-icons/pi';
 
-export const UserAvatar = () => {
+type Props = {
+  src: string | null;
+  isSubscribed?: boolean;
+};
+
+export const UserAvatar = ({ src, isSubscribed = false }: Props) => {
+  const ringStyles = clsx(
+    'rounded-full absolute top-0 left-0 right-0 bottom-0',
+    {
+      'bg-default-300 dark:bg-default-100': !isSubscribed,
+      'gradient-background ': isSubscribed,
+    },
+  );
+
   return (
-    <Popover
-      placement='bottom'
-      offset={20}
-      classNames={{ trigger: 'cursor-pointer' }}
-    >
-      <PopoverTrigger>
-        <Avatar
-          isBordered
-          icon={<PiUserBold size={24} className='opacity-50' />}
-          className='w-10 h-10 flex-shrink-0'
-          classNames={{ base: 'ring-black/10 dark:ring-white/10 ring-[3px] ring-offset-[3px]' }}
-        />
-      </PopoverTrigger>
-      <PopoverContent className='w-40 p-1'>
-        <div className='w-full flex flex-col gap-2 px-1 py-1'>
-          <LogoutButton />
-        </div>
-      </PopoverContent>
-    </Popover>
+    <div className='relative w-full h-full p-1'>
+      <Avatar
+        src={src || undefined}
+        icon={<PiUser className='w-1/2 h-1/2 opacity-30' />}
+        className='w-full h-full flex-shrink-0 z-30 border-4 border-[--bg]'
+      />
+
+      <div className={ringStyles} />
+      {isSubscribed && (
+        <div className='gradient-background rounded-full blur-sm dark:blur-[6px] absolute top-0 left-0 right-0 bottom-0' />
+      )}
+    </div>
   );
 };

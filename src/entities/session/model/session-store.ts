@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '@albomoni/shared/model/types/user.type';
+import { UserType } from '@albomoni/entities/user/model/user.type';
 
-type Session = { user: User | null; isTokenValid: boolean; isPending: boolean };
+type Session = { user: UserType | null; isTokenValid: boolean; isPending: boolean };
 
 const initialState: Session = {
   user: null,
