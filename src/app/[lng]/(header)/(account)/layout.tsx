@@ -1,7 +1,4 @@
-'use client';
-
-import { useSession } from '@albomoni/shared/lib/hooks/use-session';
-import { Spinner } from '@nextui-org/spinner';
+import { cookies } from 'next/headers';
 import { permanentRedirect } from 'next/navigation';
 
 type Props = {
@@ -9,17 +6,9 @@ type Props = {
 };
 
 export default function AuthLayout({ children }: Props) {
-  const { isPending, isLogged } = useSession();
+  const token = cookies().get('token');
 
-  if (isPending) {
-    return (
-      <div className='absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center'>
-        <Spinner />
-      </div>
-    );
-  }
-
-  if (!isLogged) {
+  if (!token?.value) {
     permanentRedirect('/login');
   }
 

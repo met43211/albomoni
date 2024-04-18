@@ -6,8 +6,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-
-
 export default function HeaderLayout({ children }: Props) {
   return (
     <>
