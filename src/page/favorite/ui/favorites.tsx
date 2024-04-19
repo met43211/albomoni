@@ -14,8 +14,8 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
       return [];
     }
   };
-  const favoritesArray = getFavsArray();
 
+  const favoritesArray = getFavsArray();
   const favorites = await getFavoritesAsync(favoritesArray);
 
   return (
