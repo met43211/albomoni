@@ -14,6 +14,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
 import { Button } from '@nextui-org/button';
 import { setCookie } from 'cookies-next';
+import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
+import { apiClient } from '@albomoni/shared/api/base';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -43,8 +45,18 @@ export const LoginWidget = () => {
     try {
       const response = await mutateAsync(query);
       const { access } = response;
+      const favorites =
+        JSON.parse(localStorage.getItem('favorites') as string) || [];
 
+      await apiClient.put(
+        'favorites/',
+        { favorites },
+        { Authorization: `Bearer ${access}` },
+      );
+
+      addCookie('token', access);
       setCookie('token', access);
+
       router.push('/');
     } catch {
       return;

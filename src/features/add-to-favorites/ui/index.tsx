@@ -2,11 +2,14 @@
 
 'use client';
 
-import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
 import { MouseEventHandler, useEffect } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
-import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
+import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
+import { apiClient } from '@albomoni/shared/api/base';
+import { getCookie } from 'cookies-next';
+import { usePathname } from 'next/navigation';
 import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
@@ -15,14 +18,9 @@ type Props = {
 
 export const AddToFavoritesButton = ({ postId }: Props) => {
   const { isLogged } = useSession();
-  const { favorites, setFavorites } = useFavorites();
-
-  useEffect(() => {
-    const storedItems = localStorage.getItem('favorites');
-    if (storedItems) {
-      setFavorites(JSON.parse(storedItems));
-    }
-  }, []);
+  const { favorites, isPending, setFavorites } = useFavorites();
+  const token = getCookie('token');
+  const pathname = usePathname();
 
   useEffect(() => {
     if (favorites.length !== 0) {
@@ -41,11 +39,27 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
       : [...favorites, postId];
 
     setFavorites(updatedFavorites);
-    revalidateRoute('/favorite');
+
+    if (pathname.slice(3) !== '/favorite') {
+      revalidateRoute('/favorite');
+    }
+
+    if (isLogged) {
+      const syncFavsAsync = async () => {
+        await apiClient.post(
+          'favorites/',
+          { id: postId },
+          { Authorization: `Bearer ${token}` },
+        );
+      };
+
+      syncFavsAsync();
+    }
   };
 
   return (
     <Button
+      isLoading={isPending}
       isIconOnly
       size='sm'
       radius='full'

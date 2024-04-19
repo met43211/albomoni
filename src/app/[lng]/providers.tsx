@@ -9,6 +9,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import { useState } from 'react';
 import { ThemeColorObserver } from '@albomoni/shared/lib/utils/theme-color-observer';
+import { FavoriteProvider } from '@albomoni/shared/lib/providers/favorite-provider';
 import { store } from '../_env/store';
 
 type Props = {
@@ -27,7 +28,9 @@ const Providers = ({ children, lang }: Props) => {
             <NextUIProvider>
               <ThemeProvider attribute='class'>
                 <ThemeColorObserver>
-                  <LanguageProvider lang={lang}>{children}</LanguageProvider>
+                  <LanguageProvider lang={lang}>
+                    <FavoriteProvider>{children}</FavoriteProvider>
+                  </LanguageProvider>
                 </ThemeColorObserver>
               </ThemeProvider>
             </NextUIProvider>

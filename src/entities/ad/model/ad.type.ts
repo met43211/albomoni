@@ -17,7 +17,8 @@ export type Ad = {
   seller: {
     user_id: number;
     name: string;
-    avatar: string;
+    avatar: string | null;
+    subscription: boolean;
     rating: number;
     feedback_count: number;
   };

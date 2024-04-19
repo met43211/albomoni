@@ -6,6 +6,7 @@ import { PiUserBold } from 'react-icons/pi';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { cookies } from 'next/headers';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
+import { UserAvatar } from '@albomoni/entities/user';
 
 type Props = {
   data: Ad;
@@ -72,11 +73,12 @@ export const AdActions = async ({ data, lng }: Props) => {
         <div className='flex flex-col gap-3'>
           <h3 className='text-md font-semibold opacity-50'>Продавец</h3>
           <div className='w-full h-14 flex gap-4 items-center'>
-            <Avatar
-              src={seller.avatar}
-              icon={<PiUserBold size={24} className='opacity-50' />}
-              className='w-14 h-14 flex-shrink-0'
-            />
+            <div className='w-14 h-14 flex-shrink-0'>
+              <UserAvatar
+                src={seller.avatar}
+                isSubscribed={seller.subscription}
+              />
+            </div>
             <div className='flex flex-col gap-1 justify-between w-full h-full'>
               <p className='text-lg font-bold'>{seller.name}</p>
               <Rating

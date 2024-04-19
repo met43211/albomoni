@@ -15,25 +15,34 @@ import {
 } from 'react-icons/pi';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { UserAvatar } from '@albomoni/entities/user';
+import removeCookie from '@albomoni/shared/lib/utils/server/remove-cookie';
+import { deleteCookie } from 'cookies-next';
 import { ChangeThemeButton } from './change-theme-button';
 
 export const MenuAside = () => {
   const { isLogged, user } = useSession();
 
+  const handleLogout = async () => {
+    removeCookie('token');
+    deleteCookie('token');
+  };
+
   return (
     <aside className='w-full tablet:w-80 flex-shrink-0 flex flex-col gap-4'>
       {isLogged && user ? (
-        <Link href='/unauth'>
-          <div className='w-full h-16 flex gap-4 items-center'>
-            <div className='w-16 h-16 flex-shrink-0'>
-              <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
-            </div>
-
-            <div className='flex flex-col gap-1 justify-between w-full h-full'>
-              <p className='text-lg font-bold'>{user.first_name}</p>
-            </div>
+        <button
+          type='button'
+          onClick={handleLogout}
+          className='w-full h-16 flex gap-4 items-center text-start'
+        >
+          <div className='w-16 h-16 flex-shrink-0'>
+            <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
           </div>
-        </Link>
+
+          <div className='flex flex-col gap-1 justify-between w-full h-full'>
+            <p className='text-lg font-bold'>{user.first_name}</p>
+          </div>
+        </button>
       ) : (
         <Link href='/login'>
           <button

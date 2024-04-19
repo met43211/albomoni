@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   favorites: [],
+  isPending: true,
 };
 
 const favoritesSlice = createSlice({
@@ -11,6 +12,9 @@ const favoritesSlice = createSlice({
   reducers: {
     setFavorites: (state, { payload }) => {
       state.favorites = payload;
+    },
+    setIsPending: (state, { payload }) => {
+      state.isPending = payload;
     },
   },
 });

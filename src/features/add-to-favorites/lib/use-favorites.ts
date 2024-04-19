@@ -13,6 +13,10 @@ export const useFavorites = () => {
     (state: RootState) => state.favorites.favorites,
   );
 
+  const isPending: boolean = useSelector(
+    (state: RootState) => state.favorites.isPending,
+  );
+
   const setFavorites = (array: number[]) => {
     dispatch({
       type: 'favorites/setFavorites',
@@ -22,11 +26,19 @@ export const useFavorites = () => {
     setCookie('favorites', array);
   };
 
+  const setIsPending = (newPending: boolean) => {
+    dispatch({
+      type: 'favorites/setIsPending',
+      payload: newPending,
+    });
+  };
+
   const favorites = storeFavorites;
 
   return {
     favorites,
-    localFavorites,
+    isPending,
     setFavorites,
+    setIsPending,
   };
 };

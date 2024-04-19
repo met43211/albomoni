@@ -3,17 +3,18 @@ import { Suspense } from 'react';
 import { cookies } from 'next/headers';
 import { Spacer } from '@nextui-org/spacer';
 import { AdsListSkeleton } from '@albomoni/widgets/ads-list/ui/skeleton';
+import { getCookie } from 'cookies-next';
 import { CategoriesList } from './categories-list';
 import { WelcomeBlock } from './welcome-block';
 import { CategoriesListSkeleton } from './categories-list/skeleton';
 import { HomeAdsList } from './ads-list';
 
 export const HomePage = async ({ lng }: I18nLangParam) => {
-  const cookie = cookies().get('token');
+  const token = getCookie('token', { cookies });
 
   return (
     <main className='flex flex-col items-center z-10 pb-40'>
-      {!cookie?.value ? <WelcomeBlock /> : <Spacer className='h-6' />}
+      {!token ? <WelcomeBlock /> : <Spacer className='h-6' />}
 
       <Suspense fallback={<CategoriesListSkeleton />}>
         <CategoriesList lng={lng} />

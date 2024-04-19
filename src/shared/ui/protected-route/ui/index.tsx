@@ -13,14 +13,16 @@ export const ProtectedRouteMessage = () => {
         <Link href='/registration'>
           <button
             type='button'
-            className='w-64 py-3 bg-primary rounded-2xl font-medium mt-5 shadow-lg shadow-primary/40'
+            className='w-64 py-3 bg-primary rounded-2xl font-medium mt-5 shadow-lg shadow-primary/40 text-white'
           >
             Зарегистрироваться
           </button>
         </Link>
 
         <Link href='/login'>
-          <button type='button'>Войти в аккаунт</button>
+          <button type='button' className='text-primary'>
+            Войти в аккаунт
+          </button>
         </Link>
       </div>
     </main>

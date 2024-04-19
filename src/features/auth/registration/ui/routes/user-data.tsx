@@ -10,6 +10,8 @@ import { Button } from '@nextui-org/button';
 import { PasswordVisibilityButton } from '@albomoni/shared/ui/password-visibility-button/ui';
 import { Checkbox } from '@nextui-org/checkbox';
 import { setCookie } from 'cookies-next';
+import { apiClient } from '@albomoni/shared/api/base';
+import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
@@ -42,7 +44,18 @@ export const RegistrationUserData = ({
       const response = await mutateAsync(request);
       const { access } = response;
 
+      const favorites =
+        JSON.parse(localStorage.getItem('favorites') as string) || [];
+
+      await apiClient.put(
+        'favorites/',
+        { favorites },
+        { Authorization: `Bearer ${access}` },
+      );
+
+      addCookie('token', access);
       setCookie('token', access);
+
       setActiveRoute(ERegistrationRoutes.COMPLETE);
     } catch {
       return;

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { deleteCookie, getCookie } from 'cookies-next';
 import { validateTokenAsync } from '../../widgets/header/api';
+import removeCookie from '../lib/utils/server/remove-cookie';
 
 export const useValidateToken = () => {
   const { isPending, isLogged, setUser, setIsValidToken, setIsPending } =
@@ -20,6 +21,7 @@ export const useValidateToken = () => {
         setIsPending(false);
       } catch {
         deleteCookie('token');
+        removeCookie('token');
         setIsPending(false);
         setUser(null);
         setIsValidToken(false);
@@ -31,6 +33,7 @@ export const useValidateToken = () => {
       validateToken(token);
     } else {
       setIsPending(false);
+      removeCookie('token');
       setUser(null);
       setIsValidToken(false);
     }
