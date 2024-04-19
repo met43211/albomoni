@@ -1,13 +1,13 @@
+'use client';
+
 import { UserAvatar } from '@albomoni/entities/user';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
-import { cookies } from 'next/headers';
-
+import { getCookie } from 'cookies-next';
 import { PiCaretRightBold } from 'react-icons/pi';
 
 export const ProfileUser = async () => {
-  const token = cookies().get('token');
-
-  const user = await getUserAsync(token?.value as string);
+  const token = getCookie('token');
+  const user = await getUserAsync(token as string);
 
   return (
     <div className='w-full flex flex-row gap-2 md:gap-4'>

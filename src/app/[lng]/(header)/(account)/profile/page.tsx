@@ -1,5 +1,5 @@
 import { ProfilePage } from '@albomoni/page/profile';
 
-export default function Profile() {
+export default async function Profile() {
   return <ProfilePage />;
 }

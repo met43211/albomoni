@@ -1,4 +1,4 @@
-import { PlaceAdPage } from '@albomoni/page/auth/place-ad';
+import { PlaceAdPage } from '@albomoni/page/place-ad';
 
 export default function PlaceAd() {
   return <PlaceAdPage />;

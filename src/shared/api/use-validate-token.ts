@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect } from 'react';
-import { useCookies } from 'react-cookie';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { validateTokenAsync } from '../../widgets/header/api';
 
 export const useValidateToken = () => {
-  const [cookie, _setCookie, removeCookie] = useCookies();
   const { isPending, isLogged, setUser, setIsValidToken, setIsPending } =
     useSession();
-  const { token } = cookie;
+  const token = getCookie('token');
 
   useEffect(() => {
     const validateToken = async (tokenStr: string) => {
@@ -19,7 +19,7 @@ export const useValidateToken = () => {
         setIsValidToken(true);
         setIsPending(false);
       } catch {
-        removeCookie('token');
+        deleteCookie('token');
         setIsPending(false);
         setUser(null);
         setIsValidToken(false);

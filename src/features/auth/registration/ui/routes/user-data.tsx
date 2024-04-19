@@ -2,7 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCookies } from 'react-cookie';
 import { AnimatePresence, m } from 'framer-motion';
 import { Spinner } from '@nextui-org/spinner';
 import { Input } from '@nextui-org/input';
@@ -10,6 +9,7 @@ import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Button } from '@nextui-org/button';
 import { PasswordVisibilityButton } from '@albomoni/shared/ui/password-visibility-button/ui';
 import { Checkbox } from '@nextui-org/checkbox';
+import { setCookie } from 'cookies-next';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
@@ -20,7 +20,6 @@ export const RegistrationUserData = ({
   setActiveRoute,
 }: RegistrationRoutesProps) => {
   const { mutateAsync, isPending, isError } = useMutation(SignupQueries);
-  const [, setToken] = useCookies();
 
   const [passVisible, setPassVisible] = useState(false);
   const [confPassVisible, setConfPassVisible] = useState(false);
@@ -43,7 +42,7 @@ export const RegistrationUserData = ({
       const response = await mutateAsync(request);
       const { access } = response;
 
-      setToken('token', access);
+      setCookie('token', access);
       setActiveRoute(ERegistrationRoutes.COMPLETE);
     } catch {
       return;

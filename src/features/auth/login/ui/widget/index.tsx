@@ -10,10 +10,10 @@ import { AnimatePresence, m } from 'framer-motion';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { PiUserBold } from 'react-icons/pi';
-import { useCookies } from 'react-cookie';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
 import { Button } from '@nextui-org/button';
+import { setCookie } from 'cookies-next';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -25,7 +25,6 @@ export const LoginWidget = () => {
   const { t } = useClientTranslation('forms');
   const router = useRouter();
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
-  const [, setToken] = useCookies();
 
   const { control, handleSubmit } = useForm<LoginCheckSchemaFormData>({
     resolver: yupResolver(LoginCheckSchema),
@@ -45,7 +44,8 @@ export const LoginWidget = () => {
       const response = await mutateAsync(query);
       const { access } = response;
 
-      setToken('token', access);
+      setCookie('token', access);
+      router.push('/');
     } catch {
       return;
     }
