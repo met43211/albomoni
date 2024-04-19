@@ -1,5 +1,6 @@
 import { AdsList } from '@albomoni/widgets/ads-list';
 import { getFavoritesAsync } from '../api/get-favorites';
+import { NoFavorites } from './no-favorites';
 
 type Props = {
   lng: string;
@@ -7,18 +8,19 @@ type Props = {
 };
 
 export const FavoritesList = async ({ lng, favoritesId }: Props) => {
-  const getFavsArray = () => {
+  const getFavsArray = (): number[] => {
     try {
-      return JSON.parse(favoritesId);
+      return JSON.parse(favoritesId) as number[];
     } catch {
       return [];
     }
   };
 
   const favoritesArray = getFavsArray();
+
   const favorites = await getFavoritesAsync(favoritesArray);
 
-  return (
+  return favorites.length > 0 ? (
     <AdsList
       titleSize='xl'
       title='Избранные объявления'
@@ -26,5 +28,7 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
       lng={lng}
       data={favorites}
     />
+  ) : (
+    <NoFavorites />
   );
 };

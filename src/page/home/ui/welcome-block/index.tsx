@@ -16,7 +16,7 @@ export const WelcomeBlock = () => {
           <Link href='/place-ad'>
             <button
               type='button'
-              className='w-fit flex gap-2 items-center py-3 px-5 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400 hover:scale-105 active:scale-95 transition-transform text-white'
+              className='w-fit flex gap-2 items-center py-3 px-5 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400 hover:scale-105 active:scale-95 transition-transform text-white font-medium'
             >
               <PiPlusCircleBold size={20} />
               Разместить объявление

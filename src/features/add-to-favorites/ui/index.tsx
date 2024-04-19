@@ -6,6 +6,7 @@ import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
 import { MouseEventHandler, useEffect } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
+import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
 import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
@@ -40,10 +41,7 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
       : [...favorites, postId];
 
     setFavorites(updatedFavorites);
-
-    if (isLogged) {
-      console.log('add');
-    }
+    revalidateRoute('/favorite');
   };
 
   return (
