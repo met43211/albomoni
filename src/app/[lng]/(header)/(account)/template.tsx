@@ -1,5 +1,6 @@
 'use client';
 
+import { ProtectedRouteMessage } from '@albomoni/shared/ui/protected-route';
 import { getCookie } from 'cookies-next';
 
 type Props = {
@@ -9,5 +10,5 @@ type Props = {
 export default function AuthTemplate({ children }: Props) {
   const token = getCookie('token');
 
-  return token ? children : <>Go away</>;
+  return token ? children : <ProtectedRouteMessage />;
 }
