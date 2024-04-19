@@ -22,7 +22,7 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
 
   const favorites = await getFavoritesAsync(favoritesArray);
 
-  return favorites.length > 0 ? (
+  return favoritesArray.length > 0 ? (
     <AdsList
       titleSize='xl'
       title='Избранные объявления'
