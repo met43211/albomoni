@@ -5,7 +5,7 @@
 import { Button } from '@nextui-org/button';
 import { MouseEventHandler, useEffect } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
-import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
+import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';

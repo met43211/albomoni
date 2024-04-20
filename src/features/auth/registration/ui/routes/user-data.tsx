@@ -12,6 +12,7 @@ import { Checkbox } from '@nextui-org/checkbox';
 import { setCookie } from 'cookies-next';
 import { apiClient } from '@albomoni/shared/api/base';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
+import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
@@ -53,8 +54,12 @@ export const RegistrationUserData = ({
         { Authorization: `Bearer ${access}` },
       );
 
-      addCookie('token', access);
-      setCookie('token', access);
+      const oneDay = 24 * 60 * 60 * 1000;
+      const expiresDate = new Date(Date.now() + oneDay * 7);
+
+      addCookie('token', access, { expires: expiresDate });
+      setCookie('token', access, { expires: expiresDate });
+      revalidateRoute('/profile');
 
       setActiveRoute(ERegistrationRoutes.COMPLETE);
     } catch {
@@ -87,8 +92,7 @@ export const RegistrationUserData = ({
         >
           <div className='flex flex-col gap-4 px-6'>
             <p className='text-sm opacity-50'>
-              Укажите проверочный код — он придёт на указанный email адрес в
-              течение 2 минут.
+              Завершите регистрацию, указав основные данные для входа в аккаунт.
             </p>
 
             <Controller

@@ -16,6 +16,7 @@ import { Button } from '@nextui-org/button';
 import { setCookie } from 'cookies-next';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import { apiClient } from '@albomoni/shared/api/base';
+import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -54,10 +55,14 @@ export const LoginWidget = () => {
         { Authorization: `Bearer ${access}` },
       );
 
-      addCookie('token', access);
-      setCookie('token', access);
+      const oneDay = 24 * 60 * 60 * 1000;
+      const expiresDate = new Date(Date.now() + oneDay * 7);
 
-      router.push('/');
+      addCookie('token', access, { expires: expiresDate });
+      setCookie('token', access, { expires: expiresDate });
+      revalidateRoute('/profile');
+
+      router.push('/profile');
     } catch {
       return;
     }
