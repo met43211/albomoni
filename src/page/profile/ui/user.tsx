@@ -8,6 +8,7 @@ import { PiCaretRightBold } from 'react-icons/pi';
 
 export const ProfileUser = () => {
   const token = getCookie('token');
+  console.log(token);
   const { data } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUserAsync(token as string),
@@ -20,7 +21,9 @@ export const ProfileUser = () => {
           <UserAvatar src={data.avatar} isSubscribed={data.subscription} />
         </div>
         <div className='w-full flex flex-col justify-center'>
-          <h3 className='text-xl md:text-2xl font-semibold'>Михаил</h3>
+          <h3 className='text-xl md:text-2xl font-semibold'>
+            {data.first_name}
+          </h3>
 
           {data.subscription ? (
             <button type='button' className='flex gap-2 items-center '>

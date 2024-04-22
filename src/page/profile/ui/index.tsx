@@ -5,10 +5,12 @@ import {
 } from 'react-icons/pi';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { cookies } from 'next/headers';
 import { ProfileUser } from './user';
 import { UserSkeleton } from './user-skeleton';
 
 export const ProfilePage = () => {
+  cookies();
   return (
     <main className='flex flex-col gap-10 items-center'>
       <div className='flex flex-col gap-7 w-full max-w-7xl px-4 mb-40'>
