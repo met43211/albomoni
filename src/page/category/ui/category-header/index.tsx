@@ -6,9 +6,14 @@ import Image from 'next/image';
 type Props = {
   lng: string;
   categoryId: string;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export const CategoryHeader = async ({ lng, categoryId }: Props) => {
+export const CategoryHeader = async ({
+  lng,
+  categoryId,
+  searchParams,
+}: Props) => {
   const { t } = await useTranslation(lng);
   const categories = await getCategoriesAsync();
   const categoryData = categories.find(({ name }) => name === categoryId);
@@ -19,7 +24,7 @@ export const CategoryHeader = async ({ lng, categoryId }: Props) => {
         <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
           {t(`categories.${categoryId}`)}
         </h1>
-        <CategoryFilter categoryId={categoryId} />
+        <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
         {categoryData && (
           <Image
             className='hidden md:block absolute -bottom-5 right-0'

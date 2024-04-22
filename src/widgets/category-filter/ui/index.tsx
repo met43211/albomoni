@@ -14,9 +14,10 @@ import { FiltersStateContext } from '../lib/use-filters-state';
 
 type Props = {
   categoryId: string;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export const CategoryFilter = ({ categoryId }: Props) => {
+export const CategoryFilter = ({ categoryId, searchParams }: Props) => {
   const { data, isLoading } = useQuery<any>({
     queryKey: ['category-filter'],
     queryFn: () => apiClient.get('place-filters/'),
@@ -27,7 +28,10 @@ export const CategoryFilter = ({ categoryId }: Props) => {
   } | null>(null);
 
   useEffect(() => {
-    if (data) {
+    if (searchParams.filters) {
+      const parsedData = JSON.parse(atob(searchParams.filters as string));
+      setFilterState(parsedData);
+    } else if (data) {
       setFilterState(renderFilterState(data[categoryId]));
     }
   }, [data]);
@@ -69,10 +73,7 @@ export const CategoryFilter = ({ categoryId }: Props) => {
               })}
           </div>
           <div className='flex gap-4'>
-            <ShowFilteredAdsButton
-              categoryId={categoryId}
-              selectedFilters={filterState}
-            />
+            <ShowFilteredAdsButton selectedFilters={filterState} />
           </div>
         </FiltersStateContext.Provider>
       </FiltersContext.Provider>
