@@ -4,10 +4,16 @@ import {
   PiWalletBold,
 } from 'react-icons/pi';
 import Link from 'next/link';
-import { Suspense } from 'react';
 import { cookies } from 'next/headers';
-import { ProfileUser } from './user';
+import dynamic from 'next/dynamic';
 import { UserSkeleton } from './user-skeleton';
+
+const DynamicProfileUser = dynamic(
+  () => import('./user').then((mod) => mod.ProfileUser),
+  {
+    loading: () => <UserSkeleton />,
+  },
+);
 
 export const ProfilePage = () => {
   cookies();
@@ -17,9 +23,8 @@ export const ProfilePage = () => {
         <h2 className='text-2xl md:text-3xl font-bold mt-5 md:mt-10 w-full'>
           Профиль
         </h2>
-        <Suspense fallback={<UserSkeleton />}>
-          <ProfileUser />
-        </Suspense>
+
+        <DynamicProfileUser />
 
         <div className='w-full grid md:grid-cols-2 gap-4 md:gap-6'>
           <Link href='/profile/wallet'>

@@ -12,11 +12,14 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
+import { getCookie } from 'cookies-next';
 import { BillingSchema } from '../model/schema';
 
 export const BillingForm = () => {
   const [cookies] = useCookies();
   const router = useRouter();
+  const token = getCookie('token');
+
   const {
     register,
     handleSubmit,

@@ -1,8 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import { ShowFilteredAdsButton } from '@albomoni/features/category/show-filtered-ads';
-import jsonFilters from '@albomoni/shared/model/filters.json';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@albomoni/shared/api/base';
+import { Skeleton } from '@nextui-org/skeleton';
 import { Filter, renderFilterState } from '../lib/render-filter-state';
 import { Attribute } from './attribute';
 import { FiltersContext } from '../lib/use-filters';
@@ -13,35 +17,65 @@ type Props = {
 };
 
 export const CategoryFilter = ({ categoryId }: Props) => {
-  const { filters } = JSON.parse(JSON.stringify(jsonFilters));
-  const [filterState, setFilterState] = useState(
-    renderFilterState(filters[categoryId]),
-  );
+  const { data, isLoading } = useQuery<any>({
+    queryKey: ['category-filter'],
+    queryFn: () => apiClient.get('place-filters/'),
+  });
 
-  return (
-    <FiltersContext.Provider value={filters[categoryId]}>
-      <FiltersStateContext.Provider value={filterState}>
+  const [filterState, setFilterState] = useState<{
+    [key: string]: Filter;
+  } | null>(null);
+
+  useEffect(() => {
+    if (data) {
+      setFilterState(renderFilterState(data[categoryId]));
+    }
+  }, [data]);
+
+  if (isLoading)
+    return (
+      <>
         <div className='flex gap-4 flex-wrap'>
-          {Object.entries(filterState)
-            .sort((a: any, b: any) => Math.sign(a[1].order - b[1].order))
-            .map(([filterKey, filterParams]) => {
-              const { type, variants, selected } = filterParams as Filter;
-              return (
-                <Attribute
-                  key={filterKey}
-                  setFilterState={setFilterState}
-                  filterKey={filterKey}
-                  type={type}
-                  variants={variants}
-                  selected={selected}
-                />
-              );
-            })}
+          <Skeleton className='w-36 h-10 rounded-xl' />
+          <Skeleton className='w-36 h-10 rounded-xl ' />
+          <Skeleton className='w-36 h-10 rounded-xl ' />
+          <Skeleton className='w-36 h-10 rounded-xl ' />
         </div>
         <div className='flex gap-4'>
-          <ShowFilteredAdsButton />
+          <Skeleton className='w-56 h-12 rounded-2xl ' />
         </div>
-      </FiltersStateContext.Provider>
-    </FiltersContext.Provider>
+      </>
+    );
+
+  return (
+    filterState && (
+      <FiltersContext.Provider value={data[categoryId]}>
+        <FiltersStateContext.Provider value={filterState}>
+          <div className='flex gap-4 flex-wrap'>
+            {Object.entries(filterState)
+              .sort((a: any, b: any) => Math.sign(a[1].order - b[1].order))
+              .map(([filterKey, filterParams]) => {
+                const { type, variants, selected } = filterParams as Filter;
+                return (
+                  <Attribute
+                    key={filterKey}
+                    setFilterState={setFilterState}
+                    filterKey={filterKey}
+                    type={type}
+                    variants={variants}
+                    selected={selected}
+                  />
+                );
+              })}
+          </div>
+          <div className='flex gap-4'>
+            <ShowFilteredAdsButton
+              categoryId={categoryId}
+              selectedFilters={filterState}
+            />
+          </div>
+        </FiltersStateContext.Provider>
+      </FiltersContext.Provider>
+    )
   );
 };

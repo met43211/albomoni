@@ -12,13 +12,12 @@ export const AdInfo = async ({ data, lng }: Props) => {
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-col gap-2'>
-        <h3 className='text-md font-semibold opacity-50 pb-1'>Характеристики</h3>
         {Object.entries(data.ad.additional).map(([key, value]) => (
           <h5
             key={key}
             className='w-full text-lg font-semibold select-text cursor-text'
           >
-            <span className='opacity-70'>
+            <span className='opacity-50'>
               {t(`${data.ad.category[0]}.${key}.name`)}:{' '}
             </span>
             {Number(value)

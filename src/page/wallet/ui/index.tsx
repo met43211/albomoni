@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { PiPlusCircleBold } from 'react-icons/pi';
 
 export const WalletPage = async () => {
-  const currency = cookies().get('currency');
   const token = cookies().get('token');
 
   const user = await getUserAsync(token?.value as string);
@@ -19,7 +18,7 @@ export const WalletPage = async () => {
         <h3 className='text-5xl md:text-7xl font-semibold'>
           {normalizePrice({
             price: user.money,
-            currency: currency?.value,
+            currency: user.currency,
             adCurrency: user.currency,
           })}
         </h3>

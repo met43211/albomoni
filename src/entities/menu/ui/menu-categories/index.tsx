@@ -28,8 +28,8 @@ export const MenuCategories = ({ onClose }: Props) => {
           {data.map((category) => (
             <Link
               key={category.name}
-              as={`categories/${category.name}`}
-              href='categories/[categoryId]'
+              as={`/categories/${category.name}`}
+              href='/categories/[categoryId]'
               onClick={onClose}
               className='w-full h-48 bg-[--element] rounded-2xl p-4 items-start justify-start flex-shrink-0 hover:scale-105 active:scale-95 transition-transform relative'
             >

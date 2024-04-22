@@ -1,31 +1,25 @@
 import { Suspense } from 'react';
-import { Skeleton } from '@nextui-org/react';
 import { CategoryHeader } from './category-header';
+import { CategoryAdsBlock } from './ads-block';
 
 type Props = {
   lng: string;
   categoryId: string;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export const CategoryPage = ({ lng, categoryId }: Props) => (
-  <main className='flex flex-col gap-10 items-center pb-40'>
-    <Suspense
-      fallback={
-        <div className='max-w-7xl w-full px-4'>
-          <Skeleton className='w-full h-[304px] md:h-[248px] rounded-3xl' />
-        </div>
-      }
-    >
+export const CategoryPage = async ({
+  lng,
+  categoryId,
+  searchParams,
+}: Props) => {
+  return (
+    <main className='flex flex-col gap-10 items-center pb-40'>
       <CategoryHeader lng={lng} categoryId={categoryId} />
-    </Suspense>
 
-    <div className='w-full max-w-7xl px-4 flex flex-col-reverse lg:flex-row gap-6'>
-      <Suspense>
-        {/* <AdsList title='Недавние объявления' cols={3} /> */}
-      </Suspense>
-      {/* <div className='flex flex-col gap-8 w-96 '>
-        <ShowHistoryButton />
-      </div> */}
-    </div>
-  </main>
-);
+      <div className='w-full max-w-7xl px-4 flex flex-col-reverse lg:flex-row gap-6'>
+        <CategoryAdsBlock lng={lng} searchParams={searchParams} />
+      </div>
+    </main>
+  );
+};
