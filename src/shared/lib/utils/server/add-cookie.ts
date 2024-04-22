@@ -1,12 +1,13 @@
 'use server';
 
-import { ResponseCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import { setCookie } from 'cookies-next';
+import { OptionsType } from 'cookies-next/lib/types';
 import { cookies } from 'next/headers';
 
 export default async function addCookie(
   key: string,
   value: string,
-  options?: Partial<ResponseCookie>,
+  options?: OptionsType,
 ) {
-  cookies().set(key, value, options);
+  setCookie(key, value, { cookies });
 }

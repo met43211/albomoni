@@ -1,7 +1,8 @@
 'use server';
 
+import { deleteCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 
 export default async function removeCookie(key: string) {
-  cookies().delete(key);
+  deleteCookie(key, { cookies });
 }
