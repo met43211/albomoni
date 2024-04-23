@@ -1,6 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 /* eslint-disable class-methods-use-this */
-import { API_URL } from '../config';
+
+import { API_URL, PAYMENT_URL } from '../config';
 
 export class ApiClient {
   private baseUrl: string;
@@ -100,3 +101,4 @@ export class ApiClient {
 }
 
 export const apiClient = new ApiClient(API_URL);
+export const paymentClient = new ApiClient(PAYMENT_URL);

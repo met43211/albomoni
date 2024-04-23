@@ -15,34 +15,40 @@ import {
 } from 'react-icons/pi';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { UserAvatar } from '@albomoni/entities/user';
-import removeCookie from '@albomoni/shared/lib/utils/server/remove-cookie';
-import { deleteCookie } from 'cookies-next';
 import { ChangeThemeButton } from './change-theme-button';
 
-export const MenuAside = () => {
-  const { isLogged, user } = useSession();
+type Props = {
+  onClose: () => void;
+};
 
-  const handleLogout = async () => {
-    removeCookie('token');
-    deleteCookie('token');
-  };
+export const MenuAside = ({ onClose }: Props) => {
+  const { isLogged, user } = useSession();
 
   return (
     <aside className='w-full tablet:w-80 flex-shrink-0 flex flex-col gap-4'>
       {isLogged && user ? (
-        <button
-          type='button'
-          onClick={handleLogout}
-          className='w-full h-16 flex gap-4 items-center text-start'
-        >
-          <div className='w-16 h-16 flex-shrink-0'>
-            <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
-          </div>
+        <Link href='/profile'>
+          <button
+            type='button'
+            onClick={onClose}
+            className='w-full h-16 flex gap-4 items-center text-start'
+          >
+            <div className='w-16 h-16 flex-shrink-0'>
+              <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
+            </div>
 
-          <div className='flex flex-col gap-1 justify-between w-full h-full'>
-            <p className='text-lg font-bold'>{user.first_name}</p>
-          </div>
-        </button>
+            <div className='flex flex-col justify-center w-full h-full'>
+              <p className='text-lg font-bold'>{user.first_name}</p>
+              <div className='w-full flex gap-1 items-center text-sm opacity-50'>
+                Перейти в профиль
+                <PiCaretRightBold
+                  size={16}
+                  className='flex-shrink-0 mt-[2px]'
+                />
+              </div>
+            </div>
+          </button>
+        </Link>
       ) : (
         <Link href='/login'>
           <button

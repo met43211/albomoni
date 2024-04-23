@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const CategoryFilter = ({ categoryId, searchParams }: Props) => {
-  const { data, isLoading } = useQuery<any>({
+  const { data, isLoading, isFetching, isPending } = useQuery<any>({
     queryKey: ['category-filter'],
     queryFn: () => apiClient.get('place-filters/'),
   });
@@ -36,17 +36,17 @@ export const CategoryFilter = ({ categoryId, searchParams }: Props) => {
     }
   }, [data]);
 
-  if (isLoading)
+  if (isLoading || isFetching || isPending)
     return (
       <>
         <div className='flex gap-4 flex-wrap'>
-          <Skeleton className='w-36 h-10 rounded-xl' />
-          <Skeleton className='w-36 h-10 rounded-xl ' />
-          <Skeleton className='w-36 h-10 rounded-xl ' />
-          <Skeleton className='w-36 h-10 rounded-xl ' />
+          <Skeleton className='w-36 h-10 rounded-xl !bg-default-300' />
+          <Skeleton className='w-36 h-10 rounded-xl !bg-default-300' />
+          <Skeleton className='w-36 h-10 rounded-xl !bg-default-300' />
+          <Skeleton className='w-36 h-10 rounded-xl !bg-default-300' />
         </div>
         <div className='flex gap-4'>
-          <Skeleton className='w-56 h-12 rounded-2xl ' />
+          <Skeleton className='w-56 h-12 rounded-2xl !bg-default-300' />
         </div>
       </>
     );

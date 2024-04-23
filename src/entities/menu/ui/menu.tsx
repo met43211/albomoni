@@ -28,7 +28,7 @@ export const Menu = ({ isOpen, onOpenChange }: Props) => {
               hideScrollBar
               className='flex w-full h-[calc(100dvh-80px)] flex-col tablet:flex-row-reverse gap-4 md:gap-8 px-4 max-w-7xl pt-2'
             >
-              <MenuAside />
+              <MenuAside onClose={onClose} />
               <MenuCategories onClose={onClose} />
             </ScrollShadow>
           </div>

@@ -5,7 +5,7 @@
 import { Button } from '@nextui-org/button';
 import { MouseEventHandler, useEffect } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
-import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
+import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';
@@ -18,7 +18,7 @@ type Props = {
 
 export const AddToFavoritesButton = ({ postId }: Props) => {
   const { isLogged } = useSession();
-  const { favorites, isPending, setFavorites } = useFavorites();
+  const { favorites, isPending, setFavorites, setIsPending } = useFavorites();
   const token = getCookie('token');
   const pathname = usePathname();
 
@@ -46,11 +46,15 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
 
     if (isLogged) {
       const syncFavsAsync = async () => {
+        setIsPending(true);
+
         await apiClient.post(
           'favorites/',
           { id: postId },
           { Authorization: `Bearer ${token}` },
         );
+
+        setIsPending(false);
       };
 
       syncFavsAsync();
@@ -59,7 +63,7 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
 
   return (
     <Button
-      isLoading={isPending}
+      isDisabled={isPending}
       isIconOnly
       size='sm'
       radius='full'

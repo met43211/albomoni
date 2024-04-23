@@ -12,7 +12,7 @@ import { Checkbox } from '@nextui-org/checkbox';
 import { setCookie } from 'cookies-next';
 import { apiClient } from '@albomoni/shared/api/base';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
-import revalidateRoute from '@albomoni/shared/lib/utils/revalidate';
+import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';

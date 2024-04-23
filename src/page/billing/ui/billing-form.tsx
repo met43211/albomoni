@@ -12,13 +12,11 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
-import { getCookie } from 'cookies-next';
 import { BillingSchema } from '../model/schema';
 
 export const BillingForm = () => {
   const [cookies] = useCookies();
   const router = useRouter();
-  const token = getCookie('token');
 
   const {
     register,
@@ -66,24 +64,28 @@ export const BillingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-6'>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className='w-full flex flex-col gap-6 relative'
+    >
       <input
         min='1'
         step='any'
         type='text'
-        className='w-min text-5xl md:text-7xl bg-transparent outline-none font-semibold'
+        className='w-full max-w-[500px] text-5xl md:text-7xl bg-transparent outline-none font-semibold'
         placeholder={normSum}
         inputMode='numeric'
         {...register('sum')}
       />
+
       <AnimatePresence>
-        <m.div layout className='w-full md:max-w-[600px]'>
-          {errors.sum && (
+        {errors.sum && (
+          <m.div layout className='w-full md:max-w-[600px]'>
             <NotificationBubble type='error'>
               {errors.sum.message}
             </NotificationBubble>
-          )}
-        </m.div>
+          </m.div>
+        )}
       </AnimatePresence>
 
       <m.button
