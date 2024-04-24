@@ -22,11 +22,11 @@ export const HeaderNavigationPaths = [
     path: '/place-ad',
     icon: PiPlusCircleBold,
   },
-  {
-    id: 'messages',
-    path: '/messages',
-    icon: TbMessageCircle,
-  },
+  // {
+  //   id: 'messages',
+  //   path: '/messages',
+  //   icon: TbMessageCircle,
+  // },
   {
     id: 'profile',
     path: '/profile',

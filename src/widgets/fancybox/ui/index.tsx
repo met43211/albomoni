@@ -56,14 +56,6 @@ export const ImageViewer = ({ images }: Props) => {
           infinite: true,
           Dots: true,
           Thumbs: false,
-          // breakpoints: {
-          //   '(min-width: 768px)': {
-          //     Dots: false,
-          //     Thumbs: {
-          //       type: 'modern',
-          //     },
-          //   },
-          // },
         }}
       >
         {images?.map(({ full, preview }) => (

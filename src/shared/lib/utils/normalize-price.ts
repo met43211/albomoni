@@ -16,7 +16,7 @@ export const normalizePrice = async ({
   const locales = {
     RUB: 'ru-RU',
     USD: 'en-US',
-    EUR: 'en-GB'
+    EUR: 'en-GB',
   } as any;
 
   if (currency === adCurrency)
