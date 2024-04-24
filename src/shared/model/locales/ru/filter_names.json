@@ -77,70 +77,38 @@
     "four": "4 + 1",
     "more": "5 + 2 и более"
   },
-  "apartment_duration": {
+  "period": {
     "long": "Долгосрочно",
     "daily": "Посуточно"
   },
-  "room_duration": {
-    "long": "Долгосрочно",
-    "daily": "Посуточно"
-  },
-  "house_duration": {
-    "long": "Долгосрочно",
-    "daily": "Посуточно"
-  },
-  "house_buy_object_type": {
+  "house_target_type": {
     "house": "Дом",
     "dacha": "Дача",
     "cottage": "Коттедж",
     "townhouse": "Таунхаус"
   },
-  "garage_buy_object_type": {
+  "garage_type": {
     "garage": "Гаражи",
     "car_place": "Машиноместа"
   },
-  "garage_rent_object_type": {
-    "garage": "Гаражи",
-    "car_place": "Машиноместа"
-  },
-  "commercial_buy_object_type": {
+  "comm_target_type": {
     "office": "Офис",
     "free_type": "Свободного назначения",
-    "sell_square": "Торговая площадь",
+    "square": "Торговая площадь",
     "warehouse": "Склад",
-    "industry": "Производство",
+    "prom": "Производство",
     "food": "Общепит",
     "hostel": "Гостиница",
     "car_service": "Автосервис",
     "house": "Здание"
   },
-  "commercial_rent_object_type": {
-    "office": "Офис",
-    "free_type": "Свободного назначения",
-    "sell_square": "Торговая площадь",
-    "warehouse": "Склад",
-    "industry": "Производство",
-    "food": "Общепит",
-    "hostel": "Гостиница",
-    "car_service": "Автосервис",
-    "house": "Здание"
-  },
-  "stead_buy_category": {
+  "stead_target_type": {
     "IZHS": "ИЖС",
     "SNT": "СНТ",
-    "industrial": "Промназначение"
+    "promotional": "Промназначение"
   },
-  "stead_rent_category": {
-    "IZHS": "ИЖС",
-    "SNT": "СНТ",
-    "industrial": "Промназначение"
-  },
-  "garage_buy_secure": {
-    "true": "С охраной",
-    "false": "Без охраны"
-  },
-  "garage_rent_secure": {
-    "true": "С охраной",
-    "false": "Без охраны"
+  "secure": {
+    "with_secure": "С охраной",
+    "no_secure": "Без охраны"
   }
 }

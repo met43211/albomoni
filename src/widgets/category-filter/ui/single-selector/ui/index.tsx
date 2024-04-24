@@ -1,10 +1,10 @@
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/popover';
 import { Radio, RadioGroup } from '@nextui-org/radio';
-import { HiSelector } from 'react-icons/hi';
 import { renderFilterState } from '@albomoni/widgets/category-filter/lib/render-filter-state';
 import { useFilters } from '@albomoni/widgets/category-filter/lib/use-filters';
 import { useFiltersState } from '@albomoni/widgets/category-filter/lib/use-filters-state';
+import { PiCaretDownBold } from 'react-icons/pi';
 
 type Props = {
   selected: string;
@@ -33,7 +33,7 @@ export const SingleSelector = ({
       <PopoverTrigger>
         <div className='w-fit h-min py-2 bg-[--element] dark:bg-neutral-300 text-black rounded-xl px-5 flex items-center gap-2 hover:scale-105 active:scale-90 transition-transform cursor-pointer'>
           {t(`${filterKey}.${selected}`)}
-          <HiSelector size={20} className='mt-[1px]' />
+          <PiCaretDownBold size={16} className='mt-[1px]' />
         </div>
       </PopoverTrigger>
 
