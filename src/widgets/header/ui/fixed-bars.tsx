@@ -29,6 +29,7 @@ export const FixedBars = () => {
     const regex = new RegExp(route);
     return regex.test(flatRoute);
   });
+  const isAdRoute = flatRoute.split('/')[0] === 'ad';
 
   const handleBack = () => {
     if (flatRoute === 'profile/wallet') {
@@ -41,7 +42,7 @@ export const FixedBars = () => {
   return (
     <>
       <AnimatePresence>
-        {isScrolled && scrollDir === 'up' && flatRoute !== 'ad' && (
+        {isScrolled && scrollDir === 'up' && !isAdRoute && (
           <m.div
             initial={{ y: '-150%' }}
             animate={{ y: 0 }}

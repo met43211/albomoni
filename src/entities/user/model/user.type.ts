@@ -9,4 +9,7 @@ export type UserType = {
   currency: string;
   subscription: boolean;
   phone: string | null;
+  notifications: number;
+  products: number;
+  plans: number;
 };

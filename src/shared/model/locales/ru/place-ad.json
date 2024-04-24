@@ -868,7 +868,7 @@
     "real_type": {
       "name": "Тип жилья",
       "secondary": "Вторичка",
-      "new_building": "Новостройка"
+      "new": "Новостройка"
     },
     "duration": {
       "name": "Срок аренды",
