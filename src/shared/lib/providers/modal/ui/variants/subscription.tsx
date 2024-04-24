@@ -15,7 +15,7 @@ export const ModalVariantSubscription = () => {
           <UserAvatar src={user?.avatar as string} isSubscribed isBig />
         </div>
         <div className='flex flex-col gap-2 items-center'>
-          <h1 className='text-white text-3xl font-semibold bg-gradient-to-r from-indigo-400 to-red-500 inline-block text-transparent bg-clip-text'>
+          <h1 className='text-3xl font-semibold bg-gradient-to-r from-indigo-400 to-red-500 inline-block text-transparent bg-clip-text'>
             Albomoni Pro
           </h1>
           <h2 className='text-lg text-white opacity-50 font-medium'>
