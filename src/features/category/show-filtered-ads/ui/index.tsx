@@ -2,6 +2,7 @@
 
 'use client';
 
+import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { Filter } from '@albomoni/widgets/category-filter/lib/render-filter-state';
 import { Button } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -30,7 +31,6 @@ export const ShowFilteredAdsButton = ({ selectedFilters }: Props) => {
     const newPath = `${initPath}?filters=${encodedData}`;
 
     setDisabled(true);
-
     router.push(newPath);
   };
 
@@ -41,7 +41,7 @@ export const ShowFilteredAdsButton = ({ selectedFilters }: Props) => {
       className='bg-gradient-to-tr from-blue-500 to-indigo-400 text-white font-medium'
       onPress={handleClick}
     >
-      Показать объявления
+      {disabled ? 'Показаны релевантные объявления' : 'Показать объявления'}
     </Button>
   );
 };

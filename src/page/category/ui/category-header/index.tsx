@@ -19,22 +19,20 @@ export const CategoryHeader = async ({
   const categoryData = categories.find(({ name }) => name === categoryId);
 
   return (
-    <div className='w-full max-w-7xl md:px-4 flex flex-col gap-10 md:mt-2'>
-      <div className='w-full p-4 py-8 md:p-8 md:rounded-3xl bg-gradient-to-tr from-blue-200 to-indigo-200 dark:from-blue-800 dark:to-indigo-500 shadow-lg shadow-indigo-100 dark:shadow-blue-800/50 flex flex-col gap-8 relative overflow-clip md:pr-48'>
-        <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
-          {t(`categories.${categoryId}`)}
-        </h1>
-        <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
-        {categoryData && (
-          <Image
-            className='hidden md:block absolute -bottom-5 right-0'
-            width={240}
-            height={240}
-            src={categoryData.img}
-            alt={categoryId}
-          />
-        )}
-      </div>
+    <div className='w-full p-6 py-8 md:p-8 md:rounded-3xl bg-gradient-to-tr from-blue-200 to-indigo-200 dark:from-blue-800 dark:to-indigo-500 shadow-lg shadow-indigo-100 dark:shadow-blue-800/50 flex flex-col gap-8 relative overflow-clip md:pr-48'>
+      <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
+        {t(`categories.${categoryId}`)}
+      </h1>
+      <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
+      {categoryData && (
+        <Image
+          className='hidden md:block absolute -bottom-5 right-0'
+          width={240}
+          height={240}
+          src={categoryData.img}
+          alt={categoryId}
+        />
+      )}
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
 import { AdsList } from '@albomoni/widgets/ads-list';
 import { cookies } from 'next/headers';
+import { PiMagnifyingGlass } from 'react-icons/pi';
 
 type Props = {
   lng: string;
@@ -24,15 +25,19 @@ export const CategoryAdsBlock = async ({
     ? Object.values(parsedFilters).map((filter: any) => filter.selected)
     : null;
 
-  const fullFilters = normalizedFilters
-    ? [categoryId, ...normalizedFilters]
-    : null;
-
   const ads = await apiClient.post<Ad[]>('ads/', {
-    filters: fullFilters,
+    filters: [categoryId, ...(normalizedFilters || [])],
   });
 
-  return (
+  return ads.length > 0 ? (
     <AdsList lng={lng} title='Актуальные объявления' cols={3} data={ads} />
+  ) : (
+    <div className='w-full flex flex-col gap-4 items-center mt-20'>
+      <PiMagnifyingGlass size={64} className='opacity-50' />
+      <h3 className='text-xl font-semibold'>Объявления не найдены</h3>
+      <h4 className='opacity-50 font-medium max-w-64 text-center'>
+        Попробуйте выбрать другие фильтры.
+      </h4>
+    </div>
   );
 };

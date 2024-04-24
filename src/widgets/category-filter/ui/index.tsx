@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const CategoryFilter = ({ categoryId, searchParams }: Props) => {
-  const { data, isLoading, isFetching, isPending } = useQuery<any>({
+  const { data, isLoading, isPending } = useQuery<any>({
     queryKey: ['category-filter'],
     queryFn: () => apiClient.get('place-filters/'),
   });
@@ -36,7 +36,7 @@ export const CategoryFilter = ({ categoryId, searchParams }: Props) => {
     }
   }, [data]);
 
-  if (isLoading || isFetching || isPending)
+  if (isLoading || isPending)
     return (
       <>
         <div className='flex gap-4 flex-wrap'>

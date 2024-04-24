@@ -68,7 +68,7 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
     try {
       await mutateAsync({ ...formCopy, token, hash });
 
-      await fetch(`${API_URL}place-ad/`, {
+      await fetch(`${API_URL}place-img/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: '*/*',

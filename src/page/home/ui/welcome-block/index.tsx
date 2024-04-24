@@ -1,8 +1,15 @@
 import { PiPlusCircleBold } from 'react-icons/pi';
 import Link from 'next/link';
+import { cookies } from 'next/headers';
+import { getCookie } from 'cookies-next';
+import { Spacer } from '@nextui-org/spacer';
 import { WelcomeBlockScreen } from './screen';
 
 export const WelcomeBlock = () => {
+  const token = getCookie('token', { cookies });
+
+  if (token) return <Spacer className='h-6' />;
+
   return (
     <div className='w-full h-[500px] lg:h-[410px] bg-gradient-to-bl from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-500 flex justify-center mb-14'>
       <div className='max-w-7xl w-full px-4 flex py-8 items-start lg:items-center relative'>

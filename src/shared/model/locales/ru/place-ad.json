@@ -9,6 +9,8 @@
     "real_estate": "Недвижимость",
     "events_celebrations": "Мероприятия и праздники",
     "electronics": "Техника",
+    "consumer_services": "Потребительские услуги",
+    "products_and_specialized_services": "Продукты и специализированные услуги",
     "tires_rims_and_wheels": "Шины диски и колёса",
     "repair_and_construction": "Ремонт и строительство",
     "oils_and_auto_chemicals": "Масла и автохимия",
@@ -838,7 +840,8 @@
     "seller": "О продавце",
     "price": "Цена",
     "additional": "Дополнительно",
-    "about": "Подробная информация"
+    "about": "Подробная информация",
+    "title": "Название"
   },
   "price": {
     "name": "Укажите стоимость"
@@ -866,6 +869,11 @@
       "name": "Тип жилья",
       "secondary": "Вторичка",
       "new_building": "Новостройка"
+    },
+    "duration": {
+      "name": "Срок аренды",
+      "long": "Долгосрочно",
+      "daily": "Посуточно"
     },
     "rooms_count": {
       "name": "Количество комнат",
@@ -936,6 +944,65 @@
     },
     "power": {
       "name": "Мощность (л.с.)"
+    }
+  },
+  "services": {
+    "title": {
+      "name": "Введите название"
+    },
+    "region": {
+      "name": "Регион оказания услуг"
+    },
+    "address": {
+      "name": "Регион оказания услуг"
+    }
+  },
+  "requests": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Регион оказания услуг"
+    }
+  },
+  "personal_effects": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Адрес"
+    }
+  },
+  "for_home_and_cottage": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Адрес"
+    }
+  },
+  "electronics": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Адрес встречи с покупателем"
+    }
+  },
+  "spare_parts_and_accessories": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Адрес"
+    }
+  },
+  "events_celebrations": {
+    "title": {
+      "name": "Введите название"
+    },
+    "address": {
+      "name": "Регион проведения мероприятия"
     }
   }
 }
