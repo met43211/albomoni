@@ -21,7 +21,7 @@ export const ProfileSecondaryControls = () => {
         className='w-full h-36 rounded-[20px] flex flex-col shadow-base dark:bg-default text-start font-medium p-4 relative overflow-clip justify-between hover:scale-[1.02] active:scale-[0.98] transition-transform'
       >
         Уведомления
-        <PiBell className='absolute w-auto h-[80%] -bottom-4 -right-3 opacity-10' />
+        <PiBell className='absolute w-auto h-[75%] -bottom-4 -right-3 opacity-10' />
       </button>
 
       <button
