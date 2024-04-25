@@ -31,11 +31,13 @@ export const UserAvatar = ({
   );
 
   return (
-    <div className='relative w-full h-full p-1'>
+    <div className='relative w-full h-full p-1 '>
       <Avatar
         src={src || undefined}
         icon={<PiUser className='w-1/2 h-1/2 opacity-30' />}
-        className={`w-full h-full flex-shrink-0 z-30 border-4 ${isBig ? 'border-black' : 'border-[--bg]'}`}
+        className={`w-full h-full flex-shrink-0 z-30 border-4 ${
+          isBig ? 'border-black bg-neutral-800' : 'border-[--bg]'
+        }`}
       />
 
       <div className={ringStyles} />
