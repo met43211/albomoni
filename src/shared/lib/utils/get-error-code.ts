@@ -1,1 +1,1 @@
-export const getErrorCode = (error: string) => error.split(': ').at(-1);
+export const getErrorCode = (error: string) => Number(error.split(': ').at(-1));

@@ -1,3 +1,3 @@
 export const ModalMobile = () => {
-  return <>mobile</>;
+  return null;
 };

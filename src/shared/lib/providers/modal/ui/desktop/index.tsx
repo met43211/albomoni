@@ -32,7 +32,7 @@ export const ModalDesktop = () => {
               transition: { ease: [0, 1, 0, 1], duration: 1 },
             }}
             exit={{ filter: 'blur(25px)', opacity: 0, scale: 1.1 }}
-            className='w-full mx-1 max-w-[440px] max-h-[70dvh] flex flex-col gap-6 m-auto box-border bg-[#000000] rounded-4xl border-1 border-white/10 z-50 shadow-2xl shadow-black'
+            className='w-full mx-1 max-w-[440px] max-h-[70dvh] flex flex-col m-auto box-border bg-black rounded-4xl border-1 border-white/10 z-50 shadow-2xl shadow-black overflow-hidden'
             ref={rootRef}
           >
             <ModalContent />

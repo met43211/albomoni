@@ -1,9 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 
 import { UserAvatar } from '@albomoni/entities/user';
 import { UserType } from '@albomoni/entities/user/model/user.type';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
+import { useEffect } from 'react';
 import { PiCaretRightBold } from 'react-icons/pi';
 
 type Props = {
@@ -11,7 +15,12 @@ type Props = {
 };
 
 export const ProfileUser = ({ user }: Props) => {
+  const { setUser } = useSession();
   const { setModalState } = useModal();
+
+  useEffect(() => {
+    setUser(user);
+  }, [user]);
 
   const handleClick = () => {
     setModalState(EModalStates.SUBSCRIPTION);
