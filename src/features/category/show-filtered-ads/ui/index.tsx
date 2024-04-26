@@ -41,7 +41,7 @@ export const ShowFilteredAdsButton = ({ selectedFilters }: Props) => {
       className='bg-gradient-to-tr from-blue-500 to-indigo-400 text-white font-medium'
       onPress={handleClick}
     >
-      {disabled ? 'Показаны релевантные объявления' : 'Показать объявления'}
+      {disabled ? 'Показаны похожие объявления' : 'Показать объявления'}
     </Button>
   );
 };

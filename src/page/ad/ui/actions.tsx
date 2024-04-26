@@ -1,8 +1,6 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { Button } from '@nextui-org/button';
-import { Avatar } from '@nextui-org/avatar';
 import { Rating } from '@albomoni/shared/ui/rating';
-import { PiUserBold } from 'react-icons/pi';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { cookies } from 'next/headers';
 import { InfoButton } from '@albomoni/shared/ui/info-button';

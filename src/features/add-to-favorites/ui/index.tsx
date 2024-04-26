@@ -10,6 +10,7 @@ import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';
 import { usePathname } from 'next/navigation';
+import { Tooltip } from '@nextui-org/tooltip';
 import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
@@ -62,19 +63,23 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
   };
 
   return (
-    <Button
-      isDisabled={isPending}
-      isIconOnly
-      size='sm'
-      radius='full'
-      onClick={handleClick}
-      className={
-        isActive
-          ? 'text-[--error] bg-red-500/10'
-          : 'text-[--text] dark:bg-default-200'
-      }
+    <Tooltip
+      content={isActive ? 'Убрать из избранного' : 'Добавить в избранное'}
     >
-      {isActive ? <PiHeartFill size={18} /> : <PiHeartBold size={18} />}
-    </Button>
+      <Button
+        isDisabled={isPending}
+        isIconOnly
+        size='sm'
+        radius='full'
+        onClick={handleClick}
+        className={
+          isActive
+            ? 'text-[--error] bg-red-500/10'
+            : 'text-[--text] dark:bg-default-200'
+        }
+      >
+        {isActive ? <PiHeartFill size={18} /> : <PiHeartBold size={18} />}
+      </Button>
+    </Tooltip>
   );
 };

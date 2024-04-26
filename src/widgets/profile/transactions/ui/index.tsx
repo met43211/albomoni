@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-empty-collection */
+
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 import { parseDate } from '@albomoni/shared/lib/utils/parse-date';

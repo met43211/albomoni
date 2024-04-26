@@ -25,8 +25,6 @@ export const ModalSubscriptionConfirmation = ({ setScreen }: Props) => {
   const router = useRouter();
   const [amount, setAmount] = useState<number | null>(null);
 
-  console.log(user);
-
   const handleClickBack = () => {
     setScreen(ESubscriptionStates.ADVANTAGES);
   };

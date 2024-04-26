@@ -1,13 +1,14 @@
+import { getUserAsync } from '@albomoni/entities/user/api/get-user';
 import { UserType } from '@albomoni/entities/user/model/user.type';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { PiPlusCircleBold } from 'react-icons/pi';
 
-type Props = {
-  user: UserType;
-};
+export const Balance = async () => {
+  const token = cookies().get('token');
+  const user = await getUserAsync(token?.value as string);
 
-export const Balance = ({ user }: Props) => {
   return (
     <div className='w-full flex flex-col gap-8'>
       <h2 className='text-2xl md:text-3xl font-bold mt-5 md:mt-10 w-full'>

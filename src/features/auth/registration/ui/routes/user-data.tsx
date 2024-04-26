@@ -13,6 +13,7 @@ import { setCookie } from 'cookies-next';
 import { apiClient } from '@albomoni/shared/api/base';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
+import { useLocalStorage } from 'react-use';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
@@ -23,6 +24,7 @@ export const RegistrationUserData = ({
   setActiveRoute,
 }: RegistrationRoutesProps) => {
   const { mutateAsync, isPending, isError } = useMutation(SignupQueries);
+  const [watchedAds] = useLocalStorage('watched', []);
 
   const [passVisible, setPassVisible] = useState(false);
   const [confPassVisible, setConfPassVisible] = useState(false);
@@ -50,7 +52,7 @@ export const RegistrationUserData = ({
 
       await apiClient.put(
         'favorites/',
-        { favorites },
+        { favorites, views: watchedAds },
         { Authorization: `Bearer ${access}` },
       );
 

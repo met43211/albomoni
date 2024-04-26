@@ -12,4 +12,5 @@ export type UserType = {
   notifications: number;
   products: number;
   plans: number;
+  views: number[];
 };

@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import { Key, memo, useEffect } from 'react';
@@ -24,9 +25,7 @@ export const PlaceAdAutocomplete = memo(
         e.message ===
         'ResizeObserver loop completed with undelivered notifications.'
       ) {
-        // prevent React's listener from firing
         e.stopImmediatePropagation();
-        // prevent the browser's console error message
         e.preventDefault();
       }
     };

@@ -6,13 +6,20 @@ import { PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { cookies } from 'next/headers';
+import dynamic from 'next/dynamic';
 import { Ad } from '../../model/ad.type';
 import { getAdTitle } from '../../lib/get-ad-title';
+import { ImageGallery } from '../image-gallery';
 
 type Props = {
   data: Ad;
   lng: string;
 };
+
+const DynamicAdWatchedMessage = dynamic(
+  () => import('./watched').then((mod) => mod.AdWatchedMessage),
+  { ssr: false },
+);
 
 export const AdCard = ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
@@ -23,23 +30,10 @@ export const AdCard = ({ data, lng }: Props) => {
   return (
     <Link
       href={`/ad/${ad.id}`}
-      className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer'
+      className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'
     >
-      <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory'>
-        {ad.images.map(({ full, preview }) => (
-          <Image
-            key={full}
-            src={full}
-            blurDataURL={preview}
-            placeholder='blur'
-            alt='image'
-            width={240}
-            height={160}
-            quality={40}
-            className='snap-start flex-shrink-0 object-cover h-full'
-          />
-        ))}
-      </div>
+      <DynamicAdWatchedMessage adId={data.ad.id} />
+      <ImageGallery images={ad.images} />
       <Divider />
       <div className='w-full flex flex-col gap-4 p-4 relative'>
         <Rating

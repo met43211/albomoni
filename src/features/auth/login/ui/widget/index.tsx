@@ -17,6 +17,7 @@ import { setCookie } from 'cookies-next';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import { apiClient } from '@albomoni/shared/api/base';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
+import { useLocalStorage } from 'react-use';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -27,6 +28,8 @@ export const LoginWidget = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { t } = useClientTranslation('forms');
   const router = useRouter();
+  const [watchedAds] = useLocalStorage('watched', []);
+
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
 
   const { control, handleSubmit } = useForm<LoginCheckSchemaFormData>({
@@ -51,7 +54,7 @@ export const LoginWidget = () => {
 
       await apiClient.put(
         'favorites/',
-        { favorites },
+        { favorites, views: watchedAds },
         { Authorization: `Bearer ${access}` },
       );
 
@@ -60,8 +63,8 @@ export const LoginWidget = () => {
 
       addCookie('token', access, { expires: expiresDate });
       setCookie('token', access, { expires: expiresDate });
-      revalidateRoute('/profile');
 
+      revalidateRoute('/profile');
       router.push('/profile');
     } catch {
       return;

@@ -1,17 +1,31 @@
-import { getUserAsync } from '@albomoni/entities/user/api/get-user';
-import { Balance } from '@albomoni/widgets/profile/balance';
-import { Transactions } from '@albomoni/widgets/profile/transactions';
-import { cookies } from 'next/headers';
+import { BalanceSkeleton } from '@albomoni/widgets/profile/balance';
+import { TransactionsSkeleton } from '@albomoni/widgets/profile/transactions';
 
-export const WalletPage = async () => {
-  const token = cookies().get('token');
-  const user = await getUserAsync(token?.value as string);
+import dynamic from 'next/dynamic';
 
+const DynamicBalance = dynamic(
+  () => import('@albomoni/widgets/profile/balance').then((mod) => mod.Balance),
+  {
+    loading: () => <BalanceSkeleton />,
+  },
+);
+
+const DynamicTransactions = dynamic(
+  () =>
+    import('@albomoni/widgets/profile/transactions').then(
+      (mod) => mod.Transactions,
+    ),
+  {
+    loading: () => <TransactionsSkeleton />,
+  },
+);
+
+export const WalletPage = () => {
   return (
     <main className='flex flex-col gap-10 items-center'>
       <div className='flex flex-col gap-7 w-full max-w-7xl px-4 mb-40'>
-        <Balance user={user} />
-        <Transactions />
+        <DynamicBalance />
+        <DynamicTransactions />
       </div>
     </main>
   );
