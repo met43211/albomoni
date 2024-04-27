@@ -41,9 +41,10 @@
   --error: rgb(233, 22, 22);
 }
 
+html,
 body {
   color: var(--text);
-  background: var(--bg);
+  background: var(--bg) !important;
 }
 
 body {

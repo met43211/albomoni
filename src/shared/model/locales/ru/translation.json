@@ -42,5 +42,10 @@
     "t_one": "{{count}} отзыв",
     "t_few": "{{count}} отзыва",
     "t_many": "{{count}} отзывов"
+  },
+  "tabs": {
+    "active": "Активные",
+    "moderating": "На проверке",
+    "archived": "Архив"
   }
 }

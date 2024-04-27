@@ -24,13 +24,14 @@ const DynamicAdWatchedMessage = dynamic(
 export const AdCard = ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
+  const { title, additional, category } = ad;
 
   const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
 
   return (
     <Link
       href={`/ad/${ad.id}`}
-      className='w-full flex-shrink-0 flex flex-col shadow-medium dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'
+      className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'
     >
       <DynamicAdWatchedMessage adId={data.ad.id} />
       <ImageGallery images={ad.images} />
@@ -46,7 +47,9 @@ export const AdCard = ({ data, lng }: Props) => {
         </div>
 
         <div className='flex flex-col gap-2'>
-          <h5 className='text-md font-bold '>{getAdTitle(data, lng)}</h5>
+          <h5 className='text-md font-bold line-clamp-1'>
+            {getAdTitle(lng, title, additional, category)}
+          </h5>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />
             <p className='text-xs font-medium'>

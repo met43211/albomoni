@@ -4,7 +4,6 @@ import {
   PiPlusCircleBold,
   PiUserBold,
 } from 'react-icons/pi';
-import { TbMessageCircle } from 'react-icons/tb';
 
 export const HeaderNavigationPaths = [
   {

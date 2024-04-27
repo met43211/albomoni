@@ -11,6 +11,8 @@ type Props = {
 };
 
 export const AdGallery = async ({ data, lng }: Props) => {
+  const { title, category, additional } = data.ad;
+
   return (
     <div className='w-full flex flex-col gap-6 flex-shrink'>
       <div className='w-full overflow-clip lg:rounded-xl flex-shrink'>
@@ -24,7 +26,7 @@ export const AdGallery = async ({ data, lng }: Props) => {
       </div>
 
       <h2 className='text-2xl font-bold px-4 lg:px-0 select-text pt-1'>
-        {getAdTitle(data, lng)}
+        {getAdTitle(lng, title, additional, category)}
       </h2>
 
       <div className='w-full hidden lg:flex'>

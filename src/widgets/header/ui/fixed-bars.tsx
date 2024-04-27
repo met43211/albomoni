@@ -32,7 +32,12 @@ export const FixedBars = () => {
   const isAdRoute = flatRoute.split('/')[0] === 'ad';
 
   const handleBack = () => {
-    if (flatRoute === 'profile/wallet') {
+    if (
+      flatRoute === 'profile/wallet' ||
+      flatRoute === 'profile/my-ads' ||
+      flatRoute === 'profile/my-ads/moderating' ||
+      flatRoute === 'profile/my-ads/archived'
+    ) {
       router.push('/profile');
     } else {
       router.back();
