@@ -29,6 +29,8 @@ export const CategoryAdsBlock = async ({
     filters: [categoryId, ...(normalizedFilters || [])],
   });
 
+  console.log(ads)
+
   return ads.length > 0 ? (
     <AdsList lng={lng} title='Актуальные объявления' cols={3} data={ads} />
   ) : (

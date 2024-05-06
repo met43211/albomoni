@@ -1,5 +1,5 @@
-import { PlaceAd, PlaceAdSkeleton } from '@albomoni/features/place-ad';
-import { GetPlaceCategoriesQueries } from '@albomoni/features/place-ad/api';
+import { PlaceAd, PlaceAdSkeleton } from '@albomoni/features/ad/place-ad';
+import { GetPlaceCategoriesQueries } from '@albomoni/features/ad/place-ad/api';
 import {
   HydrationBoundary,
   QueryClient,

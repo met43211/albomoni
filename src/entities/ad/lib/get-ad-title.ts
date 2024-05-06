@@ -24,8 +24,11 @@ export const getAdTitle = async (
       } этаж`,
       rooms: `Комната, ${additional.square} м², ${additional.floor}/${additional.floors_house} этаж`,
     },
-    transportation: {},
+    transportation: `${additional.brand}, ${additional.model}, ${additional.year}`,
   } as any;
 
-  return titleVault[categories[0]][categories[1]];
+  if (categories[0] === 'real_estate')
+    return titleVault[categories[0]][categories[1]];
+
+  return titleVault[categories[0]];
 };

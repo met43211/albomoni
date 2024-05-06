@@ -52,6 +52,10 @@ const config: Config = {
               DEFAULT: '#ED2939',
               foreground: '#ffffff',
             },
+            success: {
+              DEFAULT: 'rgb(58, 171, 64)',
+              foreground: '#fff',
+            },
             focus: '#3C72FF',
           },
         },
@@ -75,7 +79,7 @@ const config: Config = {
             },
             success: {
               DEFAULT: 'rgb(58, 171, 64)',
-              foreground: '#000000',
+              foreground: '#fff',
             },
             focus: 'white',
           },

@@ -11,6 +11,9 @@ type AdInfo = {
   isService: boolean;
   category: string[];
   images: ImageType[];
+  status: 'active' | 'moderating' | 'archived';
+  views: number;
+  favorites: number;
   additional: {
     [key: string]: string;
   };

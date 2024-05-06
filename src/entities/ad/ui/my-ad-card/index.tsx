@@ -1,17 +1,11 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
-import { Chip } from '@nextui-org/chip';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
-import { parseDate } from '@albomoni/shared/lib/utils/parse-date';
-import {
-  PiEyeBold,
-  PiHeartBold,
-  PiMapPinBold,
-  PiPhonePlusBold,
-} from 'react-icons/pi';
-import { TbMessageCircle } from 'react-icons/tb';
+import { PiMapPinBold } from 'react-icons/pi';
+import Link from 'next/link';
 import { getAdTitle } from '../../lib/get-ad-title';
 import { MyAd } from '../../model/ad.type';
 import { ImageGallery } from '../image-gallery';
+import { MyAdCardChips } from './chips';
+import { MyAdCardStats } from './stats';
 
 type Props = {
   ad: MyAd;
@@ -20,6 +14,7 @@ type Props = {
 
 export const MyAdCard = ({ ad, lng }: Props) => {
   const {
+    id,
     title,
     additional,
     category,
@@ -27,6 +22,7 @@ export const MyAdCard = ({ ad, lng }: Props) => {
     currency: adCurrency,
     geoposition,
     views,
+    status,
     favorites,
   } = ad;
 
@@ -34,7 +30,10 @@ export const MyAdCard = ({ ad, lng }: Props) => {
     <div className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'>
       <ImageGallery images={ad.images} />
 
-      <div className='w-full flex flex-col gap-5 p-4'>
+      <Link
+        href={`/profile/my-ads/ad/${id}`}
+        className='w-full flex flex-col gap-5 p-4'
+      >
         <div className='w-full flex flex-col gap-2'>
           <h5 className='text-md font-bold line-clamp-1'>
             {getAdTitle(lng, title, additional, category)}
@@ -44,50 +43,15 @@ export const MyAdCard = ({ ad, lng }: Props) => {
           </h6>
         </div>
 
-        <ScrollShadow
-          orientation='horizontal'
-          hideScrollBar
-          className='w-full flex gap-2 items-center'
-        >
-          <Chip
-            variant='flat'
-            color='success'
-            classNames={{ content: 'font-medium' }}
-          >
-            Активно
-          </Chip>
-          <Chip
-            variant='flat'
-            color='primary'
-            classNames={{ content: 'font-medium' }}
-          >
-            Осталось 27 дней
-          </Chip>
-        </ScrollShadow>
+        <MyAdCardChips status={status} />
 
         <div className='w-full flex gap-2 items-center'>
           <PiMapPinBold size={16} />
           <p className='text-sm font-medium'>{geoposition}</p>
         </div>
-
-        <div className='w-full flex mt-2'>
-          <div className='w-full flex flex-col gap-2 items-center '>
-            <PiEyeBold size={24} />
-            <p className='text-sm font-semibold'>{views}</p>
-          </div>
-          <div className='w-full flex flex-col gap-2 items-center '>
-            <PiPhonePlusBold size={24} />
-            <p className='text-sm font-semibold'>5</p>
-          </div>
-          <div className='w-full flex flex-col gap-2 items-center '>
-            <PiHeartBold size={24} />
-            <p className='text-sm font-semibold'>{favorites}</p>
-          </div>
-          <div className='w-full flex flex-col gap-2 items-center opacity-50 '>
-            <TbMessageCircle size={24} />
-            <p className='text-sm font-semibold'>0</p>
-          </div>
-        </div>
+      </Link>
+      <div className='w-full flex flex-col gap-5 px-4 pt-2 pb-4'>
+        <MyAdCardStats views={views} favorites={favorites} />
       </div>
     </div>
   );

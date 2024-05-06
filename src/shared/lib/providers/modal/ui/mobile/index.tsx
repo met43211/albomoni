@@ -50,7 +50,7 @@ export const ModalMobile = () => {
               style={{ willChange }}
               dragSnapToOrigin
               onDragEnd={handleDragEnd}
-              className='absolute border-t-1 pt-4 border-white/10 bottom-0 w-full max-h-[99dvh] flex flex-col m-auto box-border bg-black rounded-t-[40px] z-50 shadow-2xl shadow-black overflow-hidden'
+              className='absolute border-t-1 pt-4 border-white/10 bottom-0 w-full max-h-[97dvh] flex flex-col m-auto box-border bg-black rounded-t-[40px] z-50 shadow-2xl shadow-black overflow-hidden'
               ref={rootRef}
             >
               <ModalMobileCloser />
