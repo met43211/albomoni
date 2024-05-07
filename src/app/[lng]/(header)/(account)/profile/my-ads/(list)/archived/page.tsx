@@ -1,4 +1,4 @@
-import { MyAdsArchivedPage } from '@albomoni/page/my-ads/ui/archived';
+import { MyAdsArchivedPage } from '@albomoni/page/personal/my-ads/ui/archived';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 
 type Props = {

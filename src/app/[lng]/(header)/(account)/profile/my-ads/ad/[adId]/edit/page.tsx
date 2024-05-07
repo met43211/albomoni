@@ -1,4 +1,4 @@
-import { AdPage } from '@albomoni/page/public/ad';
+import { EditAdPage } from '@albomoni/page/personal/edit-ad';
 
 type Props = {
   params: {
@@ -8,5 +8,5 @@ type Props = {
 };
 
 export default async function Ad({ params: { lng, adId } }: Props) {
-  return <AdPage lng={lng} adId={adId} />;
+  return <EditAdPage lng={lng} adId={adId} />;
 }

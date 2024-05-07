@@ -1,4 +1,4 @@
-import { MyAdsActivePage } from '@albomoni/page/my-ads/ui/active';
+import { MyAdsActivePage } from '@albomoni/page/personal/my-ads/ui/active';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 
 type Props = {

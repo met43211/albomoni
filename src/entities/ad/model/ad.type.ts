@@ -14,6 +14,7 @@ type AdInfo = {
   status: 'active' | 'moderating' | 'archived';
   views: number;
   favorites: number;
+  seller: 'owner' | 'broker';
   additional: {
     [key: string]: string;
   };

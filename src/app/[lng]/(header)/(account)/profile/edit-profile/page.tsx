@@ -1,4 +1,4 @@
-import { EditProfilePage } from '@albomoni/page/edit-profile';
+import { EditProfilePage } from '@albomoni/page/personal/edit-profile';
 
 export default function EditProfile() {
   return <EditProfilePage />;

@@ -8,6 +8,7 @@ import { PiPencilSimpleBold, PiTrendUpBold } from 'react-icons/pi';
 import { MyAdCardChips, MyAdCardStats } from '@albomoni/entities/ad';
 import { StopAdButton } from '@albomoni/features/ad/stop-ad';
 import { StartAdButton } from '@albomoni/features/ad/start-ad';
+import Link from 'next/link';
 
 type Props = {
   data: Ad;
@@ -25,10 +26,16 @@ export const MyAdActions = async ({ data, lng }: Props) => {
           <StartAdButton id={ad.id} status={ad.status} />
 
           <div className='w-full flex gap-4'>
-            <Button size='lg' className='w-full font-semibold'>
+            <Button
+              as={Link}
+              href={`/profile/my-ads/ad/${ad.id}/edit`}
+              size='lg'
+              className='w-full font-semibold'
+            >
               <PiPencilSimpleBold size={18} />
               Редактировать
             </Button>
+
             {ad.status !== 'archived' && (
               <StopAdButton id={data.ad.id} status={data.ad.status} />
             )}

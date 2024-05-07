@@ -1,4 +1,4 @@
-import { MyAdPage } from '@albomoni/page/my-ad/ui';
+import { MyAdPage } from '@albomoni/page/personal/my-ad/ui';
 
 type Props = {
   params: {

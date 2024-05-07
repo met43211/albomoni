@@ -1,4 +1,4 @@
-import { MyAdsPage } from '@albomoni/page/my-ads';
+import { MyAdsPage } from '@albomoni/page/personal/my-ads';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { ReactNode } from 'react';
 

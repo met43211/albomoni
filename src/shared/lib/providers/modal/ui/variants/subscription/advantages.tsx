@@ -6,8 +6,7 @@ import { Button } from '@nextui-org/button';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
+import { useState } from 'react';
 import {
   EModalStates,
   ESubscriptionStates,
@@ -24,22 +23,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
   const token = getCookie('token');
   const router = useRouter();
   const { setModalState } = useModal();
-  const { resolvedTheme } = useTheme();
   const [scrollPosition, setScrollPosition] = useState(0);
-
-  useEffect(() => {
-    const themeColorMeta = document.querySelector('meta[name="theme-color"]');
-
-    if (themeColorMeta && resolvedTheme === 'light') {
-      themeColorMeta.setAttribute('content', '#000000');
-    }
-
-    return () => {
-      if (themeColorMeta && resolvedTheme === 'light') {
-        themeColorMeta.setAttribute('content', '#fffffe');
-      }
-    };
-  }, []);
 
   const handleScroll = (event: any) => {
     setScrollPosition(event.target.scrollTop);

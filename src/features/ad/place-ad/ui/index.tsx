@@ -12,7 +12,7 @@ import { GetPlaceCategoriesQueries } from '../api';
 import { PlaceAdSkeleton } from './skeleton';
 import { PlaceAdNavigation } from './navigation';
 import { SelectFilters } from './select-filters';
-import { PlaceAdForm } from './form';
+import { PlaceAdForm } from './place-ad-form';
 import { PlaceAdSuccess } from './success';
 
 export const PlaceAd = () => {

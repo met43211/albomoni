@@ -1,5 +1,12 @@
 export type PlaceAdFormState = {
-  fields: { [key: string]: string | string[] | FormData | File[] };
+  fields: {
+    [key: string]:
+      | string
+      | string[]
+      | FormData
+      | File[]
+      | { [key: string]: string | string[] };
+  };
   filters: string[];
   errors: { [key: string]: string };
 };

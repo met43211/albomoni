@@ -1,7 +1,12 @@
 export type PlaceAdInputData = {
   filters?: string[];
   fields?: {
-    [key: string]: string | string[] | FormData | File[];
+    [key: string]:
+      | string
+      | string[]
+      | FormData
+      | File[]
+      | { [key: string]: string | string[] };
   };
   images?: FormData;
   hash: string;

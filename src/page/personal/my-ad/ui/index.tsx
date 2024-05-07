@@ -2,7 +2,7 @@ import { WatchedAd } from '@albomoni/entities/ad';
 import { AdInfo } from '@albomoni/widgets/ad/ad-info';
 import { AdGallery } from '@albomoni/widgets/ad/ad-gallery/ui';
 import { cookies } from 'next/headers';
-import { getAdAsync } from '../api/get-ad';
+import { getAdAsync } from '@albomoni/entities/ad/api/get-ad';
 import { MyAdActions } from './actions';
 
 type Props = {

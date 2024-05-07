@@ -1,4 +1,4 @@
-import { CategoryPage } from '@albomoni/page/category';
+import { CategoryPage } from '@albomoni/page/public/category';
 
 type Props = {
   params: {
