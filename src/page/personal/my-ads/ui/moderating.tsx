@@ -27,7 +27,7 @@ export const MyAdsModeratingPage = async ({ lng }: Props) => {
     </div>
   ) : (
     <Placeholder
-      icon={<PiMagnifyingGlass size={60} />}
+      icon={<PiMagnifyingGlass size={60} className='opacity-50 mt-6' />}
       title='Ничего не найдено'
       desc='Попробуйте создать и запустить новое объявление'
     />

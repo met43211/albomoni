@@ -10,8 +10,13 @@ export const MyAdsRoutes = [
     href: '/profile/my-ads/moderating',
   },
   {
-    id: 1,
+    id: 2,
     name: 'archived',
     href: '/profile/my-ads/archived',
+  },
+  {
+    id: 3,
+    name: 'ended',
+    href: '/profile/my-ads/ended',
   },
 ];

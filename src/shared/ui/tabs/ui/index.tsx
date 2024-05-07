@@ -38,7 +38,12 @@ export const Tabs = ({ items }: Props) => {
       variant='light'
       selectedKey={truePath}
       onSelectionChange={handleChange}
-      classNames={{ cursor: 'rounded-[14px]', tabContent: 'font-medium' }}
+      classNames={{
+        base: '-ml-4 w-[calc(100%+32px)]',
+        tabList: 'px-4 rounded-none',
+        cursor: 'rounded-[14px]',
+        tabContent: 'font-medium',
+      }}
     >
       {items.map(({ name, href }) => (
         <Tab key={href} title={t(`tabs.${name}`)} />

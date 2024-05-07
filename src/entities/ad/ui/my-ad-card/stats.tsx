@@ -19,7 +19,7 @@ export const MyAdCardStats = ({ views, favorites }: Props) => {
     {
       name: 'phone',
       icon: <PiPhonePlusBold size={24} />,
-      content: views,
+      content: 0,
       popover: 'Количество пользователей, посмотревших Ваш номер телефона',
     },
     {

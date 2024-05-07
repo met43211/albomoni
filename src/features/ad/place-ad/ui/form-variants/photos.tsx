@@ -81,20 +81,19 @@ export const PlaceAdPhotos = memo(
     return (
       <div className='flex gap-4 flex-col'>
         <h5 className='text-md font-medium opacity-50'>{t(`${title}.name`)}</h5>
-        <div className='flex gap-4 flex-wrap'>
+        <div className='grid grid-cols-3 gap-2 md:gap-4 flex-wrap'>
           {value &&
             Object.values(value).map((image: any, index) => {
               return (
                 <div
                   key={`image.name.${index}`}
-                  className='w-28 h-28 rounded-2xl relative'
+                  className='w-full aspect-square rounded-lg overflow-clip md:rounded-2xl relative'
                 >
                   <Image
                     src={URL.createObjectURL(image)}
-                    width={112}
-                    height={112}
+                    fill
                     alt={image.name}
-                    className='w-28 h-28 rounded-2xl object-cover'
+                    className='w-28 h-28 object-cover'
                   />
                   <Button
                     size='sm'

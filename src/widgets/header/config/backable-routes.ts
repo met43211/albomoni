@@ -1,5 +1,6 @@
 export const BackableRoutes = [
   'ad/[0-9]*',
+  'user/[0-9]*',
   'profile/wallet',
   'profile/subscription',
   'profile/my-ads',

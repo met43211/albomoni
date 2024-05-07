@@ -38,6 +38,7 @@ export const FixedBars = () => {
       flatRoute === 'profile/wallet' ||
       flatRoute === 'profile/my-ads' ||
       flatRoute === 'profile/my-ads/moderating' ||
+      flatRoute === 'profile/my-ads/ended' ||
       flatRoute === 'profile/my-ads/archived'
     ) {
       router.push('/profile');

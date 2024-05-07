@@ -1,6 +1,6 @@
 import { Skeleton } from '@nextui-org/skeleton';
 
-export const UserSkeleton = () => {
+export const UserProfileSkeleton = () => {
   return (
     <div className='w-full flex flex-row gap-2 md:gap-4'>
       <div className='w-20 h-20 lg:w-28 lg:h-28 flex-shrink-0 p-2'>

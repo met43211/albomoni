@@ -10,11 +10,11 @@ type Props = {
   lng: string;
 };
 
-export const MyAdsActivePage = async ({ lng }: Props) => {
+export const MyAdsEndedPage = async ({ lng }: Props) => {
   const token = getCookie('token', { cookies });
 
   const myAds = await apiClient.get<MyAd[]>(
-    'my-ads/active/',
+    'my-ads/ended/',
     {},
     { Authorization: `Bearer ${token}` },
   );

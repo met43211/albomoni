@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-param-reassign */
 
@@ -13,14 +14,16 @@ import { API_URL } from '@albomoni/shared/config';
 import { useEffect, useState } from 'react';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { AnimatePresence } from 'framer-motion';
-import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { apiClient } from '@albomoni/shared/api/base';
+import { useRouter } from 'next/navigation';
+import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { PlaceAdFormElement, PlaceAdInput } from './form-variants';
 import { PlaceAdQueries } from '../api';
 import { PlaceAdFormState } from '../model/form.type';
 import { countFields } from '../lib/count-fields';
 import { CategoryContext } from '../lib/use-category';
-import { createFileArray } from '../lib/create-file-array';
+import { base64toFile } from '../lib/base-64-to-file';
 
 type Props = {
   formData: any;
@@ -30,14 +33,13 @@ type Props = {
 export const EditAdForm = ({ formData, ad }: Props) => {
   const { t } = useClientTranslation('place-ad');
   const { mutateAsync } = useMutation(PlaceAdQueries);
-  const { user } = useSession();
   const [token] = useCookie('token');
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [isLoadingImages, setIsLoadingImages] = useState(true);
-  const [imgs, setImgs] = useState<File[]>([]);
+  const router = useRouter();
 
   const {
+    id,
     additional,
     cost,
     description,
@@ -45,35 +47,51 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     seller,
     currency,
     images,
+    hash,
   } = ad.ad;
+
+  const initFields = {
+    price: { value: cost.toString(), currency },
+    description,
+    address: geoposition,
+    seller,
+    photo: [],
+    ...additional,
+  };
+
+  const initErrors = () =>
+    Object.keys(initFields).reduce(
+      (acc: any, field: string) => ({
+        ...acc,
+        [field]: null,
+      }),
+      {},
+    );
+
+  const [form, updateForm] = useImmer<PlaceAdFormState>({
+    fields: initFields,
+    filters: formData.filters,
+    errors: initErrors(),
+  });
 
   useEffect(() => {
     const loadImages = async () => {
-      const imgArray = images.map((img) => img.full);
-      const fileArray = await createFileArray(imgArray);
-      setImgs(fileArray);
-      setIsLoadingImages(false)
+      const imgArray = images.map((img) => img.full.split('/media')[1]);
+      const resp = await apiClient.post<{ files: string[] }>('get-images/', {
+        files: imgArray,
+      });
+
+      const fileList = resp.files.map((base64, index) =>
+        base64toFile(base64, imgArray[index]),
+      );
+
+      updateForm((draft: any) => {
+        draft.fields.photo = fileList;
+      });
     };
 
     loadImages();
   }, []);
-
-  console.log(imgs);
-
-  const [form, updateForm] = useImmer<PlaceAdFormState>({
-    fields: {
-      price: { value: cost.toString(), currency },
-      description,
-      address: geoposition,
-      seller,
-      photo: imgs,
-      ...additional,
-    },
-    filters: formData.filters,
-    errors: {},
-  });
-
-  if (isLoadingImages && !imgs) return <>d</>;
 
   const handleSubmit = async () => {
     const errorsList = Object.entries(form.errors);
@@ -100,8 +118,6 @@ export const EditAdForm = ({ formData, ad }: Props) => {
 
     delete formCopy.fields.photo;
 
-    const hash = `${user?.user_id}_${Date.now().toString()}`;
-
     setIsLoading(true);
 
     try {
@@ -116,6 +132,10 @@ export const EditAdForm = ({ formData, ad }: Props) => {
         method: 'POST',
         body: photoFormData,
       });
+
+      revalidateRoute(`/profile/my-ads/ad/${id}`);
+      revalidateRoute(`/profile/my-ads/ad/${id}/edit`);
+      router.replace(`/profile/my-ads/ad/${id}`);
     } catch {
       return;
     } finally {
@@ -158,9 +178,9 @@ export const EditAdForm = ({ formData, ad }: Props) => {
             variant='shadow'
             onPress={handleSubmit}
             isLoading={isLoading}
-            className='w-min'
+            className='w-min font-medium'
           >
-            Разместить объявление
+            Обновить информацию
           </Button>
 
           <AnimatePresence>

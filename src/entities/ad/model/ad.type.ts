@@ -7,6 +7,7 @@ type AdInfo = {
   cost: number;
   currency: string;
   date: string;
+  hash: string;
   geoposition: string;
   isService: boolean;
   category: string[];

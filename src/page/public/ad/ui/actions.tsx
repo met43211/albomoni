@@ -5,6 +5,7 @@ import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { cookies } from 'next/headers';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { UserAvatar } from '@albomoni/entities/user';
+import Link from 'next/link';
 
 type Props = {
   data: Ad;
@@ -70,7 +71,10 @@ export const AdActions = async ({ data, lng }: Props) => {
 
         <div className='flex flex-col gap-3'>
           <h3 className='text-md font-semibold opacity-50'>Продавец</h3>
-          <div className='w-full h-14 flex gap-4 items-center'>
+          <Link
+            href={`/user/${data.seller.user_id}`}
+            className='w-full h-14 flex gap-4 items-center active:scale-95 transition-transform'
+          >
             <div className='w-14 h-14 flex-shrink-0'>
               <UserAvatar
                 src={seller.avatar}
@@ -85,7 +89,7 @@ export const AdActions = async ({ data, lng }: Props) => {
                 lng={lng}
               />
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className='flex flex-col gap-1'>

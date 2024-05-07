@@ -14,3 +14,13 @@ export type UserType = {
   plans: number;
   views: number[];
 };
+
+export type PublicUserType = {
+  user_id: number;
+  first_name: string;
+  last_name: string | null;
+  patronymic: string | null;
+  avatar: string | null;
+  subscription: boolean;
+  regDate: string;
+};

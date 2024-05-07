@@ -2,7 +2,6 @@ import { getAdAsync } from '@albomoni/entities/ad/api/get-ad';
 import { getAdTitle } from '@albomoni/entities/ad/lib/get-ad-title';
 import { EditAdForm } from '@albomoni/features/ad/place-ad';
 import { placeFormAsync } from '@albomoni/features/ad/place-ad/api/place-form/place-form';
-import { createFileArray } from '@albomoni/features/ad/place-ad/lib/create-file-array';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
 
@@ -12,6 +11,7 @@ type Props = {
 };
 
 export const EditAdPage = async ({ lng, adId }: Props) => {
+  cookies();
   const adData = await getAdAsync(adId);
   const { category, title, additional } = adData.ad;
   const token = getCookie('token', { cookies });
