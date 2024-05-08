@@ -118,13 +118,14 @@ export const PlaceAdPhotos = memo(
               );
             })}
           {(!value || value?.length < 10) && (
-            <Button
-              disableRipple
-              className='w-28 h-28 bg-[--element]'
-              onPress={handleOpenInput}
+            <button
+              type='button'
+              aria-label='Add image'
+              className='w-full aspect-square bg-[--element] rounded-lg md:rounded-2xl flex items-center justify-center'
+              onClick={handleOpenInput}
             >
               <PiPlusCircleBold size={32} className='opacity-50' />
-            </Button>
+            </button>
           )}
         </div>
 

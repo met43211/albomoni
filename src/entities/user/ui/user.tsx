@@ -12,10 +12,8 @@ type Props = {
 };
 
 export const User = ({ user }: Props) => {
-  const { avatar, subscription, first_name, regDate } = user;
+  const { avatar, subscription, first_name } = user;
   const { setModalState } = useModal();
-
-  const { date } = parseDate(regDate);
 
   const handleClick = () => {
     setModalState(EModalStates.SUBSCRIPTION);
@@ -23,7 +21,7 @@ export const User = ({ user }: Props) => {
 
   return (
     <div className='w-full flex flex-row gap-2 md:gap-4 text-start items-center'>
-      <div className='w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0 p-2'>
+      <div className='w-24 h-24 lg:w-28 lg:h-28 flex-shrink-0 p-2'>
         <UserAvatar src={avatar} isSubscribed={subscription} />
       </div>
       <div className='w-full flex flex-col justify-center'>

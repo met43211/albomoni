@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { UserAd } from '@albomoni/entities/ad';
 import { getPublicAds } from '../../api/get-public-ads';
 
 type Props = {
@@ -9,7 +10,11 @@ export const UserAdsActive = async ({ userId }: Props) => {
   cookies();
   const ads = await getPublicAds(userId, 'active');
 
-  console.log(ads);
-
-  return <p>{ads.length}</p>;
+  return (
+    <div className='w-full grid grid-cols-2'>
+      {ads.map((ad) => (
+        <UserAd key={ad.id} ad={ad} />
+      ))}
+    </div>
+  );
 };

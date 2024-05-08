@@ -7,7 +7,7 @@ import { PiPlayCircleBold, PiTrendUpBold } from 'react-icons/pi';
 
 type Props = {
   id: number;
-  status: 'active' | 'moderating' | 'archived';
+  status: 'active' | 'moderating' | 'archived' | 'ended';
 };
 
 export const StartAdButton = ({ id, status }: Props) => {

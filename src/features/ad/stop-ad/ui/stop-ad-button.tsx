@@ -7,7 +7,7 @@ import { PiStopCircleBold } from 'react-icons/pi';
 
 type Props = {
   id: number;
-  status: 'active' | 'moderating' | 'archived';
+  status: 'active' | 'moderating' | 'archived' | 'ended';
 };
 
 export const StopAdButton = ({ id, status }: Props) => {

@@ -2,7 +2,7 @@ import { Chip } from '@nextui-org/chip';
 import { ScrollShadow } from '@nextui-org/scroll-shadow';
 
 type Props = {
-  status: 'active' | 'moderating' | 'archived';
+  status: 'active' | 'moderating' | 'archived' | 'ended';
 };
 
 export const MyAdCardChips = ({ status }: Props) => {
@@ -44,6 +44,18 @@ export const MyAdCardChips = ({ status }: Props) => {
         }}
       >
         В архиве
+      </Chip>
+    ),
+    ended: (
+      <Chip
+        variant='flat'
+        color='default'
+        classNames={{
+          base: 'bg-default-100 dark:bg-default-200',
+          content: 'font-medium text-default-600',
+        }}
+      >
+        Завершен
       </Chip>
     ),
   };

@@ -4,7 +4,7 @@ import { User } from '@albomoni/entities/user';
 import { PublicUserType } from '@albomoni/entities/user/model/user.type';
 import { Rating } from '@albomoni/shared/ui/rating';
 import { Button, Divider } from '@nextui-org/react';
-import { PiCaretRightBold, PiInfoBold, PiShareFatBold } from 'react-icons/pi';
+import { PiCaretRightBold, PiInfoBold, PiLinkBold } from 'react-icons/pi';
 
 type Props = {
   user: PublicUserType;
@@ -14,7 +14,7 @@ export const UserAside = ({ user }: Props) => {
   const { rate, feedback } = user;
 
   return (
-    <aside className='w-full lg:max-w-96 flex flex-col gap-6 flex-shrink-0'>
+    <aside className='w-full lg:max-w-96 flex flex-col gap-4 flex-shrink-0'>
       <User user={user} />
 
       <div className='w-full rounded-2xl bg-default overflow-clip'>
@@ -46,9 +46,9 @@ export const UserAside = ({ user }: Props) => {
       <Button
         size='lg'
         className='font-medium'
-        startContent={<PiShareFatBold size={20} className='flex-shrink-0' />}
+        startContent={<PiLinkBold size={20} className='flex-shrink-0' />}
       >
-        Поделиться профилем
+        Скопировать ссылку
       </Button>
     </aside>
   );

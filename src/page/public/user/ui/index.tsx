@@ -24,8 +24,8 @@ export const UserPage = async ({ lng, userId, children }: Props) => {
       <div className='flex flex-col gap-10 w-full max-w-7xl px-4 mb-40'>
         <div className='w-full flex flex-col lg:flex-row gap-10'>
           <DynamicUserAside user={user} />
-          <div className='w-full pt-4 flex flex-col gap-6'>
-            <h3 className='text-xl font-semibold'>Объявления</h3>
+          <div className='w-full pt-5 flex flex-col gap-4'>
+            <h3 className='text-2xl font-semibold'>Объявления</h3>
             <Tabs items={UserRoutes(userId)} />
             {children}
           </div>

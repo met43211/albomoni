@@ -12,13 +12,39 @@ type AdInfo = {
   isService: boolean;
   category: string[];
   images: ImageType[];
-  status: 'active' | 'moderating' | 'archived';
+  status: 'active' | 'moderating' | 'archived' | 'ended';
   views: number;
   favorites: number;
   seller: 'owner' | 'broker';
   additional: {
     [key: string]: string;
   };
+};
+
+export type PublicAdType = {
+  id: number;
+  user_id: number;
+  description: string;
+  title: string | null;
+  cost: number;
+  date: string;
+  seller: 'owner';
+  geoposition: string;
+  isService: boolean;
+  additional: {
+    [key: string]: string;
+  };
+  hash: string;
+  category_id: number;
+  currency: 'RUB' | 'USD' | 'EUR';
+  status: 'active' | 'moderating' | 'archived' | 'ended';
+  category: string[];
+  image: {
+    id: number;
+    file: string;
+    file_preview: string;
+    hash: string;
+  }[];
 };
 
 export type Ad = {
