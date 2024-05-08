@@ -7,6 +7,7 @@ import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 import {
   EModalStates,
   ESubscriptionStates,
@@ -49,7 +50,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
           }
         }}
         onScroll={handleScroll}
-        className='w-full h-full flex flex-col gap-5 items-center p-8 flex-shrink'
+        className='w-full h-full flex flex-col gap-5 items-center p-8 flex-shrink pt-12'
       >
         <div className='w-32 h-32'>
           <UserAvatar src={user?.avatar as string} isSubscribed isBig />
@@ -58,7 +59,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
           <h1 className='text-3xl font-semibold bg-gradient-to-r from-indigo-400 to-red-500 inline-block text-transparent bg-clip-text'>
             Albomoni Pro
           </h1>
-          <h2 className='text-lg text-white opacity-50 font-medium text-center'>
+          <h2 className='text-lg opacity-50 font-medium text-center'>
             Получите больше с единой подпиской.
           </h2>
         </div>
@@ -66,21 +67,35 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
       </ScrollShadow>
 
       <div className='w-full flex items-center justify-center flex-shrink-0 p-6 pt-0'>
-        {user?.subscription ? (
+        {user?.subscription && (
           <Button
             size='lg'
-            className='w-full font-medium text-white bg-neutral-800'
+            className='w-full font-medium'
             onPress={handleClickCancel}
           >
             Отменить подписку
           </Button>
-        ) : (
+        )}
+
+        {!user?.subscription && user && (
           <Button
             size='lg'
             onPress={handleClickConfirm}
             className='w-full bg-gradient-to-r to-indigo-700 from-red-500 font-medium text-white'
           >
             Оформить за 5000 ₽ в месяц
+          </Button>
+        )}
+
+        {!user?.subscription && !user && (
+          <Button
+            size='lg'
+            as={Link}
+            onPress={() => setModalState(EModalStates.NULL)}
+            href='/login'
+            className='w-full bg-gradient-to-r to-indigo-700 from-red-500 font-semibold text-white'
+          >
+            Войти и оформить
           </Button>
         )}
       </div>

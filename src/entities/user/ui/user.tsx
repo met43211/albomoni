@@ -24,21 +24,21 @@ export const User = ({ user }: Props) => {
   return (
     <div className='w-full flex flex-row gap-2 md:gap-4 text-start items-center'>
       <div className='w-24 h-24 lg:w-32 lg:h-32 flex-shrink-0 p-2'>
-        <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
+        <UserAvatar src={avatar} isSubscribed={subscription} />
       </div>
       <div className='w-full flex flex-col justify-center'>
-        <h3 className='text-xl md:text-2xl font-semibold'>{user.first_name}</h3>
+        <h3 className='text-xl md:text-2xl font-semibold'>{first_name}</h3>
         {subscription ? (
           <Button
             onPress={handleClick}
-            className='w-min h-8 text-sm mt-2 rounded-full text-white font-semibold bg-gradient-to-r from-indigo-800 to-red-600'
+            className='w-min h-8 text-sm mt-2 rounded-full font-semibold border-2 bg-[--bg] border-rose-600 text-rose-600'
           >
             Albomoni Pro
           </Button>
         ) : (
           <Button
             onPress={handleClick}
-            className='w-min h-8 text-sm mt-2 rounded-full font-semibold'
+            className='w-min h-8 text-sm mt-2 rounded-full font-semibold border-2 bg-[--bg] border-default-300 text-default-400'
           >
             Стандартный аккаунт
           </Button>

@@ -14,7 +14,7 @@ export const ModalMobileCloser = () => {
         animate={{ opacity: 1, transition: { delay: 0.4 } }}
         exit={{ opacity: 0 }}
         whileTap={{ scale: 1.2 }}
-        className='w-14 h-1 rounded-full bg-white'
+        className='w-14 h-1 rounded-full bg-[--text]'
       />
     </m.button>
   );

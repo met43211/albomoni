@@ -17,4 +17,5 @@ export type PlaceAdInputProps = {
   variants?: string[];
   form?: PlaceAdFormState;
   updateForm: (draft: any) => void;
+  isImagesLoaded?: boolean;
 };

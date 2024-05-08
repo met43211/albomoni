@@ -23,4 +23,6 @@ export type PublicUserType = {
   avatar: string | null;
   subscription: boolean;
   regDate: string;
+  rate: number;
+  feedback: number;
 };

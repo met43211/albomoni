@@ -34,17 +34,7 @@ export const FixedBars = () => {
     flatRoute.split('/')[0] === 'ad' || flatRoute.split('/')[2] === 'ad';
 
   const handleBack = () => {
-    if (
-      flatRoute === 'profile/wallet' ||
-      flatRoute === 'profile/my-ads' ||
-      flatRoute === 'profile/my-ads/moderating' ||
-      flatRoute === 'profile/my-ads/ended' ||
-      flatRoute === 'profile/my-ads/archived'
-    ) {
-      router.push('/profile');
-    } else {
-      router.back();
-    }
+    router.back();
   };
 
   return (

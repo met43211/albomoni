@@ -1,4 +1,4 @@
-import { UserPage } from '@albomoni/page/public/user';
+import { UserAdsActive } from '@albomoni/page/public/user';
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 
 type Props = {
@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default async function User({ params: { lng, userId } }: Props) {
-  return <UserPage lng={lng} userId={userId} />;
+  return <UserAdsActive userId={userId} />;
 }

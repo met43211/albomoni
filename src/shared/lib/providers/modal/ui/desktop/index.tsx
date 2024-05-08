@@ -23,7 +23,7 @@ export const ModalDesktop = () => {
               animate={{ opacity: 0.8 }}
               exit={{ opacity: 0 }}
               type='button'
-              className='fixed top-0 bottom-0 left-0 right-0 z-0 bg-black'
+              className='fixed top-0 bottom-0 left-0 right-0 z-0 bg-black/50'
               onClick={handleCloseModal}
             />
             <m.div
@@ -34,7 +34,7 @@ export const ModalDesktop = () => {
                 transition: { ease: [0, 1, 0, 1], duration: 1 },
               }}
               exit={{ filter: 'blur(25px)', opacity: 0, scale: 1.1 }}
-              className='w-full mx-1 max-w-[440px] max-h-[70dvh] flex flex-col m-auto box-border bg-black rounded-4xl border-1 border-white/10 z-50 shadow-2xl shadow-black overflow-hidden'
+              className='w-full mx-1 max-w-[440px] max-h-[70dvh] flex flex-col m-auto box-border bg-[--bg] rounded-4xl border-1 border-white/10 z-50 shadow-2xl shadow-black/50 overflow-hidden'
               ref={rootRef}
             >
               <ModalContent />

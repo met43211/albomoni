@@ -86,7 +86,7 @@ export const ModalSubscriptionConfirmation = ({ setScreen }: Props) => {
       >
         <Button
           size='lg'
-          className='w-full font-medium text-white bg-neutral-800'
+          className='w-full font-medium '
           onPress={handleClickBack}
         >
           Назад
@@ -95,7 +95,7 @@ export const ModalSubscriptionConfirmation = ({ setScreen }: Props) => {
         <Button
           size='lg'
           color='success'
-          className='w-full font-medium text-white'
+          className='w-full font-medium'
           onPress={handleClickConfirm}
         >
           Оплатить

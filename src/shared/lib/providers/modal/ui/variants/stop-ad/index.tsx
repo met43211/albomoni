@@ -28,10 +28,8 @@ export const ModalVariantStopAd = () => {
 
   return (
     <div className='p-6 flex flex-col gap-6 items-center'>
-      <h1 className='text-xl font-semibold text-white mt-2'>
-        Остановка объявления
-      </h1>
-      <p className='font-medium opacity-50 text-white text-center'>
+      <h1 className='text-xl font-semibold  mt-2'>Остановка объявления</h1>
+      <p className='font-medium opacity-50  text-center'>
         {isActive
           ? 'Выберите, куда Вы хотите перенести объявление: в Ваши завершённые сделки или личный архив. Повторно запустить запись можно будет в любой момент времени.'
           : 'Вы уверены, что хотите убрать это объявление из общего доступа и перенести его в личный архив? Запустить запись повторно можно будет в любой момент.'}
@@ -43,7 +41,7 @@ export const ModalVariantStopAd = () => {
           onPress={handleClick}
           size='lg'
           variant='solid'
-          className='w-full font-semibold gap-2 mt-2 bg-neutral-800 text-neutral-200'
+          className='w-full font-semibold gap-2 mt-2 '
         >
           <LuArchive size={22} />В архив
         </Button>
@@ -53,7 +51,8 @@ export const ModalVariantStopAd = () => {
             isLoading={isLoading}
             onPress={handleClick}
             size='lg'
-            className='w-full font-semibold gap-2 mt-2 bg-neutral-200 text-neutral-800'
+
+            className='w-full font-semibold gap-2 mt-2 bg-default-900 text-default'
           >
             <PiStopCircleBold size={22} />
             Завершить

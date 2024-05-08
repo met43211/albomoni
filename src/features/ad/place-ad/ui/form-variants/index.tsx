@@ -15,6 +15,7 @@ export type PlaceAdInput = {
   value: string;
   form: PlaceAdFormState;
   updateForm: (draft: any) => void;
+  isImagesLoaded?: boolean;
 };
 
 export const PlaceAdFormElement = ({
@@ -24,6 +25,7 @@ export const PlaceAdFormElement = ({
   value,
   form,
   updateForm,
+  isImagesLoaded,
 }: PlaceAdInput) => {
   const FormElements = {
     address: PlaceAdAddress,
@@ -41,6 +43,7 @@ export const PlaceAdFormElement = ({
   if (type in FormElements)
     return (
       <Element
+        isImagesLoaded={isImagesLoaded}
         title={name}
         variants={variants}
         form={form}

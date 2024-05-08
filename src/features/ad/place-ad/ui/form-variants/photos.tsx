@@ -1,8 +1,9 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-param-reassign */
 
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
-import { Button } from '@nextui-org/react';
+import { Button, Spinner } from '@nextui-org/react';
 import Image from 'next/image';
 import { FormEvent, memo, useRef } from 'react';
 import { PiPlusCircleBold, PiXBold } from 'react-icons/pi';
@@ -16,7 +17,7 @@ const yupSchema = yup.object({
 });
 
 export const PlaceAdPhotos = memo(
-  ({ title, form, updateForm, value }: PlaceAdInputProps) => {
+  ({ title, form, updateForm, value, isImagesLoaded }: PlaceAdInputProps) => {
     const { t } = useClientTranslation('place-ad');
 
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -77,6 +78,14 @@ export const PlaceAdPhotos = memo(
         draft.fields[title] = newDraft;
       });
     };
+
+    if (isImagesLoaded === false)
+      return (
+        <div className='w-full flex gap-3'>
+          <Spinner size='sm' color='secondary' className='animate-pulse' />
+          <p className='animate-pulse font-semibold'>Загрузка фотографий...</p>
+        </div>
+      );
 
     return (
       <div className='flex gap-4 flex-col'>

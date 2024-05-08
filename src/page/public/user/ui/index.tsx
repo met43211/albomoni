@@ -1,20 +1,35 @@
-import { User } from '@albomoni/entities/user';
 import { getUserPublic } from '@albomoni/entities/user/api/get-user-public';
 import { cookies } from 'next/headers';
+import { ReactNode } from 'react';
+import { Tabs } from '@albomoni/shared/ui/tabs';
+import dynamic from 'next/dynamic';
+import { UserRoutes } from '../config/routes';
 
 type Props = {
   lng: string;
   userId: string;
+  children: ReactNode;
 };
 
-export const UserPage = async ({ lng, userId }: Props) => {
+const DynamicUserAside = dynamic(() =>
+  import('./aside').then((mod) => mod.UserAside),
+);
+
+export const UserPage = async ({ lng, userId, children }: Props) => {
   cookies();
   const user = await getUserPublic(userId);
 
   return (
     <main className='flex flex-col gap-10 items-center'>
       <div className='flex flex-col gap-10 w-full max-w-7xl px-4 mb-40'>
-        <User user={user} />
+        <div className='w-full flex flex-col lg:flex-row gap-10'>
+          <DynamicUserAside user={user} />
+          <div className='w-full pt-4 flex flex-col gap-6'>
+            <h3 className='text-xl font-semibold'>Объявления</h3>
+            <Tabs items={UserRoutes(userId)} />
+            {children}
+          </div>
+        </div>
       </div>
     </main>
   );

@@ -26,7 +26,7 @@ export const Tabs = ({ items }: Props) => {
   const truePath = pathWithoutLocation === '' ? '/' : pathWithoutLocation;
 
   const handleChange = (value: Key) => {
-    router.push(value as string);
+    router.replace(value as string);
   };
 
   return (

@@ -1,11 +1,13 @@
-import { useTranslation } from '@albomoni/shared/i18n';
+'use client';
+
+import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { clsx } from 'clsx';
 import { PiStarFill } from 'react-icons/pi';
 
-type Props = { value: number; feedback: number; lng: string };
+type Props = { value: number; feedback: number };
 
-export const Rating = async ({ value, feedback, lng }: Props) => {
-  const { t } = await useTranslation(lng);
+export const Rating = ({ value, feedback }: Props) => {
+  const { t } = useClientTranslation();
 
   const bubbleStyles = clsx(
     'px-2 py-1 rounded-full text-xs text-white font-semibold',

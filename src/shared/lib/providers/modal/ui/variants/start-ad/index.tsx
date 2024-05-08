@@ -41,11 +41,11 @@ export const ModalVariantStartAd = () => {
         onScroll={handleScroll}
         className='w-full h-full flex flex-col gap-6 items-center p-6 flex-shrink'
       >
-        <h1 className='text-xl font-semibold text-white mt-2'>
+        <h1 className='text-xl font-semibold mt-2'>
           Запуск объявления
         </h1>
 
-        <p className='text-sm font-medium opacity-50 text-white text-start'>
+        <p className='text-sm font-medium opacity-50 text-start'>
           Отправляя объявление на модерацию, вы подтверждаете, что ознакомились
           с правилами платформы. Проверка объявления может занимать от пары
           часов до нескольких суток.
@@ -120,7 +120,7 @@ export const ModalVariantStartAd = () => {
           <h2 className='font-medium text-neutral-500'>
             Итоговая стоимость размещения
           </h2>
-          <p className='text-xl text-white font-semibold'>100 ₽ / сутки</p>
+          <p className='text-xl font-semibold'>100 ₽ / сутки</p>
         </div>
 
         <Button

@@ -34,6 +34,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
   const { t } = useClientTranslation('place-ad');
   const { mutateAsync } = useMutation(PlaceAdQueries);
   const [token] = useCookie('token');
+  const [isImagesLoaded, setImagesLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const router = useRouter();
@@ -88,6 +89,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
       updateForm((draft: any) => {
         draft.fields.photo = fileList;
       });
+      setImagesLoaded(true);
     };
 
     loadImages();
@@ -123,7 +125,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     try {
       await mutateAsync({ ...formCopy, token, hash });
 
-      await fetch(`${API_URL}place-img/`, {
+      await fetch(`${API_URL}edit-images/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: '*/*',
@@ -157,6 +159,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
                 {inputs.map((input: PlaceAdInput) => {
                   return (
                     <PlaceAdFormElement
+                      isImagesLoaded={isImagesLoaded}
                       key={input.name}
                       name={input.name}
                       type={input.type}
@@ -173,6 +176,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
         })}
         <div className='flex flex-col gap-4'>
           <Button
+            isDisabled={!isImagesLoaded}
             size='lg'
             color='primary'
             variant='shadow'
