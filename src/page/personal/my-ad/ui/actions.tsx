@@ -69,11 +69,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
             </div>
             <div className='flex flex-col gap-1 justify-between w-full h-full'>
               <p className='text-lg font-bold'>{seller.name}</p>
-              <Rating
-                value={seller.rating}
-                feedback={seller.feedback_count}
-                lng={lng}
-              />
+              <Rating value={seller.rating} feedback={seller.feedback_count} />
             </div>
           </div>
         </div>

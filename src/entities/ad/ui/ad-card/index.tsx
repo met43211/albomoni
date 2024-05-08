@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Divider } from '@nextui-org/divider';
 import { Rating } from '@albomoni/shared/ui/rating';
 import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
@@ -37,11 +36,7 @@ export const AdCard = ({ data, lng }: Props) => {
       <ImageGallery images={ad.images} />
       <Divider />
       <div className='w-full flex flex-col gap-4 p-4 relative'>
-        <Rating
-          value={seller.rating}
-          feedback={seller.feedback_count}
-          lng={lng}
-        />
+        <Rating value={seller.rating} feedback={seller.feedback_count} />
         <div className='absolute top-4 right-4'>
           <AddToFavoritesButton postId={data.ad.id} />
         </div>
