@@ -15,9 +15,10 @@ import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
   postId: number;
+  isBig?: boolean;
 };
 
-export const AddToFavoritesButton = ({ postId }: Props) => {
+export const AddToFavoritesButton = ({ postId, isBig = false }: Props) => {
   const { isLogged } = useSession();
   const { favorites, isPending, setFavorites, setIsPending } = useFavorites();
   const token = getCookie('token');
@@ -69,16 +70,22 @@ export const AddToFavoritesButton = ({ postId }: Props) => {
       <Button
         isDisabled={isPending}
         isIconOnly
-        size='sm'
-        radius='full'
+        size={isBig ? 'lg' : 'sm'}
+        radius={isBig ? 'lg' : 'full'}
         onClick={handleClick}
         className={
           isActive
-            ? 'text-[--error] bg-red-500/10'
-            : 'text-[--text] dark:bg-default-200'
+            ? `text-[--error] ${isBig ? 'bg-red-500/20' : 'bg-red-500/10'}`
+            : `text-[--text]  ${
+              isBig ? 'dark:bg-default' : 'dark:bg-default-200'
+            }`
         }
       >
-        {isActive ? <PiHeartFill size={18} /> : <PiHeartBold size={18} />}
+        {isActive ? (
+          <PiHeartFill size={isBig ? 24 : 18} />
+        ) : (
+          <PiHeartBold size={isBig ? 24 : 18} />
+        )}
       </Button>
     </Tooltip>
   );

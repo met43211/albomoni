@@ -2,9 +2,10 @@
 
 import { User } from '@albomoni/entities/user';
 import { PublicUserType } from '@albomoni/entities/user/model/user.type';
+import { CopyLinkButton } from '@albomoni/features/copy-link';
 import { Rating } from '@albomoni/shared/ui/rating';
-import { Button, Divider } from '@nextui-org/react';
-import { PiCaretRightBold, PiInfoBold, PiLinkBold } from 'react-icons/pi';
+import { Divider } from '@nextui-org/react';
+import { PiCaretRightBold, PiInfoBold } from 'react-icons/pi';
 
 type Props = {
   user: PublicUserType;
@@ -30,6 +31,7 @@ export const UserAside = ({ user }: Props) => {
         </button>
 
         <Divider />
+
         <button
           type='button'
           className='w-full p-4 active:bg-black/10 dark:active:bg-white/10  transition-background text-start flex justify-between items-center'
@@ -43,13 +45,8 @@ export const UserAside = ({ user }: Props) => {
           <PiCaretRightBold size={20} className='flex-shrink-0 opacity-50' />
         </button>
       </div>
-      <Button
-        size='lg'
-        className='font-medium'
-        startContent={<PiLinkBold size={20} className='flex-shrink-0' />}
-      >
-        Скопировать ссылку
-      </Button>
+
+      <CopyLinkButton />
     </aside>
   );
 };

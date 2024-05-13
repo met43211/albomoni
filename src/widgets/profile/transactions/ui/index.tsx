@@ -7,11 +7,13 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { clsx } from 'clsx';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { PiMagnifyingGlass } from 'react-icons/pi';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import { getTransactions } from '../api/get-transactions';
 
 export const Transactions = async () => {
   const token = getCookie('token', { cookies });
   const transactions = await getTransactions(token as string);
+  const currencies: any = await getCurrenciesAsync();
 
   return (
     <>
@@ -64,6 +66,7 @@ export const Transactions = async () => {
                       price: transaction.cost,
                       currency: transaction.currency,
                       adCurrency: transaction.currency,
+                      currencies,
                     })}
                   </h6>
                 </div>

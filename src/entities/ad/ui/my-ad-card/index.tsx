@@ -1,18 +1,19 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { PiMapPinBold } from 'react-icons/pi';
 import Link from 'next/link';
-import { getAdTitle } from '../../lib/get-ad-title';
 import { MyAd } from '../../model/ad.type';
 import { ImageGallery } from '../image-gallery';
 import { MyAdCardChips } from './chips';
 import { MyAdCardStats } from './stats';
+import { getClientAdTitle } from '../../lib/get-client-ad-title';
 
 type Props = {
   ad: MyAd;
   lng: string;
+  currencies: { [key: string]: number };
 };
 
-export const MyAdCard = ({ ad, lng }: Props) => {
+export const MyAdCard = ({ ad, lng, currencies }: Props) => {
   const {
     id,
     title,
@@ -36,10 +37,15 @@ export const MyAdCard = ({ ad, lng }: Props) => {
       >
         <div className='w-full flex flex-col gap-2'>
           <h5 className='text-md font-bold line-clamp-1'>
-            {getAdTitle(lng, title, additional, category)}
+            {getClientAdTitle(title, additional, category)}
           </h5>
           <h6 className='text-xl font-semibold line-clamp-1'>
-            {normalizePrice({ price: cost, currency: adCurrency, adCurrency })}
+            {normalizePrice({
+              price: cost,
+              currency: adCurrency,
+              adCurrency,
+              currencies,
+            })}
           </h6>
         </div>
 

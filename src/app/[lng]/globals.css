@@ -75,12 +75,6 @@ p {
   scrollbar-color: var(--scrollbar) transparent;
 }
 
-/* Scrollbar for Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar) transparent;
-}
-
 /* Scrollbar for WebKit (Chrome, Safari) */
 /* *::-webkit-scrollbar {
   width: 6px;

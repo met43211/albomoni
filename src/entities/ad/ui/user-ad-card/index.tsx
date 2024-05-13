@@ -14,6 +14,7 @@ import { ImageGallery } from '../image-gallery';
 type Props = {
   ad: PublicAdType;
   lng: string;
+  currencies: { [key: string]: number };
 };
 
 const DynamicAdWatchedMessage = dynamic(
@@ -21,7 +22,7 @@ const DynamicAdWatchedMessage = dynamic(
   { ssr: false },
 );
 
-export const UserAdCard = ({ ad, lng }: Props) => {
+export const UserAdCard = ({ ad, lng, currencies }: Props) => {
   const userCurrency = getCookie('currency', { cookies });
   const {
     title,
@@ -71,6 +72,7 @@ export const UserAdCard = ({ ad, lng }: Props) => {
             price: cost,
             currency: userCurrency,
             adCurrency: currency,
+            currencies,
           })}
         </p>
       </div>

@@ -1,5 +1,5 @@
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
-import { UserType } from '@albomoni/entities/user/model/user.type';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -8,6 +8,7 @@ import { PiPlusCircleBold } from 'react-icons/pi';
 export const Balance = async () => {
   const token = cookies().get('token');
   const user = await getUserAsync(token?.value as string);
+  const currencies: any = await getCurrenciesAsync();
 
   return (
     <div className='w-full flex flex-col gap-8'>
@@ -20,6 +21,7 @@ export const Balance = async () => {
           price: user.money,
           currency: user.currency,
           adCurrency: user.currency,
+          currencies,
         })}
       </h3>
 

@@ -13,6 +13,7 @@ import { ImageGallery } from '../image-gallery';
 type Props = {
   data: Ad;
   lng: string;
+  currencies: { [key: string]: number };
 };
 
 const DynamicAdWatchedMessage = dynamic(
@@ -20,7 +21,7 @@ const DynamicAdWatchedMessage = dynamic(
   { ssr: false },
 );
 
-export const AdCard = ({ data, lng }: Props) => {
+export const AdCard = ({ data, lng, currencies }: Props) => {
   const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
   const { title, additional, category } = ad;
@@ -59,6 +60,7 @@ export const AdCard = ({ data, lng }: Props) => {
             price: ad.cost,
             currency: userCurrency?.value,
             adCurrency: data.ad.currency,
+            currencies,
           })}
         </p>
       </div>

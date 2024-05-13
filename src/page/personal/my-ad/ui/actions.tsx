@@ -4,11 +4,12 @@ import { Rating } from '@albomoni/shared/ui/rating';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { cookies } from 'next/headers';
 import { UserAvatar } from '@albomoni/entities/user';
-import { PiPencilSimpleBold, PiTrendUpBold } from 'react-icons/pi';
+import { PiPencilSimpleBold } from 'react-icons/pi';
 import { MyAdCardChips, MyAdCardStats } from '@albomoni/entities/ad';
 import { StopAdButton } from '@albomoni/features/ad/stop-ad';
 import { StartAdButton } from '@albomoni/features/ad/start-ad';
 import Link from 'next/link';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 
 type Props = {
   data: Ad;
@@ -18,6 +19,8 @@ type Props = {
 export const MyAdActions = async ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
+
+  const currencies: any = await getCurrenciesAsync();
 
   return (
     <div className='flex flex-col px-4 lg:px-0'>
@@ -54,6 +57,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
               price: ad.cost,
               currency: userCurrency?.value,
               adCurrency: data.ad.currency,
+              currencies,
             })}
           </h4>
         </div>

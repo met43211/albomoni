@@ -1,4 +1,5 @@
 import { AdCard } from '@albomoni/entities/ad';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { clsx } from 'clsx';
 
@@ -28,12 +29,14 @@ export const AdsList = async ({
     'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4': cols === 4,
   });
 
+  const currencies = await getCurrenciesAsync();
+
   return (
     <div className='w-full h-min flex flex-col gap-6'>
       <h2 className={titleStyles}>{title}</h2>
       <div className={listStyles}>
         {data?.reverse().map((ad) => (
-          <AdCard key={ad.ad.id} data={ad} lng={lng} />
+          <AdCard key={ad.ad.id} data={ad} lng={lng} currencies={currencies} />
         ))}
       </div>
     </div>

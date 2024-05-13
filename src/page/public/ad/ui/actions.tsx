@@ -6,6 +6,9 @@ import { cookies } from 'next/headers';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { UserAvatar } from '@albomoni/entities/user';
 import Link from 'next/link';
+import { CopyLinkButton } from '@albomoni/features/copy-link';
+import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 
 type Props = {
   data: Ad;
@@ -16,18 +19,20 @@ export const AdActions = async ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
   const { ad, seller } = data;
   const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
+  const currencies: any = await getCurrenciesAsync();
 
   return (
     <div className='flex flex-col px-4 lg:px-0'>
       <div className='w-full lg:w-80 lg:sticky top-8 h-min flex flex-col gap-8 flex-shrink-0'>
         <div className='flex flex-col gap-4'>
           <Button className='w-full h-12 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold text-md'>
-            Посмотреть номер
+            Связаться с продавцом
           </Button>
 
-          <Button size='lg' className='w-full font-semibold'>
-            Написать
-          </Button>
+          <div className='w-full flex gap-4'>
+            <CopyLinkButton />
+            <AddToFavoritesButton isBig postId={data.ad.id} />
+          </div>
         </div>
 
         <div className='flex flex-col gap-1'>
@@ -55,6 +60,7 @@ export const AdActions = async ({ data, lng }: Props) => {
               price: ad.cost,
               currency: userCurrency?.value,
               adCurrency: data.ad.currency,
+              currencies,
             })}
           </h4>
 
@@ -64,6 +70,7 @@ export const AdActions = async ({ data, lng }: Props) => {
                 price: ad.cost,
                 currency: data.ad.currency,
                 adCurrency: data.ad.currency,
+                currencies,
               })}
             </h5>
           )}

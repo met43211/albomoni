@@ -1,18 +1,16 @@
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
-
 type Props = {
   price: number;
+  currencies: { [key: string]: number };
   currency?: string;
   adCurrency?: string;
 };
 
-export const normalizePrice = async ({
+export const normalizePrice = ({
   price,
+  currencies,
   currency = 'USD',
   adCurrency = 'USD',
 }: Props) => {
-  const currencies: any = await getCurrenciesAsync();
-
   const locales = {
     RUB: 'ru-RU',
     USD: 'en-US',
