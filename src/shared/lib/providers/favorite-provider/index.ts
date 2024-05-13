@@ -20,13 +20,19 @@ export const FavoriteProvider = ({ children }: Props) => {
   useEffect(() => {
     const loadFavorites = async () => {
       if (token) {
-        const resp = await apiClient.get<number[]>(
-          'favorites/',
-          {},
-          { Authorization: `Bearer ${token}` },
-        );
-        setFavorites(resp);
-        setIsPending(false);
+        try {
+          const resp = await apiClient.get<number[]>(
+            'favorites/',
+            {},
+            { Authorization: `Bearer ${token}` },
+          );
+          setFavorites(resp);
+          setIsPending(false);
+        } catch {
+          const favorites = localStorage.getItem('favorites') || '[]';
+          setFavorites(JSON.parse(favorites as string));
+          setIsPending(false);
+        }
       } else {
         const favorites = localStorage.getItem('favorites') || '[]';
         setFavorites(JSON.parse(favorites as string));
