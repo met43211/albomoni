@@ -55,7 +55,7 @@ export const MyAdCardChips = ({ status }: Props) => {
           content: 'font-medium text-default-600',
         }}
       >
-        Завершен
+        Завершено
       </Chip>
     ),
   };

@@ -2,9 +2,10 @@ import { cookies } from 'next/headers';
 import { LogoutButton } from '@albomoni/features/auth/logout';
 import { getCookie } from 'cookies-next';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
+import { PlaceAdButton } from '@albomoni/features/ad/place-ad';
+import { ProfileUser } from '@albomoni/entities/user';
 import { ProfileMainControls } from './main-controls';
 import { ProfileSecondaryControls } from './secondary-controls';
-import { ProfileUser } from './user';
 
 export const ProfilePage = async () => {
   const token = getCookie('token', { cookies });
@@ -19,7 +20,10 @@ export const ProfilePage = async () => {
         <ProfileUser user={user} />
         <ProfileMainControls />
         <ProfileSecondaryControls user={user} />
-        <LogoutButton />
+        <div className='w-full flex flex-col md:flex-row justify-between -mt-2 gap-16'>
+          <PlaceAdButton />
+          <LogoutButton />
+        </div>
       </div>
     </main>
   );

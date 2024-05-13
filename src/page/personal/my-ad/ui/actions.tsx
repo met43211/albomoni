@@ -36,7 +36,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
               Редактировать
             </Button>
 
-            {ad.status !== 'archived' && (
+            {(ad.status === 'active' || ad.status === 'moderating') && (
               <StopAdButton id={data.ad.id} status={data.ad.status} />
             )}
           </div>

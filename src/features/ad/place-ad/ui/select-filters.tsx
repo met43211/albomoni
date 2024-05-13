@@ -62,7 +62,7 @@ export const SelectFilters = ({
             key={variant}
             disableRipple
             size='lg'
-            className='w-full rounded-2xl py-8 justify-between hover:scale-[1.02] bg-white dark:bg-default shadow-base'
+            className='w-full rounded-2xl py-8 justify-between hover:scale-[1.02] bg-white dark:bg-default shadow-base font-medium'
             id={variant}
             onPress={handleClick}
           >

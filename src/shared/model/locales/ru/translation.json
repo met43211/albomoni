@@ -43,6 +43,16 @@
     "t_few": "{{count}} отзыва",
     "t_many": "{{count}} отзывов"
   },
+  "active_ads_count": {
+    "t_one": "{{count}} активное объявление",
+    "t_few": "{{count}} активных объявления",
+    "t_many": "{{count}} активных объявлений"
+  },
+  "ended_ads_count": {
+    "t_one": "{{count}} завершённая сделка",
+    "t_few": "{{count}} завершённые сделки",
+    "t_many": "{{count}} завершённых сделок"
+  },
   "tabs": {
     "active": "Активные",
     "moderating": "На проверке",

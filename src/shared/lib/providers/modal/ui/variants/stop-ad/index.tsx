@@ -11,14 +11,25 @@ import { stopAd } from '../../../api/stop-ad';
 
 export const ModalVariantStopAd = () => {
   const { setModalState, modalData } = useModal();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingArchive, setIsLoadingArchive] = useState(false);
+  const [isLoadingEnded, setIsLoadingEnded] = useState(false);
   const token = getCookie('token');
 
   const isActive = modalData.status === 'active';
 
-  const handleClick = async () => {
-    setIsLoading(true);
+  const handleClickToArchive = async () => {
+    setIsLoadingArchive(true);
     const handleStatus = 'archived';
+    await stopAd(modalData.id, handleStatus, token as string);
+
+    setModalState(EModalStates.NULL);
+    revalidateRoute('/profile/my-ads');
+    revalidateRoute(`/profile/my-ads/ad/${modalData.id}`);
+  };
+
+  const handleClickToEnded = async () => {
+    setIsLoadingEnded(true);
+    const handleStatus = 'ended';
     await stopAd(modalData.id, handleStatus, token as string);
 
     setModalState(EModalStates.NULL);
@@ -37,8 +48,8 @@ export const ModalVariantStopAd = () => {
 
       <div className='w-full flex gap-4'>
         <Button
-          isLoading={isLoading}
-          onPress={handleClick}
+          isLoading={isLoadingArchive}
+          onPress={handleClickToArchive}
           size='lg'
           variant='solid'
           className='w-full font-semibold gap-2 mt-2 '
@@ -48,10 +59,9 @@ export const ModalVariantStopAd = () => {
 
         {isActive && (
           <Button
-            isLoading={isLoading}
-            onPress={handleClick}
+            isLoading={isLoadingEnded}
+            onPress={handleClickToEnded}
             size='lg'
-
             className='w-full font-semibold gap-2 mt-2 bg-default-900 text-default'
           >
             <PiStopCircleBold size={22} />

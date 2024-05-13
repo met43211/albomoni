@@ -19,16 +19,17 @@ export const StartAdButton = ({ id, status }: Props) => {
   };
 
   const isArchived = status === 'archived';
+  const isEnded = status === 'ended';
 
   return (
     <Button
       onPress={handleClick}
       size='lg'
-      color={isArchived ? 'success' : 'primary'}
+      color={isArchived || isEnded ? 'success' : 'primary'}
       variant='shadow'
       className='w-full flex-shrink-0 font-semibold'
     >
-      {isArchived ? (
+      {isArchived || isEnded ? (
         <>
           <PiPlayCircleBold size={24} />
           Запустить объявление

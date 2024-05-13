@@ -6,5 +6,5 @@ type Props = {
 };
 
 export default async function User({ params: { lng, userId } }: Props) {
-  return <UserAdsActive userId={userId} />;
+  return <UserAdsActive lng={lng} userId={userId} />;
 }

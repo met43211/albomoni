@@ -1,4 +1,4 @@
-export { UserAd } from './ui/user-ad';
+export { UserAdCard } from './ui/user-ad-card';
 export { MyAdCardChips } from './ui/my-ad-card/chips';
 export { MyAdCardStats } from './ui/my-ad-card/stats';
 export { MyAdCard } from './ui/my-ad-card';
