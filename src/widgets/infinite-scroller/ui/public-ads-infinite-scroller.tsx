@@ -2,20 +2,20 @@
 
 'use client';
 
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
-import { AdCard } from '@albomoni/entities/ad/ui/ad-card';
+import { PublicAdType } from '@albomoni/entities/ad/model/ad.type';
 import { useLangContext } from '@albomoni/shared/lib/providers';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
 import { Spinner } from '@nextui-org/spinner';
+import { UserAdCard } from '@albomoni/entities/ad/ui/user-ad-card';
 
 type Props = {
-  initialData: Ad[];
+  initialData: PublicAdType[];
   currencies: { [key: string]: number };
-  fetchFunction: (page: number) => Promise<Ad[]>;
+  fetchFunction: (page: number) => Promise<PublicAdType[]>;
 };
 
-export const AdsInfiniteScroller = ({
+export const PublicAdsInfiniteScroller = ({
   initialData,
   currencies,
   fetchFunction,
@@ -71,12 +71,12 @@ export const AdsInfiniteScroller = ({
 
   return (
     <>
-      <div className='w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+      <div className='w-full grid md:grid-cols-2 gap-4'>
         {data.map((ad) => {
           return (
-            <AdCard
-              key={ad.ad.id}
-              data={ad}
+            <UserAdCard
+              key={ad.id}
+              ad={ad}
               lng={lng as string}
               currencies={currencies}
             />

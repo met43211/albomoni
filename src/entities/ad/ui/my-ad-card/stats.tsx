@@ -45,11 +45,6 @@ export const MyAdCardStats = ({ views, favorites }: Props) => {
           </PopoverContent>
         </Popover>
       ))}
-
-      {/* <div className='w-full flex flex-col gap-2 items-center opacity-50 '>
-        <TbMessageCircle size={24} />
-        <p className='text-sm font-semibold'>0</p>
-      </div> */}
     </div>
   );
 };

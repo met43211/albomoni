@@ -1,6 +1,7 @@
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import { Ad } from '@albomoni/entities/ad/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
-import { AdsList } from '@albomoni/widgets/ads-list';
+import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
 import { cookies } from 'next/headers';
 import { PiMagnifyingGlass } from 'react-icons/pi';
 
@@ -25,14 +26,29 @@ export const CategoryAdsBlock = async ({
     ? Object.values(parsedFilters).map((filter: any) => filter.selected)
     : null;
 
-  const ads = await apiClient.post<Ad[]>('ads/', {
+  const initialData = await apiClient.post<Ad[]>('ads/1', {
     filters: [categoryId, ...(normalizedFilters || [])],
   });
 
-  console.log('test', ads)
+  const currencies = await getCurrenciesAsync();
 
-  return ads.length > 0 ? (
-    <AdsList lng={lng} title='Актуальные объявления' cols={3} data={ads} />
+  const fetchFunction = () => async (page: number) => {
+    'use server';
+
+    return apiClient.post<Ad[]>(`ads/${page}`, {
+      filters: [categoryId, ...(normalizedFilters || [])],
+    });
+  };
+
+  return initialData.length > 0 ? (
+    <div className='w-full h-min flex flex-col gap-6'>
+      <h2 className='text-xl md:text-2xl font-bold'>Актуальные объявления</h2>
+      <AdsInfiniteScroller
+        initialData={initialData}
+        currencies={currencies}
+        fetchFunction={fetchFunction()}
+      />
+    </div>
   ) : (
     <div className='w-full flex flex-col gap-4 items-center mt-20'>
       <PiMagnifyingGlass size={64} className='opacity-50' />

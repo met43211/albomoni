@@ -1,14 +1,14 @@
 import { Divider } from '@nextui-org/divider';
 import { Rating } from '@albomoni/shared/ui/rating';
-import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
 import { PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
-import { cookies } from 'next/headers';
 import dynamic from 'next/dynamic';
+import { getCookie } from 'cookies-next';
+import { Spinner } from '@nextui-org/spinner';
 import { Ad } from '../../model/ad.type';
-import { getAdTitle } from '../../lib/get-ad-title';
 import { ImageGallery } from '../image-gallery';
+import { getClientAdTitle } from '../../lib/get-client-ad-title';
 
 type Props = {
   data: Ad;
@@ -21,16 +21,32 @@ const DynamicAdWatchedMessage = dynamic(
   { ssr: false },
 );
 
+const DynamicAddToFavoritesButton = dynamic(
+  () =>
+    import('@albomoni/features/add-to-favorites').then(
+      (mod) => mod.AddToFavoritesButton,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='w-8 h-8 flex items-center justify-center flex-shrink-0'>
+        <Spinner color='default' />
+      </div>
+    ),
+  },
+);
+
 export const AdCard = ({ data, lng, currencies }: Props) => {
-  const userCurrency = cookies().get('currency');
+  const userCurrency = getCookie('currency');
   const { ad, seller } = data;
   const { title, additional, category } = ad;
 
-  const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
+  const isUnmatchedCurrencies = userCurrency !== data.ad.currency;
 
   return (
     <Link
       href={`/ad/${ad.id}`}
+      target='_blank'
       className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'
     >
       <DynamicAdWatchedMessage adId={data.ad.id} />
@@ -39,12 +55,12 @@ export const AdCard = ({ data, lng, currencies }: Props) => {
       <div className='w-full flex flex-col gap-4 p-4 relative'>
         <Rating value={seller.rating} feedback={seller.feedback_count} />
         <div className='absolute top-4 right-4'>
-          <AddToFavoritesButton postId={data.ad.id} />
+          <DynamicAddToFavoritesButton postId={data.ad.id} />
         </div>
 
         <div className='flex flex-col gap-2'>
           <h5 className='text-md font-bold line-clamp-1'>
-            {getAdTitle(lng, title, additional, category)}
+            {getClientAdTitle(title, additional, category)}
           </h5>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />
@@ -58,7 +74,7 @@ export const AdCard = ({ data, lng, currencies }: Props) => {
           {isUnmatchedCurrencies && '~ '}
           {normalizePrice({
             price: ad.cost,
-            currency: userCurrency?.value,
+            currency: userCurrency,
             adCurrency: data.ad.currency,
             currencies,
           })}

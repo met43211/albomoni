@@ -31,7 +31,9 @@ export const FixedBars = () => {
   });
 
   const isAdRoute =
-    flatRoute.split('/')[0] === 'ad' || flatRoute.split('/')[2] === 'ad';
+    flatRoute.split('/')[0] === 'ad' ||
+    flatRoute.split('/')[2] === 'ad' ||
+    flatRoute.split('/')[0] === 'user';
 
   const handleBack = () => {
     router.back();

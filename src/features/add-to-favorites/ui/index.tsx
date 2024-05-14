@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable sonarjs/cognitive-complexity */
 
 'use client';
 
 import { Button } from '@nextui-org/button';
-import { MouseEventHandler, useEffect } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import { PiHeartBold, PiHeartFill } from 'react-icons/pi';
-import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';
-import { usePathname } from 'next/navigation';
 import { Tooltip } from '@nextui-org/tooltip';
+import { Spinner } from '@nextui-org/spinner';
 import { useFavorites } from '../lib/use-favorites';
 
 type Props = {
@@ -20,9 +20,9 @@ type Props = {
 
 export const AddToFavoritesButton = ({ postId, isBig = false }: Props) => {
   const { isLogged } = useSession();
-  const { favorites, isPending, setFavorites, setIsPending } = useFavorites();
+  const [isLoading, setIsLoading] = useState(false);
+  const { favorites, isPending, setFavorites } = useFavorites();
   const token = getCookie('token');
-  const pathname = usePathname();
 
   useEffect(() => {
     if (favorites.length !== 0) {
@@ -42,33 +42,38 @@ export const AddToFavoritesButton = ({ postId, isBig = false }: Props) => {
 
     setFavorites(updatedFavorites);
 
-    if (pathname.slice(3) !== '/favorite') {
-      revalidateRoute('/favorite');
-    }
-
     if (isLogged) {
       const syncFavsAsync = async () => {
-        setIsPending(true);
-
+        setIsLoading(true);
         await apiClient.post(
           'favorites/',
           { id: postId },
           { Authorization: `Bearer ${token}` },
         );
-
-        setIsPending(false);
+        setIsLoading(false);
       };
 
       syncFavsAsync();
     }
   };
 
+  if (isPending)
+    return (
+      <div
+        className={`${
+          isBig ? 'w-12 h-12' : 'w-8 h-8'
+        } flex items-center justify-center flex-shrink-0`}
+      >
+        <Spinner color='default' />
+      </div>
+    );
+
   return (
     <Tooltip
       content={isActive ? 'Убрать из избранного' : 'Добавить в избранное'}
     >
       <Button
-        isDisabled={isPending}
+        isDisabled={isLoading}
         isIconOnly
         size={isBig ? 'lg' : 'sm'}
         radius={isBig ? 'lg' : 'full'}

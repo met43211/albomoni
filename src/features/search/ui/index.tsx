@@ -1,9 +1,11 @@
 'use client';
 
+import { apiClient } from '@albomoni/shared/api/base';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Input } from '@nextui-org/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PiMagnifyingGlass } from 'react-icons/pi';
+import { useDebounce } from 'react-use';
 
 type Props = {
   isScrollable?: boolean;
@@ -11,7 +13,30 @@ type Props = {
 
 export const Search = ({ isScrollable = false }: Props) => {
   const [search, setSearch] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useClientTranslation();
+
+  useEffect(() => {
+    const getSearchTips = async () => {
+      const resp = await apiClient.get('search', { search: debouncedValue });
+
+      console.log(resp);
+    };
+
+    if (search.length > 0) {
+      getSearchTips();
+    }
+  }, [debouncedValue]);
+
+  useDebounce(
+    () => {
+      setDebouncedValue(search);
+      setIsLoading(false);
+    },
+    500,
+    [search],
+  );
 
   return (
     <form className='w-full relative flex'>

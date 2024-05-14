@@ -7,8 +7,8 @@ type Props = {
 
 export const ImageGallery = ({ images }: Props) => {
   return (
-    <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory'>
-      {images.map(({ full, preview }) => (
+    <div className='h-40 flex gap-[1px] overflow-x-scroll scrollbar-hide bg-[--element] snap-x snap-mandatory relative'>
+      {images.map(({ full, preview }, index) => (
         <Image
           key={full}
           src={full}
@@ -18,7 +18,8 @@ export const ImageGallery = ({ images }: Props) => {
           width={240}
           height={160}
           quality={40}
-          className='snap-start flex-shrink-0 object-cover h-full'
+          priority={index < 3}
+          className='snap-start flex-shrink-0 object-cover h-full z-10'
         />
       ))}
     </div>

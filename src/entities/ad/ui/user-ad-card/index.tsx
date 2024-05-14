@@ -1,15 +1,14 @@
 import { Divider } from '@nextui-org/divider';
-import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
 import { PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import dynamic from 'next/dynamic';
 import { getCookie } from 'cookies-next';
-import { cookies } from 'next/headers';
 import { MEDIA_URL } from '@albomoni/shared/config';
+import { Spinner } from '@nextui-org/spinner';
 import { PublicAdType } from '../../model/ad.type';
-import { getAdTitle } from '../../lib/get-ad-title';
 import { ImageGallery } from '../image-gallery';
+import { getClientAdTitle } from '../../lib/get-client-ad-title';
 
 type Props = {
   ad: PublicAdType;
@@ -22,8 +21,23 @@ const DynamicAdWatchedMessage = dynamic(
   { ssr: false },
 );
 
+const DynamicAddToFavoritesButton = dynamic(
+  () =>
+    import('@albomoni/features/add-to-favorites').then(
+      (mod) => mod.AddToFavoritesButton,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <div className='w-8 h-8 flex items-center justify-center flex-shrink-0'>
+        <Spinner color='default' />
+      </div>
+    ),
+  },
+);
+
 export const UserAdCard = ({ ad, lng, currencies }: Props) => {
-  const userCurrency = getCookie('currency', { cookies });
+  const userCurrency = getCookie('currency');
   const {
     title,
     additional,
@@ -44,6 +58,7 @@ export const UserAdCard = ({ ad, lng, currencies }: Props) => {
   return (
     <Link
       href={`/ad/${id}`}
+      target='_blank'
       className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'
     >
       <DynamicAdWatchedMessage adId={id} />
@@ -51,12 +66,12 @@ export const UserAdCard = ({ ad, lng, currencies }: Props) => {
       <Divider />
       <div className='w-full flex flex-col gap-4 p-4 relative'>
         <div className='absolute top-4 right-4'>
-          <AddToFavoritesButton postId={id} />
+          <DynamicAddToFavoritesButton postId={id} />
         </div>
 
         <div className='flex flex-col gap-2'>
           <h5 className='text-md font-bold line-clamp-1 pr-10'>
-            {getAdTitle(lng, title, additional, category)}
+            {getClientAdTitle(title, additional, category)}
           </h5>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />

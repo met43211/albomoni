@@ -2,7 +2,7 @@ import { getAdAsync } from '@albomoni/entities/ad/api/get-ad';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
-import { permanentRedirect } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 
 type Props = {
@@ -20,7 +20,7 @@ export default async function AdLayout({ children, params: { adId } }: Props) {
     const user = await getUserAsync(token as string);
 
     if (data.seller.user_id === user.user_id) {
-      permanentRedirect(`/profile/my-ads/ad/${adId}`);
+      redirect(`/profile/my-ads/ad/${adId}`);
     }
   }
 

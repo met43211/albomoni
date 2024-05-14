@@ -1,4 +1,4 @@
-import { AdsListSkeleton } from '@albomoni/widgets/ads-list/ui/skeleton';
+import { AdsListSkeleton } from '@albomoni/widgets/infinite-scroller';
 import dynamic from 'next/dynamic';
 
 type Props = {

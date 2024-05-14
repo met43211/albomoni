@@ -7,13 +7,27 @@ import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { UserAvatar } from '@albomoni/entities/user';
 import Link from 'next/link';
 import { CopyLinkButton } from '@albomoni/features/copy-link';
-import { AddToFavoritesButton } from '@albomoni/features/add-to-favorites';
 import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@nextui-org/skeleton';
 
 type Props = {
   data: Ad;
   lng: string;
 };
+
+const DynamicAddToFavoritesButton = dynamic(
+  () =>
+    import('@albomoni/features/add-to-favorites').then(
+      (mod) => mod.AddToFavoritesButton,
+    ),
+  {
+    ssr: false,
+    loading: () => (
+      <Skeleton className='w-12 h-12 flex items-center justify-center flex-shrink-0 bg-default rounded-2xl' />
+    ),
+  },
+);
 
 export const AdActions = async ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
@@ -31,7 +45,7 @@ export const AdActions = async ({ data, lng }: Props) => {
 
           <div className='w-full flex gap-4'>
             <CopyLinkButton />
-            <AddToFavoritesButton isBig postId={data.ad.id} />
+            <DynamicAddToFavoritesButton isBig postId={data.ad.id} />
           </div>
         </div>
 

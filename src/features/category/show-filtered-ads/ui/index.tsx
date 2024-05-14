@@ -31,7 +31,7 @@ export const ShowFilteredAdsButton = ({ selectedFilters }: Props) => {
     const newPath = `${initPath}?filters=${encodedData}`;
 
     setDisabled(true);
-    router.push(newPath);
+    router.replace(newPath);
   };
 
   return (

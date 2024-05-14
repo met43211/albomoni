@@ -1,1 +1,0 @@
-export { AdsList } from './ui';

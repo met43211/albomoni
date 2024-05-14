@@ -4,10 +4,7 @@ import { setCookie } from 'cookies-next';
 
 export const useFavorites = () => {
   const dispatch = useDispatch();
-  const [localFavorites, setLocalFavorites] = useLocalStorage<number[]>(
-    'favorites',
-    [],
-  );
+  const [, setLocalFavorites] = useLocalStorage<number[]>('favorites', []);
 
   const storeFavorites: number[] = useSelector(
     (state: RootState) => state.favorites.favorites,

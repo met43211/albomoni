@@ -4,6 +4,8 @@
 import { API_URL, PAYMENT_URL } from '../config';
 
 export class ApiClient {
+  [x: string]: any;
+
   private baseUrl: string;
 
   constructor(url: string) {

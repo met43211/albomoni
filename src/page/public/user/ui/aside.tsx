@@ -15,7 +15,7 @@ export const UserAside = ({ user }: Props) => {
   const { rate, feedback } = user;
 
   return (
-    <aside className='w-full lg:max-w-96 flex flex-col gap-4 flex-shrink-0'>
+    <aside className='w-full lg:max-w-96 lg:sticky top-6 h-min flex flex-col gap-4 flex-shrink-0'>
       <User user={user} />
 
       <div className='w-full rounded-2xl bg-default overflow-clip'>

@@ -1,10 +1,8 @@
 import { cookies } from 'next/headers';
-import { UserAdCard } from '@albomoni/entities/ad/ui/user-ad-card';
 import { Placeholder } from '@albomoni/shared/ui/placeholder';
 import { PiMagnifyingGlass } from 'react-icons/pi';
-import { useTranslation } from '@albomoni/shared/i18n';
-import { Chip } from '@nextui-org/chip';
 import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { PublicAdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
 import { getPublicAds } from '../../api/get-public-ads';
 
 type Props = {
@@ -14,27 +12,28 @@ type Props = {
 
 export const UserAdsActive = async ({ userId, lng }: Props) => {
   cookies();
-  const ads = await getPublicAds(userId, 'active');
-  const { t } = await useTranslation(lng);
+  // const { t } = await useTranslation(lng);
+  const initialData = await getPublicAds(userId, 'active', 1);
   const currencies = await getCurrenciesAsync();
+
+  const fetchFunction = () => async (page: number) => {
+    'use server';
+
+    return getPublicAds(userId, 'active', page);
+  };
 
   return (
     <div className='w-full flex flex-col gap-6 items-center'>
-      {ads.length > 0 ? (
+      {initialData.length > 0 ? (
         <>
-          <Chip className='self-start'>
-            {t('active_ads_count.t', { count: ads.length })}
-          </Chip>
-          <div className='w-full grid md:grid-cols-2 gap-4'>
-            {ads.map((ad) => (
-              <UserAdCard
-                lng={lng}
-                key={ad.id}
-                ad={ad}
-                currencies={currencies}
-              />
-            ))}
-          </div>
+          {/* <Chip className='self-start'>
+            {t('active_ads_count.t', { count: ads[0].count })}
+          </Chip> */}
+          <PublicAdsInfiniteScroller
+            initialData={initialData}
+            currencies={currencies}
+            fetchFunction={fetchFunction()}
+          />
         </>
       ) : (
         <Placeholder

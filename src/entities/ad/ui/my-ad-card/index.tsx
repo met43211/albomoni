@@ -33,6 +33,7 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
 
       <Link
         href={`/profile/my-ads/ad/${id}`}
+        target='_blank'
         className='w-full flex flex-col gap-5 p-4'
       >
         <div className='w-full flex flex-col gap-2'>

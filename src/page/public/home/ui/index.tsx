@@ -1,7 +1,7 @@
 import { I18nLangParam } from '@albomoni/shared/model/types/i18n.type';
 import { Spacer } from '@nextui-org/spacer';
-import { AdsListSkeleton } from '@albomoni/widgets/ads-list/ui/skeleton';
 import dynamic from 'next/dynamic';
+import { AdsListSkeleton } from '@albomoni/widgets/infinite-scroller/ui/ads-list-skeleton';
 import { CategoriesListSkeleton } from './categories-list/skeleton';
 import { WelcomeBlock } from './welcome-block';
 

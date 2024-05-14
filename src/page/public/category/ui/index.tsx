@@ -1,4 +1,4 @@
-import { AdsListSkeleton } from '@albomoni/widgets/ads-list/ui/skeleton';
+import { AdsListSkeleton } from '@albomoni/widgets/infinite-scroller/ui/ads-list-skeleton';
 import { Skeleton } from '@nextui-org/skeleton';
 import dynamic from 'next/dynamic';
 
@@ -33,7 +33,7 @@ export const CategoryPage = async ({
         />
       </div>
 
-      <div className='w-full max-w-7xl px-4 flex flex-col-reverse lg:flex-row gap-6'>
+      <div className='w-full max-w-7xl px-4 flex flex-col gap-6'>
         <DynamicCategoryAdsBlock
           lng={lng}
           categoryId={categoryId}

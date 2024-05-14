@@ -1,5 +1,7 @@
-import { AdsList } from '@albomoni/widgets/ads-list';
-import { getFavoritesAsync } from '../api/get-favorites';
+import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
+import { apiClient } from '@albomoni/shared/api/base';
+import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import { NoFavorites } from './no-favorites';
 
 type Props = {
@@ -18,16 +20,29 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
 
   const favoritesArray = getFavsArray();
 
-  const favorites = await getFavoritesAsync(favoritesArray);
+  const currencies = await getCurrenciesAsync();
 
-  return favorites.length > 0 ? (
-    <AdsList
-      titleSize='xl'
-      title='Избранные объявления'
-      cols={3}
-      lng={lng}
-      data={favorites}
-    />
+  const initialData = await apiClient.post<Ad[]>('favorite/1', {
+    favorites: favoritesArray,
+  });
+
+  const fetchFunction = () => async (page: number) => {
+    'use server';
+
+    return apiClient.post<Ad[]>(`favorite/${page}`, {
+      favorites: favoritesArray,
+    });
+  };
+
+  return initialData.length > 0 ? (
+    <div className='w-full h-min flex flex-col gap-10'>
+      <h2 className='text-2xl md:text-3xl font-bold'>Избранные объявления</h2>
+      <AdsInfiniteScroller
+        currencies={currencies}
+        initialData={initialData}
+        fetchFunction={fetchFunction()}
+      />
+    </div>
   ) : (
     <NoFavorites />
   );
