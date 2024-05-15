@@ -47,6 +47,7 @@ export const CategoryAdsBlock = async ({
         initialData={initialData}
         currencies={currencies}
         fetchFunction={fetchFunction()}
+        isDisableCategory
       />
     </div>
   ) : (

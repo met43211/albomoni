@@ -24,7 +24,7 @@ export const PublicAdsInfiniteScroller = ({
   const [page, setPage] = useState(1);
   const [loadedPages, setLoadedPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEnded, setIsEnded] = useState(false);
+  const [isEnded, setIsEnded] = useState(initialData.length < 12);
   const lng = useLangContext();
   const intersectionRef = useRef(null);
 

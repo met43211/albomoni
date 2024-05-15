@@ -10,6 +10,8 @@ import { CopyLinkButton } from '@albomoni/features/copy-link';
 import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@nextui-org/skeleton';
+import { useTranslation } from '@albomoni/shared/i18n';
+import { Chip } from '@nextui-org/react';
 
 type Props = {
   data: Ad;
@@ -31,6 +33,7 @@ const DynamicAddToFavoritesButton = dynamic(
 
 export const AdActions = async ({ data, lng }: Props) => {
   const userCurrency = cookies().get('currency');
+  const { t } = await useTranslation(lng, 'place-ad');
   const { ad, seller } = data;
   const isUnmatchedCurrencies = userCurrency?.value !== data.ad.currency;
   const currencies: any = await getCurrenciesAsync();
@@ -111,7 +114,26 @@ export const AdActions = async ({ data, lng }: Props) => {
 
         <div className='flex flex-col gap-1'>
           <h3 className='text-md font-semibold opacity-50'>Адрес</h3>
-          <h4 className='text-lg font-bold select-text'>{ad.geoposition}</h4>
+          <h4 className='text-lg font-semibold select-text'>
+            {ad.geoposition}
+          </h4>
+        </div>
+
+        <div className='w-full flex flex-col gap-2'>
+          <h3 className='text-md font-semibold opacity-50'>Категории</h3>
+          <div className='w-full flex-wrap flex gap-2 items-center'>
+            {ad.category.map((cat) => (
+              <Button
+                as={Link}
+                href={`/categories/${ad.category[0]}`}
+                size='sm'
+                radius='full'
+                className='text-sm font-medium'
+              >
+                {t(`categories.${cat}`)}{' '}
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

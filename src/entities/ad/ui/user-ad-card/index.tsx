@@ -1,11 +1,12 @@
 import { Divider } from '@nextui-org/divider';
-import { PiMapPin } from 'react-icons/pi';
+import { PiFolders, PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import dynamic from 'next/dynamic';
 import { getCookie } from 'cookies-next';
 import { MEDIA_URL } from '@albomoni/shared/config';
 import { Spinner } from '@nextui-org/spinner';
+import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { PublicAdType } from '../../model/ad.type';
 import { ImageGallery } from '../image-gallery';
 import { getClientAdTitle } from '../../lib/get-client-ad-title';
@@ -38,6 +39,8 @@ const DynamicAddToFavoritesButton = dynamic(
 
 export const UserAdCard = ({ ad, lng, currencies }: Props) => {
   const userCurrency = getCookie('currency');
+  const { t } = useClientTranslation('place-ad');
+
   const {
     title,
     additional,
@@ -70,9 +73,20 @@ export const UserAdCard = ({ ad, lng, currencies }: Props) => {
         </div>
 
         <div className='flex flex-col gap-2'>
-          <h5 className='text-md font-bold line-clamp-1 pr-10'>
+          <h5 className='text-md font-bold line-clamp-1 pr-10 pb-1'>
             {getClientAdTitle(title, additional, category)}
           </h5>
+          <div className='w-fit flex gap-2 opacity-50 items-center'>
+            <PiFolders />
+            <p className='text-xs font-medium line-clamp-1'>
+              {category.map((cat, index, categories) => (
+                <span>
+                  {t(`categories.${cat}`)}{' '}
+                  {index < categories.length - 1 && '· '}
+                </span>
+              ))}
+            </p>
+          </div>
           <div className='flex gap-1 opacity-50 items-center'>
             <PiMapPin />
             <p className='text-xs font-medium'>

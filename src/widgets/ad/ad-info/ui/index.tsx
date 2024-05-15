@@ -15,7 +15,7 @@ export const AdInfo = async ({ data, lng }: Props) => {
         {Object.entries(data.ad.additional).map(([key, value]) => (
           <h5
             key={key}
-            className='w-full text-lg font-semibold select-text cursor-text'
+            className='w-full lg:text-lg font-semibold select-text cursor-text'
           >
             <span className='opacity-50'>
               {t(`${data.ad.category[0]}.${key}.name`)}:{' '}

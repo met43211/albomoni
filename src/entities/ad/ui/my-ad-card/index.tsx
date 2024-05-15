@@ -1,6 +1,7 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
-import { PiMapPinBold } from 'react-icons/pi';
+import { PiFolders, PiMapPin } from 'react-icons/pi';
 import Link from 'next/link';
+import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { MyAd } from '../../model/ad.type';
 import { ImageGallery } from '../image-gallery';
 import { MyAdCardChips } from './chips';
@@ -14,6 +15,8 @@ type Props = {
 };
 
 export const MyAdCard = ({ ad, lng, currencies }: Props) => {
+  const { t } = useClientTranslation('place-ad');
+
   const {
     id,
     title,
@@ -52,9 +55,20 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
 
         <MyAdCardChips status={status} />
 
-        <div className='w-full flex gap-2 items-center'>
-          <PiMapPinBold size={16} />
-          <p className='text-sm font-medium'>{geoposition}</p>
+        <div className='w-fit flex gap-2 opacity-50 items-center'>
+          <PiFolders />
+          <p className='text-xs font-medium line-clamp-1'>
+            {category.map((cat, index, categories) => (
+              <span>
+                {t(`categories.${cat}`)} {index < categories.length - 1 && '· '}
+              </span>
+            ))}
+          </p>
+        </div>
+
+        <div className='w-full flex gap-2 items-center opacity-50 -mt-2'>
+          <PiMapPin />
+          <p className='text-xs font-medium line-clamp-1'>{geoposition}</p>
         </div>
       </Link>
       <div className='w-full flex flex-col gap-5 px-4 pt-2 pb-4'>

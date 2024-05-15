@@ -13,18 +13,20 @@ type Props = {
   initialData: Ad[];
   currencies: { [key: string]: number };
   fetchFunction: (page: number) => Promise<Ad[]>;
+  isDisableCategory?: boolean;
 };
 
 export const AdsInfiniteScroller = ({
   initialData,
   currencies,
   fetchFunction,
+  isDisableCategory,
 }: Props) => {
   const [data, setData] = useState(initialData);
   const [page, setPage] = useState(1);
   const [loadedPages, setLoadedPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [isEnded, setIsEnded] = useState(false);
+  const [isEnded, setIsEnded] = useState(initialData.length < 12);
   const lng = useLangContext();
   const intersectionRef = useRef(null);
 
@@ -77,8 +79,8 @@ export const AdsInfiniteScroller = ({
             <AdCard
               key={ad.ad.id}
               data={ad}
-              lng={lng as string}
               currencies={currencies}
+              isDisableCategory={isDisableCategory}
             />
           );
         })}

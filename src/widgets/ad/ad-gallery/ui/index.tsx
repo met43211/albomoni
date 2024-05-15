@@ -11,6 +11,7 @@ type Props = {
 };
 
 export const AdGallery = async ({ data, lng }: Props) => {
+ 
   const { title, category, additional } = data.ad;
 
   return (
