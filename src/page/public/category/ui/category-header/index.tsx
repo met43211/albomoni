@@ -2,6 +2,7 @@ import { getCategoriesAsync } from '@albomoni/entities/menu/api/get-categories';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
 import Image from 'next/image';
+import { PiCaretRight, PiMapPin } from 'react-icons/pi';
 
 type Props = {
   lng: string;
@@ -23,6 +24,11 @@ export const CategoryHeader = async ({
       <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
         {t(`categories.${categoryId}`)}
       </h1>
+      <div className='w-fit flex gap-2 items-center -mt-3 opacity-70'>
+        <PiMapPin />
+        <p>Турция, Анкара</p>
+        <PiCaretRight className='mt-[2px]' />
+      </div>
       <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
       {categoryData && (
         <Image

@@ -5,12 +5,13 @@
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Button, Spinner } from '@nextui-org/react';
 import Image from 'next/image';
-import { FormEvent, memo, useRef, useState } from 'react';
-import { PiPencilSimpleBold, PiPlusCircleBold, PiXBold } from 'react-icons/pi';
+import { FormEvent, memo, useRef } from 'react';
+import { PiArrowCounterClockwiseBold, PiPlusCircleBold, PiXBold } from 'react-icons/pi';
 import * as yup from 'yup';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { AnimatePresence } from 'framer-motion';
 import { PlaceAdInputProps } from '../../model/form.type';
+import { rotateImageFile } from '../../lib/rotate-file';
 
 const yupSchema = yup.object({
   images: yup.array().min(3, 'images.min').max(10, 'images.max'),
@@ -19,8 +20,6 @@ const yupSchema = yup.object({
 export const PlaceAdPhotos = memo(
   ({ title, form, updateForm, value, isImagesLoaded }: PlaceAdInputProps) => {
     const { t } = useClientTranslation('place-ad');
-    const [editFile, setEditFile] = useState<File | undefined>();
-    const [showEditModal, setShowEditModal] = useState(false);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -81,21 +80,34 @@ export const PlaceAdPhotos = memo(
       });
     };
 
-    const showModalHandler = (file: File) => (event: any) => {
+    const showModalHandler = (file: File) => async (event: any) => {
       const photoIndex = event.target.id;
-      setEditFile(file);
-      if (editFile) {
-        setShowEditModal(true);
-      }
+      const newFile = await rotateImageFile(file);
+
+      const newDraft = value.filter(
+        (_file: File, index: number) => index !== Number(photoIndex),
+      );
+
+      newDraft.splice(photoIndex, 0, newFile);
+
+      updateForm((draft: any) => {
+        draft.fields[title] = newDraft;
+      });
     };
 
-    const hideEditModal = () => {
-      setShowEditModal(false);
-    };
+    // const onCropComplete = (editedFile: File) => {
+    //   const newDraft = value.filter(
+    //     (_file: File, index: number) => index !== Number(editId),
+    //   );
 
-    const handleSaveImage = (editedFile: File) => {
-      console.log('edited', editedFile);
-    };
+    //   const updatedDraft = newDraft.splice(editId, 0, editedFile);
+
+    //   console.log(newDraft, updatedDraft);
+
+    //   updateForm((draft: any) => {
+    //     draft.fields[title] = updatedDraft;
+    //   });
+    // };
 
     if (isImagesLoaded === false)
       return (
@@ -130,7 +142,7 @@ export const PlaceAdPhotos = memo(
                     onPress={showModalHandler(image)}
                     className='absolute left-1 top-1 dark:bg-black/50 backdrop-blur-lg'
                   >
-                    <PiPencilSimpleBold size={16} />
+                    <PiArrowCounterClockwiseBold size={16} />
                   </Button>
                   <Button
                     size='sm'

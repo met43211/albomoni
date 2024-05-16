@@ -10,7 +10,7 @@ type Props = {
 
 const DynamicCategoryHeader = dynamic(
   () => import('./category-header').then((mod) => mod.CategoryHeader),
-  { loading: () => <Skeleton className='w-full h-[248px] md:rounded-3xl' /> },
+  { loading: () => <Skeleton className='w-full h-72 md:rounded-3xl' /> },
 );
 
 const DynamicCategoryAdsBlock = dynamic(
