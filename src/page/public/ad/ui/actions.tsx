@@ -124,6 +124,7 @@ export const AdActions = async ({ data, lng }: Props) => {
           <div className='w-full flex-wrap flex gap-2 items-center'>
             {ad.category.map((cat) => (
               <Button
+                key={cat}
                 as={Link}
                 href={`/categories/${ad.category[0]}`}
                 size='sm'

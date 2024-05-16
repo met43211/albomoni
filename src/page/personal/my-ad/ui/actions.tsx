@@ -82,7 +82,9 @@ export const MyAdActions = async ({ data, lng }: Props) => {
 
         <div className='flex flex-col gap-1'>
           <h3 className='text-md font-semibold opacity-50'>Адрес</h3>
-          <h4 className='text-lg font-semibold select-text'>{ad.geoposition}</h4>
+          <h4 className='text-lg font-semibold select-text'>
+            {ad.geoposition}
+          </h4>
         </div>
 
         <div className='w-full flex flex-col gap-2'>
@@ -90,6 +92,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
           <div className='w-full flex-wrap flex gap-2 items-center'>
             {ad.category.map((cat) => (
               <Button
+                key={cat}
                 as={Link}
                 href={`/categories/${ad.category[0]}`}
                 size='sm'

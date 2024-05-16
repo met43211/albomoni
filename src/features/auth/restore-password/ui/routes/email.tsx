@@ -1,45 +1,54 @@
+import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
+import { Button } from '@nextui-org/button';
+import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation } from '@tanstack/react-query';
-import { AnimatePresence, m } from 'framer-motion';
-import { Spinner } from '@nextui-org/spinner';
 import { Input } from '@nextui-org/input';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
-import { Button } from '@nextui-org/button';
+import { AnimatePresence, m } from 'framer-motion';
+import { Spinner } from '@nextui-org/spinner';
+import { EmailVerifyQueries } from '../../api';
 import {
-  EmailConfirmSchema,
-  EmailConfirmSchemaFormData,
+  EmailCheckSchema,
+  EmailCheckSchemaFormData,
 } from '../../model/schemas';
-import { CheckCodeQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
-import { ERegistrationRoutes } from '../../model/registration-routes.enum';
+import { ERestorePasswordRoutes } from '../../model/restore-password-routes.enum';
 
-export const RegistrationEmailConfirm = ({
-  userEmail,
+export const RestorePasswordEmail = ({
   setActiveRoute,
+  setUserEmail,
 }: RegistrationRoutesProps) => {
-  const { control, handleSubmit } = useForm<EmailConfirmSchemaFormData>({
-    resolver: yupResolver(EmailConfirmSchema),
-  });
+  const router = useRouter();
+  const { t } = useClientTranslation('forms');
+
+  const { mutateAsync, isPending, isError } = useMutation(EmailVerifyQueries);
+
   const {
-    mutateAsync,
-    isPending,
-    // error: mutateError,
-    isError,
-  } = useMutation(CheckCodeQueries);
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<EmailCheckSchemaFormData>({
+    resolver: yupResolver(EmailCheckSchema),
+  });
+
+  const handleClickBack = () => {
+    router.push('/login');
+  };
 
   const onSubmit = handleSubmit(async (data) => {
+    const { email } = data;
+
     try {
-      await mutateAsync({ email: userEmail, ...data });
-      setActiveRoute(ERegistrationRoutes.USER_DATA);
+      await mutateAsync({ email });
+      setUserEmail(email);
+      setActiveRoute(ERestorePasswordRoutes.EMAIL_CONFIRM);
     } catch {
       return;
     }
   });
-
-  const handleClickBack = () => {
-    setActiveRoute(ERegistrationRoutes.EMAIL);
-  };
 
   return (
     <AnimatePresence>
@@ -62,25 +71,24 @@ export const RegistrationEmailConfirm = ({
         >
           <div className='flex flex-col gap-4 px-6'>
             <p className='text-sm opacity-50'>
-              Укажите проверочный код — он придёт на указанный email адрес в
-              течение 2 минут.
+              Для начала, введите адрес электронной почты. На него придет письмо
+              с кодом подтверждения.
             </p>
-
             <Controller
-              name='code'
+              name='email'
               control={control}
               render={({
                 field: { onChange, value, onBlur, ref, name },
-                fieldState: { invalid, error },
+                fieldState: { invalid },
               }) => (
                 <Input
                   id={name}
-                  type='text'
-                  errorMessage={invalid && `${error?.message}`}
+                  isClearable
+                  errorMessage={invalid && t(`${errors.email?.message}`)}
+                  onClear={() => setValue('email', '')}
                   size='lg'
                   ref={ref}
-                  maxLength={6}
-                  placeholder='Проверочный код'
+                  placeholder='Электронная почта'
                   classNames={{ input: 'px-2 text-sm' }}
                   value={value || ''}
                   onChange={onChange}
@@ -92,7 +100,7 @@ export const RegistrationEmailConfirm = ({
             <AnimatePresence>
               {isError && (
                 <NotificationBubble type='error'>
-                  Неверный код подтверждения.
+                  Адрес email не найден
                 </NotificationBubble>
               )}
             </AnimatePresence>
@@ -100,10 +108,10 @@ export const RegistrationEmailConfirm = ({
 
           <div className='flex gap-4 justify-end pb-4 pt-6 px-6'>
             <Button variant='light' onPress={handleClickBack}>
-              Назад
+              Назад ко входу
             </Button>
             <Button color='primary' variant='shadow' type='submit'>
-              Зарегистрироваться
+              Продолжить
             </Button>
           </div>
         </m.form>

@@ -12,9 +12,9 @@ import {
 } from '../../model/schemas';
 import { CheckCodeQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
-import { ERegistrationRoutes } from '../../model/registration-routes.enum';
+import { ERestorePasswordRoutes } from '../../model/restore-password-routes.enum';
 
-export const RegistrationEmailConfirm = ({
+export const RestorePasswordEmailConfirm = ({
   userEmail,
   setActiveRoute,
 }: RegistrationRoutesProps) => {
@@ -31,14 +31,14 @@ export const RegistrationEmailConfirm = ({
   const onSubmit = handleSubmit(async (data) => {
     try {
       await mutateAsync({ email: userEmail, ...data });
-      setActiveRoute(ERegistrationRoutes.USER_DATA);
+      setActiveRoute(ERestorePasswordRoutes.PASSWORD_DATA);
     } catch {
       return;
     }
   });
 
   const handleClickBack = () => {
-    setActiveRoute(ERegistrationRoutes.EMAIL);
+    setActiveRoute(ERestorePasswordRoutes.EMAIL);
   };
 
   return (
@@ -103,7 +103,7 @@ export const RegistrationEmailConfirm = ({
               Назад
             </Button>
             <Button color='primary' variant='shadow' type='submit'>
-              Зарегистрироваться
+              Подтвердить
             </Button>
           </div>
         </m.form>

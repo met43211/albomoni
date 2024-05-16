@@ -18,6 +18,7 @@ import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import { apiClient } from '@albomoni/shared/api/base';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { useLocalStorage } from 'react-use';
+import Link from 'next/link';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -142,12 +143,12 @@ export const LoginWidget = () => {
                   />
                 )}
               />
-              <button
-                type='button'
+              <Link
+                href='/forgot-password'
                 className='text-sm text-start opacity-60 underline mt-4'
               >
                 Забыли пароль?
-              </button>
+              </Link>
             </div>
             <div className='px-6 py-4 flex justify-end'>
               <Button

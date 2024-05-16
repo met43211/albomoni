@@ -5,8 +5,8 @@
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { Button, Spinner } from '@nextui-org/react';
 import Image from 'next/image';
-import { FormEvent, memo, useRef } from 'react';
-import { PiPlusCircleBold, PiXBold } from 'react-icons/pi';
+import { FormEvent, memo, useRef, useState } from 'react';
+import { PiPencilSimpleBold, PiPlusCircleBold, PiXBold } from 'react-icons/pi';
 import * as yup from 'yup';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { AnimatePresence } from 'framer-motion';
@@ -19,6 +19,8 @@ const yupSchema = yup.object({
 export const PlaceAdPhotos = memo(
   ({ title, form, updateForm, value, isImagesLoaded }: PlaceAdInputProps) => {
     const { t } = useClientTranslation('place-ad');
+    const [editFile, setEditFile] = useState<File | undefined>();
+    const [showEditModal, setShowEditModal] = useState(false);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -79,6 +81,22 @@ export const PlaceAdPhotos = memo(
       });
     };
 
+    const showModalHandler = (file: File) => (event: any) => {
+      const photoIndex = event.target.id;
+      setEditFile(file);
+      if (editFile) {
+        setShowEditModal(true);
+      }
+    };
+
+    const hideEditModal = () => {
+      setShowEditModal(false);
+    };
+
+    const handleSaveImage = (editedFile: File) => {
+      console.log('edited', editedFile);
+    };
+
     if (isImagesLoaded === false)
       return (
         <div className='w-full flex gap-3'>
@@ -90,7 +108,7 @@ export const PlaceAdPhotos = memo(
     return (
       <div className='flex gap-4 flex-col'>
         <h5 className='text-md font-medium opacity-50'>{t(`${title}.name`)}</h5>
-        <div className='grid grid-cols-3 gap-2 md:gap-4 flex-wrap'>
+        <div className='grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 flex-wrap'>
           {value &&
             Object.values(value).map((image: any, index) => {
               return (
@@ -104,6 +122,16 @@ export const PlaceAdPhotos = memo(
                     alt={image.name}
                     className='w-28 h-28 object-cover'
                   />
+                  <Button
+                    size='sm'
+                    radius='full'
+                    isIconOnly
+                    id={index.toString()}
+                    onPress={showModalHandler(image)}
+                    className='absolute left-1 top-1 dark:bg-black/50 backdrop-blur-lg'
+                  >
+                    <PiPencilSimpleBold size={16} />
+                  </Button>
                   <Button
                     size='sm'
                     radius='full'

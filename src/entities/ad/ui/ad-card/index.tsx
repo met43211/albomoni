@@ -75,7 +75,7 @@ export const AdCard = ({
               {data.ad.category.map((cat, index, categories) => {
                 return (
                   (!isDisableCategory || index > 0) && (
-                    <span>
+                    <span key={cat}>
                       {t(`categories.${cat}`)}{' '}
                       {index < categories.length - 1 && '· '}
                     </span>

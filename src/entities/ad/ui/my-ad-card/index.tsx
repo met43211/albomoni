@@ -59,7 +59,7 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
           <PiFolders />
           <p className='text-xs font-medium line-clamp-1'>
             {category.map((cat, index, categories) => (
-              <span>
+              <span key={cat}>
                 {t(`categories.${cat}`)} {index < categories.length - 1 && '· '}
               </span>
             ))}
