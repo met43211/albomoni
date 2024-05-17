@@ -1,16 +1,17 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { Button } from '@nextui-org/button';
 import { Rating } from '@albomoni/shared/ui/rating';
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { cookies } from 'next/headers';
 import { UserAvatar } from '@albomoni/entities/user';
 import { PiPencilSimpleBold } from 'react-icons/pi';
-import { MyAdCardChips, MyAdCardStats } from '@albomoni/entities/ad';
+import { MyAdCardChips, MyAdCardStats } from '@albomoni/entities/ad-card';
 import { StopAdButton } from '@albomoni/features/ad/stop-ad';
 import { StartAdButton } from '@albomoni/features/ad/start-ad';
 import Link from 'next/link';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { useTranslation } from '@albomoni/shared/i18n';
+import { PromoteAdButton } from '@albomoni/features/ad/promote-ad';
 
 type Props = {
   data: Ad;
@@ -23,12 +24,17 @@ export const MyAdActions = async ({ data, lng }: Props) => {
   const { ad, seller } = data;
 
   const currencies: any = await getCurrenciesAsync();
+  const isStartable = ad.status === 'archived' || ad.status === 'ended';
 
   return (
     <div className='flex flex-col px-4 lg:px-0'>
       <div className='w-full lg:w-80 lg:sticky top-8 h-min flex flex-col gap-8 flex-shrink-0'>
         <div className='flex flex-col gap-4'>
-          <StartAdButton id={ad.id} status={ad.status} />
+          {isStartable ? (
+            <StartAdButton id={ad.id} status={ad.status} />
+          ) : (
+            <PromoteAdButton id={ad.id} plan={ad.plan} />
+          )}
 
           <div className='w-full flex gap-4 -mb-1'>
             <Button
@@ -41,7 +47,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
               Редактировать
             </Button>
 
-            {(ad.status === 'active' || ad.status === 'moderating') && (
+            {ad.status !== 'archived' && (
               <StopAdButton id={data.ad.id} status={data.ad.status} />
             )}
           </div>

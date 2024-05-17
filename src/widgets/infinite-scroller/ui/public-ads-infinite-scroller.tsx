@@ -2,12 +2,12 @@
 
 'use client';
 
-import { PublicAdType } from '@albomoni/entities/ad/model/ad.type';
+import { PublicAdType } from '@albomoni/entities/ad-card/model/ad.type';
 import { useLangContext } from '@albomoni/shared/lib/providers';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
 import { Spinner } from '@nextui-org/spinner';
-import { UserAdCard } from '@albomoni/entities/ad/ui/user-ad-card';
+import { UserAdCard } from '@albomoni/entities/ad-card/ui/user-ad-card';
 
 type Props = {
   initialData: PublicAdType[];

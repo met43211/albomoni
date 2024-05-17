@@ -3,6 +3,7 @@ export enum EModalStates {
   SUBSCRIPTION = 'subscription',
   STOP_AD = 'stop_ad',
   START_AD = 'start_ad',
+  PROMOTE_AD = 'promote_ad',
 }
 
 export enum ESubscriptionStates {

@@ -1,8 +1,8 @@
 import { ImageViewer } from '@albomoni/shared/ui/fancybox/ui';
 import { Skeleton } from '@nextui-org/skeleton';
 import { Suspense } from 'react';
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
-import { getAdTitle } from '@albomoni/entities/ad/lib/get-ad-title';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
+import { getAdTitle } from '@albomoni/entities/ad-card/lib/get-ad-title';
 import { AdInfo } from '../../ad-info';
 
 type Props = {

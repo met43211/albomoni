@@ -14,7 +14,7 @@ import { API_URL } from '@albomoni/shared/config';
 import { useEffect, useState } from 'react';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { AnimatePresence } from 'framer-motion';
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
 import { useRouter } from 'next/navigation';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';

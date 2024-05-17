@@ -1,13 +1,13 @@
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { Button } from '@nextui-org/button';
 import { Rating } from '@albomoni/shared/ui/rating';
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { cookies } from 'next/headers';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { UserAvatar } from '@albomoni/entities/user';
 import Link from 'next/link';
 import { CopyLinkButton } from '@albomoni/features/copy-link';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@nextui-org/skeleton';
 import { useTranslation } from '@albomoni/shared/i18n';

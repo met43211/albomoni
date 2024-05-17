@@ -3,6 +3,7 @@
 import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { Button } from '@nextui-org/button';
+import { LuArchive } from 'react-icons/lu';
 import { PiStopCircleBold } from 'react-icons/pi';
 
 type Props = {
@@ -26,7 +27,11 @@ export const StopAdButton = ({ id, status }: Props) => {
       isIconOnly
       className='w-min flex-shrink-0 font-semibold'
     >
-      <PiStopCircleBold size={24} />
+      {status === 'ended' ? (
+        <LuArchive size={24} />
+      ) : (
+        <PiStopCircleBold size={24} />
+      )}
     </Button>
   );
 };

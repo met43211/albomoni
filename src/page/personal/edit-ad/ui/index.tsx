@@ -1,5 +1,5 @@
-import { getAdAsync } from '@albomoni/entities/ad/api/get-ad';
-import { getAdTitle } from '@albomoni/entities/ad/lib/get-ad-title';
+import { getAdAsync } from '@albomoni/entities/ad-card/api/get-ad';
+import { getAdTitle } from '@albomoni/entities/ad-card/lib/get-ad-title';
 import { EditAdForm } from '@albomoni/features/ad/place-ad';
 import { placeFormAsync } from '@albomoni/features/ad/place-ad/api/place-form/place-form';
 import { getCookie } from 'cookies-next';

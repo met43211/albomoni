@@ -1,7 +1,7 @@
 import { apiClient } from '@albomoni/shared/api/base';
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller/ui/ads-infinite-scroller';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 
 export const HomeAdsList = async ({ lng }: { lng: string }) => {
   const initialData = await apiClient.get<Ad[]>('ad/page/1');

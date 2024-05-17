@@ -1,4 +1,4 @@
-import { getAdAsync } from '@albomoni/entities/ad/api/get-ad';
+import { getAdAsync } from '@albomoni/entities/ad-card/api/get-ad';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';

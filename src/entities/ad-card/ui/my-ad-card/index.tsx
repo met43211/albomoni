@@ -31,7 +31,7 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
   } = ad;
 
   return (
-    <div className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative'>
+    <div className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative border-1 border-white/5'>
       <ImageGallery images={ad.images} />
 
       <Link

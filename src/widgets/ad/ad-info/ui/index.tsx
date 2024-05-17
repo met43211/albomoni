@@ -1,4 +1,4 @@
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { useTranslation } from '@albomoni/shared/i18n';
 
 type Props = {

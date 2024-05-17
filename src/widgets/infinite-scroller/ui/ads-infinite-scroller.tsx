@@ -2,8 +2,8 @@
 
 'use client';
 
-import { Ad } from '@albomoni/entities/ad/model/ad.type';
-import { AdCard } from '@albomoni/entities/ad/ui/ad-card';
+import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
+import { AdCard } from '@albomoni/entities/ad-card/ui/ad-card';
 import { useLangContext } from '@albomoni/shared/lib/providers';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';

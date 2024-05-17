@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { Placeholder } from '@albomoni/shared/ui/placeholder';
 import { PiMagnifyingGlass } from 'react-icons/pi';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { PublicAdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
 import { getPublicAds } from '../../api/get-public-ads';
 

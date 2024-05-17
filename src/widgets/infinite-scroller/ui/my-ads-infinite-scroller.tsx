@@ -2,8 +2,8 @@
 
 'use client';
 
-import { MyAd } from '@albomoni/entities/ad/model/ad.type';
-import { MyAdCard } from '@albomoni/entities/ad/ui/my-ad-card';
+import { MyAd } from '@albomoni/entities/ad-card/model/ad.type';
+import { MyAdCard } from '@albomoni/entities/ad-card/ui/my-ad-card';
 import { apiClient } from '@albomoni/shared/api/base';
 import { useLangContext } from '@albomoni/shared/lib/providers';
 import { getCookie } from 'cookies-next';

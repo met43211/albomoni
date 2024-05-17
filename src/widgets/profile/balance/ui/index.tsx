@@ -1,4 +1,4 @@
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { cookies } from 'next/headers';

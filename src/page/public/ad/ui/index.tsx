@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { WatchedAd } from '@albomoni/entities/ad';
+import { WatchedAd } from '@albomoni/entities/ad-card';
 import { AdInfo } from '@albomoni/widgets/ad/ad-info';
 import { AdGallery } from '@albomoni/widgets/ad/ad-gallery/ui';
 import { getAdAsync } from '../api/get-ad';

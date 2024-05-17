@@ -7,7 +7,7 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { clsx } from 'clsx';
 import { InfoButton } from '@albomoni/shared/ui/info-button';
 import { PiMagnifyingGlass } from 'react-icons/pi';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { getTransactions } from '../api/get-transactions';
 
 export const Transactions = async () => {

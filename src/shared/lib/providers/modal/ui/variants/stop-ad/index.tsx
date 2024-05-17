@@ -16,6 +16,7 @@ export const ModalVariantStopAd = () => {
   const token = getCookie('token');
 
   const isActive = modalData.status === 'active';
+  const isEnded = modalData.status === 'ended';
 
   const handleClickToArchive = async () => {
     setIsLoadingArchive(true);
@@ -39,7 +40,9 @@ export const ModalVariantStopAd = () => {
 
   return (
     <div className='p-6 flex flex-col gap-6 items-center'>
-      <h1 className='text-xl font-semibold  mt-2'>Остановка объявления</h1>
+      <h1 className='text-xl font-semibold  mt-2'>
+        {!isEnded ? 'Остановка объявления' : 'Перенос в архив'}
+      </h1>
       <p className='font-medium opacity-50  text-center'>
         {isActive
           ? 'Выберите, куда Вы хотите перенести объявление: в Ваши завершённые сделки или личный архив. Повторно запустить запись можно будет в любой момент времени.'

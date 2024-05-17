@@ -1,3 +1,5 @@
+import { PromoOptions } from '@albomoni/shared/lib/providers/modal/ui/variants/promote-ad';
+
 export type ImageType = { full: string; preview: string };
 
 type AdInfo = {
@@ -9,6 +11,7 @@ type AdInfo = {
   date: string;
   hash: string;
   geoposition: string;
+  plan: PromoOptions;
   isService: boolean;
   category: string[];
   images: ImageType[];
@@ -31,6 +34,7 @@ export type PublicAdType = {
   seller: 'owner';
   geoposition: string;
   isService: boolean;
+  plan: PromoOptions;
   additional: {
     [key: string]: string;
   };

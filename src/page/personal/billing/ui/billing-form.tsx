@@ -12,7 +12,7 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { BillingSchema } from '../model/schema';
 
 export const BillingForm = () => {

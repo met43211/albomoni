@@ -1,5 +1,5 @@
-import { getCurrenciesAsync } from '@albomoni/entities/ad/api/get-currencies';
-import { MyAd } from '@albomoni/entities/ad/model/ad.type';
+import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
+import { MyAd } from '@albomoni/entities/ad-card/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
 import { Placeholder } from '@albomoni/shared/ui/placeholder';
 import { MyAdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
