@@ -49,6 +49,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     currency,
     images,
     hash,
+    title,
   } = ad.ad;
 
   const initFields = {
@@ -60,6 +61,8 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     ...additional,
   };
 
+  const initFieldsWithTitle = title ? { title, ...initFields } : initFields;
+
   const initErrors = () =>
     Object.keys(initFields).reduce(
       (acc: any, field: string) => ({
@@ -70,7 +73,7 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     );
 
   const [form, updateForm] = useImmer<PlaceAdFormState>({
-    fields: initFields,
+    fields: initFieldsWithTitle,
     filters: formData.filters,
     errors: initErrors(),
   });

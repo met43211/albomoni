@@ -1,8 +1,9 @@
+/* eslint-disable consistent-return */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-param-reassign */
+
 import { useImmer } from 'use-immer';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
-import { Button } from '@nextui-org/button';
 import { useMutation } from '@tanstack/react-query';
 import _ from 'lodash';
 import { useCookie } from 'react-use';
@@ -16,18 +17,17 @@ import { PlaceAdQueries } from '../api';
 import { PlaceAdFormState } from '../model/form.type';
 import { countFields } from '../lib/count-fields';
 import { CategoryContext } from '../lib/use-category';
+import { PlaceAdFormButtons } from './place-ad-form-buttons';
 
 type Props = {
   formData: any;
-  setFormData: (state: string) => void;
 };
 
-export const PlaceAdForm = ({ formData, setFormData }: Props) => {
+export const PlaceAdForm = ({ formData }: Props) => {
   const { t } = useClientTranslation('place-ad');
   const { mutateAsync } = useMutation(PlaceAdQueries);
   const { user } = useSession();
   const [token] = useCookie('token');
-  const [isLoading, setIsLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
 
   const [form, updateForm] = useImmer<PlaceAdFormState>({
@@ -36,7 +36,7 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
     errors: {},
   });
 
-  const handleSubmit = async () => {
+  const saveAd = async (): Promise<any> => {
     const errorsList = Object.entries(form.errors);
     const passedFields = errorsList.filter(
       ([_errKey, errValue]) => errValue === null,
@@ -63,10 +63,8 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
 
     const hash = `${user?.user_id}_${Date.now().toString()}`;
 
-    setIsLoading(true);
-
     try {
-      await mutateAsync({ ...formCopy, token, hash });
+      const response = await mutateAsync({ ...formCopy, token, hash });
 
       await fetch(`${API_URL}place-img/`, {
         headers: {
@@ -77,11 +75,10 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
         method: 'POST',
         body: photoFormData,
       });
+
+      return response;
     } catch {
       return;
-    } finally {
-      setIsLoading(false);
-      setFormData('success');
     }
   };
 
@@ -113,26 +110,14 @@ export const PlaceAdForm = ({ formData, setFormData }: Props) => {
             </div>
           );
         })}
-        <div className='flex flex-col gap-4'>
-          <Button
-            size='lg'
-            color='primary'
-            variant='shadow'
-            onPress={handleSubmit}
-            isLoading={isLoading}
-            className='w-min'
-          >
-            Разместить объявление
-          </Button>
-
-          <AnimatePresence>
-            {formError && (
-              <NotificationBubble type='error'>
-                Заполните корректно все поля
-              </NotificationBubble>
-            )}
-          </AnimatePresence>
-        </div>
+        <PlaceAdFormButtons saveAd={saveAd} />
+        <AnimatePresence>
+          {formError && (
+            <NotificationBubble type='error'>
+              Заполните корректно все поля
+            </NotificationBubble>
+          )}
+        </AnimatePresence>
       </div>
     </CategoryContext.Provider>
   );

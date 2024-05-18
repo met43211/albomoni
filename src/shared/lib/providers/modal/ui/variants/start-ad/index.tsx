@@ -9,13 +9,13 @@ import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@nextui-org/spinner';
 import { useModal } from '../../../lib/use-modal';
 import { EModalStates } from '../../../model/modal-states.enum';
-import { stopAd } from '../../../api/stop-ad';
 import { PromotionVariants } from '../../../config/promotion-variants';
 import { PromoteOption } from '../promote-ad/promote-option';
 import { PromoOptions } from '../promote-ad';
 import { getPromotionPlans } from '../../../api/get-promotion-plans';
 import { StartAdPeriodVariants } from '../../../config/start-ad-period-variants';
 import { calcStartAdPrice } from '../../../lib/calc-start-ad-price';
+import { startAd } from '../../../api/start-ad';
 
 export const ModalVariantStartAd = () => {
   const { setModalState, modalData } = useModal();
@@ -49,15 +49,18 @@ export const ModalVariantStartAd = () => {
   const handleClick = async () => {
     setIsStartLoading(true);
     const handleStatus = 'moderating';
-    await stopAd(modalData.id, handleStatus, token as string);
+    await startAd(
+      modalData.id,
+      handleStatus,
+      activeOption,
+      paymentPeriod as 'daily' | 'weekly' | 'monthly',
+      token as string,
+    );
 
     setModalState(EModalStates.NULL);
     revalidateRoute('/profile/my-ads');
     revalidateRoute(`/profile/my-ads/ad/${modalData.id}`);
   };
-
-  const findPrice = (title: PromoOptions) =>
-    data?.plans.find(({ name }) => name === title)?.cost;
 
   if (isLoading) {
     return (
@@ -66,6 +69,9 @@ export const ModalVariantStartAd = () => {
       </div>
     );
   }
+
+  const findPrice = (title: PromoOptions) =>
+    data?.plans.find(({ name }) => name === title)?.cost;
 
   const activeOptionData = data?.plans.find(
     ({ name }) => activeOption === name,
@@ -142,7 +148,9 @@ export const ModalVariantStartAd = () => {
 
       <div className='w-full px-6 pb-6 pt-1 flex flex-col gap-4'>
         <div className='w-full flex flex-col flex-shrink-0'>
-          <h2 className='font-medium text-neutral-500'>Итоговая стоимость</h2>
+          <h2 className='font-medium text-neutral-500'>
+            Итоговая стоимость размещения
+          </h2>
           <p className='text-xl font-semibold'>
             {calcStartAdPrice(
               data?.price as number,

@@ -11,12 +11,11 @@ type Props = {
 };
 
 export const AdGallery = async ({ data, lng }: Props) => {
- 
   const { title, category, additional } = data.ad;
 
   return (
     <div className='w-full flex flex-col gap-6 flex-shrink'>
-      <div className='w-full overflow-clip lg:rounded-xl flex-shrink'>
+      <div className='w-full overflow-clip lg:rounded-xl flex-shrink lg:border-1 lg:border-white/5'>
         <Suspense
           fallback={
             <Skeleton className='w-full aspect-square md:aspect-[3/2] rounded-xl flex-shrink' />

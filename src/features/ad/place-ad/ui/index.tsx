@@ -62,7 +62,7 @@ export const PlaceAd = () => {
       {formData === 'loading' && <Spinner />}
 
       {formData && formData !== 'loading' && formData !== 'success' && (
-        <PlaceAdForm formData={formData} setFormData={setFormData} />
+        <PlaceAdForm formData={formData} />
       )}
 
       {formData === 'success' && <PlaceAdSuccess />}
