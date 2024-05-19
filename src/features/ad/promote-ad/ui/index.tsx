@@ -15,8 +15,8 @@ export const PromoteAdButton = ({ id, plan }: Props) => {
   const { setModalState, setModalData } = useModal();
 
   const handleClick = () => {
-    setModalState(EModalStates.PROMOTE_AD);
     setModalData({ id, plan });
+    setModalState(EModalStates.PROMOTE_AD);
   };
 
   return (

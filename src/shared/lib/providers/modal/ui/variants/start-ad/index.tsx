@@ -16,6 +16,7 @@ import { getPromotionPlans } from '../../../api/get-promotion-plans';
 import { StartAdPeriodVariants } from '../../../config/start-ad-period-variants';
 import { calcStartAdPrice } from '../../../lib/calc-start-ad-price';
 import { startAd } from '../../../api/start-ad';
+import { ModalScrollableArea } from '../../scrollable-area';
 
 export const ModalVariantStartAd = () => {
   const { setModalState, modalData } = useModal();
@@ -24,7 +25,7 @@ export const ModalVariantStartAd = () => {
   const [paymentPeriod, setPaymentPeriod] = useState(
     StartAdPeriodVariants[0].id,
   );
-  const [scrollPosition, setScrollPosition] = useState(0);
+
   const [activeOption, setActiveOption] = useState<PromoOptions>(
     PromotionVariants[0].id,
   );
@@ -41,10 +42,6 @@ export const ModalVariantStartAd = () => {
         token as string,
       ),
   });
-
-  const handleScroll = (event: any) => {
-    setScrollPosition(event.target.scrollTop);
-  };
 
   const handleClick = async () => {
     setIsStartLoading(true);
@@ -79,16 +76,7 @@ export const ModalVariantStartAd = () => {
 
   return (
     <>
-      <ScrollShadow
-        hideScrollBar
-        onPointerDownCapture={(e) => {
-          if (scrollPosition > 0) {
-            e.stopPropagation();
-          }
-        }}
-        onScroll={handleScroll}
-        className='w-full h-full flex flex-col gap-6 items-center p-6 flex-shrink'
-      >
+      <ModalScrollableArea>
         <h1 className='text-xl font-semibold mt-2'>Запуск объявления</h1>
 
         <p className='text-sm opacity-50 text-start'>
@@ -144,7 +132,7 @@ export const ModalVariantStartAd = () => {
             времени.
           </p>
         </div>
-      </ScrollShadow>
+      </ModalScrollableArea>
 
       <div className='w-full px-6 pb-6 pt-1 flex flex-col gap-4'>
         <div className='w-full flex flex-col flex-shrink-0'>

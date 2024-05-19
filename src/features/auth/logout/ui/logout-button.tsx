@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 
 export const LogoutButton = () => {
   const { push } = useRouter();
+  
   const handleLogout = () => {
     removeCookie('token');
     deleteCookie('token');

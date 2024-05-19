@@ -14,8 +14,8 @@ export const StartAdButton = ({ id, status }: Props) => {
   const { setModalState, setModalData } = useModal();
 
   const handleClick = () => {
-    setModalState(EModalStates.START_AD);
     setModalData({ id, status });
+    setModalState(EModalStates.START_AD);
   };
 
   return (

@@ -3,7 +3,6 @@
 import { UserAvatar } from '@albomoni/entities/user';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -14,6 +13,7 @@ import {
 } from '../../../model/modal-states.enum';
 import { cancelSubscription } from '../../../api/cancel-subscription';
 import { useModal } from '../../../lib/use-modal';
+import { ModalScrollableArea } from '../../scrollable-area';
 
 type Props = {
   setScreen: (state: ESubscriptionStates) => void;
@@ -24,11 +24,6 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
   const token = getCookie('token');
   const router = useRouter();
   const { setModalState } = useModal();
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  const handleScroll = (event: any) => {
-    setScrollPosition(event.target.scrollTop);
-  };
 
   const handleClickConfirm = () => {
     setScreen(ESubscriptionStates.CONFIRMATION);
@@ -42,16 +37,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
 
   return (
     <>
-      <ScrollShadow
-        hideScrollBar
-        onPointerDownCapture={(e) => {
-          if (scrollPosition > 0) {
-            e.stopPropagation();
-          }
-        }}
-        onScroll={handleScroll}
-        className='w-full h-full flex flex-col gap-5 items-center p-8 flex-shrink pt-12'
-      >
+      <ModalScrollableArea>
         <div className='w-32 h-32'>
           <UserAvatar src={user?.avatar as string} isSubscribed isBig />
         </div>
@@ -64,7 +50,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
           </h2>
         </div>
         <div className='w-1 h-[700px] flex-shrink-0' />
-      </ScrollShadow>
+      </ModalScrollableArea>
 
       <div className='w-full flex items-center justify-center flex-shrink-0 p-6 pt-0'>
         {user?.subscription && (

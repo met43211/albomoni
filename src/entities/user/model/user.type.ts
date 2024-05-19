@@ -1,3 +1,5 @@
+type PhoneType = { id: number; phone: string; name: string };
+
 export type UserType = {
   user_id: number;
   first_name: string;
@@ -8,7 +10,7 @@ export type UserType = {
   money: number;
   currency: string;
   subscription: boolean;
-  phone: string | null;
+  phones: PhoneType[];
   notifications: number;
   products: number;
   plans: number;

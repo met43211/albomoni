@@ -5,6 +5,7 @@ import { ModalVariantSubscription } from './variants/subscription';
 import { ModalVariantStopAd } from './variants/stop-ad';
 import { ModalVariantStartAd } from './variants/start-ad';
 import { ModalVariantPromoteAd } from './variants/promote-ad';
+import { ModalVariantAddPhone } from './variants/(edit-profile)/add-phone';
 
 export const ModalContent = () => {
   const { modalState } = useModal();
@@ -19,6 +20,8 @@ export const ModalContent = () => {
       return <ModalVariantStartAd />;
     case EModalStates.PROMOTE_AD:
       return <ModalVariantPromoteAd />;
+    case EModalStates.EDIT_ADD_PHONE:
+      return <ModalVariantAddPhone />;
     default:
       return null;
     }

@@ -16,6 +16,7 @@ import {
   PromotionVariants,
   PromotionVariantsType,
 } from '../../../config/promotion-variants';
+import { ModalScrollableArea } from '../../scrollable-area';
 
 export type PromoOptions = 'null' | 'x3' | 'x5' | 'x7';
 
@@ -23,7 +24,6 @@ export const ModalVariantPromoteAd = () => {
   const token = getCookie('token');
   const router = useRouter();
   const { setModalState, modalData } = useModal();
-  const [scrollPosition, setScrollPosition] = useState(0);
   const [activeOption, setActiveOption] = useState<PromoOptions>(
     modalData.plan,
   );
@@ -61,10 +61,6 @@ export const ModalVariantPromoteAd = () => {
     router.refresh();
   };
 
-  const handleScroll = (event: any) => {
-    setScrollPosition(event.target.scrollTop);
-  };
-
   const closeModal = () => {
     setModalState(EModalStates.NULL);
   };
@@ -86,19 +82,10 @@ export const ModalVariantPromoteAd = () => {
 
   return (
     <>
-      <ScrollShadow
-        hideScrollBar
-        onPointerDownCapture={(e) => {
-          if (scrollPosition > 0) {
-            e.stopPropagation();
-          }
-        }}
-        onScroll={handleScroll}
-        className='w-full h-full flex flex-col gap-6 items-center p-6 flex-shrink'
-      >
+      <ModalScrollableArea>
         <h1 className='text-xl font-semibold mt-2'>Продвижение объявления</h1>
 
-        <div className='w-full flex flex-col gap-2'>
+        <div className='w-full flex flex-col gap-4'>
           <h2 className='font-medium text-neutral-500'>Текущий тариф</h2>
           <PromoteOption
             title={currentOption.title}
@@ -110,9 +97,9 @@ export const ModalVariantPromoteAd = () => {
           />
         </div>
 
-        <div className='w-full flex flex-col gap-2'>
+        <div className='w-full flex flex-col gap-4'>
           <h2 className='font-medium text-neutral-500'>Другие тарифы</h2>
-          <div className='w-full flex gap-2 flex-wrap'>
+          <div className='w-full flex gap-4 flex-wrap'>
             {otherOptions.map(({ id, title, properties }) => (
               <PromoteOption
                 id={id}
@@ -125,7 +112,7 @@ export const ModalVariantPromoteAd = () => {
               />
             ))}
           </div>
-          <p className='text-sm opacity-50 text-start pt-4'>
+          <p className='text-sm opacity-50 text-start pt-2'>
             Оплата за продвижение снимается раз в сутки с баланса вашего
             аккаунта. Вы можете отменить продвижение или поменять тариф в любой
             момент времени. При отмене продвижения оплаченный ранее тариф
@@ -134,7 +121,7 @@ export const ModalVariantPromoteAd = () => {
             автоматически сменится на стандартный.
           </p>
         </div>
-      </ScrollShadow>
+      </ModalScrollableArea>
 
       <div className='w-full px-6 pb-6 pt-1 flex flex-col gap-4'>
         <div className='w-full flex flex-col flex-shrink-0'>
