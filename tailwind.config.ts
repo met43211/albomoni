@@ -75,7 +75,7 @@ const config: Config = {
             },
             danger: {
               DEFAULT: '#ED2939',
-              foreground: '#000000',
+              foreground: '#ffffff',
             },
             success: {
               DEFAULT: 'rgb(58, 171, 64)',

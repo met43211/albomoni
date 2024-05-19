@@ -17,7 +17,7 @@ import { sendPhoneCode } from '../../../../api/add-phone/send-phone-code';
 import { verifyPhoneCode } from '../../../../api/add-phone/verify-phone-code';
 import { savePhone } from '../../../../api/add-phone/save-phone';
 
-export const ModalVariantAddPhone = () => {
+export const ModalVariantEditPhone = () => {
   const inputPhoneRef = useMask({
     mask: '+_ (___) ___-__-__',
     replacement: { _: /\d/ },
@@ -29,14 +29,14 @@ export const ModalVariantAddPhone = () => {
     showMask: true,
   });
 
-  const { setModalState } = useModal();
+  const { setModalState, modalData } = useModal();
   const token = getCookie('token');
   const router = useRouter();
 
   const [counterValue, setCounterValue] = useState<number | null>(null);
 
-  const [phoveValue, setPhoneValue] = useState('+_ (___) ___-__-__');
-  const [titleValue, setTitleValue] = useState('');
+  const [phoveValue, setPhoneValue] = useState(modalData.phone);
+  const [titleValue, setTitleValue] = useState(modalData.name);
   const [codeValue, setCodeValue] = useState('___-___');
 
   const [isResendable, setIsResendable] = useState(true);
@@ -125,7 +125,7 @@ export const ModalVariantAddPhone = () => {
     <>
       <ModalScrollableArea>
         <h1 className='text-xl font-semibold mt-4 md:mt-0'>
-          Добавление телефона
+          Редактирование телефона
         </h1>
 
         {isPhoneVerified ? (
@@ -214,7 +214,7 @@ export const ModalVariantAddPhone = () => {
           onPress={handleSavePhone}
           className='w-full font-semibold gap-2 flex-shrink-0'
         >
-          Добавить номер
+          Сохранить изменения
         </Button>
       </div>
     </>

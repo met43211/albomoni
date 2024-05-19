@@ -4,12 +4,11 @@ import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Button } from '@nextui-org/button';
-import { Divider } from '@nextui-org/react';
-import { Fragment } from 'react';
-import { PiPencilSimpleBold, PiPlusBold, PiTrashBold } from 'react-icons/pi';
+import { PiPlusBold } from 'react-icons/pi';
+import { PhoneItem } from './phone-item';
 
 type Props = {
-  numbers: { phone: string; name: string }[];
+  numbers: { id: number; phone: string; name: string }[];
 };
 
 export const EditPhoneNumbers = ({ numbers }: Props) => {
@@ -27,6 +26,8 @@ export const EditPhoneNumbers = ({ numbers }: Props) => {
           size='sm'
           className='w-fit'
           radius='full'
+          color='primary'
+          variant='shadow'
           startContent={<PiPlusBold />}
           onPress={handleClickAdd}
         >
@@ -35,32 +36,13 @@ export const EditPhoneNumbers = ({ numbers }: Props) => {
       </div>
 
       {numbers.length > 0 ? (
-        numbers.map(({ phone, name }, index) => (
-          <Fragment key={phone}>
-            <div className='flex gap-2 items-center'>
-              <div className='text-lg select-text font-medium flex flex-col items-start w-full'>
-                <h4>{name}</h4>
-                <h5 className='opacity-50 font-normal'>{phone}</h5>
-              </div>
-              <Button
-                size='sm'
-                isIconOnly
-                radius='lg'
-                variant='flat'
-                className='mt-[2px] ml-1 flex-shrink-0'
-                startContent={<PiPencilSimpleBold size={18} />}
-              />
-              <Button
-                size='sm'
-                isIconOnly
-                radius='lg'
-                variant='flat'
-                className='mt-[2px] text-danger flex-shrink-0'
-                startContent={<PiTrashBold size={18} />}
-              />
-            </div>
-            {index < numbers.length - 1 && <Divider />}
-          </Fragment>
+        numbers.map(({ id, phone, name }, index) => (
+          <PhoneItem
+            id={id}
+            phone={phone}
+            name={name}
+            isNotLast={index < numbers.length - 1}
+          />
         ))
       ) : (
         <NotificationBubble>
