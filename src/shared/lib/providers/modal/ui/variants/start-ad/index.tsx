@@ -4,7 +4,6 @@ import { getCookie } from 'cookies-next';
 import { useState } from 'react';
 import { PiPlayCircleBold } from 'react-icons/pi';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@nextui-org/spinner';
 import { useModal } from '../../../lib/use-modal';
@@ -35,9 +34,9 @@ export const ModalVariantStartAd = () => {
     queryFn: () =>
       getPromotionPlans(
         {
-          category: 'real_estate',
-          currency: 'RUB',
-          price: 100000,
+          category: modalData.category,
+          currency: modalData.currency,
+          price: modalData.price,
         },
         token as string,
       ),
@@ -45,7 +44,9 @@ export const ModalVariantStartAd = () => {
 
   const handleClick = async () => {
     setIsStartLoading(true);
+
     const handleStatus = 'moderating';
+
     await startAd(
       modalData.id,
       handleStatus,

@@ -9,13 +9,22 @@ import { PiTrendUpBold } from 'react-icons/pi';
 type Props = {
   id: number;
   plan: PromoOptions;
+  category: string;
+  currency: string;
+  price: number;
 };
 
-export const PromoteAdButton = ({ id, plan }: Props) => {
+export const PromoteAdButton = ({
+  id,
+  plan,
+  category,
+  currency,
+  price,
+}: Props) => {
   const { setModalState, setModalData } = useModal();
 
   const handleClick = () => {
-    setModalData({ id, plan });
+    setModalData({ id, plan, category, currency, price });
     setModalState(EModalStates.PROMOTE_AD);
   };
 

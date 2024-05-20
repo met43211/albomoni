@@ -12,6 +12,8 @@ import Link from 'next/link';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { PromoteAdButton } from '@albomoni/features/ad/promote-ad';
+import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
+import { MyAdErrorBubble } from './error-bubble';
 
 type Props = {
   data: Ad;
@@ -31,9 +33,21 @@ export const MyAdActions = async ({ data, lng }: Props) => {
       <div className='w-full lg:w-80 lg:sticky top-8 h-min flex flex-col gap-8 flex-shrink-0'>
         <div className='flex flex-col gap-4'>
           {isStartable ? (
-            <StartAdButton id={ad.id} status={ad.status} />
+            <StartAdButton
+              id={ad.id}
+              status={ad.status}
+              category={ad.category[0]}
+              currency={ad.currency}
+              price={ad.cost}
+            />
           ) : (
-            <PromoteAdButton id={ad.id} plan={ad.plan} />
+            <PromoteAdButton
+              id={ad.id}
+              plan={ad.plan}
+              category={ad.category[0]}
+              currency={ad.currency}
+              price={ad.cost}
+            />
           )}
 
           <div className='w-full flex gap-4 -mb-1'>
@@ -52,10 +66,14 @@ export const MyAdActions = async ({ data, lng }: Props) => {
             )}
           </div>
         </div>
-        <MyAdCardChips status={ad.status} />
-        <MyAdCardStats views={ad.views} favorites={ad.favorites} />
 
-        <div className='flex flex-col gap-1 -mt-3'>
+        <div className='w-full flex flex-col gap-4 -my-2'>
+          <MyAdErrorBubble status={ad.status_text} />
+          <MyAdCardChips status={ad.status} />
+          <MyAdCardStats views={ad.views} favorites={ad.favorites} />
+        </div>
+
+        <div className='flex flex-col gap-1 -mt-2'>
           <div className='w-full flex gap-2 justify-start'>
             <h3 className='text-md font-semibold opacity-50'>Цена</h3>
           </div>

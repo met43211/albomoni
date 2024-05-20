@@ -4,7 +4,7 @@ import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Button } from '@nextui-org/button';
-import { PiPlusBold } from 'react-icons/pi';
+import { PiArrowCircleRightBold, PiPlusBold } from 'react-icons/pi';
 import { PhoneItem } from './phone-item';
 
 type Props = {
@@ -18,24 +18,31 @@ export const EditPhoneNumbers = ({ numbers }: Props) => {
     setModalState(EModalStates.EDIT_ADD_PHONE);
   };
 
+  const isNotEmpty = numbers.length > 0;
+
   return (
     <div className='w-full flex flex-col gap-2'>
       <div className='w-full flex gap-4 items-center pb-3'>
-        <h3 className='opacity-50 font-medium'>Номера телефонов</h3>
+        <h3 className='opacity-50 font-medium'>Номер телефона</h3>
         <Button
           size='sm'
-          className='w-fit'
+          className='w-fit text-[14px]'
           radius='full'
-          color='primary'
-          variant='shadow'
-          startContent={<PiPlusBold />}
+          color='secondary'
+          startContent={
+            isNotEmpty ? (
+              <PiArrowCircleRightBold className='flex-shrink-0' size={16} />
+            ) : (
+              <PiPlusBold className='flex-shrink-0' size={16} />
+            )
+          }
           onPress={handleClickAdd}
         >
-          Добавить
+          {isNotEmpty ? 'Заменить' : 'Добавить'}
         </Button>
       </div>
 
-      {numbers.length > 0 ? (
+      {isNotEmpty ? (
         numbers.map(({ id, phone, name }, index) => (
           <PhoneItem
             key={id}
@@ -47,8 +54,7 @@ export const EditPhoneNumbers = ({ numbers }: Props) => {
         ))
       ) : (
         <NotificationBubble>
-          У вас еще нет номеров, привязанных к этой учётной записи. Добавьте
-          один.
+          У вас еще нет номера, привязанного к этой учётной записи.
         </NotificationBubble>
       )}
     </div>

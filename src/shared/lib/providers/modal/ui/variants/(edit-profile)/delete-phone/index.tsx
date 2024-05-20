@@ -29,7 +29,8 @@ export const ModalVariantDeletePhone = () => {
         </h1>
         <h2 className='text-2xl font-semibold'>{modalData.phone}</h2>
         <p className='font-medium opacity-50'>
-          Вы действительно хотите удалить этот телефон со своего аккаунта?
+          Вы действительно хотите удалить этот телефон со своего аккаунта? Все
+          активные объявления будут перенесены в архив.
         </p>
       </ModalScrollableArea>
 

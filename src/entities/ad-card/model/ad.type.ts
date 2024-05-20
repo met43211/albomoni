@@ -16,6 +16,7 @@ type AdInfo = {
   category: string[];
   images: ImageType[];
   status: 'active' | 'moderating' | 'archived' | 'ended';
+  status_text: 'correct' | 'error';
   views: number;
   favorites: number;
   seller: 'owner' | 'broker';

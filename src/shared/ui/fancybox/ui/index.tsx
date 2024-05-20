@@ -63,16 +63,14 @@ export const ImageViewer = ({ images }: Props) => {
             key={full}
             className='f-carousel__slide'
             data-fancybox='gallery'
-            data-src={full}
-            data-thumb-src={preview}
+            data-src={`${full}?v=${Date.now()}`}
+            data-thumb-src={`${preview}?v=${Date.now()}`}
           >
             <Image
               width={500}
               height={300}
               quality={70}
-              src={full}
-              placeholder='blur'
-              blurDataURL={preview}
+              src={`${full}?v=${Date.now()}`}
               alt='img'
               className='snap-start flex-shrink-0 object-cover h-full w-full'
             />

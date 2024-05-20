@@ -8,13 +8,22 @@ import { PiPlayCircleBold } from 'react-icons/pi';
 type Props = {
   id: number;
   status: 'active' | 'moderating' | 'archived' | 'ended';
+  category: string;
+  currency: string;
+  price: number;
 };
 
-export const StartAdButton = ({ id, status }: Props) => {
+export const StartAdButton = ({
+  id,
+  status,
+  category,
+  currency,
+  price,
+}: Props) => {
   const { setModalState, setModalData } = useModal();
 
   const handleClick = () => {
-    setModalData({ id, status });
+    setModalData({ id, status, category, currency, price });
     setModalState(EModalStates.START_AD);
   };
 

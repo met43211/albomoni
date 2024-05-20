@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 
 import { Button } from '@nextui-org/button';
-import { Input } from '@nextui-org/input';
 import { useMask } from '@react-input/mask';
 import { useEffect, useState } from 'react';
 import { Spacer } from '@nextui-org/spacer';
@@ -36,7 +35,7 @@ export const ModalVariantAddPhone = () => {
   const [counterValue, setCounterValue] = useState<number | null>(null);
 
   const [phoveValue, setPhoneValue] = useState('+_ (___) ___-__-__');
-  const [titleValue, setTitleValue] = useState('');
+  const [titleValue, setTitleValue] = useState('telephone');
   const [codeValue, setCodeValue] = useState('___-___');
 
   const [isResendable, setIsResendable] = useState(true);
@@ -194,7 +193,7 @@ export const ModalVariantAddPhone = () => {
         )}
 
         <Spacer />
-        <Input
+        {/* <Input
           size='lg'
           label='Название'
           labelPlacement='outside'
@@ -202,7 +201,7 @@ export const ModalVariantAddPhone = () => {
           onChange={(e) => setTitleValue(e.target.value)}
           placeholder='Личный, рабочий и т.п.'
           type='text'
-        />
+        /> */}
       </ModalScrollableArea>
 
       <div className='w-full px-6 pb-6 pt-1 flex flex-col gap-4'>

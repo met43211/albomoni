@@ -46,7 +46,7 @@ const config: Config = {
             },
             secondary: {
               DEFAULT: 'black',
-              foreground: '#000000',
+              foreground: '#fff',
             },
             danger: {
               DEFAULT: '#ED2939',
@@ -71,7 +71,7 @@ const config: Config = {
             },
             secondary: {
               DEFAULT: 'white',
-              foreground: '#000000',
+              foreground: '#000',
             },
             danger: {
               DEFAULT: '#ED2939',
