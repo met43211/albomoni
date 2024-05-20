@@ -55,7 +55,7 @@ export const ModalSubscriptionConfirmation = ({ setScreen }: Props) => {
         hideScrollBar
         className='w-full h-full max-h-[500px] flex flex-col gap-5 items-center p-8'
       >
-        <div className='w-32 h-32'>
+        <div className='w-32 h-32 flex-shrink-0'>
           <UserAvatar src={user?.avatar as string} isSubscribed isBig />
         </div>
         <div className='flex flex-col gap-2 items-center'>

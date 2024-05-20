@@ -2,7 +2,6 @@ import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { Button } from '@nextui-org/button';
 import { Divider } from '@nextui-org/divider';
-import { Fragment } from 'react';
 import { PiPencilSimpleBold, PiTrashBold } from 'react-icons/pi';
 
 type Props = {
@@ -15,32 +14,19 @@ type Props = {
 export const PhoneItem = ({ id, name, phone, isNotLast }: Props) => {
   const { setModalState, setModalData } = useModal();
 
-  const handleClickEdit = () => {
-    setModalData({ id, name, phone });
-    setModalState(EModalStates.EDIT_CHANGE_PHONE);
-  };
-
   const handleClickDelete = () => {
     setModalData({ id, name, phone });
     setModalState(EModalStates.EDIT_DELETE_PHONE);
   };
 
   return (
-    <Fragment key={id}>
+    <>
       <div className='flex gap-2 items-center'>
         <div className='text-lg select-text font-medium flex flex-col items-start w-full'>
           <h4>{name}</h4>
           <h5 className='opacity-50 font-normal'>{phone}</h5>
         </div>
-        <Button
-          size='sm'
-          isIconOnly
-          radius='lg'
-          variant='flat'
-          className='mt-[2px] ml-1 flex-shrink-0'
-          onPress={handleClickEdit}
-          startContent={<PiPencilSimpleBold size={18} />}
-        />
+
         <Button
           size='sm'
           isIconOnly
@@ -52,6 +38,6 @@ export const PhoneItem = ({ id, name, phone, isNotLast }: Props) => {
         />
       </div>
       {isNotLast && <Divider />}
-    </Fragment>
+    </>
   );
 };

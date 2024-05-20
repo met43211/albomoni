@@ -13,9 +13,9 @@ import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { useModal } from '../../../../lib/use-modal';
 import { ModalScrollableArea } from '../../../scrollable-area';
 import { EModalStates } from '../../../../model/modal-states.enum';
-import { sendPhoneCode } from '../../../../api/add-phone/send-phone-code';
-import { verifyPhoneCode } from '../../../../api/add-phone/verify-phone-code';
-import { savePhone } from '../../../../api/add-phone/save-phone';
+import { sendPhoneCode } from '../../../../api/(edit-user)/add-phone/send-phone-code';
+import { verifyPhoneCode } from '../../../../api/(edit-user)/add-phone/verify-phone-code';
+import { savePhone } from '../../../../api/(edit-user)/add-phone/save-phone';
 
 export const ModalVariantAddPhone = () => {
   const inputPhoneRef = useMask({

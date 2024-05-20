@@ -8,6 +8,7 @@ import { ModalVariantPromoteAd } from './variants/promote-ad';
 import { ModalVariantAddPhone } from './variants/(edit-profile)/add-phone';
 import { ModalVariantEditPhone } from './variants/(edit-profile)/edit-phone';
 import { ModalVariantDeletePhone } from './variants/(edit-profile)/delete-phone';
+import { ModalVariantEditTextField } from './variants/(edit-profile)/edit-text-field';
 
 export const ModalContent = () => {
   const { modalState } = useModal();
@@ -28,6 +29,8 @@ export const ModalContent = () => {
       return <ModalVariantEditPhone />;
     case EModalStates.EDIT_DELETE_PHONE:
       return <ModalVariantDeletePhone />;
+    case EModalStates.EDIT_CHANGE_TEXT:
+      return <ModalVariantEditTextField />;
     default:
       return null;
     }

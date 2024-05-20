@@ -19,6 +19,7 @@ import { apiClient } from '@albomoni/shared/api/base';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { useLocalStorage } from 'react-use';
 import Link from 'next/link';
+import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { LoginQueries } from '../../api';
 import {
   LoginCheckSchema,
@@ -27,6 +28,7 @@ import {
 
 export const LoginWidget = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isIncorrect, setIsIncorrect] = useState(false);
   const { t } = useClientTranslation('forms');
   const router = useRouter();
   const [watchedAds] = useLocalStorage('watched', []);
@@ -68,6 +70,7 @@ export const LoginWidget = () => {
       revalidateRoute('/profile');
       router.push('/profile');
     } catch {
+      setIsIncorrect(true);
       return;
     }
   });
@@ -143,6 +146,11 @@ export const LoginWidget = () => {
                   />
                 )}
               />
+              {isIncorrect && (
+                <NotificationBubble type='error'>
+                  Неверно введён логин или пароль. Попробуйте ещё раз.
+                </NotificationBubble>
+              )}
               <Link
                 href='/forgot-password'
                 className='text-sm text-start opacity-60 underline mt-4'

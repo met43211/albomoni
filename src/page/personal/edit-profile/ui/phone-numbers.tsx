@@ -38,6 +38,7 @@ export const EditPhoneNumbers = ({ numbers }: Props) => {
       {numbers.length > 0 ? (
         numbers.map(({ id, phone, name }, index) => (
           <PhoneItem
+            key={id}
             id={id}
             phone={phone}
             name={name}

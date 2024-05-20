@@ -6,7 +6,11 @@ import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-tran
 import { Button, Spinner } from '@nextui-org/react';
 import Image from 'next/image';
 import { FormEvent, memo, useRef } from 'react';
-import { PiArrowCounterClockwiseBold, PiPlusCircleBold, PiXBold } from 'react-icons/pi';
+import {
+  PiArrowCounterClockwiseBold,
+  PiPlusCircleBold,
+  PiXBold,
+} from 'react-icons/pi';
 import * as yup from 'yup';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { AnimatePresence } from 'framer-motion';
@@ -94,20 +98,6 @@ export const PlaceAdPhotos = memo(
         draft.fields[title] = newDraft;
       });
     };
-
-    // const onCropComplete = (editedFile: File) => {
-    //   const newDraft = value.filter(
-    //     (_file: File, index: number) => index !== Number(editId),
-    //   );
-
-    //   const updatedDraft = newDraft.splice(editId, 0, editedFile);
-
-    //   console.log(newDraft, updatedDraft);
-
-    //   updateForm((draft: any) => {
-    //     draft.fields[title] = updatedDraft;
-    //   });
-    // };
 
     if (isImagesLoaded === false)
       return (

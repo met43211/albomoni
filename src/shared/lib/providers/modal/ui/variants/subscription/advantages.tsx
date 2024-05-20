@@ -5,7 +5,6 @@ import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Link from 'next/link';
 import {
   EModalStates,
@@ -38,7 +37,7 @@ export const ModalSubscriptionAdvantages = ({ setScreen }: Props) => {
   return (
     <>
       <ModalScrollableArea>
-        <div className='w-32 h-32'>
+        <div className='w-32 h-32 flex-shrink-0'>
           <UserAvatar src={user?.avatar as string} isSubscribed isBig />
         </div>
         <div className='flex flex-col gap-2 items-center'>

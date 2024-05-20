@@ -8,7 +8,7 @@ import { PiTrashBold } from 'react-icons/pi';
 import { useModal } from '../../../../lib/use-modal';
 import { ModalScrollableArea } from '../../../scrollable-area';
 import { EModalStates } from '../../../../model/modal-states.enum';
-import { deletePhone } from '../../../../api/add-phone/delete-phone';
+import { deletePhone } from '../../../../api/(edit-user)/delete-phone';
 
 export const ModalVariantDeletePhone = () => {
   const { setModalState, modalData } = useModal();

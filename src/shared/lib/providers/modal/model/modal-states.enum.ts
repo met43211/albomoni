@@ -7,6 +7,7 @@ export enum EModalStates {
   EDIT_ADD_PHONE = 'edit_add_phone',
   EDIT_CHANGE_PHONE = 'edit_change_phone',
   EDIT_DELETE_PHONE = 'edit_delete_phone',
+  EDIT_CHANGE_TEXT = 'edit_change_text',
 }
 
 export enum ESubscriptionStates {
