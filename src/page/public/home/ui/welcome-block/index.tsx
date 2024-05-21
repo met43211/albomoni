@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { cookies } from 'next/headers';
 import { getCookie } from 'cookies-next';
 import { Spacer } from '@nextui-org/spacer';
+import { Button } from '@nextui-org/react';
 import { WelcomeBlockScreen } from './screen';
 
 export const WelcomeBlock = () => {
@@ -17,18 +18,19 @@ export const WelcomeBlock = () => {
           <h2 className='text-3xl lg:text-5xl font-bold !leading-[1.3] subpixel-antialiased text-indigo-900 dark:text-indigo-100'>
             Поиск и размещение объявлений
           </h2>
-          <p className='text-md lg:text-lg text-blue-900 dark:text-blue-100 opacity-90 mb-1'>
+          <p className='text-md lg:text-lg text-blue-900 dark:text-blue-100 opacity-90 mb-1 font-medium'>
             Совершайте выгодные сделки каждый день
           </p>
-          <Link href='/place-ad'>
-            <button
-              type='button'
-              className='w-fit flex gap-2 items-center py-3 px-5 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400 hover:scale-105 active:scale-95 transition-transform text-white font-medium'
-            >
-              <PiPlusCircleBold size={20} />
-              Разместить объявление
-            </button>
-          </Link>
+
+          <Button
+            as={Link}
+            href='/place-ad'
+            size='lg'
+            className='w-fit flex gap-2 items-center py-3 px-5 rounded-2xl bg-gradient-to-tr from-blue-500 to-indigo-500 dark:from-blue-500 dark:to-indigo-400 text-white font-medium'
+          >
+            <PiPlusCircleBold size={20} />
+            Разместить объявление
+          </Button>
         </div>
         <div className='absolute bottom-0 right-4 overflow-clip w-full h-[270px] md:w-[600px] md:h-[350px]'>
           <WelcomeBlockScreen />

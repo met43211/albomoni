@@ -16,13 +16,13 @@ export const MyAdCardChips = ({ status }: Props) => {
         >
           Активно
         </Chip>
-        <Chip
+        {/* <Chip
           variant='flat'
           color='primary'
           classNames={{ content: 'font-medium' }}
         >
           Осталось 27 дней
-        </Chip>
+        </Chip> */}
       </>
     ),
     moderating: (

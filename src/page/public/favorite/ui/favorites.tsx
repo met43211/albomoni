@@ -35,14 +35,11 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
   };
 
   return initialData.length > 0 ? (
-    <div className='w-full h-min flex flex-col gap-10'>
-      <h2 className='text-2xl md:text-3xl font-bold'>Избранные объявления</h2>
-      <AdsInfiniteScroller
-        currencies={currencies}
-        initialData={initialData}
-        fetchFunction={fetchFunction()}
-      />
-    </div>
+    <AdsInfiniteScroller
+      currencies={currencies}
+      initialData={initialData}
+      fetchFunction={fetchFunction()}
+    />
   ) : (
     <NoFavorites />
   );

@@ -21,8 +21,8 @@ export const CategoriesList = async ({ lng }: I18nLangParam) => {
         {categories.map((category) => (
           <Link
             key={category.name}
-            as={`categories/${category.name}`}
-            href='categories/[categoryId]'
+            as={`/categories/${category.name}`}
+            href='/categories/[categoryId]'
             className='w-36 h-48 bg-[--element] rounded-2xl p-4 items-start justify-start flex-shrink-0 hover:scale-105 active:scale-95 transition-transform relative'
           >
             <p className='text-sm font-semibold'>

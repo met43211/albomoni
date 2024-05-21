@@ -11,7 +11,7 @@ import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencie
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@nextui-org/skeleton';
 import { useTranslation } from '@albomoni/shared/i18n';
-import { Chip } from '@nextui-org/react';
+import { ContactWithSellerButton } from '@albomoni/features/contact-with-seller';
 
 type Props = {
   data: Ad;
@@ -42,9 +42,7 @@ export const AdActions = async ({ data, lng }: Props) => {
     <div className='flex flex-col px-4 lg:px-0'>
       <div className='w-full lg:w-80 lg:sticky top-8 h-min flex flex-col gap-8 flex-shrink-0'>
         <div className='flex flex-col gap-4'>
-          <Button className='w-full h-12 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold text-md'>
-            Связаться с продавцом
-          </Button>
+          <ContactWithSellerButton ad={data} />
 
           <div className='w-full flex gap-4'>
             <CopyLinkButton />

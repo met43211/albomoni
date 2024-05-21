@@ -9,6 +9,7 @@ import { ModalVariantAddPhone } from './variants/(edit-profile)/add-phone';
 import { ModalVariantEditPhone } from './variants/(edit-profile)/edit-phone';
 import { ModalVariantDeletePhone } from './variants/(edit-profile)/delete-phone';
 import { ModalVariantEditTextField } from './variants/(edit-profile)/edit-text-field';
+import { ModalVariantContactWithSeller } from './variants/contact-with-seller';
 
 export const ModalContent = () => {
   const { modalState } = useModal();
@@ -31,6 +32,8 @@ export const ModalContent = () => {
       return <ModalVariantDeletePhone />;
     case EModalStates.EDIT_CHANGE_TEXT:
       return <ModalVariantEditTextField />;
+    case EModalStates.CONTACT_WITH_SELLER:
+      return <ModalVariantContactWithSeller />;
     default:
       return null;
     }

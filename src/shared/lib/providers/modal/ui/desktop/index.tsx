@@ -23,7 +23,7 @@ export const ModalDesktop = () => {
               animate={{ opacity: 0.8 }}
               exit={{ opacity: 0 }}
               type='button'
-              className='fixed top-0 bottom-0 left-0 right-0 z-0 bg-black/50'
+              className='fixed top-0 bottom-0 left-0 right-0 z-0 bg-black/80'
               onClick={handleCloseModal}
             />
             <m.div

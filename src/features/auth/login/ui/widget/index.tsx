@@ -32,6 +32,7 @@ export const LoginWidget = () => {
   const { t } = useClientTranslation('forms');
   const router = useRouter();
   const [watchedAds] = useLocalStorage('watched', []);
+  const [loginPage, , deleteLoginPage] = useLocalStorage<string>('login-page');
 
   const { mutateAsync, isPending, isSuccess } = useMutation(LoginQueries);
 
@@ -68,7 +69,13 @@ export const LoginWidget = () => {
       setCookie('token', access, { expires: expiresDate });
 
       revalidateRoute('/profile');
-      router.push('/profile');
+
+      if (loginPage) {
+        router.push(loginPage);
+        deleteLoginPage();
+      } else {
+        router.push('/profile');
+      }
     } catch {
       setIsIncorrect(true);
       return;

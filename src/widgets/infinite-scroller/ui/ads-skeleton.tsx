@@ -1,6 +1,10 @@
 import { Skeleton } from '@nextui-org/skeleton';
 
-export const AdsSkeleton = () => {
+type Props = {
+  height?: number;
+};
+
+export const AdsSkeleton = ({ height }: Props) => {
   const skeletons = Array(12).fill(null);
 
   return (
@@ -8,7 +12,8 @@ export const AdsSkeleton = () => {
       {skeletons.map(() => (
         <Skeleton
           key={Math.random()}
-          className='w-full h-[416px] rounded-2xl'
+          style={{ height }}
+          className='w-full min-h-64 rounded-2xl'
         />
       ))}
     </>
