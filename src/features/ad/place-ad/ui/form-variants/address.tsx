@@ -6,12 +6,10 @@ import { AnimatePresence } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { Input } from '@nextui-org/input';
 import { useDebounce } from 'react-use';
+import 'react-dadata/dist/react-dadata.css';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
-import {
-  getGeoSuggestions,
-  makeRequest,
-} from '../../api/get-geo-suggestions/get-geo-suggestions';
+import { getGeoSuggestions } from '../../api/get-geo-suggestions/get-geo-suggestions';
 
 const yupSchema = yup.object({
   address: yup.string().required('required'),
@@ -55,9 +53,9 @@ export const PlaceAdAddress = memo(
     useEffect(() => {
       const getSuggests = async () => {
         const response = await getGeoSuggestions(debouncedValue);
-        // const resp = makeRequest(debouncedValue);
+        const { suggestions } = await response.json();
 
-        console.log(response);
+        console.log(suggestions);
       };
 
       if (debouncedValue.length > 2) {
@@ -74,6 +72,7 @@ export const PlaceAdAddress = memo(
           size='lg'
           id='address'
           type='text'
+          aria-label='Address'
           onChange={(e) => setInValue(e.target.value)}
           value={inValue}
         />
