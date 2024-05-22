@@ -3,10 +3,12 @@
 import { User } from '@albomoni/entities/user';
 import { PublicUserType } from '@albomoni/entities/user/model/user.type';
 import { CopyLinkButton } from '@albomoni/features/copy-link';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
 import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { Rating } from '@albomoni/shared/ui/rating';
 import { Divider } from '@nextui-org/react';
+import clsx from 'clsx';
 import { PiCaretRightBold, PiInfoBold } from 'react-icons/pi';
 
 type Props = {
@@ -15,12 +17,17 @@ type Props = {
 
 export const UserAside = ({ user }: Props) => {
   const { setModalState, setModalData } = useModal();
+  const { user: selfUser } = useSession();
 
   const { rate, feedback, user_id } = user;
 
+  const isOwnProfile = selfUser?.user_id === user_id;
+
   const handleOpenReviews = () => {
-    setModalData({ user_id });
-    setModalState(EModalStates.SET_REVIEW);
+    if (!isOwnProfile) {
+      setModalData({ user_id });
+      setModalState(EModalStates.SET_REVIEW);
+    }
   };
 
   return (
@@ -44,15 +51,26 @@ export const UserAside = ({ user }: Props) => {
         <button
           type='button'
           onClick={handleOpenReviews}
-          className='w-full p-4 active:bg-black/10 dark:active:bg-white/10  transition-background text-start flex justify-between items-center'
+          className={clsx(
+            'w-full p-4 text-start flex justify-between items-center',
+            {
+              'active:bg-black/10 dark:active:bg-white/10  transition-background':
+                !isOwnProfile,
+              'cursor-default': isOwnProfile,
+            },
+          )}
         >
           <div className='w-full flex gap-3 items-center'>
             <div className='flex flex-col gap-2'>
-              <p className='font-medium'>Оценки</p>
+              <p className='font-medium'>
+                {isOwnProfile ? 'Мои оценки' : 'Оценки'}
+              </p>
               <Rating value={rate} feedback={feedback} />
             </div>
           </div>
-          <PiCaretRightBold size={20} className='flex-shrink-0 opacity-50' />
+          {!isOwnProfile && (
+            <PiCaretRightBold size={20} className='flex-shrink-0 opacity-50' />
+          )}
         </button>
       </div>
 

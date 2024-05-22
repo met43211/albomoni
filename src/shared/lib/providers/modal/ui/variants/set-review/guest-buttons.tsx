@@ -3,10 +3,10 @@ import { PiSignInBold } from 'react-icons/pi';
 import Link from 'next/link';
 import { useLocalStorage } from 'react-use';
 import { usePathname } from 'next/navigation';
-import { useModal } from '../../../../lib/use-modal';
-import { EModalStates } from '../../../../model/modal-states.enum';
+import { useModal } from '../../../lib/use-modal';
+import { EModalStates } from '../../../model/modal-states.enum';
 
-export const ContactWithSellerButtonsGuest = () => {
+export const SetReviewButtonsGuest = () => {
   const { setModalState } = useModal();
   const [, setLoginPage] = useLocalStorage('login-page');
   const pathname = usePathname();

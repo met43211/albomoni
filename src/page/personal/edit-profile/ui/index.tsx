@@ -1,6 +1,6 @@
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
-import { PiStarFill, PiUserBold } from 'react-icons/pi';
+import { PiUserBold } from 'react-icons/pi';
 import { getUserAsync } from '@albomoni/entities/user/api/get-user';
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
@@ -22,7 +22,7 @@ export const EditProfilePage = async () => {
         </h2>
         <div className='w-full lg:w-1/2 flex flex-col gap-12'>
           <div className='w-full flex gap-4 -mt-2 -mb-3'>
-            <Button
+            {/* <Button
               size='lg'
               as={Link}
               href={`/user/${user_id}`}
@@ -32,16 +32,15 @@ export const EditProfilePage = async () => {
               startContent={<PiStarFill className='flex-shrink-0' />}
             >
               Мои отзывы
-            </Button>
+            </Button> */}
             <Button
               size='lg'
-              color='primary'
               as={Link}
               href={`/user/${user_id}`}
               className='font-medium'
               startContent={<PiUserBold className='flex-shrink-0' />}
             >
-              Мой профиль
+              Посмотреть мой профиль
             </Button>
           </div>
 

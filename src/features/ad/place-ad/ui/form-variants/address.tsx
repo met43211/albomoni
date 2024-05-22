@@ -1,12 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
-import { Input } from '@nextui-org/input';
 import * as yup from 'yup';
 import { AnimatePresence } from 'framer-motion';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
+import { Input } from '@nextui-org/input';
+import { useDebounce } from 'react-use';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
+import {
+  getGeoSuggestions,
+  makeRequest,
+} from '../../api/get-geo-suggestions/get-geo-suggestions';
 
 const yupSchema = yup.object({
   address: yup.string().required('required'),
@@ -36,6 +41,30 @@ export const PlaceAdAddress = memo(
       });
     };
 
+    const [inValue, setInValue] = useState<string>('');
+    const [debouncedValue, setDebouncedValue] = useState('');
+
+    useDebounce(
+      () => {
+        setDebouncedValue(inValue);
+      },
+      2000,
+      [inValue],
+    );
+
+    useEffect(() => {
+      const getSuggests = async () => {
+        const response = await getGeoSuggestions(debouncedValue);
+        // const resp = makeRequest(debouncedValue);
+
+        console.log(response);
+      };
+
+      if (debouncedValue.length > 2) {
+        getSuggests();
+      }
+    }, [debouncedValue]);
+
     return (
       <div className='flex gap-4 flex-col'>
         <h5 className='text-md font-medium opacity-50'>
@@ -45,9 +74,10 @@ export const PlaceAdAddress = memo(
           size='lg'
           id='address'
           type='text'
-          onChange={handleChange}
-          value={value || ''}
+          onChange={(e) => setInValue(e.target.value)}
+          value={inValue}
         />
+
         <AnimatePresence>
           {form?.errors[title] && (
             <NotificationBubble type='error'>
