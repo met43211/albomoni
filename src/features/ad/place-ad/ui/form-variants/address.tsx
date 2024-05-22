@@ -6,7 +6,6 @@ import { AnimatePresence } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { Input } from '@nextui-org/input';
 import { useDebounce } from 'react-use';
-import 'react-dadata/dist/react-dadata.css';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
 import { getGeoSuggestions } from '../../api/get-geo-suggestions/get-geo-suggestions';
