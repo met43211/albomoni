@@ -39,9 +39,9 @@
     "events_celebrations": "Мероприятия, праздники"
   },
   "feedback": {
-    "t_one": "{{count}} отзыв",
-    "t_few": "{{count}} отзыва",
-    "t_many": "{{count}} отзывов"
+    "t_one": "{{count}} оценка",
+    "t_few": "{{count}} оценки",
+    "t_many": "{{count}} оценок"
   },
   "active_ads_count": {
     "t_one": "{{count}} активное объявление",

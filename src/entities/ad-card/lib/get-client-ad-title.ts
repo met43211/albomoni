@@ -25,7 +25,7 @@ export const getClientAdTitle = (
       } этаж`,
       rooms: `Комната, ${additional.square} м², ${additional.floor}/${additional.floors_house} этаж`,
     },
-    transportation: `${additional.brand}, ${additional.model}, ${additional.year}`,
+    transportation: `${additional.brand} ${additional.model} ${additional.year}`,
   } as any;
 
   if (categories[0] === 'real_estate')

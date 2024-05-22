@@ -1,15 +1,26 @@
 import { Button } from '@nextui-org/button';
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PiCopyBold } from 'react-icons/pi';
 import { useCopyToClipboard } from 'react-use';
+import { getCookie } from 'cookies-next';
+import { Spinner } from '@nextui-org/spinner';
+import { GetContactsQuery } from '../../../../api/get-contacts/query';
+import { useModal } from '../../../../lib/use-modal';
 
 export const ContactWithSellerUserContent = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [, copyToClipboard] = useCopyToClipboard();
+  const { modalData } = useModal();
+  const token = getCookie('token');
+
+  const { data, isLoading } = useQuery(
+    GetContactsQuery(modalData.user_id, token as string),
+  );
 
   const handleClick = () => {
     if (!isCopied) {
-      copyToClipboard('+79320505497');
+      copyToClipboard(data?.phone || '0');
       setIsCopied(true);
     }
   };
@@ -21,6 +32,14 @@ export const ContactWithSellerUserContent = () => {
       }, 3000);
     }
   }, [isCopied]);
+
+  if (isLoading) {
+    return (
+      <div className='w-full h-44 flex items-center justify-center'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -34,7 +53,7 @@ export const ContactWithSellerUserContent = () => {
         {isCopied ? (
           <p className='text-lg'>Номер скопирован</p>
         ) : (
-          <p className='text-xl opacity-60'>+79320505497</p>
+          <p className='text-xl opacity-60'>{data?.phone}</p>
         )}
 
         <PiCopyBold size={24} className='opacity-60' />

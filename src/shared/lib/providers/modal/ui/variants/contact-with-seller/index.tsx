@@ -11,7 +11,7 @@ import { ContactWithSellerGuestContent } from './guest/guest-content';
 import { ContactWithSellerButtonsGuest } from './guest/guest-buttons';
 
 export const ModalVariantContactWithSeller = () => {
-  const { setModalState, modalData } = useModal();
+  const { setModalState } = useModal();
   const token = getCookie('token');
 
   return (

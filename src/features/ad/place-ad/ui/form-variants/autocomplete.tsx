@@ -36,24 +36,29 @@ export const PlaceAdAutocomplete = memo(
     }, []);
 
     return (
-      <Autocomplete
-        label={t(`${category}.${title}.name`)}
-        defaultItems={variants as any}
-        onKeyDown={(e: any) => e.continuePropagation()}
-        selectedKey={value || ''}
-        onSelectionChange={handleChange}
-      >
-        {(item: { label: string; img?: string }) => (
-          <AutocompleteItem
-            startContent={
-              <Avatar src={item.img} icon={<PiCarBold size={24} />} />
-            }
-            key={item.label}
-          >
-            {item.label}
-          </AutocompleteItem>
-        )}
-      </Autocomplete>
+      <div className='flex gap-4 flex-col'>
+        <h5 className='text-md font-medium opacity-50'>
+          {t(`${category}.${title}.name`)}
+        </h5>
+        <Autocomplete
+          defaultItems={variants as any}
+          size='lg'
+          onKeyDown={(e: any) => e.continuePropagation()}
+          selectedKey={value || ''}
+          onSelectionChange={handleChange}
+        >
+          {(item: { label: string; img?: string }) => (
+            <AutocompleteItem
+              startContent={
+                <Avatar src={item.img} icon={<PiCarBold size={24} />} />
+              }
+              key={item.label}
+            >
+              {item.label}
+            </AutocompleteItem>
+          )}
+        </Autocomplete>
+      </div>
     );
   },
   (prevProps, nextProps) =>
