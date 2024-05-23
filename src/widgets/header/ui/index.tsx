@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { Skeleton } from '@nextui-org/skeleton';
 import { useCookies } from 'react-cookie';
 import { getCurrencyByLocale } from '@albomoni/shared/lib/utils/get-currency-by-locale';
@@ -32,8 +31,6 @@ export const Header = () => {
   if (!cookies.currency) {
     setCookie('currency', getCurrencyByLocale(locale as string));
   }
-
-  useValidateToken();
 
   return (
     <header className='w-full h-20 flex flex-row justify-center z-30'>

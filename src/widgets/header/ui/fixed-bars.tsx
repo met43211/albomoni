@@ -10,6 +10,8 @@ import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-tran
 import Link from 'next/link';
 import { MenuButton } from '@albomoni/entities/menu';
 import { PiCaretLeftBold } from 'react-icons/pi';
+import { useOriginContext } from '@albomoni/shared/lib/providers/origin-provider';
+import { useCallback } from 'react';
 import { HeaderNavigationPaths } from '../config/header-navigation-paths';
 import { BackableRoutes } from '../config/backable-routes';
 
@@ -19,6 +21,7 @@ export const FixedBars = () => {
   const scrollDir = useScrollDirection();
   const activePath = usePathname();
   const router = useRouter();
+  const isWithinPage = useOriginContext();
 
   router.prefetch('/login');
 
@@ -35,9 +38,10 @@ export const FixedBars = () => {
     flatRoute.split('/')[2] === 'ad' ||
     flatRoute.split('/')[0] === 'user';
 
-  const handleBack = () => {
-    router.back();
-  };
+  const handleBack = useCallback(() => {
+    if (isWithinPage) router.back();
+    else router.push('/');
+  }, [isWithinPage, router]);
 
   return (
     <>

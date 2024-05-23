@@ -12,13 +12,13 @@ export const StaticHeader = () => {
           <AlbomoniSvg />
         </Link>
 
-        <button
-          type='button'
+        <Link
+          href='/location'
           className='flex gap-1 justify-start items-center opacity-50 hover:opacity-100 active:scale-95 transition-transform-opacity origin-left'
         >
           <PiMapPinBold size={14} />
           <p className='text-xs font-medium'>Анкара</p>
-        </button>
+        </Link>
       </div>
 
       <Search />

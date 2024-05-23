@@ -1,4 +1,4 @@
-import { AnimatePresence, m, useWillChange } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { useRef } from 'react';
 import { RemoveScroll } from 'react-remove-scroll';
 import { EModalStates } from '../../model/modal-states.enum';
@@ -9,7 +9,6 @@ import { ModalMobileCloser } from './closer';
 export const ModalMobile = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const { modalState, setModalState } = useModal();
-  const willChange = useWillChange();
 
   const handleCloseModal = () => {
     setModalState(EModalStates.NULL);
@@ -47,7 +46,6 @@ export const ModalMobile = () => {
               drag='y'
               dragConstraints={{ top: 0, bottom: 1000 }}
               dragElastic={{ bottom: 0.05 }}
-              style={{ willChange }}
               dragSnapToOrigin
               onDragEnd={handleDragEnd}
               className='absolute border-t-1 border-white/10 bottom-0 w-full max-h-[97dvh] flex flex-col m-auto box-border bg-[--bg] rounded-t-[40px] z-50 shadow-2xl shadow-black overflow-hidden min-h-64'

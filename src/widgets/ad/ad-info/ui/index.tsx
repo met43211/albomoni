@@ -1,5 +1,6 @@
 import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { useTranslation } from '@albomoni/shared/i18n';
+import { getAdditionalValue } from '../lib/get-additional-value';
 
 type Props = {
   data: Ad;
@@ -23,9 +24,15 @@ export const AdInfo = async ({ data, lng }: Props) => {
               <span className='opacity-50'>
                 {t(`${data.ad.category[0]}.${key}.name`)}:{' '}
               </span>
-              {Number(value)
+              {getAdditionalValue({
+                t,
+                value,
+                category: data.ad.category[0],
+                key,
+              })}
+              {/* {Number(value)
                 ? value
-                : t(`${data.ad.category[0]}.${key}.${value}`)}
+                : t(`${data.ad.category[0]}.${key}.${value}`)} */}
             </h5>
           ))}
         </div>

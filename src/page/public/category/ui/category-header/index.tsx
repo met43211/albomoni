@@ -3,6 +3,7 @@ import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
 import { Button } from '@nextui-org/button';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   PiCaretRight,
   PiCaretRightBold,
@@ -31,6 +32,8 @@ export const CategoryHeader = async ({
         {t(`categories.${categoryId}`)}
       </h1>
       <Button
+        as={Link}
+        href='/location'
         radius='full'
         className='w-fit flex gap-2 items-center -mt-3 bg-white text-black opacity-80'
       >

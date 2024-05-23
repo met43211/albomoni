@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { ThemeColorObserver } from '@albomoni/shared/lib/utils/client/theme-color-observer';
 import { FavoriteProvider } from '@albomoni/shared/lib/providers/favorite-provider';
 import { Modal } from '@albomoni/shared/lib/providers/modal';
+import { OriginTracker } from '@albomoni/shared/lib/providers/origin-provider';
 import { store } from '../_env/store';
 
 type Props = {
@@ -28,20 +29,22 @@ const Providers = ({ children, lang }: Props) => {
     <CookiesProvider defaultSetOptions={{ path: '/' }}>
       <QueryClientProvider client={queryClient}>
         <StoreProvider store={store}>
-          <LazyMotion features={loadFeatures}>
-            <NextUIProvider>
-              <ThemeProvider attribute='class'>
-                <ThemeColorObserver>
-                  <LanguageProvider lang={lang}>
-                    <FavoriteProvider>
-                      <Modal />
-                      {children}
-                    </FavoriteProvider>
-                  </LanguageProvider>
-                </ThemeColorObserver>
-              </ThemeProvider>
-            </NextUIProvider>
-          </LazyMotion>
+          <FavoriteProvider>
+            <OriginTracker>
+              <LazyMotion features={loadFeatures}>
+                <NextUIProvider>
+                  <ThemeProvider attribute='class'>
+                    <ThemeColorObserver>
+                      <LanguageProvider lang={lang}>
+                        <Modal />
+                        {children}
+                      </LanguageProvider>
+                    </ThemeColorObserver>
+                  </ThemeProvider>
+                </NextUIProvider>
+              </LazyMotion>
+            </OriginTracker>
+          </FavoriteProvider>
         </StoreProvider>
       </QueryClientProvider>
     </CookiesProvider>

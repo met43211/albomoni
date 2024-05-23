@@ -9,5 +9,8 @@ export const getGeoSuggestions = (query: string) =>
       Authorization: `Token ${process.env.NEXT_PUBLIC_DADATA_API_URL}`,
       'X-Secret': process.env.NEXT_PUBLIC_DADATA_SECRET_KEY || '',
     },
-    body: JSON.stringify({ query, count: 10 }),
+    body: JSON.stringify({
+      query,
+      count: 10,
+    }),
   });

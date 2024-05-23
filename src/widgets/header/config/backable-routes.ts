@@ -7,4 +7,5 @@ export const BackableRoutes = [
   'profile/my-ads',
   'profile/edit-profile',
   'profile/notifications',
+  'location',
 ];

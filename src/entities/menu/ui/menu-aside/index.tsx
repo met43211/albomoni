@@ -126,7 +126,12 @@ export const MenuAside = ({ onClose }: Props) => {
 
       <ChangeThemeButton />
 
-      <Button className='w-full h-28 bg-[--bg] dark:bg-[--element] shadow-base rounded-3xl flex flex-col gap-0 items-start justify-between p-4 relative overflow-clip'>
+      <Button
+        as={Link}
+        href='/location'
+        onPress={onClose}
+        className='w-full h-28 bg-[--bg] dark:bg-[--element] shadow-base rounded-3xl flex flex-col gap-0 items-start justify-between p-4 relative overflow-clip'
+      >
         <div className='flex flex-col gap-0 justify-start items-start'>
           <p className='font-semibold text-md'>
             Регион отображаемых объявлений
