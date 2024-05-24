@@ -106,10 +106,10 @@ export const EditAdForm = ({ formData, ad }: Props) => {
 
     const isValidForm = passedFields.length === countFields(formData);
 
-    if (!isValidForm) {
-      setFormError('error.invalid');
-      return;
-    }
+    // if (!isValidForm) {
+    //   setFormError('error.invalid');
+    //   return;
+    // }
 
     setFormError(null);
 

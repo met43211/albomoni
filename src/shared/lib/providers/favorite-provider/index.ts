@@ -7,6 +7,7 @@ import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { useSession } from '../../hooks/use-session';
 
 type Props = {
@@ -18,6 +19,8 @@ export const FavoriteProvider = ({ children }: Props) => {
   const [, , deleteCookie] = useCookies();
   const { setFavorites, setIsPending } = useFavorites();
   const { isLogged } = useSession();
+
+  useValidateToken();
 
   useEffect(() => {
     const loadFavorites = async () => {
