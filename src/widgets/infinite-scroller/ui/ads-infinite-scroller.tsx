@@ -4,7 +4,6 @@
 
 import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { AdCard } from '@albomoni/entities/ad-card/ui/ad-card';
-import { useLangContext } from '@albomoni/shared/lib/providers';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
 import { Spinner } from '@nextui-org/spinner';
@@ -27,7 +26,6 @@ export const AdsInfiniteScroller = ({
   const [loadedPages, setLoadedPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isEnded, setIsEnded] = useState(initialData.length < 12);
-  const lng = useLangContext();
   const intersectionRef = useRef(null);
 
   useEffect(() => {
@@ -83,7 +81,7 @@ export const AdsInfiniteScroller = ({
               isDisableCategory={isDisableCategory}
             />
           );
-        })}
+        })}яЕ
       </div>
       {isLoading && <Spinner className='mt-6' />}
       {!isEnded && <div ref={intersectionRef} />}

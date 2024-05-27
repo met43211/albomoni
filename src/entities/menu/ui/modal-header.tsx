@@ -2,13 +2,23 @@ import { Search } from '@albomoni/features/search';
 import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { PiMapPinBold, PiSquaresFourBold } from 'react-icons/pi';
+import { useLocalStorage } from 'react-use';
 
 type Props = {
   onClose: () => void;
 };
 
 export const ModalHeader = ({ onClose }: Props) => {
+  const pathname = usePathname();
+  const [, setBackPage] = useLocalStorage<string>('back-page');
+
+  const handleClickLocation = () => {
+    setBackPage(pathname);
+    onClose();
+  };
+
   return (
     <header className='w-full h-20 flex flex-row justify-center z-30'>
       <div className='flex flex-row gap-4 lg:gap-8 max-w-7xl px-4 w-full items-center justify-between'>
@@ -17,13 +27,15 @@ export const ModalHeader = ({ onClose }: Props) => {
             <AlbomoniSvg />
           </Link>
 
-          <button
+          <Link
+            href='/location'
+            onClick={handleClickLocation}
             type='button'
-            className='flex gap-1 justify-start items-center opacity-50 hover:opacity-100 active:scale-95 transition-transform-opacity origin-left'
+            className='flex gap-1 justify-start items-center opacity-50 hover:opacity-100 active:scale-95 transition-transform-opacity origin-left text-left'
           >
             <PiMapPinBold size={14} />
             <p className='text-xs font-medium'>Анкара</p>
-          </button>
+          </Link>
         </div>
 
         <div className='hidden md:flex w-full h-fit'>

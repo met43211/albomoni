@@ -15,6 +15,8 @@ import {
 } from 'react-icons/pi';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { UserAvatar } from '@albomoni/entities/user';
+import { useLocalStorage } from 'react-use';
+import { usePathname } from 'next/navigation';
 import { ChangeThemeButton } from './change-theme-button';
 
 type Props = {
@@ -23,6 +25,13 @@ type Props = {
 
 export const MenuAside = ({ onClose }: Props) => {
   const { isLogged, user } = useSession();
+  const pathname = usePathname();
+  const [, setBackPage] = useLocalStorage<string>('back-page');
+
+  const handleClickLocation = () => {
+    setBackPage(pathname);
+    onClose();
+  };
 
   return (
     <aside className='w-full tablet:w-80 flex-shrink-0 flex flex-col gap-4'>
@@ -129,7 +138,7 @@ export const MenuAside = ({ onClose }: Props) => {
       <Button
         as={Link}
         href='/location'
-        onPress={onClose}
+        onPress={handleClickLocation}
         className='w-full h-28 bg-[--bg] dark:bg-[--element] shadow-base rounded-3xl flex flex-col gap-0 items-start justify-between p-4 relative overflow-clip'
       >
         <div className='flex flex-col gap-0 justify-start items-start'>

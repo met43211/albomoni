@@ -4,16 +4,18 @@ import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import { Button } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { PiFloppyDiskBold } from 'react-icons/pi';
-import { useDebounce } from 'react-use';
+import { useDebounce, useLocalStorage } from 'react-use';
 import { SuggestionType } from '@albomoni/features/ad/place-ad/ui/form-variants/address';
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/navigation';
 import { getGeoSuggestionsCity } from '../api/get-countries';
+import { saveLocation } from '../api/save-location';
 
 export const LocationPicker = () => {
-  // const [countryList, setCountryList] = useState([]);
-  // const [cityList, setCityList] = useState([]);
+  const token = getCookie('token');
+  const [backPage, , deleteBackPage] = useLocalStorage<string>('back-page');
+  const router = useRouter();
 
-  // const [selectedCountry, setSelectedCountry] = useState();
-  // const [selectedCity, setSelectedCity] = useState();
   const [inValue, setInValue] = useState<string>('');
   const [debouncedValue, setDebouncedValue] = useState('');
   const [suggestList, setSuggestList] = useState<SuggestionType[]>([]);
@@ -58,7 +60,27 @@ export const LocationPicker = () => {
     }
   };
 
-  console.log(selectedVariant);
+  const handleSubmit = async () => {
+    if (selectedVariant?.data) {
+      try {
+        await saveLocation(
+          selectedVariant.data.country_iso_code,
+          selectedVariant.data.region_iso_code,
+          selectedVariant.data.geoname_id,
+          token as string,
+        );
+
+        if (backPage) {
+          router.replace(backPage);
+          deleteBackPage();
+        } else {
+          router.replace('/');
+        }
+      } catch {
+        return;
+      }
+    }
+  };
 
   return (
     <div className='w-full flex flex-col gap-6 lg:w-1/2'>
@@ -106,10 +128,12 @@ export const LocationPicker = () => {
       </Autocomplete> */}
 
       <Button
+        isDisabled={typeof selectedVariant !== 'object'}
         size='lg'
         color='primary'
         variant='shadow'
         className='mt-8 md:w-fit font-medium'
+        onPress={handleSubmit}
       >
         <PiFloppyDiskBold size={18} />
         Сохранить

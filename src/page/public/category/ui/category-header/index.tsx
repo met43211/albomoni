@@ -1,15 +1,8 @@
 import { getCategoriesAsync } from '@albomoni/entities/menu/api/get-categories';
+import { NavigateToLocationCategoryButton } from '@albomoni/features/(navigate)/to-location-page';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
-import { Button } from '@nextui-org/button';
 import Image from 'next/image';
-import Link from 'next/link';
-import {
-  PiCaretRight,
-  PiCaretRightBold,
-  PiMapPin,
-  PiMapPinBold,
-} from 'react-icons/pi';
 
 type Props = {
   lng: string;
@@ -31,16 +24,7 @@ export const CategoryHeader = async ({
       <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
         {t(`categories.${categoryId}`)}
       </h1>
-      <Button
-        as={Link}
-        href='/location'
-        radius='full'
-        className='w-fit flex gap-2 items-center -mt-3 bg-white text-black opacity-80'
-      >
-        <PiMapPinBold size={16} />
-        <p className='font-medium'>Турция, Анкара</p>
-        <PiCaretRightBold className='mt-[2px]' />
-      </Button>
+      <NavigateToLocationCategoryButton />
       <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
       {categoryData && (
         <Image
