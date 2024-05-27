@@ -8,7 +8,7 @@ type Props = {
 
 export const NotificationBubble = ({ children, type = 'default' }: Props) => {
   const bubbleStyles = clsx(
-    'w-full px-4 py-3 rounded-xl text-sm bg-opacity-10',
+    'w-full px-4 py-3 rounded-xl text-sm bg-opacity-10 flex-shrink-0',
     {
       'bg-[--element]': type === 'default',
       'bg-red-500  text-red-500': type === 'error',

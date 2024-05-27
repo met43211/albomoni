@@ -116,6 +116,7 @@ export const PlaceAdAddress = memo(
           defaultItems={suggestList}
           allowsCustomValue
           endContent={false}
+          defaultInputValue={value}
           scrollShadowProps={{
             isEnabled: false,
           }}
