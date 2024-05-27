@@ -38,7 +38,22 @@ export const PlaceAdFormButtons = ({ saveAd }: Props) => {
       return;
     }
 
-    setModalData({ id: response.id });
+    console.log({
+      id: response.id,
+      status: response.status,
+      category: response.category,
+      currency: response.currency,
+      price: response.price,
+    });
+
+    setModalData({
+      id: response.id,
+      status: response.status,
+      category: response.category,
+      currency: response.currency,
+      price: response.cost,
+    });
+
     setModalState(EModalStates.START_AD);
 
     router.push(`/profile/my-ads/ad/${response.id}`);

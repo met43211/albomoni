@@ -42,6 +42,8 @@ export const ModalVariantStartAd = () => {
       ),
   });
 
+  console.log(data)
+
   const handleClick = async () => {
     setIsStartLoading(true);
 
