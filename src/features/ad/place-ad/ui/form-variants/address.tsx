@@ -14,7 +14,7 @@ const yupSchema = yup.object({
   address: yup.object().required('required'),
 });
 
-type SuggestionType = { value: string; data: { [key: string]: string } };
+export type SuggestionType = { value: string; data: { [key: string]: string } };
 
 export const PlaceAdAddress = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {

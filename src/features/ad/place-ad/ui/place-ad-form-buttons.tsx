@@ -38,14 +38,6 @@ export const PlaceAdFormButtons = ({ saveAd }: Props) => {
       return;
     }
 
-    console.log({
-      id: response.id,
-      status: response.status,
-      category: response.category,
-      currency: response.currency,
-      price: response.price,
-    });
-
     setModalData({
       id: response.id,
       status: response.status,

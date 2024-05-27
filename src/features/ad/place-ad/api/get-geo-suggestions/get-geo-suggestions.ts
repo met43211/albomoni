@@ -12,5 +12,10 @@ export const getGeoSuggestions = (query: string) =>
     body: JSON.stringify({
       query,
       count: 10,
+      locations: [
+        {
+          country_iso_code: '*',
+        },
+      ],
     }),
   });
