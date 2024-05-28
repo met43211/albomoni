@@ -10,13 +10,16 @@ import {
   PiCaretDownBold,
   PiCaretRightBold,
   PiCurrencyRubBold,
+  PiFilesBold,
   PiMapPinBold,
+  PiQuestionBold,
   PiTranslateBold,
 } from 'react-icons/pi';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { UserAvatar } from '@albomoni/entities/user';
 import { useLocalStorage } from 'react-use';
 import { usePathname } from 'next/navigation';
+import { Divider } from '@nextui-org/divider';
 import { ChangeThemeButton } from './change-theme-button';
 
 type Props = {
@@ -82,7 +85,7 @@ export const MenuAside = ({ onClose }: Props) => {
                 <p className='font-semibold text-md opacity-60'>Русский</p>
               </div>
 
-              <PiCaretDownBold size={20} />
+              <PiCaretDownBold size={20} className='opacity-50' />
 
               <PiTranslateBold
                 size={80}
@@ -113,7 +116,7 @@ export const MenuAside = ({ onClose }: Props) => {
                 <p className='font-semibold text-md opacity-60'>RUB</p>
               </div>
 
-              <PiCaretDownBold size={20} />
+              <PiCaretDownBold size={20} className='opacity-50' />
 
               <PiCurrencyRubBold
                 size={80}
@@ -148,13 +151,39 @@ export const MenuAside = ({ onClose }: Props) => {
           <p className='font-semibold text-md opacity-60'>Турция, Анкара</p>
         </div>
 
-        <PiCaretRightBold size={20} />
+        <PiCaretRightBold size={20} className='opacity-50' />
 
         <PiMapPinBold
           size={80}
           className='absolute -bottom-2 -right-2 flex-shrink-0 !max-w-full opacity-10'
         />
       </Button>
+
+      <div className='w-full flex flex-col bg-white dark:bg-default shadow-base rounded-3xl overflow-clip'>
+        <Link
+          href='/support'
+          onClick={() => onClose()}
+          className='w-full h-14 flex justify-between px-6 items-center hover:opacity-70 active:opacity-40 transition-opacity'
+        >
+          <div className='w-full flex gap-4 items-center'>
+            <PiQuestionBold size={20} />
+            <p className='font-semibold text-sm'>Поддержка</p>
+          </div>
+          <PiCaretRightBold size={18} className='flex-shrink-0 opacity-50' />
+        </Link>
+        <Divider />
+        <Link
+          onClick={() => onClose()}
+          href='/policy'
+          className='w-full h-14 flex justify-between px-6 items-center hover:opacity-70 active:opacity-40 transition-opacity'
+        >
+          <div className='w-full flex gap-4 items-center'>
+            <PiFilesBold size={20} />
+            <p className='font-semibold text-sm'>Условия и оферта</p>
+          </div>
+          <PiCaretRightBold size={18} className='flex-shrink-0 opacity-50' />
+        </Link>
+      </div>
     </aside>
   );
 };

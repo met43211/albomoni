@@ -81,7 +81,7 @@ export const AdsInfiniteScroller = ({
               isDisableCategory={isDisableCategory}
             />
           );
-        })}яЕ
+        })}
       </div>
       {isLoading && <Spinner className='mt-6' />}
       {!isEnded && <div ref={intersectionRef} />}

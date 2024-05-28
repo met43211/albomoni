@@ -24,7 +24,7 @@ export const MenuCategories = ({ onClose }: Props) => {
     data && (
       <div className='w-full flex flex-col gap-8 py-4 tablet:py-0'>
         <h4 className='text-xl font-bold flex tablet:hidden'>Все категории</h4>
-        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4'>
+        <div className='grid grid-cols-2 gap-4 sm:grid-cols-3'>
           {data.map((category) => (
             <Link
               key={category.name}

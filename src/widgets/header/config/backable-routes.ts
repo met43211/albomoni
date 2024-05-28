@@ -8,4 +8,6 @@ export const BackableRoutes = [
   'profile/edit-profile',
   'profile/notifications',
   'location',
+  'policy',
+  'support',
 ];

@@ -32,7 +32,7 @@ export const ChangeThemeButton = () => {
             <p className='font-semibold text-sm'>Оформление</p>
           </div>
 
-          <PiCaretDownBold size={18} />
+          <PiCaretDownBold size={18} className='opacity-50' />
         </Button>
       </DropdownTrigger>
       <DropdownMenu
