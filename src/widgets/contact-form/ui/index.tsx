@@ -6,12 +6,15 @@ import { FileLoaderList } from '@albomoni/shared/ui/file-loader-list';
 import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
+import { ContactVariants } from '../config/contact-variants';
 
 export const ContactForm = () => {
   const { user } = useSession();
+
   const [email, setEmail] = useState('');
-  const contactVariants = ['question', 'bug', 'feature', 'feedback', 'other'];
-  const [selectedKey, setSelectedKey] = useState(new Set([contactVariants[0]]));
+  const [selectedContactVariant, setSelectedContactVariant] = useState(
+    new Set([ContactVariants[0]]),
+  );
   const [attachments, setAttachments] = useState<File[]>([]);
 
   useEffect(() => {
@@ -35,9 +38,9 @@ export const ContactForm = () => {
       <div className='w-72 flex flex-col gap-3'>
         <h5 className='font-medium opacity-50'>Как мы можем помочь?</h5>
         <Dropdown
-          collection={contactVariants}
-          selectedKeys={selectedKey}
-          setSelectedKeys={setSelectedKey}
+          collection={ContactVariants}
+          selectedKeys={selectedContactVariant}
+          setSelectedKeys={setSelectedContactVariant}
         />
       </div>
 
