@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable sonarjs/cognitive-complexity */
 
 'use client';

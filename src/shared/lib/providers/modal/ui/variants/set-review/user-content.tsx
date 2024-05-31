@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useQuery } from '@tanstack/react-query';
 import { getCookie } from 'cookies-next';
 import { Spinner } from '@nextui-org/spinner';

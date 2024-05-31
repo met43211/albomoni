@@ -1,7 +1,6 @@
 import { Button } from '@nextui-org/button';
 import { useState } from 'react';
 import { PiPlayCircleBold } from 'react-icons/pi';
-import { ScrollShadow } from '@nextui-org/scroll-shadow';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@nextui-org/spinner';

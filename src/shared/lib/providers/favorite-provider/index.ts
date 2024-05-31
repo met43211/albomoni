@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { useFavorites } from '@albomoni/features/add-to-favorites/lib/use-favorites';

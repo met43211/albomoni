@@ -1,11 +1,10 @@
 import { getCookie } from 'cookies-next';
 import { cookies } from 'next/headers';
-import { getSubscriptionsInfo } from '../api/get-subscription-info';
 
 export const SubscriptionsPage = async () => {
   const token = getCookie('token', { cookies });
 
-  const response = await getSubscriptionsInfo(token as string);
+  // const response = await getSubscriptionsInfo(token as string);
 
   return (
     <main className='flex flex-col gap-10 items-center'>

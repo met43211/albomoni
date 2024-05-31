@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable react-hooks/exhaustive-deps */
 
 import { useTheme } from 'next-themes';
 import { useEffect } from 'react';

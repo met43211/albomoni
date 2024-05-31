@@ -16,6 +16,7 @@
     "node": true
   },
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/naming-convention": "off",
     "arrow-body-style": "off",
     "no-useless-return": "off",

@@ -1,8 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
-import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { Filter } from '@albomoni/widgets/category-filter/lib/render-filter-state';
 import { Button } from '@nextui-org/react';
 import { usePathname, useRouter } from 'next/navigation';

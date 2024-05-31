@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-autofocus */
 
 import { getCookie } from 'cookies-next';

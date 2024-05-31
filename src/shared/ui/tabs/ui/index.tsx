@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';

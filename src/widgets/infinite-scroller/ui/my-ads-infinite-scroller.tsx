@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { MyAd } from '@albomoni/entities/ad-card/model/ad.type';

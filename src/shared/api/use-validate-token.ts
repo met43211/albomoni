@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useEffect } from 'react';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { deleteCookie, getCookie } from 'cookies-next';

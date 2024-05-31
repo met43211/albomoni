@@ -1,8 +1,7 @@
-'use client';
-
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable no-param-reassign */
+
+'use client';
 
 import { useImmer } from 'use-immer';
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';

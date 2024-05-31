@@ -43,7 +43,7 @@ export const ProfileSecondaryControls = ({ user }: Props) => {
       <button
         type='button'
         aria-label='my-ads'
-        className='w-full h-24 md:h-36 rounded-[20px] flex flex-col shadow-base dark:bg-default text-start font-medium p-4 relative overflow-clip justify-between hover:scale-[1.02] active:scale-[0.98] transition-transform opacity-50'
+        className='w-full h-24 md:h-36 rounded-[20px] flex flex-col shadow-base dark:bg-default text-start font-medium p-4 relative overflow-clip justify-between hover:scale-[1.02] active:scale-[0.98] transition-transform opacity-50 col-span-2 md:col-span-1'
       >
         Активные платные услуги
         <div className='bg-default dark:bg-default-200 w-min h-7 min-w-7 px-2 rounded-full dark:shadow-base flex items-center justify-center'>

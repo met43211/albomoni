@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { useValidateToken } from '@albomoni/shared/api/use-validate-token';

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/no-autofocus */
 
 import { Button } from '@nextui-org/button';

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { UserAvatar } from '@albomoni/entities/user';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Button } from '@nextui-org/button';

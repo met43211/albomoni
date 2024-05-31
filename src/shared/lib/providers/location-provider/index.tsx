@@ -10,13 +10,13 @@ type Props = {
 
 export const LocationProvider = ({ children }: Props) => {
   const [locationLocal] = useLocalStorage('location');
-  const { user } = useSession();
+  const { user, isPending } = useSession();
 
   useEffect(() => {
-    if (!locationLocal && !user) {
+    if (!locationLocal && !user && !isPending) {
       console.log('un');
     }
-  }, []);
+  }, [isPending]);
 
   return children;
 };

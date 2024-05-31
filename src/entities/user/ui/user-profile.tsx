@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { UserType } from '@albomoni/entities/user/model/user.type';

@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 'use client';
 
 import { ShowFilteredAdsButton } from '@albomoni/features/category/show-filtered-ads';

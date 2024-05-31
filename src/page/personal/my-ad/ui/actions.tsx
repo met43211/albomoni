@@ -12,7 +12,6 @@ import Link from 'next/link';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { PromoteAdButton } from '@albomoni/features/(ad)/promote-ad';
-import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { MyAdErrorBubble } from './error-bubble';
 
 type Props = {
