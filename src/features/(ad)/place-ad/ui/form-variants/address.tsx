@@ -1,4 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-param-reassign */
+
 import { useClientTranslation } from '@albomoni/shared/lib/hooks/use-client-translation';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import * as yup from 'yup';
@@ -6,6 +8,7 @@ import { AnimatePresence } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
+import { Map } from '@albomoni/entities/map';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
 import { getGeoSuggestions } from '../../api/get-geo-suggestions/get-geo-suggestions';
@@ -14,31 +17,15 @@ const yupSchema = yup.object({
   address: yup.object().required('required'),
 });
 
-export type SuggestionType = { value: string; data: { [key: string]: string } };
+export type SuggestionType = {
+  value: string;
+  data: { [key: string]: string; geo_lat: string; geo_lon: string };
+};
 
 export const PlaceAdAddress = memo(
   ({ title, form, updateForm, value }: PlaceAdInputProps) => {
     const { t } = useClientTranslation('place-ad');
     const category = useCategory();
-
-    // const handleChange = (e: any) => {
-    //   const { value: inputValue } = e.target;
-
-    //   try {
-    //     yupSchema.validateSync({ address: inputValue });
-    //     updateForm((draft: any) => {
-    //       draft.errors[title] = null;
-    //     });
-    //   } catch (err: any) {
-    //     updateForm((draft: any) => {
-    //       draft.errors[title] = err.message;
-    //     });
-    //   }
-
-    //   updateForm((draft: any) => {
-    //     draft.fields[title] = inputValue;
-    //   });
-    // };
 
     const [inValue, setInValue] = useState<string>('');
     const [debouncedValue, setDebouncedValue] = useState('');
@@ -103,6 +90,9 @@ export const PlaceAdAddress = memo(
       }
     };
 
+    const lat = Number(selectedVariant?.data.geo_lat) || undefined;
+    const lon = Number(selectedVariant?.data.geo_lon) || undefined;
+
     return (
       <div className='flex gap-4 flex-col'>
         <h5 className='text-md font-medium opacity-50'>
@@ -136,6 +126,8 @@ export const PlaceAdAddress = memo(
             </NotificationBubble>
           )}
         </AnimatePresence>
+
+        <Map newLat={lat} newLng={lon} />
       </div>
     );
   },

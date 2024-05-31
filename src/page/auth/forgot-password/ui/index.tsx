@@ -1,4 +1,4 @@
-import { RestorePasswordWidget } from '@albomoni/features/auth/restore-password';
+import { RestorePasswordWidget } from '@albomoni/features/(auth)/restore-password';
 import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import Link from 'next/link';
 import { PiXBold } from 'react-icons/pi';

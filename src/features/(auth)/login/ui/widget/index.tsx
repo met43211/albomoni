@@ -160,7 +160,7 @@ export const LoginWidget = () => {
               )}
               <Link
                 href='/forgot-password'
-                className='text-sm text-start opacity-60 underline mt-4'
+                className='w-fit text-sm text-start opacity-60 underline mt-4'
               >
                 Забыли пароль?
               </Link>

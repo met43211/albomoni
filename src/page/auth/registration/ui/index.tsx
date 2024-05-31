@@ -1,4 +1,4 @@
-import { RegistrationWidget } from '@albomoni/features/auth/registration';
+import { RegistrationWidget } from '@albomoni/features/(auth)/registration';
 import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import Link from 'next/link';
 import { Suspense } from 'react';

@@ -14,6 +14,7 @@ import { apiClient } from '@albomoni/shared/api/base';
 import addCookie from '@albomoni/shared/lib/utils/server/add-cookie';
 import revalidateRoute from '@albomoni/shared/lib/utils/server/revalidate';
 import { useLocalStorage } from 'react-use';
+import Link from 'next/link';
 import { UserDataSchema, UserDataSchemaFormData } from '../../model/schemas';
 import { SignupQueries } from '../../api';
 import { RegistrationRoutesProps } from '../../model/routes-props.type';
@@ -191,9 +192,9 @@ export const RegistrationUserData = ({
                   />
                   <p className='opacity-50 text-sm'>
                     Я принимаю{' '}
-                    <span className='underline cursor-pointer'>
+                    <Link href='/policy' className='underline cursor-pointer'>
                       условия и правила платформы
-                    </span>
+                    </Link>
                   </p>
                 </div>
               )}

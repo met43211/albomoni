@@ -5,9 +5,10 @@ import { Button } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { PiFloppyDiskBold } from 'react-icons/pi';
 import { useDebounce, useLocalStorage } from 'react-use';
-import { SuggestionType } from '@albomoni/features/ad/place-ad/ui/form-variants/address';
+import { SuggestionType } from '@albomoni/features/(ad)/place-ad/ui/form-variants/address';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import { Map } from '@albomoni/entities/map';
 import { getGeoSuggestionsCity } from '../api/get-countries';
 import { saveLocation } from '../api/save-location';
 
@@ -82,62 +83,49 @@ export const LocationPicker = () => {
     }
   };
 
+  const lat = Number(selectedVariant?.data.geo_lat) || undefined;
+  const lon = Number(selectedVariant?.data.geo_lon) || undefined;
+
   return (
-    <div className='w-full flex flex-col gap-6 lg:w-1/2'>
-      <p className='opacity-50 font-medium -mb-3'>Выберите город и страну</p>
+    <>
+      <div className='w-full flex flex-col gap-6 lg:w-1/2'>
+        <p className='opacity-50 font-medium -mb-3'>Выберите город и страну</p>
 
-      <Autocomplete
-        size='lg'
-        isLoading={isLoading}
-        placeholder='Начните вводить адрес'
-        aria-label='Address'
-        defaultItems={suggestList}
-        allowsCustomValue
-        endContent={false}
-        scrollShadowProps={{
-          isEnabled: false,
-        }}
-        onKeyDown={(e: any) => e.continuePropagation()}
-        onSelectionChange={handleSelection}
-        onInputChange={handleInput}
-      >
-        {(item) => (
-          <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
-        )}
-      </Autocomplete>
+        <div className='w-full flex gap-4'>
+          <Autocomplete
+            size='lg'
+            isLoading={isLoading}
+            placeholder='Начните вводить адрес'
+            aria-label='Address'
+            defaultItems={suggestList}
+            allowsCustomValue
+            endContent={false}
+            scrollShadowProps={{
+              isEnabled: false,
+            }}
+            onKeyDown={(e: any) => e.continuePropagation()}
+            onSelectionChange={handleSelection}
+            onInputChange={handleInput}
+          >
+            {(item) => (
+              <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
+            )}
+          </Autocomplete>
 
-      {/* <Autocomplete
-        defaultItems={countryList}
-        aria-label='select country'
-        size='lg'
-        placeholder='Не выбрано'
-      >
-        {(item) => <AutocompleteItem key={item}>f</AutocompleteItem>}
-      </Autocomplete>
-      <p className='opacity-50 font-medium -mb-3 mt-3'>
-        Выберите населённый пункт
-      </p>
-      <Autocomplete
-        isDisabled={!selectedCountry}
-        defaultItems={cityList}
-        aria-label='select city'
-        size='lg'
-        placeholder='Не выбрано'
-      >
-        {(item) => <AutocompleteItem key={item}>f</AutocompleteItem>}
-      </Autocomplete> */}
-
-      <Button
-        isDisabled={typeof selectedVariant !== 'object'}
-        size='lg'
-        color='primary'
-        variant='shadow'
-        className='mt-8 md:w-fit font-medium'
-        onPress={handleSubmit}
-      >
-        <PiFloppyDiskBold size={18} />
-        Сохранить
-      </Button>
-    </div>
+          <Button
+            isDisabled={typeof selectedVariant !== 'object'}
+            size='lg'
+            color='primary'
+            variant='shadow'
+            isIconOnly
+            className='font-medium'
+            onPress={handleSubmit}
+          >
+            <PiFloppyDiskBold size={24} />
+          </Button>
+        </div>
+      </div>
+      <Map newLat={lat} newLng={lon} />
+    </>
   );
 };

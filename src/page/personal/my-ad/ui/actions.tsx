@@ -6,12 +6,12 @@ import { cookies } from 'next/headers';
 import { UserAvatar } from '@albomoni/entities/user';
 import { PiPencilSimpleBold } from 'react-icons/pi';
 import { MyAdCardChips, MyAdCardStats } from '@albomoni/entities/ad-card';
-import { StopAdButton } from '@albomoni/features/ad/stop-ad';
-import { StartAdButton } from '@albomoni/features/ad/start-ad';
+import { StopAdButton } from '@albomoni/features/(ad)/stop-ad';
+import { StartAdButton } from '@albomoni/features/(ad)/start-ad';
 import Link from 'next/link';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { useTranslation } from '@albomoni/shared/i18n';
-import { PromoteAdButton } from '@albomoni/features/ad/promote-ad';
+import { PromoteAdButton } from '@albomoni/features/(ad)/promote-ad';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { MyAdErrorBubble } from './error-bubble';
 

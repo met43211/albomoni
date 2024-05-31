@@ -1,4 +1,4 @@
-import { LoginWidget } from '@albomoni/features/auth/login';
+import { LoginWidget } from '@albomoni/features/(auth)/login';
 import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import Link from 'next/link';
 import { PiXBold } from 'react-icons/pi';

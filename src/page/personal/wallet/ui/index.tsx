@@ -1,10 +1,10 @@
-import { BalanceSkeleton } from '@albomoni/widgets/profile/balance';
-import { TransactionsSkeleton } from '@albomoni/widgets/profile/transactions';
+import { BalanceSkeleton } from '@albomoni/widgets/(profile)/balance';
+import { TransactionsSkeleton } from '@albomoni/widgets/(profile)/transactions';
 
 import dynamic from 'next/dynamic';
 
 const DynamicBalance = dynamic(
-  () => import('@albomoni/widgets/profile/balance').then((mod) => mod.Balance),
+  () => import('@albomoni/widgets/(profile)/balance').then((mod) => mod.Balance),
   {
     loading: () => <BalanceSkeleton />,
   },
@@ -12,7 +12,7 @@ const DynamicBalance = dynamic(
 
 const DynamicTransactions = dynamic(
   () =>
-    import('@albomoni/widgets/profile/transactions').then(
+    import('@albomoni/widgets/(profile)/transactions').then(
       (mod) => mod.Transactions,
     ),
   {
