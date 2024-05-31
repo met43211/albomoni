@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
-import { useLocalStorage } from 'react-use';
+import { useGeolocation, useLocalStorage } from 'react-use';
 import { useSession } from '../../hooks/use-session';
 import { useModal } from '../modal/lib/use-modal';
 import { EModalStates } from '../modal/model/modal-states.enum';
@@ -13,14 +13,16 @@ type Props = {
 export const LocationProvider = ({ children }: Props) => {
   const [locationLocal] = useLocalStorage('location');
   const { user, isPending } = useSession();
+  const location = useGeolocation();
 
   const { setModalState } = useModal();
 
   useEffect(() => {
-    if (!locationLocal && !user && !isPending) {
+    if (!locationLocal && !user && !isPending && !location.loading) {
+      console.log(location);
       setModalState(EModalStates.LOCATION);
     }
-  }, [isPending]);
+  }, [isPending, location.loading]);
 
   return children;
 };
