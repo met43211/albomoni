@@ -15,7 +15,7 @@ export const AdWatchedMessage = ({ adId }: Props) => {
   const isFavoriteRoute = normalizedPath === '/favorite';
 
   return isWatched && !isFavoriteRoute ? (
-    <div className='absolute top-2 left-2 bg-default/70 backdrop-blur-xl text-sm font-medium rounded-xl px-2 py-1'>
+    <div className='absolute top-2 left-2 bg-default/70 z-20 backdrop-blur-xl text-sm font-medium rounded-xl px-2 py-1'>
       Просмотрено
     </div>
   ) : null;

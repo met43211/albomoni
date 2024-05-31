@@ -110,5 +110,10 @@
   "secure": {
     "with_secure": "С охраной",
     "no_secure": "Без охраны"
+  },
+  "services_type": {
+    "consumer_services": "Потребительские услуги",
+    "business_services": "Услуги для бизнеса",
+    "products_and_specialized_services": ""
   }
 }

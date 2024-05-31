@@ -12,6 +12,7 @@ import { ThemeColorObserver } from '@albomoni/shared/lib/utils/client/theme-colo
 import { FavoriteProvider } from '@albomoni/shared/lib/providers/favorite-provider';
 import { Modal } from '@albomoni/shared/lib/providers/modal';
 import { OriginTracker } from '@albomoni/shared/lib/providers/origin-provider';
+import { LocationProvider } from '@albomoni/shared/lib/providers/location-provider';
 import { store } from '../_env/store';
 
 type Props = {
@@ -36,8 +37,10 @@ const Providers = ({ children, lang }: Props) => {
                   <ThemeProvider attribute='class'>
                     <ThemeColorObserver>
                       <LanguageProvider lang={lang}>
-                        <Modal />
-                        {children}
+                        <LocationProvider>
+                          <Modal />
+                          {children}
+                        </LocationProvider>
                       </LanguageProvider>
                     </ThemeColorObserver>
                   </ThemeProvider>
