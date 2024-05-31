@@ -3,7 +3,7 @@ export const SupportVideo = () => {
     <div className='w-full flex flex-col lg:flex-row gap-4 lg:gap-8'>
       <div className='w-full aspect-video bg-default rounded-2xl' />
       <div className='w-full flex flex-col gap-4'>
-        <h3 className='text-2xl font-semibold'>Нужна помощь?</h3>
+        <h3 className='text-xl md:text-2xl font-semibold'>Нужна помощь?</h3>
         <p className='font-medium opacity-50'>
           Посмотрите короткий видеоролик об основных возможностях площадки
           Albomoni, чтобы узнать:

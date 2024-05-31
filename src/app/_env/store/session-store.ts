@@ -2,7 +2,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserType } from '@albomoni/entities/user/model/user.type';
 
-type Session = { user: UserType | null; isTokenValid: boolean; isPending: boolean };
+type Session = {
+  user: UserType | null;
+  isTokenValid: boolean;
+  isPending: boolean;
+};
 
 const initialState: Session = {
   user: null,
