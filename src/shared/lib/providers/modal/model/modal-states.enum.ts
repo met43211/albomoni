@@ -10,6 +10,7 @@ export enum EModalStates {
   EDIT_CHANGE_TEXT = 'edit_change_text',
   CONTACT_WITH_SELLER = 'contact_with_seller',
   SET_REVIEW = 'set_review',
+  LOCATION = 'location',
 }
 
 export enum ESubscriptionStates {

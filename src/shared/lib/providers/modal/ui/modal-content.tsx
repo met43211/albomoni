@@ -11,6 +11,7 @@ import { ModalVariantDeletePhone } from './variants/(edit-profile)/delete-phone'
 import { ModalVariantEditTextField } from './variants/(edit-profile)/edit-text-field';
 import { ModalVariantContactWithSeller } from './variants/contact-with-seller';
 import { ModalVariantSetReview } from './variants/set-review';
+import { ModalVariantLocation } from './variants/location';
 
 export const ModalContent = () => {
   const { modalState } = useModal();
@@ -37,6 +38,8 @@ export const ModalContent = () => {
       return <ModalVariantContactWithSeller />;
     case EModalStates.SET_REVIEW:
       return <ModalVariantSetReview />;
+    case EModalStates.LOCATION:
+      return <ModalVariantLocation />;
     default:
       return null;
     }
