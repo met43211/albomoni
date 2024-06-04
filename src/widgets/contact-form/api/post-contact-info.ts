@@ -1,5 +1,5 @@
 import { API_URL } from '@albomoni/shared/config';
-import { ContactFormDataI } from '../contact-form/model/contact-form-data';
+import { ContactFormDataI } from '../model/contact-form-data';
 
 export const postContactInfo = async (data: ContactFormDataI) => {
   const formData = new FormData();
@@ -10,7 +10,6 @@ export const postContactInfo = async (data: ContactFormDataI) => {
     formData.append('attachments', data.attachments);
   }
   try {
-    console.log(formData);
     return await fetch(`${API_URL}feedback-message/`, {
       headers: {
         Accept: '*/*',

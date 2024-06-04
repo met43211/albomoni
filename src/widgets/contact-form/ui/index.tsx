@@ -7,7 +7,7 @@ import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/react';
 import { FormEventHandler, useEffect, useState } from 'react';
-import { postContactInfo } from '@albomoni/widgets/api/post-contact-info';
+import { postContactInfo } from '@albomoni/widgets/contact-form/api/post-contact-info';
 import { ContactVariants } from '../config/contact-variants';
 import { validator } from '../lib/validator';
 import { ContactFormDataI } from '../model/contact-form-data';
@@ -42,7 +42,7 @@ export const ContactForm = () => {
       await postContactInfo(data);
       setIsSuccess(true);
     } catch (e) {
-      console.log(e);
+      return;
     }
   };
 
