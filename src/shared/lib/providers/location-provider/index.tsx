@@ -1,11 +1,11 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
+import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 import { useLocalStorage } from 'react-use';
 import { useSession } from '../../hooks/use-session';
 import { useModal } from '../modal/lib/use-modal';
 import { EModalStates } from '../modal/model/modal-states.enum';
-import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 
 type Props = {
   children: ReactNode;
