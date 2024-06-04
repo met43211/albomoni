@@ -5,12 +5,10 @@ import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import * as yup from 'yup';
 import { AnimatePresence } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
-import { useDebounce } from 'react-use';
-import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 import { Map } from '@albomoni/entities/map';
+import { TGoogleSuggestion } from '@albomoni/entities/map/model/google-suggestion.type';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
-import { getGeoSuggestions } from '../../api/get-geo-suggestions/get-geo-suggestions';
 
 const yupSchema = yup.object({
   address: yup.object().required('required'),
@@ -26,35 +24,7 @@ export const PlaceAdAddress = memo(
     const { t } = useClientTranslation('place-ad');
     const category = useCategory();
 
-    const [inValue, setInValue] = useState<string>('');
-    const [debouncedValue, setDebouncedValue] = useState('');
-    const [suggestList, setSuggestList] = useState<SuggestionType[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [selectedVariant, setSelectedVariant] = useState<SuggestionType>();
-
-    useDebounce(
-      () => {
-        setDebouncedValue(inValue);
-        setIsLoading(false);
-      },
-      2000,
-      [inValue],
-    );
-
-    useEffect(() => {
-      const getSuggests = async () => {
-        const response = await getGeoSuggestions(debouncedValue);
-        const { suggestions } = await response.json();
-
-        setSuggestList(suggestions as SuggestionType[]);
-      };
-
-      if (debouncedValue.length > 2) {
-        getSuggests();
-      } else {
-        setSuggestList([]);
-      }
-    }, [debouncedValue]);
+    const [selectedVariant, setSelectedVariant] = useState<TGoogleSuggestion>();
 
     useEffect(() => {
       if (selectedVariant) {
@@ -75,48 +45,12 @@ export const PlaceAdAddress = memo(
       }
     }, [selectedVariant]);
 
-    const handleSelection = (sel: any) => {
-      const selectedSuggest = suggestList.find(
-        ({ value: suggestValue }) => suggestValue === sel,
-      );
-      setSelectedVariant(selectedSuggest);
-    };
-
-    const handleInput = (text: string) => {
-      setInValue(text);
-      if (text.length > 2) {
-        setIsLoading(true);
-      }
-    };
-
-    const lat = Number(selectedVariant?.data.geo_lat) || undefined;
-    const lon = Number(selectedVariant?.data.geo_lon) || undefined;
-
     return (
       <div className='flex gap-4 flex-col'>
         <h5 className='text-md font-medium opacity-50'>
           {t(`${category}.${title}.name`)}
         </h5>
-        <Autocomplete
-          size='lg'
-          isLoading={isLoading}
-          placeholder='Начните вводить адрес'
-          aria-label='Address'
-          defaultItems={suggestList}
-          allowsCustomValue
-          endContent={false}
-          defaultInputValue={value}
-          scrollShadowProps={{
-            isEnabled: false,
-          }}
-          onKeyDown={(e: any) => e.continuePropagation()}
-          onSelectionChange={handleSelection}
-          onInputChange={handleInput}
-        >
-          {(item) => (
-            <AutocompleteItem key={item.value}>{item.value}</AutocompleteItem>
-          )}
-        </Autocomplete>
+        <Map setSelectedVariant={setSelectedVariant} />
 
         <AnimatePresence>
           {form?.errors[title] && (
@@ -125,8 +59,6 @@ export const PlaceAdAddress = memo(
             </NotificationBubble>
           )}
         </AnimatePresence>
-
-        <Map newLat={lat} newLng={lon} />
       </div>
     );
   },

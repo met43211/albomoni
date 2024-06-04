@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/no-autofocus */
-
 import { Button } from '@nextui-org/button';
+import { PiCheckBold, PiMapPinBold, PiPencilSimpleBold } from 'react-icons/pi';
+import Link from 'next/link';
 import { ModalScrollableArea } from '../../scrollable-area';
 import { useModal } from '../../../lib/use-modal';
-
 import { EModalStates } from '../../../model/modal-states.enum';
 
 export const ModalVariantLocation = () => {
@@ -12,15 +11,44 @@ export const ModalVariantLocation = () => {
   return (
     <>
       <ModalScrollableArea>
-        <h1 className='text-xl font-semibold mt-4 md:mt-0'>Выбор региона</h1>
+        <h1 className='text-xl font-semibold mt-4 md:mt-0'>
+          Регион объявлений
+        </h1>
+        <div className='w-full h-12 rounded-2xl bg-default px-4 flex gap-2 items-center'>
+          <PiMapPinBold size={22} className='opacity-50' />
+          <p className='font-semibold opacity-60'>Россия, Москва</p>
+        </div>
+        <p className='font-medium'>
+          <span className='opacity-50'>
+            Регион объявлений, которые будут отображаться в Ваших подборках.
+            Нажмите
+          </span>{' '}
+          <span>Изменить</span>
+          <span className='opacity-50'>
+            , если хотите поменять местоположение.
+          </span>
+        </p>
       </ModalScrollableArea>
 
       <div className='w-full px-6 pb-6 pt-1 flex gap-4'>
         <Button
+          as={Link}
+          href='/location'
           onPress={() => setModalState(EModalStates.NULL)}
           size='lg'
           className='w-full font-medium'
         >
+          <PiPencilSimpleBold size={20} />
+          Изменить
+        </Button>
+        <Button
+          onPress={() => setModalState(EModalStates.NULL)}
+          size='lg'
+          variant='shadow'
+          color='primary'
+          className='w-full font-medium'
+        >
+          <PiCheckBold size={20} />
           Подтвердить
         </Button>
       </div>
