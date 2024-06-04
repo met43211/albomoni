@@ -19,7 +19,7 @@ export const Map = ({ setSelectedVariant, types = '(cities)' }: Props) => {
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [position, setPosition] = useState({ lat: 55.7483, lng: 37.6171 });
   const [map, setMap] = useState(null);
-  const inputRef = useRef(null);
+  const [value, setValue] = useState('');
 
   const onLoad = useCallback((autocompleteInstance: any) => {
     setAutocomplete(autocompleteInstance);
@@ -38,7 +38,7 @@ export const Map = ({ setSelectedVariant, types = '(cities)' }: Props) => {
           }
           return mapInstance;
         });
-
+        setValue(place.formatted_address);
         setSelectedVariant(place);
       }
     } else {
@@ -65,10 +65,13 @@ export const Map = ({ setSelectedVariant, types = '(cities)' }: Props) => {
       >
         <Input
           size='lg'
-          ref={inputRef}
           startContent={<PiMapPinBold size={20} className='opacity-50' />}
           type='text'
           placeholder='Введите адрес'
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
           classNames={{ input: 'font-medium' }}
         />
       </Autocomplete>
