@@ -12,9 +12,9 @@ export const WelcomeBlock = () => {
   if (token) return <Spacer className='h-6' />;
 
   return (
-    <div className='w-full h-[500px] lg:h-[410px] bg-gradient-to-bl from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-500 flex justify-center mb-14'>
-      <div className='max-w-7xl w-full px-4 flex py-8 items-start lg:items-center relative'>
-        <div className='flex flex-col gap-5 w-full sm:w-1/2'>
+    <div className='w-full h-[500px] md:h-[280px] lg:h-[410px] bg-gradient-to-bl from-blue-200 to-indigo-200 dark:from-blue-900 dark:to-indigo-500 flex justify-center mb-14'>
+      <div className='max-w-7xl w-full pr-4 md:flex pt-8 items-start lg:items-center relative justify-between overflow-hidden'>
+        <div className='flex flex-col gap-5 w-full sm:w-1/2 pl-4 lg:pb-8 md:min-w-[390px]'>
           <h2 className='text-3xl lg:text-5xl font-bold !leading-[1.3] subpixel-antialiased text-indigo-900 dark:text-indigo-100'>
             Поиск и размещение объявлений
           </h2>
@@ -32,8 +32,10 @@ export const WelcomeBlock = () => {
             Разместить объявление
           </Button>
         </div>
-        <div className='absolute bottom-0 right-4 overflow-clip w-full h-[270px] md:w-[600px] md:h-[350px]'>
-          <WelcomeBlockScreen />
+        <div className='relative top-8 w-full h-full md:w-[600px] md:top-0 ml-[-15px] md:ml-1 lg:ml-1'>
+          <div className='h-full md:h-[350px] overflow-clip'>
+            <WelcomeBlockScreen />
+          </div>
         </div>
       </div>
     </div>

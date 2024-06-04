@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactNode, useEffect } from 'react';
+import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 import { useLocalStorage } from 'react-use';
 import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 import { useSession } from '../../hooks/use-session';

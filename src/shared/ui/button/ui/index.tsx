@@ -1,6 +1,6 @@
 import { Button as NextUIButton } from '@nextui-org/button';
 import { clsx } from 'clsx';
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -13,7 +13,6 @@ type Props = {
     | 'success'
     | 'warning'
     | 'danger';
-  className?: string;
   variant?:
     | 'solid'
     | 'bordered'
@@ -22,8 +21,7 @@ type Props = {
     | 'faded'
     | 'shadow'
     | 'ghost';
-  type?: 'button' | 'submit' | 'reset';
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const Button = ({
   children,

@@ -114,6 +114,119 @@
   "services_type": {
     "consumer_services": "Потребительские услуги",
     "business_services": "Услуги для бизнеса",
-    "products_and_specialized_services": ""
+    "products_and_specialized_services": "Продукты и специализированные услуги"
+  },
+  "consumer_services_type":{
+    "domestic_services": "Бытовые услуги",
+    "babysitters_caregivers": "Няни, сиделки",
+    "beauty_health": "Красота и здоровье",
+    "handyman": "Мастер",
+    "cleaning": "Уборка",
+    "mounting_and_installation_of_appliances": "Монтаж и установка приборов",
+    "animal_care": "Забота о животных",
+    "garbage_and_recyclables_removal": "Вывоз мусора и вторсырья",
+    "car_service_rental": "Аренда авто"
+  },
+  "requests_type":{
+    "consumer_services": "Потребительские услуги",
+    "business_services": "Услуги для бизнеса",
+    "products_and_specialized_services": "Продукты и специализированные услуги"
+  },
+  "business_services_type":{
+    "business_services":"Услуги для бизнеса",
+    "advertising_printing": "Рекламная полиграфия",
+    "training_courses":"Учебные курсы",
+    "safety_security": "Безопастность",
+    "computer_help": "Компьютерная помощь",
+    "repair_and_maintenance_of_equipment": "Ремонт и обслуживание оборудования",
+    "loaders_warehousing_services": "Cкладские услуги погрузчиков",
+    "trucking": "Грузоперевозки",
+    "passenger_transportation": "Пассажирские перевозки"
+  },
+  "products_and_specialized_services_type":{
+    "art":"Искусство",
+    "equipment_production": "Производство оборудования",
+    "food_and_grocery_delivery":"Доставка еды и продуктов",
+    "holidays_events": "Праздничные мероприятия",
+    "construction": "Cтроительство",
+    "garden_landscaping": "Ландшафтный дизайн сада",
+    "services_эвакуатора": "Услуги эвакуатора",
+    "repair_and_decoration": "Ремонт и отделка",
+    "photography_and_videography": "Фото и видео",
+    "other": "Другое"
+  },
+  "electronics_type":{
+    "audio_and_video": "Звук и видео",
+    "games_consoles_and_programs": "Игровые консоли и программы",
+    "desktop_computers": "Настольные компьютеры",
+    "office_equipment_and_consumables": "Офисное оборудование и расходные материалы",
+    "tablets_and_e": "Планшеты",
+    "telephones": "Телефоны",
+    "computer_goods": "Компьютерные товары",
+    "photographic_equipment":"Фото оборудование"
+  },
+  "audio_and_video_type":{
+    "mp3_players": "Mp3 плееры",
+    "acoustics_speakers_subwoofers": "Акустика, колонки, сабвуферы",
+    "video_dvd_and_blu-ray_players": "Видео-DVD и Blu-Ray проигрователи",
+    "video_cameras": "Видео камеры",
+    "cables_and_adapters": "Кабели и адаптеры",
+    "microphones": "Микрофоны",
+    "music_and_movies": "Музыка и фильмы",
+    "music_centers_stereos": "Музыкальные центры, стереосистемы",
+    "headphones": "Наушники",
+    "tvs_and_projectors": "Телевизоры и проекторы",
+    "amplifiers_and_receivers": "Усилители и ресиверы",
+    "accessories": "Аксессуары",
+    "laptops": "Ноутбуки",
+    "games_for_consoles": "Игры для консолей",
+    "game_consoles": "Игровые консоли",
+    "computer_games": "Компьютерные игры",
+    "programs": "Программы"
+  },
+  "desktop_computers_type":{
+    "system_units": "Системные блоки",
+    "monoblocks": "Моноблоки",
+    "other": "Другое"
+  },
+  "office_equipment_type":{
+    "mfps_copiers_and_scanners": "Многофункциональные копиры и сканеры",
+    "printers": "Принтеры",
+    "telephony": "Телефония",
+    "ups_surge_protectors": "Защитные устройства для ИБП",
+    "paper_shredders": "Измельчители бумаги",
+    "consumables": "Расходные материалы",
+    "chancery": "Канцелярия"
+  },
+  "tablets_type": {
+    "tablets": "Планшеты",
+    "e-books": "Электронные книги",
+    "accessories": "Аксессуары"
+  },
+  "telephones_type": {
+    "cell_phones": "Сотовые телефоны",
+    "walkie-talkies": "Рации",
+    "landline_phones": "Стационарные телефоны",
+    "accessories": "Аксессуары"
+  },
+  "computer_goods_type":{
+    "acoustics": "Акустика",
+    "webcams": "Веб-камеры",
+    "joysticks_and_steering_wheels": "Джойстики и рули",
+    "keyboards_and_mice": "Клавиатуры и мыши",
+    "monitors": "Мониторы",
+    "portable_hard_disks": "Портативные жесткие диски",
+    "network_equipment": "Сетевое оборудование",
+    "tv_tuners": "ТВ-тюнеры",
+    "flash_drives_and_memory_cards": "Флешки и карты памяти",
+    "accessories": "Аксессуары"
+  },
+  "photographic_equipment_type":{
+    "compact_cameras": "Компактные камеры",
+    "mirror_cameras": "Зеркальные камеры",
+    "film_cameras": "Пленочные фотоаппараты",
+    "binoculars_and_telescopes": "Бинокли и телескопы",
+    "lenses": "Линзы",
+    "equipment_and_accessories": "Оборудование и аксессуары"
   }
 }
