@@ -89,7 +89,10 @@ export const MyAdActions = async ({ data, lng }: Props) => {
 
         <div className='flex flex-col gap-3'>
           <h3 className='text-md font-semibold opacity-50'>Продавец (Вы)</h3>
-          <div className='w-full h-14 flex gap-4 items-center'>
+          <Link
+            href={`/user/${seller.user_id}`}
+            className='w-full h-14 flex gap-4 items-center'
+          >
             <div className='w-14 h-14 flex-shrink-0'>
               <UserAvatar
                 src={seller.avatar}
@@ -100,7 +103,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
               <p className='text-lg font-bold'>{seller.name}</p>
               <Rating value={seller.rating} feedback={seller.feedback_count} />
             </div>
-          </div>
+          </Link>
         </div>
 
         <div className='flex flex-col gap-1'>

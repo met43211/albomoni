@@ -7,10 +7,15 @@ import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/react';
 import { FormEventHandler, useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { postContactInfo } from '@albomoni/widgets/contact-form/api/post-contact-info';
+=======
+>>>>>>> 123a475f8bd8775d6660b2b8dd31073984bad9fc
 import { ContactVariants } from '../config/contact-variants';
 import { validator } from '../lib/validator';
 import { ContactFormDataI } from '../model/contact-form-data';
+import { postContactInfo } from '../api/post-contact-info';
+import { ContactFormSuccessMessage } from './success-message';
 
 export const ContactForm = () => {
   const { user } = useSession();
@@ -23,6 +28,7 @@ export const ContactForm = () => {
     new Set([ContactVariants[0]]),
   );
   const [attachments, setAttachments] = useState<File[]>([]);
+  const [isFormLoading, setIsFormLoading] = useState(false);
 
   useEffect(() => {
     if (user?.email) {
@@ -30,19 +36,19 @@ export const ContactForm = () => {
     }
   }, [user]);
 
-  const resetForm = () => {
-    setEmail('');
-    setAppeal('');
-    setSelectedContactVariant(new Set([ContactVariants[0]]));
-    setAttachments([]);
-  };
-
   const send = async (data: ContactFormDataI) => {
     try {
       await postContactInfo(data);
       setIsSuccess(true);
+<<<<<<< HEAD
     } catch (e) {
       return;
+=======
+    } catch {
+      return;
+    } finally {
+      setIsFormLoading(false);
+>>>>>>> 123a475f8bd8775d6660b2b8dd31073984bad9fc
     }
   };
 
@@ -61,13 +67,13 @@ export const ContactForm = () => {
       setIsValidEmail(isEmail);
       setIsValidAppeal(isAppeal);
       if (isEmail && isAppeal) {
-        resetForm();
+        setIsFormLoading(true);
         send(formData);
       }
     });
   };
 
-  return (
+  return !isSuccess ? (
     <form
       className='w-full flex flex-col gap-8'
       onSubmit={handleSubmit}
@@ -122,12 +128,8 @@ export const ContactForm = () => {
           multiple
         />
       </div>
-      {isSuccess && (
-        <div className='w-full max-w-[700px]'>
-          <NotificationBubble>Успешно отправлено</NotificationBubble>
-        </div>
-      )}
       <Button
+        isLoading={isFormLoading}
         size='lg'
         color='primary'
         variant='shadow'
@@ -137,5 +139,7 @@ export const ContactForm = () => {
         Отправить
       </Button>
     </form>
+  ) : (
+    <ContactFormSuccessMessage />
   );
 };
