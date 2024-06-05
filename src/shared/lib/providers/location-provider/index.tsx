@@ -3,11 +3,9 @@
 import { ReactNode, useEffect } from 'react';
 import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 import { useLocalStorage } from 'react-use';
-import { useDispatch } from 'react-redux';
 import { useSession } from '../../hooks/use-session';
 import { useModal } from '../modal/lib/use-modal';
 import { EModalStates } from '../modal/model/modal-states.enum';
-import { fetchLocation } from '../location/model/location.slice';
 
 type Props = {
   children: ReactNode;
@@ -16,7 +14,6 @@ type Props = {
 export const LocationProvider = ({ children }: Props) => {
   const [locationLocal] = useLocalStorage('location');
   const { user, isPending } = useSession();
-  const dispatch = useDispatch;
 
   const { setModalState } = useModal();
 
