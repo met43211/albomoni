@@ -1,12 +1,24 @@
 import { Button } from '@nextui-org/button';
 import { PiCheckBold, PiMapPinBold, PiPencilSimpleBold } from 'react-icons/pi';
 import Link from 'next/link';
+import { getCookie } from 'cookies-next';
+import { TLocation } from '@albomoni/shared/model/types/location.type';
 import { ModalScrollableArea } from '../../scrollable-area';
 import { useModal } from '../../../lib/use-modal';
 import { EModalStates } from '../../../model/modal-states.enum';
 
 export const ModalVariantLocation = () => {
   const { setModalState } = useModal();
+
+  const getLocation = () => {
+    try {
+      return JSON.parse(getCookie('location') as string) as TLocation;
+    } catch {
+      return { address: 'undefined' };
+    }
+  };
+
+  const location = getLocation();
 
   return (
     <>
@@ -16,7 +28,7 @@ export const ModalVariantLocation = () => {
         </h1>
         <div className='w-full h-12 rounded-2xl bg-default px-4 flex gap-2 items-center'>
           <PiMapPinBold size={22} className='opacity-50' />
-          <p className='font-semibold opacity-60'>Россия, Москва</p>
+          <p className='font-semibold opacity-60'>{location.address}</p>
         </div>
         <p className='font-medium'>
           <span className='opacity-50'>

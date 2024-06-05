@@ -4,13 +4,14 @@ import {
   Autocomplete,
   GoogleMap,
   Marker,
-  Libraries,
+  Libraries as TLibraries,
 } from '@react-google-maps/api';
 import { m } from 'framer-motion';
 import { Input } from '@nextui-org/input';
 import { PiFloppyDiskBold, PiMapPinBold } from 'react-icons/pi';
 import { TGoogleSuggestion } from '../model/google-suggestion.type';
 import { MapSkeleton } from './skeleton';
+import { Libraries } from '../config/map-config';
 
 type Props = {
   setSelectedVariant: (variant: TGoogleSuggestion) => void;
@@ -60,8 +61,8 @@ export const Map = ({
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_URL as string}
-      libraries={['places'] as Libraries}
       loadingElement={<MapSkeleton onSave={onSave} />}
+      libraries={Libraries as TLibraries}
     >
       <Autocomplete
         className='-mt-4 flex items-center'

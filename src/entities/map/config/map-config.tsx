@@ -3,3 +3,5 @@ export const MapConfig = {
   lat: 55.75396,
   lng: 37.620393,
 } as const;
+
+export const Libraries = ['places'];
