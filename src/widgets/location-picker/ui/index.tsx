@@ -4,15 +4,19 @@ import { useLocalStorage } from 'react-use';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { Map } from '@albomoni/entities/map';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TGoogleSuggestion } from '@albomoni/entities/map/model/google-suggestion.type';
+import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
 
 export const LocationPicker = () => {
   const token = getCookie('token');
   const [backPage, , deleteBackPage] = useLocalStorage<string>('back-page');
   const router = useRouter();
-
   const [selectedVariant, setSelectedVariant] = useState<TGoogleSuggestion>();
+
+  useEffect(() => {
+    console.log(selectedVariant);
+  }, [selectedVariant]);
 
   return (
     <>

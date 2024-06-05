@@ -40,7 +40,7 @@ export const PlaceAdAddress = memo(
         }
 
         updateForm((draft: any) => {
-          draft.fields[title] = selectedVariant;
+          draft.fields[title] = selectedVariant.place_id;
         });
       }
     }, [selectedVariant]);
