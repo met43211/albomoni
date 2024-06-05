@@ -1,7 +1,13 @@
+import { MEDIA_URL } from '@albomoni/shared/config';
+import { Video } from '@albomoni/shared/ui/video/ui';
+
 export const SupportVideo = () => {
+  const mediaUrl = MEDIA_URL;
   return (
     <div className='w-full flex flex-col lg:flex-row gap-4 lg:gap-8'>
-      <div className='w-full aspect-video bg-default rounded-2xl' />
+      <div className='w-full aspect-video bg-default rounded-2xl overflow-hidden'>
+        <Video src={`${mediaUrl}en.mov`} className='w-full h-full' />
+      </div>
       <div className='w-full flex flex-col gap-4'>
         <h3 className='text-xl md:text-2xl font-semibold'>Нужна помощь?</h3>
         <p className='font-medium opacity-50'>
