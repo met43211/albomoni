@@ -7,7 +7,12 @@ export const Categories = async ({ lng }: I18nLangParam) => {
   return (
     <>
       {categories.map((category) => (
-        <Category name={category.name} img={category.img} lng={lng} />
+        <Category
+          key={category.name}
+          name={category.name}
+          img={category.img}
+          lng={lng}
+        />
       ))}
     </>
   );

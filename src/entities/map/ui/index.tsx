@@ -1,14 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   LoadScript,
   Autocomplete,
   GoogleMap,
   Marker,
-  Libraries,
+  Libraries as TLibraries,
 } from '@react-google-maps/api';
 import { Input } from '@nextui-org/input';
 import { PiMapPinBold } from 'react-icons/pi';
 import { TGoogleSuggestion } from '../model/google-suggestion.type';
+import { Libraries } from '../config/map-config';
 
 type Props = {
   setSelectedVariant: (variant: TGoogleSuggestion) => void;
@@ -53,7 +54,7 @@ export const Map = ({ setSelectedVariant, types = '(cities)' }: Props) => {
   return (
     <LoadScript
       googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_API_URL as string}
-      libraries={['places'] as Libraries}
+      libraries={Libraries as TLibraries}
     >
       <Autocomplete
         className='-mt-4'

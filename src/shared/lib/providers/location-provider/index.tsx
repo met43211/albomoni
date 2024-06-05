@@ -2,7 +2,9 @@
 
 import { ReactNode, useEffect } from 'react';
 import { getGeolocation } from '@albomoni/shared/api/get-geolocation';
-import { useLocalStorage } from 'react-use';
+import { googleGeosuggest } from '@albomoni/shared/api/get-google-geosuggest';
+import { getCookie, setCookie } from 'cookies-next';
+import { saveLocation } from '@albomoni/shared/api/save-location';
 import { useSession } from '../../hooks/use-session';
 import { useModal } from '../modal/lib/use-modal';
 import { EModalStates } from '../modal/model/modal-states.enum';
@@ -12,20 +14,50 @@ type Props = {
 };
 
 export const LocationProvider = ({ children }: Props) => {
-  const [locationLocal] = useLocalStorage('location');
-  const { user, isPending } = useSession();
+  const cookieLocation = getCookie('location');
+  const { isPending } = useSession();
+  const token = getCookie('token');
 
   const { setModalState } = useModal();
 
   useEffect(() => {
-    if (!locationLocal && !user && !isPending) {
+    if (!cookieLocation && !isPending) {
       const getGeo = async () => {
-        const resp = await getGeolocation();
-        console.log(resp);
+        try {
+          const resp = await getGeolocation();
+          const resp2 = await googleGeosuggest(
+            resp.latitude.toString(),
+            resp.longitude.toString(),
+          );
+          const address = resp2.results[0].formatted_address;
+          const [city, country] = address.split(', ');
+
+          const location = {
+            city,
+            country,
+            address,
+            lat: resp.latitude,
+            lon: resp.longitude,
+            country_code: resp.country_code,
+            region_code: resp.region_code,
+          };
+
+          if (token) {
+            try {
+              await saveLocation(location, token);
+            } catch {
+              return;
+            }
+          }
+
+          setCookie('location', location);
+          setModalState(EModalStates.LOCATION);
+        } catch {
+          return;
+        }
       };
 
       getGeo();
-      setModalState(EModalStates.LOCATION);
     }
   }, [isPending]);
 
