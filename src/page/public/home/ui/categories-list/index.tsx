@@ -15,6 +15,7 @@ export const CategoriesList = async ({ lng }: I18nLangParam) => {
   const scrollToEnd = () => {
     scrollRight(slideRef);
   };
+
   return (
     <div className='w-full flex flex-col max-w-7xl gap-8'>
       <div className='w-full flex justify-between'>

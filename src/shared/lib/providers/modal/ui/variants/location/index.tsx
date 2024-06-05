@@ -48,7 +48,7 @@ export const ModalVariantLocation = () => {
           color='primary'
           className='w-full font-medium'
         >
-          <PiCheckBold size={20} />
+          <PiCheckBold size={20} className='flex-shrink-0' />
           Подтвердить
         </Button>
       </div>

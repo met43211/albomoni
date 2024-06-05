@@ -41,6 +41,7 @@ export const Search = ({ isScrollable = false }: Props) => {
   return (
     <form className='w-full relative flex'>
       <Input
+        disabled
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         size='lg'
