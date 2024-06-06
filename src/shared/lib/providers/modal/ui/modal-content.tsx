@@ -12,6 +12,7 @@ import { ModalVariantEditTextField } from './variants/(edit-profile)/edit-text-f
 import { ModalVariantContactWithSeller } from './variants/contact-with-seller';
 import { ModalVariantSetReview } from './variants/set-review';
 import { ModalVariantLocation } from './variants/location';
+import { ModalVariantUserInfo } from './variants/user-info';
 
 export const ModalContent = () => {
   const { modalState } = useModal();
@@ -40,6 +41,8 @@ export const ModalContent = () => {
       return <ModalVariantSetReview />;
     case EModalStates.LOCATION:
       return <ModalVariantLocation />;
+    case EModalStates.USER_INFO:
+      return <ModalVariantUserInfo />;
     default:
       return null;
     }

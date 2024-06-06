@@ -1,8 +1,5 @@
-import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
-import { apiClient } from '@albomoni/shared/api/base';
-import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
-import { NoFavorites } from './no-favorites';
+import { AdsContainer } from './AdsContainer';
 
 type Props = {
   lng: string;
@@ -22,25 +19,7 @@ export const FavoritesList = async ({ lng, favoritesId }: Props) => {
 
   const currencies = await getCurrenciesAsync();
 
-  const initialData = await apiClient.post<Ad[]>('favorite/1', {
-    favorites: favoritesArray,
-  });
-
-  const fetchFunction = () => async (page: number) => {
-    'use server';
-
-    return apiClient.post<Ad[]>(`favorite/${page}`, {
-      favorites: favoritesArray,
-    });
-  };
-
-  return initialData.length > 0 ? (
-    <AdsInfiniteScroller
-      currencies={currencies}
-      initialData={initialData}
-      fetchFunction={fetchFunction()}
-    />
-  ) : (
-    <NoFavorites />
+  return (
+    <AdsContainer currencies={currencies} favoritesArray={favoritesArray} />
   );
 };

@@ -29,6 +29,10 @@ export const UserAside = ({ user }: Props) => {
       setModalState(EModalStates.SET_REVIEW);
     }
   };
+  const handleSeeInfo = () => {
+    setModalData({ user });
+    setModalState(EModalStates.USER_INFO);
+  };
 
   return (
     <aside className='w-full lg:max-w-96 lg:sticky top-6 h-min flex flex-col gap-4 flex-shrink-0'>
@@ -37,6 +41,7 @@ export const UserAside = ({ user }: Props) => {
       <div className='w-full rounded-2xl bg-default overflow-clip'>
         <button
           type='button'
+          onClick={handleSeeInfo}
           className='w-full p-4 active:bg-black/10 dark:active:bg-white/10 transition-background text-start flex justify-between items-center'
         >
           <div className='w-full flex gap-3 items-center'>

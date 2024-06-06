@@ -18,7 +18,7 @@ export const LocationPicker = () => {
       <div className='w-full flex flex-col gap-6 lg:w-1/2'>
         <p className='opacity-50 font-medium -mb-3'>Выберите город и страну</p>
       </div>
-      <Map setSelectedVariant={setSelectedVariant} />
+      <Map setSelectedVariant={setSelectedVariant} onSave={() => {}} />
     </>
   );
 };

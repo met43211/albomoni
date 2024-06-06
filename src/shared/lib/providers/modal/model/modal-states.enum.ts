@@ -11,6 +11,7 @@ export enum EModalStates {
   CONTACT_WITH_SELLER = 'contact_with_seller',
   SET_REVIEW = 'set_review',
   LOCATION = 'location',
+  USER_INFO = 'user-info',
 }
 
 export enum ESubscriptionStates {
