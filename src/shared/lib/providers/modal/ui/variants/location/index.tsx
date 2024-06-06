@@ -1,23 +1,13 @@
 import { Button } from '@nextui-org/button';
 import { PiCheckBold, PiMapPinBold, PiPencilSimpleBold } from 'react-icons/pi';
 import Link from 'next/link';
-import { getCookie } from 'cookies-next';
-import { TLocation } from '@albomoni/shared/model/types/location.type';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 import { ModalScrollableArea } from '../../scrollable-area';
 import { useModal } from '../../../lib/use-modal';
 import { EModalStates } from '../../../model/modal-states.enum';
 
 export const ModalVariantLocation = () => {
   const { setModalState } = useModal();
-
-  const getLocation = () => {
-    try {
-      return JSON.parse(getCookie('location') as string) as TLocation;
-    } catch {
-      return { address: 'undefined' };
-    }
-  };
-
   const location = getLocation();
 
   return (

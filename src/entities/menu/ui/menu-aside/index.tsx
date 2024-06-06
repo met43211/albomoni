@@ -20,6 +20,7 @@ import { UserAvatar } from '@albomoni/entities/user';
 import { useLocalStorage } from 'react-use';
 import { usePathname } from 'next/navigation';
 import { Divider } from '@nextui-org/divider';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 import { ChangeThemeButton } from './change-theme-button';
 
 type Props = {
@@ -30,6 +31,7 @@ export const MenuAside = ({ onClose }: Props) => {
   const { isLogged, user } = useSession();
   const pathname = usePathname();
   const [, setBackPage] = useLocalStorage<string>('back-page');
+  const location = getLocation();
 
   const handleClickLocation = () => {
     setBackPage(pathname);
@@ -148,7 +150,7 @@ export const MenuAside = ({ onClose }: Props) => {
           <p className='font-semibold text-md'>
             Регион отображаемых объявлений
           </p>
-          <p className='font-semibold text-md opacity-60'>Турция, Анкара</p>
+          <p className='font-semibold text-md opacity-60'>{location.address}</p>
         </div>
 
         <PiCaretRightBold size={20} className='opacity-50' />

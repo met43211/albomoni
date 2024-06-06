@@ -5,5 +5,5 @@ export type TLocation = {
   country_code: string;
   lat: number;
   lon: number;
-  region_code: string | null;
+  region_code?: string | null;
 };

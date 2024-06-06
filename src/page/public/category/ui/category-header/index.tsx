@@ -2,6 +2,8 @@ import { getCategoriesAsync } from '@albomoni/entities/menu/api/get-categories';
 import { NavigateToLocationCategoryButton } from '@albomoni/features/(navigate)/to-location-page';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
+import { Skeleton } from '@nextui-org/skeleton';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
 type Props = {
@@ -9,6 +11,14 @@ type Props = {
   categoryId: string;
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+const DynamicNavigateToLocationCategoryButton = dynamic(
+  () =>
+    import('@albomoni/features/(navigate)/to-location-page').then(
+      (mod) => mod.NavigateToLocationCategoryButton,
+    ),
+  { loading: () => <Skeleton className='w-40 h-10 rounded-full' />, ssr: false },
+);
 
 export const CategoryHeader = async ({
   lng,
@@ -24,7 +34,7 @@ export const CategoryHeader = async ({
       <h1 className='text-2xl font-bold text-blue-950 dark:text-white'>
         {t(`categories.${categoryId}`)}
       </h1>
-      <NavigateToLocationCategoryButton />
+      <DynamicNavigateToLocationCategoryButton />
       <CategoryFilter categoryId={categoryId} searchParams={searchParams} />
       {categoryData && (
         <Image
