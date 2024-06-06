@@ -1,5 +1,4 @@
 import { getCategoriesAsync } from '@albomoni/entities/menu/api/get-categories';
-import { NavigateToLocationCategoryButton } from '@albomoni/features/(navigate)/to-location-page';
 import { useTranslation } from '@albomoni/shared/i18n';
 import { CategoryFilter } from '@albomoni/widgets/category-filter';
 import { Skeleton } from '@nextui-org/skeleton';

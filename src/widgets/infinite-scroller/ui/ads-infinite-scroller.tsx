@@ -12,6 +12,7 @@ type Props = {
   isDisableCategory?: boolean;
   fetchFunc: ({ queryKey }: { queryKey: [string, number] }) => Promise<Ad[]>;
   setIsAds?: (isAds: boolean) => void;
+  queryKey: string;
 };
 
 export const AdsInfiniteScroller = ({
@@ -19,6 +20,7 @@ export const AdsInfiniteScroller = ({
   isDisableCategory,
   fetchFunc,
   setIsAds,
+  queryKey,
 }: Props) => {
   const [page, setPage] = useState(1);
   const [loadedPages, setLoadedPages] = useState(1);
@@ -27,7 +29,7 @@ export const AdsInfiniteScroller = ({
   const intersectionRef = useRef(null);
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['ads', page],
+    queryKey: [queryKey, page],
     queryFn: fetchFunc,
   });
 

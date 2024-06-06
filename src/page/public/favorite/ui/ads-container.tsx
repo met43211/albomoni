@@ -14,6 +14,7 @@ export const AdsContainer = ({
   currencies: { [key: string]: number };
 }) => {
   const [isAds, setIsAds] = useState(true);
+
   const fetchAds = async ({ queryKey }: { queryKey: [string, number] }) => {
     const [_key, page] = queryKey;
     try {
@@ -24,11 +25,13 @@ export const AdsContainer = ({
       throw new Error('Error fetching ads');
     }
   };
+
   return isAds ? (
     <AdsInfiniteScroller
       currencies={currencies}
       fetchFunc={fetchAds}
       setIsAds={setIsAds}
+      queryKey='favorite-scroll'
     />
   ) : (
     <NoFavorites />

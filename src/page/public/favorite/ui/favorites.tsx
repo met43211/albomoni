@@ -1,5 +1,5 @@
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
-import { AdsContainer } from './AdsContainer';
+import { AdsContainer } from './ads-container';
 
 type Props = {
   lng: string;

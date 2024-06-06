@@ -8,5 +8,11 @@ export const AdsContainer = ({
 }: {
   currencies: { [key: string]: number };
 }) => {
-  return <AdsInfiniteScroller currencies={currencies} fetchFunc={fetchAds} />;
+  return (
+    <AdsInfiniteScroller
+      currencies={currencies}
+      fetchFunc={fetchAds}
+      queryKey='home-scroll'
+    />
+  );
 };

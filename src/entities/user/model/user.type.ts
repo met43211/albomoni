@@ -17,6 +17,8 @@ export type UserType = {
   products: number;
   plans: number;
   views: number[];
+  date_joined: string;
+  description: string;
 } & TLocation;
 
 export type PublicUserType = {
@@ -29,4 +31,6 @@ export type PublicUserType = {
   regDate: string;
   rate: number;
   feedback: number;
+  date_joined: string;
+  description: string;
 };
