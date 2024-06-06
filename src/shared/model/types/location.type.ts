@@ -3,7 +3,7 @@ export type TLocation = {
   city: string;
   country: string;
   country_code: string;
-  lat: number;
-  lon: number;
+  lat: number | (() => number);
+  lon: number | (() => number);
   region_code?: string | null;
 };

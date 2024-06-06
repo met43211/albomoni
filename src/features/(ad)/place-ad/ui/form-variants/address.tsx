@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { Map } from '@albomoni/entities/map';
 import { TGoogleSuggestion } from '@albomoni/entities/map/model/google-suggestion.type';
+import { parseLocation } from '@albomoni/shared/lib/utils/parse-location';
 import { PlaceAdInputProps } from '../../model/form.type';
 import { useCategory } from '../../lib/use-category';
 
@@ -28,8 +29,10 @@ export const PlaceAdAddress = memo(
 
     useEffect(() => {
       if (selectedVariant) {
+        const location = parseLocation(selectedVariant);
+
         try {
-          yupSchema.validateSync({ address: selectedVariant });
+          yupSchema.validateSync({ address: location });
           updateForm((draft: any) => {
             draft.errors[title] = null;
           });
@@ -40,7 +43,7 @@ export const PlaceAdAddress = memo(
         }
 
         updateForm((draft: any) => {
-          draft.fields[title] = selectedVariant.place_id;
+          draft.fields[title] = location;
         });
       }
     }, [selectedVariant]);
@@ -50,7 +53,8 @@ export const PlaceAdAddress = memo(
         <h5 className='text-md font-medium opacity-50'>
           {t(`${category}.${title}.name`)}
         </h5>
-        <Map setSelectedVariant={setSelectedVariant} />
+        
+        <Map types='address' setSelectedVariant={setSelectedVariant} />
 
         <AnimatePresence>
           {form?.errors[title] && (

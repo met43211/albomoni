@@ -15,14 +15,14 @@ export const parseLocation = (
     'country',
   );
 
-  console.log(locationResponce);
+  const { lat, lng } = geometry.location;
 
   return {
     address: formatted_address,
     city,
     country: countryComponent?.long_name || '',
     country_code: countryComponent?.short_name || '',
-    lat: geometry.location.lat,
-    lon: geometry.location.lng,
+    lat: typeof lat === 'function' ? lat() : lat,
+    lon: typeof lng === 'function' ? lng() : lng,
   };
 };

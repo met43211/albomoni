@@ -11,8 +11,8 @@ export type TGoogleSuggestion = {
       Hh: { lo: number; hi: number };
     };
     location: {
-      lat: number;
-      lng: number;
+      lat: number | (() => number);
+      lng: number | (() => number);
     };
     location_type: string;
     viewport: {
