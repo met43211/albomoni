@@ -25,6 +25,7 @@ export const Map = ({
   onSave,
 }: Props) => {
   const [autocomplete, setAutocomplete] = useState<any>(null);
+  const [isEdited, setIsEdited] = useState(false);
   const [position, setPosition] = useState({ lat: 55.7483, lng: 37.6171 });
   const [map, setMap] = useState(null);
   const [value, setValue] = useState('');
@@ -36,6 +37,7 @@ export const Map = ({
   const onPlaceChanged = useCallback(() => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
+      setIsEdited(true);
       if (place.geometry && place.geometry.location) {
         const lat = place.geometry.location.lat();
         const lng = place.geometry.location.lng();
@@ -72,7 +74,7 @@ export const Map = ({
           types: [types],
         }}
       >
-        <>
+        <div className='w-full flex gap-4'>
           <Input
             size='lg'
             startContent={<PiMapPinBold size={20} className='opacity-50' />}
@@ -84,19 +86,21 @@ export const Map = ({
             }}
             classNames={{ input: 'font-medium' }}
           />
-          {onSave && (
-            <m.div
+          {onSave && isEdited && (
+            <m.button
+              type='button'
+              onClick={onSave}
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
+              whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', duration: 0.5 }}
+              className='w-min rounded-[14px] bg-primary flex items-center justify-center text-white flex-shrink-0 font-medium px-4 gap-2'
             >
-              <PiFloppyDiskBold
-                className='w-[25px] h-[25px] ml-2 cursor-pointer'
-                onClick={onSave}
-              />
-            </m.div>
+              <PiFloppyDiskBold size={20} />
+              Сохранить
+            </m.button>
           )}
-        </>
+        </div>
       </Autocomplete>
       <GoogleMap
         mapContainerClassName='w-full aspect-square md:aspect-video rounded-2xl'

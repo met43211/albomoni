@@ -8,6 +8,7 @@ import { saveLocation } from '@albomoni/shared/api/save-location';
 import { useSession } from '../../hooks/use-session';
 import { useModal } from '../modal/lib/use-modal';
 import { EModalStates } from '../modal/model/modal-states.enum';
+import { parseLocation } from '../../utils/parse-location';
 
 type Props = {
   children: ReactNode;
@@ -15,10 +16,11 @@ type Props = {
 
 export const LocationProvider = ({ children }: Props) => {
   const cookieLocation = getCookie('location');
-  const { isPending } = useSession();
+  const { user, isPending } = useSession();
   const token = getCookie('token');
 
   const { setModalState } = useModal();
+  const userLocation = user?.address;
 
   useEffect(() => {
     if (!cookieLocation && !isPending) {
@@ -29,18 +31,8 @@ export const LocationProvider = ({ children }: Props) => {
             resp.latitude.toString(),
             resp.longitude.toString(),
           );
-          const address = resp2.results[0].formatted_address;
-          const [city, country] = address.split(', ');
 
-          const location = {
-            city,
-            country,
-            address,
-            lat: resp.latitude,
-            lon: resp.longitude,
-            country_code: resp.country_code,
-            region_code: resp.region_code,
-          };
+          const location = parseLocation(resp2.results[0]);
 
           if (token) {
             try {
@@ -52,12 +44,26 @@ export const LocationProvider = ({ children }: Props) => {
 
           setCookie('location', location);
           setModalState(EModalStates.LOCATION);
-        } catch {
+        } catch (e) {
+          console.log(e);
           return;
         }
       };
 
-      getGeo();
+      if (userLocation) {
+        const { address, city, country, country_code, lat, lon } = user;
+
+        setCookie('location', {
+          address,
+          city,
+          country,
+          country_code,
+          lat,
+          lon,
+        });
+      } else {
+        getGeo();
+      }
     }
   }, [isPending]);
 

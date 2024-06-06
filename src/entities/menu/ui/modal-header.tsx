@@ -1,4 +1,5 @@
 import { Search } from '@albomoni/features/search';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 import { AlbomoniSvg } from '@albomoni/shared/ui/logo';
 import { Button } from '@nextui-org/react';
 import Link from 'next/link';
@@ -13,6 +14,7 @@ type Props = {
 export const ModalHeader = ({ onClose }: Props) => {
   const pathname = usePathname();
   const [, setBackPage] = useLocalStorage<string>('back-page');
+  const { city } = getLocation();
 
   const handleClickLocation = () => {
     setBackPage(pathname);
@@ -34,7 +36,7 @@ export const ModalHeader = ({ onClose }: Props) => {
             className='flex gap-1 justify-start items-center opacity-50 hover:opacity-100 active:scale-95 transition-transform-opacity origin-left text-left'
           >
             <PiMapPinBold size={14} />
-            <p className='text-xs font-medium'>Анкара</p>
+            <p className='text-xs font-medium'>{city}</p>
           </Link>
         </div>
 

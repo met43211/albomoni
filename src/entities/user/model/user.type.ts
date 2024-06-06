@@ -1,3 +1,5 @@
+import { TLocation } from '@albomoni/shared/model/types/location.type';
+
 type PhoneType = { id: number; phone: string; name: string };
 
 export type UserType = {
@@ -15,7 +17,7 @@ export type UserType = {
   products: number;
   plans: number;
   views: number[];
-};
+} & TLocation;
 
 export type PublicUserType = {
   user_id: number;
