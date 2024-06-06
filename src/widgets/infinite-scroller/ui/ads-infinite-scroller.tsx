@@ -4,33 +4,32 @@ import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { AdCard } from '@albomoni/entities/ad-card/ui/ad-card';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
-import { Spinner } from '@nextui-org/spinner';
+import { useQuery } from '@tanstack/react-query';
+import { AdsListSkeleton } from './ads-list-skeleton';
 
 type Props = {
-  initialData: Ad[];
   currencies: { [key: string]: number };
-  fetchFunction: (page: number) => Promise<Ad[]>;
   isDisableCategory?: boolean;
+  fetchFunc: ({ queryKey }: { queryKey: [string, number] }) => Promise<Ad[]>;
+  setIsAds?: (isAds: boolean) => void;
 };
 
 export const AdsInfiniteScroller = ({
-  initialData,
   currencies,
-  fetchFunction,
   isDisableCategory,
+  fetchFunc,
+  setIsAds,
 }: Props) => {
-  const [data, setData] = useState(initialData);
   const [page, setPage] = useState(1);
   const [loadedPages, setLoadedPages] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEnded, setIsEnded] = useState(initialData.length < 12);
+  const [ads, setAds] = useState<Ad[]>([]);
+  const [isEnded, setIsEnded] = useState(true);
   const intersectionRef = useRef(null);
 
-  useEffect(() => {
-    setData(initialData);
-    setPage(1);
-    setLoadedPages(1);
-  }, [initialData]);
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ['ads', page],
+    queryFn: fetchFunc,
+  });
 
   const intersection = useIntersection(intersectionRef, {
     root: null,
@@ -39,27 +38,28 @@ export const AdsInfiniteScroller = ({
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const newAds = await fetchFunction(page);
-
-      if (newAds.length < 12) {
-        setIsEnded(true);
-      }
-
-      setData([...data, ...newAds]);
-      setIsLoading(false);
-    };
-
     if (page > loadedPages) {
-      try {
-        fetchData();
-        setLoadedPages(loadedPages + 1);
-      } catch {
-        setIsLoading(false);
-      }
+      refetch();
     }
   }, [page]);
+
+  useEffect(() => {
+    if (data) {
+      if (data.length < 12) {
+        setIsEnded(true);
+      } else {
+        setIsEnded(false);
+      }
+      if (data.length === 0 && setIsAds) {
+        setIsAds(false);
+      } else if (page > 1) {
+        setAds((prev) => [...prev, ...data]);
+      } else {
+        setAds(data);
+      }
+    }
+    setLoadedPages(loadedPages + 1);
+  }, [data]);
 
   useEffect(() => {
     if (intersection && intersection.intersectionRatio === 1) {
@@ -70,7 +70,7 @@ export const AdsInfiniteScroller = ({
   return (
     <>
       <div className='w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-        {data.map((ad) => {
+        {ads.map((ad) => {
           return (
             <AdCard
               key={ad.ad.id}
@@ -81,7 +81,7 @@ export const AdsInfiniteScroller = ({
           );
         })}
       </div>
-      {isLoading && <Spinner className='mt-6' />}
+      {isLoading && <AdsListSkeleton />}
       {!isEnded && <div ref={intersectionRef} />}
     </>
   );
