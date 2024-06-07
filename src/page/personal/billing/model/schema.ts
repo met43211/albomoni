@@ -10,27 +10,28 @@ export const BillingSchema = yup
   .object({
     sum: yup
       .number()
-      .min(100)
+      .typeError('Введите корректную сумму пополнения')
+      .min(1, 'Сумма должна не менее 100')
       .integer('Сумма должна быть целым числом')
-      .required(),
+      .required('Введите сумму пополнения'),
     'card-number': yup
       .string()
-      .required('Card number is required')
-      .test('is-valid-card-number', 'Card number is not valid', (value) =>
+      .required('Введите номер карты')
+      .test('is-valid-card-number', 'Номер карты введён некорректно', (value) =>
         luhnCheck(value || ''),
       )
       .matches(
         /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9]{2})[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|220[0-4][0-9]{12})$/,
-        'Card number is not valid',
+        'Номер карты введён некорректно',
       )
-      .min(13, 'Card number must be at least 13 digits')
-      .max(19, 'Card number must be at most 19 digits'),
-    email: yup.string().email('incorrect email'),
+      .min(13, 'Номер карты должен состоять не менее чем из 13 цифр.')
+      .max(19, 'Номер карты должен состоять не более чем из 19 цифр.'),
+    email: yup.string().email('Неверный email'),
     'card-date': yup
       .string()
-      .required('Expiry date is required')
-      .matches(expiryDateRegex, 'Expiry date format is MM/YY')
-      .test('expiryDate', 'Expiry date is in the past', (value) => {
+      .required('Укажите дату истечения срока действия карты')
+      .matches(expiryDateRegex, 'Формат даты истечения срока действия: ММ/ГГ')
+      .test('expiryDate', 'Срок годности карты уже в прошлом', (value) => {
         if (!value) return false;
 
         const [month, year] = value.split('/').map(Number);
@@ -40,14 +41,14 @@ export const BillingSchema = yup
       }),
     cvv: yup
       .string()
-      .required('CVV is required')
-      .matches(/^[0-9]{3,4}$/, 'CVV must be 3 or 4 digits'),
+      .required('Укажите CVV код карты')
+      .matches(/^[0-9]{3,4}$/, 'CVV должен состоять из 3 или 4 цифр'),
     tel: yup
       .string()
-      .required('Phone number is required')
+      .required('Укажите номер телефона')
       .matches(
         internationalPhoneRegex,
-        'Phone number is not valid, it should start with "+"',
+        'Номер телефона недействителен, он должен начинаться с «+».',
       ),
   })
   .required();

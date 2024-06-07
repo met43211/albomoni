@@ -7,14 +7,16 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { AnimatePresence, m } from 'framer-motion';
 import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
-import { useCookies } from 'react-cookie';
 import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { PaymentWidget } from '@albomoni/widgets/payment-widget';
+import { useSession } from '@albomoni/shared/lib/hooks/use-session';
+import { Spinner } from '@nextui-org/spinner';
 import { BillingSchema } from '../model/schema';
+import { sendPaymentRequest } from '../api/send-payment-request';
 
 declare global {
   interface Window {
@@ -23,20 +25,30 @@ declare global {
 }
 
 export const BillingForm = () => {
-  const [cookies] = useCookies();
   const router = useRouter();
+  const { user } = useSession();
+
   const [isSave, setIsSave] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(BillingSchema),
   });
 
+  useEffect(() => {
+    if (user) {
+      const initialPhone = user.phones[0].phone.replace(/[^\d+]/g, '');
+      setValue('tel', initialPhone);
+      setValue('email', user.email);
+    }
+  }, [user]);
+
   const [normSum, setNormSum] = useState('100');
-  const { currency } = cookies;
 
   useEffect(() => {
     const setPrice = async () => {
@@ -45,8 +57,8 @@ export const BillingForm = () => {
       setNormSum(
         normalizePrice({
           price: 100,
-          currency,
-          adCurrency: currency,
+          currency: 'RUB',
+          adCurrency: 'RUB',
           currencies,
         }),
       );
@@ -56,20 +68,34 @@ export const BillingForm = () => {
   }, []);
 
   const onSubmit = async (data: any) => {
-    const fieldValues = {
-      cvv: data.cvv,
-      cardNumber: data['card-number'],
-      expDateMonth: data['card-date'].slice(0, 2),
-      expDateYear: data['card-date'].slice(3),
-    };
-    console.log(isSave);
-    if (window.cp) {
-      const checkout = new window.cp.Checkout({
-        publicId: 'pk_96b8fadfcdfac511e6ef7015016e3',
-      });
-      checkout.createPaymentCryptogram(fieldValues).then((cryptogram: any) => {
-        console.log(cryptogram);
-      });
+    try {
+      setIsLoading(true);
+
+      const fieldValues = {
+        cvv: data.cvv,
+        cardNumber: data['card-number'],
+        expDateMonth: data['card-date'].slice(0, 2),
+        expDateYear: data['card-date'].slice(3),
+      };
+
+      if (window.cp) {
+        const checkout = new window.cp.Checkout({
+          publicId: 'pk_96b8fadfcdfac511e6ef7015016e3',
+        });
+        const cryptogram = await checkout.createPaymentCryptogram(fieldValues);
+        const response = await sendPaymentRequest(
+          data.sum,
+          cryptogram,
+          data.email,
+          data.tel,
+          isSave,
+        );
+
+        router.push(response as string);
+        router.push('/profile/wallet');
+      }
+    } catch {
+      setIsLoading(false);
     }
 
     // const { sum } = data;
@@ -128,13 +154,20 @@ export const BillingForm = () => {
 
       <m.button
         type='submit'
+        disabled={isLoading}
         layout
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className='w-full md:w-fit h-12 px-6 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold  flex items-center gap-3 justify-center mt-4'
       >
-        <PiWalletBold size={20} />
-        Оплатить
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <PiWalletBold size={20} />
+            Оплатить
+          </>
+        )}
       </m.button>
     </form>
   );

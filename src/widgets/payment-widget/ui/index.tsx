@@ -43,7 +43,7 @@ export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
           </div>
           <div className='w-full'>
             <input
-              type='tel'
+              type='password'
               inputMode='numeric'
               autoComplete='cc-csc'
               placeholder='CVV'
@@ -61,7 +61,7 @@ export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
         <input
           type='email'
           placeholder='Email для получения чека'
-          className='bg-default rounded-2xl px-4 h-12 w-full'
+          className='bg-default rounded-2xl px-4 h-12 w-full mb-2'
           {...register('email')}
         />
         <Checkbox
