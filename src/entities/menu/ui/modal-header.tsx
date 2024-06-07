@@ -36,7 +36,7 @@ export const ModalHeader = ({ onClose }: Props) => {
             className='flex gap-1 justify-start items-center opacity-50 hover:opacity-100 active:scale-95 transition-transform-opacity origin-left text-left'
           >
             <PiMapPinBold size={14} />
-            <p className='text-xs font-medium'>{city}</p>
+            <p className='text-xs font-medium line-clamp-1'>{city}</p>
           </Link>
         </div>
 

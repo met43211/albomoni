@@ -3,6 +3,7 @@
 import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getLocation } from '@albomoni/shared/lib/utils/get-location';
+import { Placeholder } from '@albomoni/shared/ui/placeholder';
 import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
 import { useState } from 'react';
 import { PiMagnifyingGlass } from 'react-icons/pi';
@@ -43,12 +44,10 @@ export const AdsContainer = ({
       />
     </div>
   ) : (
-    <div className='w-full flex flex-col gap-4 items-center mt-20'>
-      <PiMagnifyingGlass size={64} className='opacity-50' />
-      <h3 className='text-xl font-semibold'>Объявления не найдены</h3>
-      <h4 className='opacity-50 font-medium max-w-64 text-center'>
-        Попробуйте выбрать другие фильтры.
-      </h4>
-    </div>
+    <Placeholder
+      icon={<PiMagnifyingGlass size={64} className='opacity-50 mt-10' />}
+      title='Объявления не найдены'
+      desc='Попробуйте выбрать другие фильтры.'
+    />
   );
 };

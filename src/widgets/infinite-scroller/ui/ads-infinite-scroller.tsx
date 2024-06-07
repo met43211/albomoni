@@ -5,7 +5,7 @@ import { AdCard } from '@albomoni/entities/ad-card/ui/ad-card';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
 import { useQuery } from '@tanstack/react-query';
-import { AdsListSkeleton } from './ads-list-skeleton';
+import { AdsSkeleton } from './ads-skeleton';
 
 type Props = {
   currencies: { [key: string]: number };
@@ -82,8 +82,9 @@ export const AdsInfiniteScroller = ({
             />
           );
         })}
+        {isLoading && <AdsSkeleton height={355} />}
       </div>
-      {isLoading && <AdsListSkeleton />}
+
       {!isEnded && <div ref={intersectionRef} />}
     </>
   );

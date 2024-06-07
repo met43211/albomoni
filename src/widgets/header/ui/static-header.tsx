@@ -24,7 +24,7 @@ export const StaticHeader = () => {
           {city === 'Весь мир' ? (
             <Skeleton className='w-12 h-4 rounded-md' />
           ) : (
-            <p className='text-xs font-medium'>{city}</p>
+            <p className='text-xs font-medium line-clamp-1'>{city}</p>
           )}
         </Link>
       </div>

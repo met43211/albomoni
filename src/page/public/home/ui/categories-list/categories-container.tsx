@@ -42,7 +42,7 @@ export const CategoriesContainer = ({ children }: Props) => {
       <ScrollShadow
         orientation='horizontal'
         hideScrollBar
-        className='grid grid-flow-col grid-rows-2 sm:flex sm:flex-row gap-4 py-1 px-4 overflow-y-hidden'
+        className='grid grid-flow-col grid-rows-2 sm:flex sm:flex-row gap-4 py-1 px-4 overflow-y-hidden -mt-2'
         ref={slideRef}
       >
         {children}
