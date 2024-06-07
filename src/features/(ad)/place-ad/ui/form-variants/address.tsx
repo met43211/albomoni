@@ -53,8 +53,12 @@ export const PlaceAdAddress = memo(
         <h5 className='text-md font-medium opacity-50'>
           {t(`${category}.${title}.name`)}
         </h5>
-        
-        <Map types='address' setSelectedVariant={setSelectedVariant} />
+
+        <Map
+          initialLocation={value}
+          types='address'
+          setSelectedVariant={setSelectedVariant}
+        />
 
         <AnimatePresence>
           {form?.errors[title] && (

@@ -43,18 +43,32 @@ export const EditAdForm = ({ formData, ad }: Props) => {
     additional,
     cost,
     description,
-    geoposition,
     seller,
     currency,
     images,
     hash,
     title,
+    address: adAddress,
+    city,
+    country,
+    country_code,
+    lat,
+    lon,
   } = ad.ad;
+
+  const address = {
+    address: adAddress,
+    city,
+    country,
+    country_code,
+    lat,
+    lon,
+  };
 
   const initFields = {
     price: { value: cost.toString(), currency },
     description,
-    address: geoposition,
+    address,
     seller,
     photo: [],
     ...additional,

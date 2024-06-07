@@ -5,7 +5,7 @@ export type PlaceAdFormState = {
       | string[]
       | FormData
       | File[]
-      | { [key: string]: string | string[] };
+      | { [key: string]: string | string[] | number };
   };
   filters: string[];
   errors: { [key: string]: string };

@@ -29,6 +29,8 @@ export const ModalVariantStartAd = () => {
     PromotionVariants[0].id,
   );
 
+  console.log(modalData)
+
   const { data, isLoading } = useQuery({
     queryKey: ['promotion-options'],
     queryFn: () =>

@@ -6,7 +6,7 @@ export type PlaceAdInputData = {
       | string[]
       | FormData
       | File[]
-      | { [key: string]: string | string[] };
+      | { [key: string]: string | string[] | number };
   };
   images?: FormData;
   hash: string;

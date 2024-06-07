@@ -1,4 +1,5 @@
 import { PromoOptions } from '@albomoni/shared/lib/providers/modal/ui/variants/promote-ad';
+import { TLocation } from '@albomoni/shared/model/types/location.type';
 
 export type ImageType = { full: string; preview: string };
 
@@ -23,7 +24,7 @@ type AdInfo = {
   additional: {
     [key: string]: string;
   };
-};
+} & TLocation;
 
 export type PublicAdType = {
   id: number;
