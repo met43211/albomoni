@@ -1,5 +1,4 @@
 import { useModal } from '@albomoni/shared/lib/providers/modal/lib/use-modal';
-import { EModalStates } from '@albomoni/shared/lib/providers/modal/model/modal-states.enum';
 import { Button } from '@nextui-org/button';
 
 type Props = {
@@ -10,7 +9,7 @@ export const GetSubscriptionButton = ({ isSubscribed }: Props) => {
   const { setModalState } = useModal();
 
   const handleClick = () => {
-    setModalState(EModalStates.SUBSCRIPTION);
+    // setModalState(EModalStates.SUBSCRIPTION);
   };
 
   return isSubscribed ? (
