@@ -6,9 +6,10 @@ import { PiEyeBold, PiHeartBold, PiPhonePlusBold } from 'react-icons/pi';
 type Props = {
   views: number;
   favorites: number;
+  phone_views: number;
 };
 
-export const MyAdCardStats = ({ views, favorites }: Props) => {
+export const MyAdCardStats = ({ views, favorites, phone_views }: Props) => {
   const items = [
     {
       name: 'views',
@@ -19,7 +20,7 @@ export const MyAdCardStats = ({ views, favorites }: Props) => {
     {
       name: 'phone',
       icon: <PiPhonePlusBold size={24} />,
-      content: 0,
+      content: phone_views,
       popover: 'Количество пользователей, посмотревших Ваш номер телефона',
     },
     {

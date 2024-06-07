@@ -28,7 +28,10 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
     views,
     status,
     favorites,
+    phone_views,
   } = ad;
+
+  console.log(ad);
 
   return (
     <div className='w-full flex-shrink-0 flex flex-col shadow-base dark:bg-[--element] rounded-2xl overflow-clip cursor-pointer relative border-1 border-white/5'>
@@ -72,7 +75,11 @@ export const MyAdCard = ({ ad, lng, currencies }: Props) => {
         </div>
       </Link>
       <div className='w-full flex flex-col gap-5 px-4 pt-2 pb-4'>
-        <MyAdCardStats views={views} favorites={favorites} />
+        <MyAdCardStats
+          views={views}
+          favorites={favorites}
+          phone_views={phone_views}
+        />
       </div>
     </div>
   );

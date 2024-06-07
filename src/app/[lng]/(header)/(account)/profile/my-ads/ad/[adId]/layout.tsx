@@ -12,7 +12,7 @@ type Props = {
   };
 };
 
-export default async function MyAdTemplate({
+export default async function MyAdLayout({
   children,
   params: { adId },
 }: Props) {

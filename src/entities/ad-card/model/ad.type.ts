@@ -68,4 +68,5 @@ export type Ad = {
 export type MyAd = AdInfo & {
   views: number;
   favorites: number;
+  phone_views: number;
 };
