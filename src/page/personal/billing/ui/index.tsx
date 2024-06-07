@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { BillingForm } from './billing-form';
 
 export const BillingPage = () => {
@@ -9,6 +10,7 @@ export const BillingPage = () => {
         </h2>
         <BillingForm />
       </div>
+      <Script src='https://checkout.cloudpayments.ru/checkout.js' />
     </main>
   );
 };

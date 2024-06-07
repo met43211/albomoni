@@ -4,12 +4,19 @@ import { UseFormRegister } from 'react-hook-form';
 
 type Props = {
   register: UseFormRegister<{
-    'card-number': number;
+    email?: string | undefined;
     sum: number;
+    'card-number': string;
+    'card-date': string;
+    cvv: string;
+    'is-save'?: boolean;
+    tel: string;
   }>;
+  isSave: boolean;
+  setIsSave: (state: boolean) => void;
 };
 
-export const PaymentWidget = ({ register }: Props) => {
+export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
   return (
     <div className='w-full md:max-w-[50%] flex flex-col gap-4'>
       <p className='font-medium opacity-50'>Введите данные карты</p>
@@ -20,34 +27,49 @@ export const PaymentWidget = ({ register }: Props) => {
           inputMode='numeric'
           autoComplete='cc-number'
           placeholder='Номер карты'
-          // ref={inputNumberRef}
           {...register('card-number')}
           className='bg-default rounded-2xl px-4 h-12 w-full'
         />
         <div className='flex flex-row gap-4'>
-          <input
-            type='tel'
-            inputMode='numeric'
-            autoComplete='cc-exp'
-            placeholder='Срок действия'
-            // ref={inputDateRef}
-            className='bg-default rounded-2xl px-4 h-12 w-full'
-          />
-          <input
-            type='tel'
-            inputMode='numeric'
-            autoComplete='cc-csc'
-            placeholder='CVV'
-            // ref={inputCvvRef}
-            className='bg-default rounded-2xl px-4 h-12 w-full'
-          />
+          <div className='w-full'>
+            <input
+              type='tel'
+              inputMode='numeric'
+              autoComplete='cc-exp'
+              placeholder='Срок действия'
+              {...register('card-date')}
+              className='bg-default rounded-2xl px-4 h-12 w-full'
+            />
+          </div>
+          <div className='w-full'>
+            <input
+              type='tel'
+              inputMode='numeric'
+              autoComplete='cc-csc'
+              placeholder='CVV'
+              className='bg-default rounded-2xl px-4 h-12 w-full'
+              {...register('cvv')}
+            />
+          </div>
         </div>
+        <input
+          type='tel'
+          placeholder='Номер телефона'
+          className='bg-default rounded-2xl px-4 h-12 w-full'
+          {...register('tel')}
+        />
         <input
           type='email'
           placeholder='Email для получения чека'
           className='bg-default rounded-2xl px-4 h-12 w-full'
+          {...register('email')}
         />
-        <Checkbox>Сохранить карту</Checkbox>
+        <Checkbox
+          checked={isSave}
+          onChange={(e) => setIsSave(e.target.checked)}
+        >
+          Сохранить карту
+        </Checkbox>
       </div>
     </div>
   );
