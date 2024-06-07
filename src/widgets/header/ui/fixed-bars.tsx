@@ -75,7 +75,9 @@ export const FixedBars = () => {
             },
           );
 
-          router.prefetch(path);
+          if (flatRoute === '') {
+            router.prefetch(path);
+          }
 
           return (
             <Tooltip
