@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
+import { PaymentWidget } from '@albomoni/widgets/payment-widget';
 import { BillingSchema } from '../model/schema';
 
 export const BillingForm = () => {
@@ -48,27 +49,28 @@ export const BillingForm = () => {
   }, []);
 
   const onSubmit = async (data: any) => {
-    const { sum } = data;
-    const body = { sum, currency };
+    console.log(data);
+    // const { sum } = data;
+    // const body = { sum, currency };
 
-    const response = await fetch(
-      'https://ansaratracker.store/pay-service/bill/',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookies.token}`,
-        },
-        body: JSON.stringify(body),
-      },
-    );
+    // const response = await fetch(
+    //   'https://ansaratracker.store/pay-service/bill/',
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${cookies.token}`,
+    //     },
+    //     body: JSON.stringify(body),
+    //   },
+    // );
 
-    const paymentData = await response.json();
-    const {
-      confirmation: { confirmation_url },
-    } = paymentData;
+    // const paymentData = await response.json();
+    // const {
+    //   confirmation: { confirmation_url },
+    // } = paymentData;
 
-    router.push(confirmation_url);
+    // router.push(confirmation_url);
   };
 
   return (
@@ -86,6 +88,8 @@ export const BillingForm = () => {
         {...register('sum')}
       />
 
+      <PaymentWidget register={register} />
+
       <AnimatePresence>
         {errors.sum && (
           <m.div layout className='w-full md:max-w-[600px]'>
@@ -101,10 +105,10 @@ export const BillingForm = () => {
         layout
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className='w-full md:w-fit h-12 px-6 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold  flex items-center gap-3 justify-center'
+        className='w-full md:w-fit h-12 px-6 bg-gradient-to-r rounded-2xl from-blue-300 to-indigo-400 dark:from-blue-500 dark:to-indigo-400 text-white shadow-lg shadow-blue-400/40 font-semibold  flex items-center gap-3 justify-center mt-4'
       >
         <PiWalletBold size={20} />
-        Перейти к оплате
+        Оплатить
       </m.button>
     </form>
   );
