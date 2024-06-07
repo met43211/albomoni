@@ -16,9 +16,16 @@ import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencie
 import { PaymentWidget } from '@albomoni/widgets/payment-widget';
 import { BillingSchema } from '../model/schema';
 
+declare global {
+  interface Window {
+    cp: any;
+  }
+}
+
 export const BillingForm = () => {
   const [cookies] = useCookies();
   const router = useRouter();
+  const [isSave, setIsSave] = useState(false);
 
   const {
     register,
@@ -49,7 +56,22 @@ export const BillingForm = () => {
   }, []);
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    const fieldValues = {
+      cvv: data.cvv,
+      cardNumber: data['card-number'],
+      expDateMonth: data['card-date'].slice(0, 2),
+      expDateYear: data['card-date'].slice(3),
+    };
+    console.log(isSave);
+    if (window.cp) {
+      const checkout = new window.cp.Checkout({
+        publicId: 'pk_96b8fadfcdfac511e6ef7015016e3',
+      });
+      checkout.createPaymentCryptogram(fieldValues).then((cryptogram: any) => {
+        console.log(cryptogram);
+      });
+    }
+
     // const { sum } = data;
     // const body = { sum, currency };
 
@@ -88,16 +110,20 @@ export const BillingForm = () => {
         {...register('sum')}
       />
 
-      <PaymentWidget register={register} />
+      <PaymentWidget
+        register={register}
+        isSave={isSave}
+        setIsSave={setIsSave}
+      />
 
       <AnimatePresence>
-        {errors.sum && (
-          <m.div layout className='w-full md:max-w-[600px]'>
+        {Object.entries(errors).map(([key, error]) => (
+          <m.div key={key} layout className='w-full md:max-w-[600px]'>
             <NotificationBubble type='error'>
-              {errors.sum.message}
+              {error.message}
             </NotificationBubble>
           </m.div>
-        )}
+        ))}
       </AnimatePresence>
 
       <m.button
