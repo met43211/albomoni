@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Spinner } from '@nextui-org/spinner';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
+import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
+import { useCurrencies } from '@albomoni/shared/lib/providers/currencies-provider';
 import { useModal } from '../../../lib/use-modal';
 import { EModalStates } from '../../../model/modal-states.enum';
 import { PromoteOption } from './promote-option';
@@ -21,6 +23,7 @@ export type PromoOptions = 'null' | 'x3' | 'x5' | 'x7';
 
 export const ModalVariantPromoteAd = () => {
   const token = getCookie('token');
+  const currencies = useCurrencies();
   const router = useRouter();
   const { setModalState, modalData } = useModal();
   const [activeOption, setActiveOption] = useState<PromoOptions>(
@@ -129,7 +132,7 @@ export const ModalVariantPromoteAd = () => {
             <Button
               as={Link}
               href='/profile/wallet/billing'
-              onPress={closeModal}
+              onClick={closeModal}
               variant='faded'
               color='primary'
               radius='full'
@@ -139,7 +142,16 @@ export const ModalVariantPromoteAd = () => {
               Пополнить
             </Button>
           </h2>
-          <p className='text-xl font-semibold'>5000 ₽</p>
+          <p className='text-xl font-semibold'>
+            {data?.wallet
+              ? normalizePrice({
+                price: data.wallet,
+                currencies,
+                currency: 'RUB',
+                adCurrency: 'RUB',
+              })
+              : 'Неизвестно'}
+          </p>
         </div>
 
         <Button

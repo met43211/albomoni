@@ -1,9 +1,9 @@
 import { getAdAsync } from '@albomoni/entities/ad-card/api/get-ad';
 import { getCookie } from 'cookies-next';
-import { jwtDecode } from 'jwt-decode';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 type Props = {
   children: ReactNode;
@@ -12,16 +12,17 @@ type Props = {
   };
 };
 
-export default async function AdLayout({ children, params: { adId } }: Props) {
+export default async function MyAdTemplate({
+  children,
+  params: { adId },
+}: Props) {
   const token = getCookie('token', { cookies });
+  const decoded = jwtDecode(token as string) as any;
 
-  if (token) {
-    const decoded = jwtDecode(token as string) as any;
-    const data = await getAdAsync(adId);
+  const data = await getAdAsync(adId);
 
-    if (data.seller.user_id === decoded.user_id) {
-      redirect(`/profile/my-ads/ad/${adId}`);
-    }
+  if (data.seller.user_id !== decoded.user_id) {
+    redirect(`/ad/${adId}`);
   }
 
   return children;

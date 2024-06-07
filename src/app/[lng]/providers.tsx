@@ -13,6 +13,7 @@ import { FavoriteProvider } from '@albomoni/shared/lib/providers/favorite-provid
 import { Modal } from '@albomoni/shared/lib/providers/modal';
 import { OriginTracker } from '@albomoni/shared/lib/providers/origin-provider';
 import { LocationProvider } from '@albomoni/shared/lib/providers/location-provider';
+import { CurrenciesProvider } from '@albomoni/shared/lib/providers/currencies-provider';
 import { store } from '../_env/store';
 
 type Props = {
@@ -30,24 +31,26 @@ const Providers = ({ children, lang }: Props) => {
     <CookiesProvider defaultSetOptions={{ path: '/' }}>
       <QueryClientProvider client={queryClient}>
         <StoreProvider store={store}>
-          <FavoriteProvider>
-            <OriginTracker>
-              <LazyMotion features={loadFeatures}>
-                <NextUIProvider>
-                  <ThemeProvider attribute='class'>
-                    <ThemeColorObserver>
-                      <LanguageProvider lang={lang}>
-                        <LocationProvider>
-                          <Modal />
-                          {children}
-                        </LocationProvider>
-                      </LanguageProvider>
-                    </ThemeColorObserver>
-                  </ThemeProvider>
-                </NextUIProvider>
-              </LazyMotion>
-            </OriginTracker>
-          </FavoriteProvider>
+          <CurrenciesProvider>
+            <FavoriteProvider>
+              <OriginTracker>
+                <LazyMotion features={loadFeatures}>
+                  <NextUIProvider>
+                    <ThemeProvider attribute='class'>
+                      <ThemeColorObserver>
+                        <LanguageProvider lang={lang}>
+                          <LocationProvider>
+                            <Modal />
+                            {children}
+                          </LocationProvider>
+                        </LanguageProvider>
+                      </ThemeColorObserver>
+                    </ThemeProvider>
+                  </NextUIProvider>
+                </LazyMotion>
+              </OriginTracker>
+            </FavoriteProvider>
+          </CurrenciesProvider>
         </StoreProvider>
       </QueryClientProvider>
     </CookiesProvider>

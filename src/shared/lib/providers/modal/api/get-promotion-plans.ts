@@ -8,6 +8,7 @@ export type PromotionQueries = {
 };
 
 export type PromotionOutput = {
+  wallet: number;
   price: number;
   plans: { name: PromoOptions; cost: number }[];
 };
