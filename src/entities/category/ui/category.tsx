@@ -20,6 +20,7 @@ export const Category = async ({ name, img, lng }: Props) => {
       <p className='text-sm font-semibold'>{t(`categories.${name}`)}</p>
       <Image
         className='absolute bottom-0 right-0'
+        unoptimized
         width={150}
         height={150}
         src={img}

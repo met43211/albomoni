@@ -37,6 +37,7 @@ export const MenuCategories = ({ onClose }: Props) => {
                 {t(`categories.${category.name}`)}
               </p>
               <Image
+                unoptimized
                 className='absolute bottom-0 right-0'
                 width={150}
                 height={150}

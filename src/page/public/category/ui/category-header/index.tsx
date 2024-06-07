@@ -16,7 +16,10 @@ const DynamicNavigateToLocationCategoryButton = dynamic(
     import('@albomoni/features/(navigate)/to-location-page').then(
       (mod) => mod.NavigateToLocationCategoryButton,
     ),
-  { loading: () => <Skeleton className='w-40 h-10 rounded-full' />, ssr: false },
+  {
+    loading: () => <Skeleton className='w-40 h-10 rounded-full' />,
+    ssr: false,
+  },
 );
 
 export const CategoryHeader = async ({
@@ -38,6 +41,7 @@ export const CategoryHeader = async ({
       {categoryData && (
         <Image
           className='hidden md:block absolute -bottom-5 right-0'
+          unoptimized
           width={240}
           height={240}
           src={categoryData.img}

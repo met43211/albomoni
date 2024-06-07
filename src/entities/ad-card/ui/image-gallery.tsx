@@ -14,6 +14,7 @@ export const ImageGallery = ({ images }: Props) => {
           src={full}
           blurDataURL={preview}
           placeholder='blur'
+          unoptimized
           alt='image'
           width={240}
           height={160}

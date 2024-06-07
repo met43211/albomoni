@@ -43,6 +43,7 @@ export const FileLoaderList = ({
                   {isImage ? (
                     <Image
                       alt={file.name}
+                      unoptimized
                       src={URL.createObjectURL(file)}
                       fill
                       className='snap-start flex-shrink-0 object-cover h-full z-10'

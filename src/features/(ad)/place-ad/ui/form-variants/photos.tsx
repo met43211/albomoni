@@ -119,6 +119,7 @@ export const PlaceAdPhotos = memo(
                   className='w-full aspect-square rounded-lg overflow-clip md:rounded-2xl relative'
                 >
                   <Image
+                    unoptimized
                     src={URL.createObjectURL(image)}
                     fill
                     alt={image.name}

@@ -9,6 +9,7 @@ import {
 import { m } from 'framer-motion';
 import { Input } from '@nextui-org/input';
 import { PiFloppyDiskBold, PiMapPinBold } from 'react-icons/pi';
+import { TLocation } from '@albomoni/shared/model/types/location.type';
 import { TGoogleSuggestion } from '../model/google-suggestion.type';
 import { MapSkeleton } from './skeleton';
 import { Libraries } from '../config/map-config';
@@ -17,18 +18,24 @@ type Props = {
   setSelectedVariant: (variant: TGoogleSuggestion) => void;
   types?: '(cities)' | 'address';
   onSave?: () => void;
+  initialLocation?: TLocation;
 };
 
 export const Map = ({
   setSelectedVariant,
   types = '(cities)',
   onSave,
+  initialLocation,
 }: Props) => {
+  const initialCoords = {
+    lat: initialLocation?.lat || 55.7483,
+    lng: initialLocation?.lon || 55.7483,
+  };
   const [autocomplete, setAutocomplete] = useState<any>(null);
   const [isEdited, setIsEdited] = useState(false);
-  const [position, setPosition] = useState({ lat: 55.7483, lng: 37.6171 });
+  const [position, setPosition] = useState(initialCoords);
   const [map, setMap] = useState(null);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialLocation?.address || '');
 
   const onLoad = useCallback((autocompleteInstance: any) => {
     setAutocomplete(autocompleteInstance);
@@ -52,7 +59,7 @@ export const Map = ({
         setSelectedVariant(place);
       }
     } else {
-      console.log('Autocomplete is not loaded yet!');
+      return;
     }
   }, [autocomplete]);
 
@@ -105,7 +112,7 @@ export const Map = ({
       <GoogleMap
         mapContainerClassName='w-full aspect-square md:aspect-video rounded-2xl'
         center={position}
-        zoom={15}
+        zoom={12}
         onLoad={onMapLoad}
       >
         <Marker position={position} />

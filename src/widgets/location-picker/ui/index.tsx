@@ -8,12 +8,14 @@ import { useState } from 'react';
 import { TGoogleSuggestion } from '@albomoni/entities/map/model/google-suggestion.type';
 import { parseLocation } from '@albomoni/shared/lib/utils/parse-location';
 import { saveLocation } from '@albomoni/shared/api/save-location';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 
 export const LocationPicker = () => {
   const token = getCookie('token');
   const [backPage, , deleteBackPage] = useLocalStorage<string>('back-page');
   const router = useRouter();
   const [selectedVariant, setSelectedVariant] = useState<TGoogleSuggestion>();
+  const cookieLocation = getLocation();
 
   const handleSave = async () => {
     if (selectedVariant) {
@@ -40,7 +42,11 @@ export const LocationPicker = () => {
         <p className='opacity-50 font-medium -mb-3'>Выберите город и страну</p>
       </div>
       <div className='w-full flex flex-col gap-4 -mt-2'>
-        <Map setSelectedVariant={setSelectedVariant} onSave={handleSave} />
+        <Map
+          initialLocation={cookieLocation}
+          setSelectedVariant={setSelectedVariant}
+          onSave={handleSave}
+        />
       </div>
     </>
   );
