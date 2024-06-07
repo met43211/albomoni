@@ -15,7 +15,7 @@ export const ContactWithSellerUserContent = () => {
   const token = getCookie('token');
 
   const { data, isLoading } = useQuery(
-    GetContactsQuery(modalData.user_id, token as string),
+    GetContactsQuery(modalData.user_id, modalData.ad_id, token as string),
   );
 
   const handleClick = () => {

@@ -1,6 +1,6 @@
 'use client';
 
-import { ShowFilteredAdsButton } from '@albomoni/features/category/show-filtered-ads';
+import { ShowFilteredAdsButton } from '@albomoni/features/(category)/show-filtered-ads';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@albomoni/shared/api/base';

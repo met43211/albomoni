@@ -13,7 +13,7 @@ export const ContactWithSellerButton = ({ ad }: Props) => {
   const { setModalState, setModalData } = useModal();
 
   const handleOpenContactModal = () => {
-    setModalData({ user_id: ad.seller.user_id });
+    setModalData({ user_id: ad.seller.user_id, ad_id: ad.ad.id });
     setModalState(EModalStates.CONTACT_WITH_SELLER);
   };
 
