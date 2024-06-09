@@ -20,6 +20,7 @@ type AdInfo = {
   status_text: 'correct' | 'error';
   views: number;
   favorites: number;
+  phone_views: number;
   seller: 'owner' | 'broker';
   additional: {
     [key: string]: string;

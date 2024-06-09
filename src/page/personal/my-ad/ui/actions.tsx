@@ -69,7 +69,7 @@ export const MyAdActions = async ({ data, lng }: Props) => {
         <div className='w-full flex flex-col gap-4 -my-2'>
           <MyAdErrorBubble status={ad.status_text} />
           <MyAdCardChips status={ad.status} />
-          <MyAdCardStats views={ad.views} favorites={ad.favorites} />
+          <MyAdCardStats views={ad.views} favorites={ad.favorites} phone_views={ad.phone_views} />
         </div>
 
         <div className='flex flex-col gap-1 -mt-2'>

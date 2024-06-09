@@ -11,7 +11,6 @@ export const AdInfo = async ({ data, lng }: Props) => {
   const { t } = await useTranslation(lng, 'place-ad');
 
   const additionalArray = Object.entries(data.ad.additional);
-
   const descriptionList = data.ad.description.split('\n');
 
   return (
