@@ -4,6 +4,7 @@ import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
 import { useState } from 'react';
 import { Placeholder } from '@albomoni/shared/ui/placeholder';
 import { PiMagnifyingGlass } from 'react-icons/pi';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 import { fetchAds } from '../../api/get-ads/fetch-ads';
 
 export const AdsContainer = ({
@@ -12,13 +13,14 @@ export const AdsContainer = ({
   currencies: { [key: string]: number };
 }) => {
   const [isAds, setIsAds] = useState(true);
+  const location = getLocation();
 
   return isAds ? (
     <AdsInfiniteScroller
       setIsAds={setIsAds}
       currencies={currencies}
       fetchFunc={fetchAds}
-      queryKey='home-scroll'
+      queryKey={`home-scroll_${location.lat}_${location.lon}`}
     />
   ) : (
     <Placeholder
