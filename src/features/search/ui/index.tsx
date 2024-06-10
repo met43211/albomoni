@@ -21,6 +21,7 @@ export const Search = ({ isScrollable = false }: Props) => {
       <m.button
         layoutId='search'
         type='button'
+        onClick={() => setIsOpened(true)}
         className='w-full h-12 bg-default rounded-2xl px-4 text-start flex gap-3 items-center '
       >
         <PiMagnifyingGlassBold size={20} className='opacity-50' />
