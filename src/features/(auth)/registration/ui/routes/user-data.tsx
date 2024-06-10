@@ -192,7 +192,11 @@ export const RegistrationUserData = ({
                   />
                   <p className='opacity-50 text-sm'>
                     Я принимаю{' '}
-                    <Link href='/policy' className='underline cursor-pointer'>
+                    <Link
+                      href='/policy'
+                      target='_blank'
+                      className='underline cursor-pointer'
+                    >
                       условия и правила платформы
                     </Link>
                   </p>
