@@ -47,7 +47,7 @@ export const MenuAside = ({ onClose }: Props) => {
             onClick={onClose}
             className='w-full h-16 flex gap-4 items-center text-start'
           >
-            <div className='w-16 h-16 flex-shrink-0'>
+            <div className='w-16 h-16 flex-shrink-0 z-0'>
               <UserAvatar src={user.avatar} isSubscribed={user.subscription} />
             </div>
 

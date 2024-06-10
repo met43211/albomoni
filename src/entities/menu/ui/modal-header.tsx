@@ -40,9 +40,14 @@ export const ModalHeader = ({ onClose }: Props) => {
           </Link>
         </div>
 
-        <div className='hidden md:flex w-full h-fit'>
+        <button
+          type='button'
+          aria-label='close modal'
+          onClick={() => onClose()}
+          className='hidden md:flex w-full h-fit'
+        >
           <Search />
-        </div>
+        </button>
 
         <Button
           size='lg'
