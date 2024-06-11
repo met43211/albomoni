@@ -64,7 +64,7 @@ export const Toolbar = ({
         onPress={handleUnderlineClick}
         isIconOnly
         color={
-          editorState.getCurrentInlineStyle().has('UNDELINE')
+          editorState.getCurrentInlineStyle().has('UNDERLINE')
             ? 'primary'
             : 'default'
         }
