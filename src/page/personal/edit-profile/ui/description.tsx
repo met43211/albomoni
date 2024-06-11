@@ -34,7 +34,7 @@ export const EditDescription = ({ description }: { description: string }) => {
         </div>
       ) : (
         <div className='w-full flex gap-4 flex-col'>
-          {JSON.parse(description).blocks[0].text.length ? (
+          {description && JSON.parse(description).blocks[0].text.length ? (
             <>
               <DraftJsRenderer value={desc} />
               <Button onPress={() => setIsEdit(true)}>
