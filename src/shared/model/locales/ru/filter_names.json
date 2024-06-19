@@ -347,7 +347,7 @@
     "fertilizers": "Удобрения",
     "pots_and_planters": "Горшки и кашпо",
     "garden_furniture": "Садовая мебель",
-    "water_features": "Водные элементы"
+    "water_features": "Сантехника"
   },
   "appliances_type":{
     "kitchen_appliances": "Кухонные приборы",
@@ -402,7 +402,7 @@
     "washing_machine_parts": "Запчасти для стиральных машин",
     "microwave_parts": "Части микроволновой печи",
     "oven_parts": "Части духовки",
-    "vacuum_cleaner_parts": "Части палесоса",
+    "vacuum_cleaner_parts": "Части пылесоса",
     "air_conditioner_parts": "Части кондиционера"
   },
   "tools_type":{
