@@ -9,6 +9,38 @@
     "with_mileage": "C пробегом",
     "new": "Новые"
   },
+  "motorcycles_and_motorized_vehicles_type": {
+  "all-terrain_vehicles": "Кроссовые",
+  "karting": "Картинги",
+  "mopeds_and_scooters": "Мопеды и скутеры",
+  "motorcycles": "Мотоциклы",
+  "snowmobiles": "Снегоходы",
+  "atvs_and_buggies": "ATV и багги"
+},
+"trucks_and_special_vehicles_type": {
+  "buses": "Автобусы",
+  "motorhomes": "Дома на колёсах",
+  "truck_cranes": "Грузовые краны",
+  "bulldozers": "Бульдозеры",
+  "trucks": "Грузовики",
+  "utility_equipment": "Коммунальный транспорт",
+  "light_commercial_vehicles": "Легкие коммерческие автомобили",
+  "attachments": "Навесное оборудование",
+  "loaders": "Погрузчики",
+  "trailers": "Прицепы",
+  "agricultural_machinery": "Сельскохозяйственная техника",
+  "construction_equipment": "Строительное оборудование",
+  "logging_machinery": "Лесозаготовительная техника",
+  "tractors": "Тракторы",
+  "excavators": "Экскаваторы",
+  "other": "Другое"
+},
+"water_transportation_type": {
+  "paddleboats": "Водные велосипеды",
+  "jet_skis": "Гидроциклы",
+  "boats_and_yachts": "Лодки и яхты",
+  "motor_boats_and_motors": "Моторные лодки и моторы"
+},
   "real_estate_type": {
     "apartments": "Квартира",
     "room": "Комната",
