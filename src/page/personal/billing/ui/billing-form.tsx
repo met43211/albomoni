@@ -76,6 +76,7 @@ export const BillingForm = () => {
         cardNumber: data['card-number'],
         expDateMonth: data['card-date'].slice(0, 2),
         expDateYear: data['card-date'].slice(3),
+        name: data.cardholder,
       };
 
       if (window.cp) {
@@ -87,12 +88,12 @@ export const BillingForm = () => {
           data.sum,
           cryptogram,
           data.email,
+          data.cardholder,
           data.tel,
           isSave,
         );
 
         router.push(response as string);
-        router.push('/profile/wallet');
       }
     } catch {
       setIsLoading(false);

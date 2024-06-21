@@ -3,14 +3,12 @@
 import { useFavorites } from '@albomoni/features/add-to-favorites/lib/use-favorites';
 import { apiClient } from '@albomoni/shared/api/base';
 import { getCookie } from 'cookies-next';
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useValidateToken } from '@albomoni/shared/api/use-validate-token';
 import { useSession } from '../../hooks/use-session';
 
-type Props = {
-  children: React.ReactNode;
-};
+type Props = PropsWithChildren;
 
 export const FavoriteProvider = ({ children }: Props) => {
   const token = getCookie('token');

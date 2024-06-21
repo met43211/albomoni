@@ -5,13 +5,14 @@ const expiryDateRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
 const currentYear = new Date().getFullYear() % 100;
 const currentMonth = new Date().getMonth() + 1;
 const internationalPhoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+const latinNameRegex = /^[A-Za-z\s]+$/;
 
 export const BillingSchema = yup
   .object({
     sum: yup
       .number()
       .typeError('Введите корректную сумму пополнения')
-      .min(1, 'Сумма должна не менее 100')
+      .min(1, 'Сумма должна быть не менее 1')
       .integer('Сумма должна быть целым числом')
       .required('Введите сумму пополнения'),
     'card-number': yup
@@ -43,6 +44,15 @@ export const BillingSchema = yup
       .string()
       .required('Укажите CVV код карты')
       .matches(/^[0-9]{3,4}$/, 'CVV должен состоять из 3 или 4 цифр'),
+    cardholder: yup
+      .string()
+      .required('Укажите имя и фамилию держателя карты')
+      .matches(
+        latinNameRegex,
+        'Имя и фамилия должны быть указаны латинскими буквами',
+      )
+      .min(2, 'Имя и фамилия должны быть не менее 2 символов')
+      .max(50, 'Имя и фамилия должны быть не более 50 символов'),
     tel: yup
       .string()
       .required('Укажите номер телефона')
