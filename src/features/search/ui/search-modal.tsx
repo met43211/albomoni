@@ -7,15 +7,16 @@ import { useState } from 'react';
 import { Spinner } from '@nextui-org/react';
 import { SearchForm } from './search-form';
 import { SearchTips } from './search-tips';
+import { TSearchTip } from '../model/search.type';
 
-type Props = {
+export type SearchModalProps = {
   onClose: () => void;
 };
 
-export const SearchModal = ({ onClose }: Props) => {
+export const SearchModal = ({ onClose }: SearchModalProps) => {
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [tips, setTips] = useState<[string, string, string][]>([]);
+  const [tips, setTips] = useState<TSearchTip[]>([]);
 
   const isValueShort = searchValue.length < 3;
 
@@ -51,7 +52,7 @@ export const SearchModal = ({ onClose }: Props) => {
             </p>
           )}
           {!isValueShort && isLoading && <Spinner />}
-          {!isValueShort && !isLoading && <SearchTips tips={tips} />}
+          {!isValueShort && !isLoading && <SearchTips tips={tips} onClose={onClose} />}
         </div>
       </m.section>
     </RemoveScroll>

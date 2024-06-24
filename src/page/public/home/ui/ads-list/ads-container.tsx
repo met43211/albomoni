@@ -14,8 +14,6 @@ export const AdsContainer = ({
   const [isAds, setIsAds] = useState(true);
   const location = getLocation();
 
-  console.log(location)
-
   return isAds ? (
     <AdsInfiniteScroller
       setIsAds={setIsAds}
