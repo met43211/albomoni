@@ -36,7 +36,10 @@ const DraftJsRenderer: React.FC<Props> = ({ value, className }) => {
           ))}
         </div>
       ) : (
-        <div className={className} dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          className={`select-text ${className}`}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
       )}
 
       <style>{`ul, ol, menu{
