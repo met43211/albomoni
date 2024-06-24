@@ -88,7 +88,7 @@ export const BillingForm = () => {
           data.cardholder,
           data.tel,
           isSave,
-          token,
+          token as string,
         );
 
         router.push(response as string);
