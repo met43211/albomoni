@@ -43,9 +43,12 @@ export const BillingForm = () => {
 
   useEffect(() => {
     if (user) {
-      const initialPhone = user.phones[0].phone.replace(/[^\d+]/g, '');
-      setValue('tel', initialPhone);
       setValue('email', user.email);
+
+      if (user.phones[0]) {
+        const initialPhone = user.phones[0].phone.replace(/[^\d+]/g, '');
+        setValue('tel', initialPhone);
+      }
     }
   }, [user]);
 
