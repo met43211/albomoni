@@ -1,7 +1,7 @@
+/* eslint-disable react/jsx-indent */
 import { Button } from '@nextui-org/button';
 import { parseDate } from '@albomoni/shared/lib/utils/parse-date';
 import { PublicUserType } from '@albomoni/entities/user/model/user.type';
-import { NotificationBubble } from '@albomoni/shared/ui/notification-bubble';
 import DraftJsRenderer from '@albomoni/shared/ui/draft-js-render/ui';
 import { ModalScrollableArea } from '../../scrollable-area';
 import { useModal } from '../../../lib/use-modal';
@@ -30,10 +30,10 @@ export const ModalVariantUserInfo = () => {
 
         <div className='w-full flex flex-col gap-1'>
           <h2 className='font-medium text-neutral-500'>О продавце</h2>
-          {JSON.parse(user?.description).blocks[0].text.length ? (
-            <DraftJsRenderer value={user?.description} />
+          {user && user.description ? (
+            <DraftJsRenderer value={user.description} />
           ) : (
-            <NotificationBubble>Описание отсутствует</NotificationBubble>
+            <i>Описание отсутствует</i>
           )}
         </div>
       </ModalScrollableArea>

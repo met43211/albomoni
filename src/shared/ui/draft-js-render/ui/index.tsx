@@ -41,7 +41,8 @@ const DraftJsRenderer: React.FC<Props> = ({ value, className }) => {
 
       <style>{`ul, ol, menu{
         margin: auto;
-        padding-left: 40px;
+        padding-left: 20px;
+        padding-top: 10px;
       }
       ol{
         list-style-type: decimal;

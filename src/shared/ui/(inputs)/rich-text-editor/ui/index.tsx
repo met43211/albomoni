@@ -1,6 +1,12 @@
 'use client';
 
-import { Editor, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import {
+  ContentState,
+  Editor,
+  EditorState,
+  convertFromRaw,
+  convertToRaw,
+} from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import { useEffect, useState } from 'react';
 import { Toolbar } from './toolbar';
@@ -18,8 +24,13 @@ export const RichTextEditor = ({
 
   useEffect(() => {
     if (value) {
-      const contentState = convertFromRaw(JSON.parse(value));
-      setEditorState(EditorState.createWithContent(contentState));
+      try {
+        const contentState = convertFromRaw(JSON.parse(value));
+        setEditorState(EditorState.createWithContent(contentState));
+      } catch (error) {
+        const contentState = ContentState.createFromText(value);
+        setEditorState(EditorState.createWithContent(contentState));
+      }
     }
   }, []);
 
