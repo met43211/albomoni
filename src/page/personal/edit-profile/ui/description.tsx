@@ -6,12 +6,25 @@ import DraftJsRenderer from '@albomoni/shared/ui/draft-js-render/ui';
 import { Button } from '@nextui-org/react';
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const EditDescription = ({ description }: { description: string }) => {
   const [isEdit, setIsEdit] = useState(false);
   const router = useRouter();
   const [desc, setDesc] = useState('');
+  useEffect(() => {
+    if (description) {
+      try {
+        if (JSON.parse(description).blocks[0].text.length) {
+          setDesc(description);
+        } else {
+          setDesc('');
+        }
+      } catch (error) {
+        setDesc(description);
+      }
+    }
+  }, [description]);
   const handleSave = async () => {
     try {
       const token = getCookie('token');
@@ -28,21 +41,36 @@ export const EditDescription = ({ description }: { description: string }) => {
       {isEdit ? (
         <div className='w-full gap-4 flex flex-col'>
           <RichTextEditor value={desc} onChange={setDesc} />
-          <Button onPress={handleSave} className='w-full'>
+          <Button
+            onPress={handleSave}
+            className='w-full'
+            color='primary'
+            variant='shadow'
+          >
             Сохранить
           </Button>
         </div>
       ) : (
         <div className='w-full flex gap-4 flex-col'>
-          {description && JSON.parse(description).blocks[0].text.length ? (
+          {desc.trim().length ? (
             <>
               <DraftJsRenderer value={desc} />
-              <Button onPress={() => setIsEdit(true)}>
+              <Button
+                onPress={() => setIsEdit(true)}
+                color='primary'
+                variant='shadow'
+              >
                 Редактировать описание
               </Button>
             </>
           ) : (
-            <Button onPress={() => setIsEdit(true)}>Добавить описание</Button>
+            <Button
+              onPress={() => setIsEdit(true)}
+              color='primary'
+              variant='shadow'
+            >
+              Добавить описание
+            </Button>
           )}
         </div>
       )}
