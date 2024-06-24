@@ -13,15 +13,16 @@ import {
   useState,
 } from 'react';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
-import { useDebounce, useLocation } from 'react-use';
+import { useDebounce } from 'react-use';
+import { TSearchTip } from '../model/search.type';
+import { SearchModalProps } from './search-modal';
 
 type Props = {
   value: string;
   setValue: (text: string) => void;
-  onClose: () => void;
   setIsLoading: (bool: boolean) => void;
-  setTips: (tops: [string, string, string][]) => void;
-};
+  setTips: (tops: TSearchTip[]) => void;
+} & SearchModalProps;
 
 export const SearchForm = ({
   value,
@@ -38,13 +39,13 @@ export const SearchForm = ({
 
   useEffect(() => {
     const getSearchTips = async () => {
-      const resp = await apiClient.get('search', {
+      const resp = await apiClient.get<TSearchTip[]>('search', {
         search: debouncedValue,
         country,
         city,
       });
 
-      setTips(resp as [string, string, string][]);
+      setTips(resp);
     };
 
     if (value.length > 2) {

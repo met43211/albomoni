@@ -1,3 +1,5 @@
+/* eslint-disable sonarjs/cognitive-complexity */
+
 'use client';
 
 import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
@@ -5,6 +7,9 @@ import { AdCard } from '@albomoni/entities/ad-card/ui/ad-card';
 import { useEffect, useRef, useState } from 'react';
 import { useIntersection } from 'react-use';
 import { useQuery } from '@tanstack/react-query';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
+import { Placeholder } from '@albomoni/shared/ui/placeholder';
+import { PiCompass } from 'react-icons/pi';
 import { AdsSkeleton } from './ads-skeleton';
 
 type Props = {
@@ -27,6 +32,7 @@ export const AdsInfiniteScroller = ({
   const [ads, setAds] = useState<Ad[]>([]);
   const [isEnded, setIsEnded] = useState(true);
   const intersectionRef = useRef(null);
+  const location = getLocation();
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: [queryKey, page],
@@ -69,7 +75,7 @@ export const AdsInfiniteScroller = ({
     }
   }, [intersection]);
 
-  return (
+  return location.address !== 'Весь мир' ? (
     <>
       <div className='w-full grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
         {ads.map((ad) => {
@@ -87,5 +93,11 @@ export const AdsInfiniteScroller = ({
 
       {!isEnded && <div ref={intersectionRef} />}
     </>
+  ) : (
+    <Placeholder
+      icon={<PiCompass size={60} className='mt-10' />}
+      title='Не выбран регион'
+      desc='Перейдите в выбор региона для уточнения зоны поиска объявлений'
+    />
   );
 };

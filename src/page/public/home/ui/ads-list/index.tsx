@@ -1,5 +1,10 @@
 import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
-import { AdsContainer } from './ads-container';
+import dynamic from 'next/dynamic';
+
+const DynamicAdsContainer = dynamic(
+  () => import('./ads-container').then((mod) => mod.AdsContainer),
+  { ssr: false },
+);
 
 export const HomeAdsList = async ({ lng }: { lng: string }) => {
   const currencies = await getCurrenciesAsync();
@@ -7,7 +12,7 @@ export const HomeAdsList = async ({ lng }: { lng: string }) => {
   return (
     <div className='w-full h-min flex flex-col gap-6'>
       <h2 className='text-xl md:text-2xl font-bold'>Актуальные объявления</h2>
-      <AdsContainer currencies={currencies} />
+      <DynamicAdsContainer currencies={currencies} />
     </div>
   );
 };

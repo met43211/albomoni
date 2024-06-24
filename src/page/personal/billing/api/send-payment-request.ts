@@ -7,12 +7,17 @@ export const sendPaymentRequest = (
   name: string,
   phone: string,
   isSaveData: boolean,
+  token: string,
 ) =>
-  paymentClient.post('bill/', {
-    amount,
-    cryptogram,
-    email,
-    name,
-    phone,
-    isSaveData,
-  });
+  paymentClient.post(
+    'bill/',
+    {
+      amount,
+      cryptogram,
+      email,
+      name,
+      phone,
+      isSaveData,
+    },
+    { Authorization: `Bearer ${token}` },
+  );

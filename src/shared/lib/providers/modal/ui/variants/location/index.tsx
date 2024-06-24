@@ -2,6 +2,7 @@ import { Button } from '@nextui-org/button';
 import { PiCheckBold, PiMapPinBold, PiPencilSimpleBold } from 'react-icons/pi';
 import Link from 'next/link';
 import { getLocation } from '@albomoni/shared/lib/utils/get-location';
+import { useEffect } from 'react';
 import { ModalScrollableArea } from '../../scrollable-area';
 import { useModal } from '../../../lib/use-modal';
 import { EModalStates } from '../../../model/modal-states.enum';
@@ -9,6 +10,12 @@ import { EModalStates } from '../../../model/modal-states.enum';
 export const ModalVariantLocation = () => {
   const { setModalState } = useModal();
   const location = getLocation();
+
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, []);
 
   return (
     <>

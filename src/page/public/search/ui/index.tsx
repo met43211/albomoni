@@ -1,6 +1,13 @@
+import dynamic from 'next/dynamic';
+
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+const DynamicSearchList = dynamic(
+  () => import('./searchlist').then((mod) => mod.SearchList),
+  { ssr: false },
+);
 
 export const SearchPage = ({ searchParams: { query } }: Props) => {
   return (
@@ -10,6 +17,7 @@ export const SearchPage = ({ searchParams: { query } }: Props) => {
           <h2 className='text-2xl md:text-3xl font-bold'>
             Результаты поиска по запросу &quot;{query}&quot;
           </h2>
+          <DynamicSearchList query={query as string} />
         </div>
       </div>
     </main>
