@@ -34,6 +34,7 @@ export const BillingForm = () => {
 
   const {
     register,
+    control,
     handleSubmit,
     setValue,
     formState: { errors },
@@ -135,6 +136,7 @@ export const BillingForm = () => {
         register={register}
         isSave={isSave}
         setIsSave={setIsSave}
+        control={control}
       />
 
       <AnimatePresence>

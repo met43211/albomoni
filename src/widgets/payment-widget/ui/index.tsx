@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Checkbox } from '@nextui-org/react';
-import { UseFormRegister } from 'react-hook-form';
+import { Controller, UseFormRegister } from 'react-hook-form';
 
 type Props = {
   register: UseFormRegister<{
@@ -13,11 +13,25 @@ type Props = {
     'is-save'?: boolean;
     tel: string;
   }>;
+  control: any;
   isSave: boolean;
   setIsSave: (state: boolean) => void;
 };
 
-export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
+export const PaymentWidget = ({
+  register,
+  setIsSave,
+  isSave,
+  control,
+}: Props) => {
+  const formatCardDate = (value: string) => {
+    const cleanedValue = value.replace(/\D/g, ''); // Удаляем все нечисловые символы
+    if (cleanedValue.length >= 2) {
+      return `${cleanedValue.substring(0, 2)}/${cleanedValue.substring(2, 4)}`;
+    }
+    return cleanedValue;
+  };
+
   return (
     <div className='w-full md:max-w-[50%] flex flex-col gap-4'>
       <p className='font-medium opacity-50'>Введите данные карты</p>
@@ -32,13 +46,21 @@ export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
           className='bg-default rounded-2xl px-4 h-12 w-full'
         />
         <div className='flex flex-row gap-4'>
-          <input
-            type='tel'
-            inputMode='text'
-            autoComplete='cc-exp'
-            placeholder='Срок действия'
-            {...register('card-date')}
-            className='bg-default rounded-2xl px-4 h-12 w-full'
+          <Controller
+            name='card-date'
+            control={control}
+            defaultValue=''
+            render={({ field }) => (
+              <input
+                {...field}
+                type='tel'
+                inputMode='numeric'
+                autoComplete='cc-exp'
+                placeholder='MM/YY'
+                className='bg-default rounded-2xl px-4 h-12 w-full'
+                onChange={(e) => field.onChange(formatCardDate(e.target.value))}
+              />
+            )}
           />
 
           <input
