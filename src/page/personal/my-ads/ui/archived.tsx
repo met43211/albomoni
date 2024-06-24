@@ -22,6 +22,8 @@ export const MyAdsArchivedPage = async ({ lng }: Props) => {
     { Authorization: `Bearer ${token}` },
   );
 
+  console.log(myAds)
+
   return myAds.length > 0 ? (
     <>
       <div className='w-full flex gap-2'>

@@ -30,7 +30,7 @@ export const StopAdButton = ({ id, status }: Props) => {
       {status === 'ended' ? (
         <LuArchive size={24} />
       ) : (
-        <PiStopCircleBold size={24} />
+        <PiStopCircleBold size={28} />
       )}
     </Button>
   );
