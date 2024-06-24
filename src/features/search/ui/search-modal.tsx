@@ -15,11 +15,9 @@ type Props = {
 export const SearchModal = ({ onClose }: Props) => {
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [tips, setTips] = useState<string[]>([]);
+  const [tips, setTips] = useState<[string, string, string][]>([]);
 
   const isValueShort = searchValue.length < 3;
-
-  console.log(tips);
 
   return (
     <RemoveScroll className='fixed inset-0 z-[200]'>
@@ -46,15 +44,15 @@ export const SearchModal = ({ onClose }: Props) => {
             <PiXBold className='w-2/5 h-2/5' />
           </button>
         </div>
-        <div className='w-full flex flex-col gap-4 md:gap-8 max-w-7xl'>
+        <div className='w-full flex flex-col gap-4 md:gap-8 max-w-7xl mt-6'>
           {isValueShort && (
             <p className='text-lg font-medium opacity-50'>
               Введите хотя бы 3 символа...
             </p>
           )}
+          {!isValueShort && isLoading && <Spinner />}
+          {!isValueShort && !isLoading && <SearchTips tips={tips} />}
         </div>
-        {!isValueShort && isLoading && <Spinner />}
-        {!isValueShort && !isLoading && <SearchTips tips={tips} />}
       </m.section>
     </RemoveScroll>
   );

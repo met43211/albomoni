@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import { apiClient } from '@albomoni/shared/api/base';
 import { useLangContext } from '@albomoni/shared/lib/providers';
+import { getLocation } from '@albomoni/shared/lib/utils/get-location';
 import { Button } from '@nextui-org/button';
 import { m } from 'framer-motion';
 import { useRouter } from 'next/navigation';
@@ -12,14 +13,14 @@ import {
   useState,
 } from 'react';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
-import { useDebounce } from 'react-use';
+import { useDebounce, useLocation } from 'react-use';
 
 type Props = {
   value: string;
   setValue: (text: string) => void;
   onClose: () => void;
   setIsLoading: (bool: boolean) => void;
-  setTips: (tops: string[]) => void;
+  setTips: (tops: [string, string, string][]) => void;
 };
 
 export const SearchForm = ({
@@ -31,13 +32,19 @@ export const SearchForm = ({
 }: Props) => {
   const router = useRouter();
   const lang = useLangContext();
+  const { city, country } = getLocation();
 
   const [debouncedValue, setDebouncedValue] = useState('');
 
   useEffect(() => {
     const getSearchTips = async () => {
-      const resp = await apiClient.get('search', { search: debouncedValue });
-      setTips(resp as string[]);
+      const resp = await apiClient.get('search', {
+        search: debouncedValue,
+        country,
+        city,
+      });
+
+      setTips(resp as [string, string, string][]);
     };
 
     if (value.length > 2) {

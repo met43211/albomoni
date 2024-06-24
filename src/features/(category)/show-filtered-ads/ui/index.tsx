@@ -22,6 +22,7 @@ export const ShowFilteredAdsButton = ({ selectedFilters }: Props) => {
 
   const handleClick = async () => {
     const jsonData = JSON.stringify(selectedFilters);
+    console.log(jsonData)
     const encodedData = Buffer.from(jsonData).toString('base64');
 
     const initPath = pathname.split('?')[0];
