@@ -55,7 +55,7 @@ export const RichTextEditor = ({
           placeholder='Введите описание'
         />
       </div>
-      <style>{`h1{
+      <style>{`div.DraftEditor-root h1{
         font-size: 25px;
       }
       div.DraftEditor-root {
