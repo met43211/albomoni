@@ -19,6 +19,8 @@ export const SearchModal = ({ onClose }: Props) => {
 
   const isValueShort = searchValue.length < 3;
 
+  console.log(tips);
+
   return (
     <RemoveScroll className='fixed inset-0 z-[200]'>
       <m.section

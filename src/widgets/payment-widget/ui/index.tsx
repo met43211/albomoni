@@ -34,7 +34,7 @@ export const PaymentWidget = ({ register, setIsSave, isSave }: Props) => {
         <div className='flex flex-row gap-4'>
           <input
             type='tel'
-            inputMode='numeric'
+            inputMode='text'
             autoComplete='cc-exp'
             placeholder='Срок действия'
             {...register('card-date')}
