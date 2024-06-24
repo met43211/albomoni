@@ -11,10 +11,10 @@ import { normalizePrice } from '@albomoni/shared/lib/utils/normalize-price';
 import { useEffect, useState } from 'react';
 import { PiWalletBold } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
-import { getCurrenciesAsync } from '@albomoni/entities/ad-card/api/get-currencies';
 import { PaymentWidget } from '@albomoni/widgets/payment-widget';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Spinner } from '@nextui-org/spinner';
+import { useCurrencies } from '@albomoni/shared/lib/providers/currencies-provider';
 import { BillingSchema } from '../model/schema';
 import { sendPaymentRequest } from '../api/send-payment-request';
 
@@ -27,6 +27,7 @@ declare global {
 export const BillingForm = () => {
   const router = useRouter();
   const { user } = useSession();
+  const currencies = useCurrencies();
 
   const [isSave, setIsSave] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -48,24 +49,14 @@ export const BillingForm = () => {
     }
   }, [user]);
 
-  const [normSum, setNormSum] = useState('100');
-
-  useEffect(() => {
-    const setPrice = async () => {
-      const currencies: any = await getCurrenciesAsync();
-
-      setNormSum(
-        normalizePrice({
-          price: 100,
-          currency: 'RUB',
-          adCurrency: 'RUB',
-          currencies,
-        }),
-      );
-    };
-
-    setPrice();
-  }, []);
+  const [normSum] = useState(
+    normalizePrice({
+      price: 100,
+      currency: 'RUB',
+      adCurrency: 'RUB',
+      currencies,
+    }),
+  );
 
   const onSubmit = async (data: any) => {
     try {

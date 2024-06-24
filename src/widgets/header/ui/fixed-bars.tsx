@@ -1,4 +1,3 @@
-import { Search } from '@albomoni/features/search';
 import { TooltipTransitionVariants } from '@albomoni/shared/config/transition-variants';
 import { useScrollDirection } from '@albomoni/shared/lib/hooks/use-scroll-direction';
 import { useScrolledTo } from '@albomoni/shared/lib/hooks/use-scrolled-to';
@@ -51,9 +50,9 @@ export const FixedBars = () => {
             initial={{ y: '-150%' }}
             animate={{ y: 0 }}
             exit={{ y: '-150%' }}
-            className='fixed max-w-7xl top-0 w-full h-20 z-50 flex items-center justify-center px-4 gap-4 lg:gap-8'
+            className='fixed max-w-7xl top-0 w-full h-20 z-50 flex items-center justify-end px-4 gap-4 lg:gap-8'
           >
-            <Search isScrollable />
+            {/* <Search isScrollable /> */}
             <MenuButton />
           </m.div>
         )}

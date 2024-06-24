@@ -40,7 +40,7 @@ export const AdsContainer = ({
         currencies={currencies}
         fetchFunc={fetchAds}
         setIsAds={setIsAds}
-        queryKey={`category-${categoryId}-scroll`}
+        queryKey={`category-${categoryId}-${normalizedFilters}-scroll`}
       />
     </div>
   ) : (
