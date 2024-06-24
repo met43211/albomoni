@@ -15,6 +15,7 @@ import { PaymentWidget } from '@albomoni/widgets/payment-widget';
 import { useSession } from '@albomoni/shared/lib/hooks/use-session';
 import { Spinner } from '@nextui-org/spinner';
 import { useCurrencies } from '@albomoni/shared/lib/providers/currencies-provider';
+import { getCookie } from 'cookies-next';
 import { BillingSchema } from '../model/schema';
 import { sendPaymentRequest } from '../api/send-payment-request';
 
@@ -28,6 +29,7 @@ export const BillingForm = () => {
   const router = useRouter();
   const { user } = useSession();
   const currencies = useCurrencies();
+  const token = getCookie('token');
 
   const [isSave, setIsSave] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -86,6 +88,7 @@ export const BillingForm = () => {
           data.cardholder,
           data.tel,
           isSave,
+          token,
         );
 
         router.push(response as string);
