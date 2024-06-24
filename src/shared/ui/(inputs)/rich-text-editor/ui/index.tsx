@@ -57,7 +57,9 @@ export const RichTextEditor = ({
       </div>
       <style>{`h1{
         font-size: 25px;
-      }`}</style>
+      }
+      div.DraftEditor-root {
+  min-height: 80px}`}</style>
     </>
   );
 };
