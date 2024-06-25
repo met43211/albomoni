@@ -37,6 +37,7 @@ export const AdsInfiniteScroller = ({
   const { data, isLoading, refetch } = useQuery({
     queryKey: [queryKey, page],
     queryFn: fetchFunc,
+    refetchOnMount: true,
   });
 
   const intersection = useIntersection(intersectionRef, {

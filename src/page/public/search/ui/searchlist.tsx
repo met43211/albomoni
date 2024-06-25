@@ -31,7 +31,5 @@ export const SearchList = ({ query }: { query: string }) => {
       fetchFunc={getSearchResults(query)}
       queryKey={`search_${query}_${location.lon}`}
     />
-  ) : (
-    <HomeAdsPlaceholder />
   );
 };
