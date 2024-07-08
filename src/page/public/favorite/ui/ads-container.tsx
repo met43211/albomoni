@@ -3,7 +3,8 @@
 import { Ad } from '@albomoni/entities/ad-card/model/ad.type';
 import { apiClient } from '@albomoni/shared/api/base';
 import { AdsInfiniteScroller } from '@albomoni/widgets/infinite-scroller';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useFavorites } from '@albomoni/features/add-to-favorites/lib/use-favorites';
 import { NoFavorites } from './no-favorites';
 
 export const AdsContainer = ({
@@ -14,22 +15,29 @@ export const AdsContainer = ({
   currencies: { [key: string]: number };
 }) => {
   const [isAds, setIsAds] = useState(true);
+  const { favorites } = useFavorites();
 
-  const fetchAds = async ({ queryKey }: { queryKey: [string, number] }) => {
-    const [_key, page] = queryKey;
-    try {
-      return await apiClient.post<Ad[]>(`favorite/${page}`, {
-        favorites: favoritesArray,
-      });
-    } catch (error) {
-      throw new Error('Error fetching ads');
-    }
-  };
+  const fetchAds =
+    (favoritesIds: number[]) =>
+      async ({ queryKey }: { queryKey: [string, number] }) => {
+        const [_key, page] = queryKey;
+        try {
+          return await apiClient.post<Ad[]>(`favorite/${page}`, {
+            favorites: favoritesIds,
+          });
+        } catch (error) {
+          throw new Error('Error fetching ads');
+        }
+      };
+
+  useEffect(() => {
+    setIsAds(true);
+  }, [favorites]);
 
   return isAds ? (
     <AdsInfiniteScroller
       currencies={currencies}
-      fetchFunc={fetchAds}
+      fetchFunc={fetchAds(favorites)}
       setIsAds={setIsAds}
       queryKey='favorite-scroll'
     />
