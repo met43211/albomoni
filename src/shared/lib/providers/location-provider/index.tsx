@@ -44,8 +44,7 @@ export const LocationProvider = ({ children }: Props) => {
 
           setCookie('location', location);
           setModalState(EModalStates.LOCATION);
-        } catch (e) {
-          console.log(e);
+        } catch {
           return;
         }
       };
