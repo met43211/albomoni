@@ -15,7 +15,12 @@ export const WelcomeBlockScreen = () => {
         </div>
       </div>
       <div className='w-full h-full rounded-xl bg-white/30 overflow-hidden shadow-inner'>
-        <Image src={profile} alt='profile img' className='object-cover' />
+        <Image
+          src={profile}
+          alt='profile img'
+          className='object-cover'
+          unoptimized
+        />
       </div>
     </div>
   );
