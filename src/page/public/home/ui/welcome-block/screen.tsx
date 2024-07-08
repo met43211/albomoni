@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import profile from '../../../../../shared/assets/profile.jpg';
+
 export const WelcomeBlockScreen = () => {
   return (
     <div className='absolute -bottom-5 border-3 w-full h-full border-white/40 rounded-2xl p-2 flex flex-col gap-3 overflow-clip'>
@@ -11,7 +14,9 @@ export const WelcomeBlockScreen = () => {
           <p className='text-sm text-white'>albomoni.com</p>
         </div>
       </div>
-      <div className='w-full h-full rounded-xl bg-white/30' />
+      <div className='w-full h-full rounded-xl bg-white/30 overflow-hidden shadow-inner'>
+        <Image src={profile} alt='profile img' className='object-cover' />
+      </div>
     </div>
   );
 };
